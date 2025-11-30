@@ -1,0 +1,145 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.txkj.readingapp'
+    //compileSdk 32
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.txkj.readingapp"
+        //com.foobnix.pdf.readermod
+        minSdk 21
+        //targetSdk 32
+        targetSdk 34
+//        versionCode 1
+//        versionName "1.0"
+        versionCode 10200//5246
+        versionName "1.2.0" //"""8.8.76"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //-----------------------
+        //added for compiling
+
+        //for jni so
+        ndk {
+            //https://www.cnblogs.com/zhangzhxb/p/14493600.html
+            abiFilters 'armeabi-v7a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //-----------------------
+    //added for compiling
+
+    //for dependencies
+    configurations {
+        all {
+            exclude module: 'httpclient'
+            exclude module: 'commons-logging'
+        }
+    }
+
+    //for jni so
+    //https://www.jianshu.com/p/12e9077d3fe9
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+
+//    implementation 'androidx.appcompat:appcompat:1.7.0'
+//    implementation 'com.google.android.material:material:1.12.0'
+//    testImplementation 'junit:junit:4.13.2'
+//    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
+
+    //FIXME: Need to target to SDK34
+/*
+Execution failed for task ':app:mergeDebugJavaResource'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.MergeJavaResWorkAction
+   > 2 files found with path 'META-INF/DEPENDENCIES' from inputs:
+      - C:\Users\admin\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpclient\4.5.13\e5f6cae5ca7ecaac1ec2827a9e2d65ae2869cada\httpclient-4.5.13.jar
+      - C:\Users\admin\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.4.15\7f2e0c573eaa7a74bac2e89b359e1f73d92a0a1d\httpcore-4.4.15.jar
+     Adding a packagingOptions block may help, please refer to
+     https://developer.android.com/reference/tools/gradle-api/7.3/com/android/build/api/dsl/ResourcesPackagingOptions
+     for more information
+
+Need:
+    configurations {
+        all {
+            exclude module: 'httpclient'
+            exclude module: 'commons-logging'
+        }
+    }
+ */
+
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.work:work-runtime:2.9.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //implementation 'androidx.appcompat:appcompat:1.7.0'
+
+    implementation 'net.lingala.zip4j:zip4j:2.11.5'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+
+    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation('org.greenrobot:greendao:3.3.0') {
+        exclude group: 'org.greenrobot.greendao.rx'
+    }
+    implementation 'org.greenrobot:greendao-api:3.3.0'
+    implementation 'org.jsoup:jsoup:1.18.1'//bug in 1.17.1
+
+//    /** Google Drive Sync **/
+//    implementation 'com.google.http-client:google-http-client-gson:1.42.2'
+//    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+//    implementation('com.google.api-client:google-api-client-android:1.30.2') {
+//        //noinspection DuplicatePlatformClasses
+//        exclude group: 'org.apache.httpcomponents'
+//    }
+//    implementation('com.google.apis:google-api-services-drive:v3-rev173-1.25.0') {
+//        //noinspection DuplicatePlatformClasses
+//        exclude group: 'org.apache.httpcomponents'
+//    }
+
+    implementation "com.github.junrar:junrar:4.0.0"
+
+    implementation 'com.github.joniles:rtfparserkit:1.16.0'
+
+    //implementation 'com.google.android.gms:play-services-ads:23.2.0'
+
+    implementation 'org.zwobble.mammoth:mammoth:1.5.0'
+    implementation 'javax.xml.stream:stax-api:1.0-2'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.12.6'
+    implementation 'io.github.rburgst:okhttp-digest:1.21'
+    implementation 'com.squareup.okio:okio-parent:1.17.6'
+
+    implementation 'com.github.albfernandez:juniversalchardet:2.5.0'
+
+    implementation 'com.github.axet:lame:1.0.9'
+}
