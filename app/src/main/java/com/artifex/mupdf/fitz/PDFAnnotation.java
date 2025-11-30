@@ -377,9 +377,9 @@ public class PDFAnnotation
 
 	public native boolean applyRedaction(boolean blackBoxes, int imageMethod, int lineArt, int text);
 
-	/** @deprecated use getBorderWidth instead. */
+	/** deprecated use getBorderWidth instead. */
 	public float getBorder() { return getBorderWidth(); }
 
-	/** @deprecated use setBorderWidth instead. */
+	/** deprecated use setBorderWidth instead. */
 	public void setBorder(float width) { setBorderWidth(width); }
 }

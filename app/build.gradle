@@ -1,22 +1,21 @@
 plugins {
-    id 'com.android.application'
+    alias(libs.plugins.android.application)
 }
 
 android {
     namespace 'com.txkj.readingapp'
-    //compileSdk 32
-    compileSdk 34
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         applicationId "com.txkj.readingapp"
-        //com.foobnix.pdf.readermod
-        minSdk 21
-        //targetSdk 32
-        targetSdk 34
+        minSdk 23 //24
+        targetSdk 36
 //        versionCode 1
 //        versionName "1.0"
-        versionCode 10200//5246
-        versionName "1.2.0" //"""8.8.76"
+        versionCode 10400//5246
+        versionName "1.4.0" //"""8.8.76"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -26,7 +25,7 @@ android {
         //for jni so
         ndk {
             //https://www.cnblogs.com/zhangzhxb/p/14493600.html
-            abiFilters 'armeabi-v7a'
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
     }
 
@@ -37,8 +36,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     //-----------------------
@@ -62,6 +61,12 @@ android {
 }
 
 dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
 
 //    implementation 'androidx.appcompat:appcompat:1.7.0'
 //    implementation 'com.google.android.material:material:1.12.0'
@@ -90,11 +95,11 @@ Need:
     }
  */
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+//    implementation 'androidx.appcompat:appcompat:1.4.1'
+//    implementation 'com.google.android.material:material:1.5.0'
+//    testImplementation 'junit:junit:4.13.2'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -141,5 +146,5 @@ Need:
 
     implementation 'com.github.albfernandez:juniversalchardet:2.5.0'
 
-    implementation 'com.github.axet:lame:1.0.9'
+    implementation 'com.github.axet:lame:1.0.9' 
 }
