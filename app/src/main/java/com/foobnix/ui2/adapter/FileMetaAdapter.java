@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class FileMetaAdapter extends AppRecycleAdapter<FileMeta, RecyclerView.ViewHolder> implements FastScroller.SectionIndexer {
+    public boolean hidePath = false;
 
     public static final int DISPLAY_TYPE_FILE = 2;
     public static final int DISPLAY_TYPE_DIRECTORY = 3;
@@ -878,7 +879,11 @@ public class FileMetaAdapter extends AppRecycleAdapter<FileMeta, RecyclerView.Vi
             }
         }
 
-        holder.authorParent.setVisibility(View.VISIBLE);
+        if (hidePath) {
+            holder.authorParent.setVisibility(View.INVISIBLE);
+        } else {
+            holder.authorParent.setVisibility(View.VISIBLE);
+        }
 
         if (adapterType == ADAPTER_LIST || adapterType == ADAPTER_LIST_COMPACT) {
             if (AppState.get().coverSmallSize >= IMG.TWO_LINE_COVER_SIZE) {
@@ -961,6 +966,12 @@ public class FileMetaAdapter extends AppRecycleAdapter<FileMeta, RecyclerView.Vi
             holder.author.setVisibility(View.GONE);
             if (holder.series != null) {
                 holder.series.setVisibility(View.GONE);
+            }
+        }
+
+        if (hidePath) {
+            if (holder.path != null) {
+                holder.path.setVisibility(View.INVISIBLE);
             }
         }
 

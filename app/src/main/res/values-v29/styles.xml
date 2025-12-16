@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="StyledIndicatorsWhite" parent="Theme.AppCompat.Light">
+    <style name="StyledIndicatorsWhite" parent="Theme.MaterialComponents.Light"> <!--Theme.AppCompat.Light-->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+<!--        <item name="android:windowDisablePreview">true</item>-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
 
     </style>
 
-    <style name="StyledIndicatorsBlack" parent="Theme.AppCompat.NoActionBar">
+    <style name="StyledIndicatorsBlack" parent="Theme.MaterialComponents.NoActionBar"> <!--Theme.AppCompat.NoActionBar-->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+<!--        <item name="android:windowDisablePreview">true</item>-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
     </style>
 
 </resources>

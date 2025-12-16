@@ -93,6 +93,7 @@ import java.util.List;
 
 @SuppressLint("NewApi")
 public class MainTabs2 extends AdsFragmentActivity {
+    public final static boolean USE_NEW_UI = true;
     public final static boolean MOD_VERSION = true;
 
     public static final int REQUEST_CODE_ADD_RESOURCE = 123;

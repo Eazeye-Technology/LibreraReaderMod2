@@ -2,14 +2,14 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <style name="StyledIndicatorsWhite" parent="@android:style/Theme.Light.NoTitleBar">
+    <style name="StyledIndicatorsWhite" parent="Theme.MaterialComponents.Light.NoActionBar"> <!--@android:style/Theme.Light.NoTitleBar-->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDisablePreview">true</item>
+<!--        <item name="android:windowDisablePreview">true</item>-->
     </style>
 
-    <style name="StyledIndicatorsBlack" parent="@android:style/Theme.Black.NoTitleBar">
+    <style name="StyledIndicatorsBlack" parent="Theme.MaterialComponents.NoActionBar"> <!--@android:style/Theme.Black.NoTitleBar-->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDisablePreview">true</item>
+<!--        <item name="android:windowDisablePreview">true</item>-->
     </style>
 
 

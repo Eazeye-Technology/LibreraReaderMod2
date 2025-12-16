@@ -11,6 +11,7 @@ import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.LOG;
 import com.foobnix.model.AppState;
+import com.foobnix.ui2.MainTabs2;
 //import com.google.android.gms.ads.AdSize;
 //import com.google.android.gms.common.ConnectionResult;
 //import com.google.android.gms.common.GoogleApiAvailability;
@@ -36,9 +37,11 @@ public class AppsConfig {
     public static final String FLAVOR = LibreraBuildConfig.FLAVOR;
     public static final boolean IS_ENABLE_1_PAGE_SEARCH = true;
     public final static ExecutorService executorService = Executors.newFixedThreadPool(2);
-    public static boolean IS_LOG =  Build.MODEL.startsWith("Android SDK")
-            || Build.DEVICE.contains("emulator")
-    || Build.MODEL.contains("sdk_gphone64_x86_64");
+    public static boolean IS_LOG =
+            MainTabs2.MOD_VERSION ? false :
+                    (Build.MODEL.startsWith("Android SDK")
+                    || Build.DEVICE.contains("emulator")
+                    || Build.MODEL.contains("sdk_gphone64_x86_64"));
     public static boolean IS_TEST_DEVICE = false;
     public static String MUPDF_FZ_VERSION = "";
     public static String MUPDF_1_11 = "1.11";

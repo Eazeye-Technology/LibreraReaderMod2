@@ -105,23 +105,36 @@ public class RecentFragment2 extends UIFragment<FileMeta> {
             }
         });
 
-        TxtUtils.underlineTextView((TextView) view.findViewById(R.id.clearAllRecent)).setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                AlertDialogs.showDialog(getActivity(), getString(R.string.do_you_want_to_clear_everything_), getString(R.string.ok), new Runnable() {
-
-                    @Override
-                    public void run() {
-                        clearAllRecent.run();
-
-                    }
-                });
-
-            }
-        });
+        if (MainTabs2.USE_NEW_UI) {
+            ((TextView) view.findViewById(R.id.clearAllRecent)).setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialogs.showDialog(getActivity(), getString(R.string.do_you_want_to_clear_everything_), getString(R.string.ok), new Runnable() {
+                        @Override
+                        public void run() {
+                            clearAllRecent.run();
+                        }
+                    });
+                }
+            });
+        } else {
+            TxtUtils.underlineTextView((TextView) view.findViewById(R.id.clearAllRecent)).setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialogs.showDialog(getActivity(), getString(R.string.do_you_want_to_clear_everything_), getString(R.string.ok), new Runnable() {
+                        @Override
+                        public void run() {
+                            clearAllRecent.run();
+                        }
+                    });
+                }
+            });
+        }
 
         recentAdapter = new FileMetaAdapter();
+        if (MainTabs2.USE_NEW_UI) {
+            recentAdapter.hidePath = true;
+        }
         recentAdapter.tempValue = FileMetaAdapter.TEMP_VALUE_FOLDER_PATH;
         bindAdapter(recentAdapter);
         bindAuthorsSeriesAdapter(recentAdapter);

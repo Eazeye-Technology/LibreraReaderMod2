@@ -3,14 +3,14 @@
 
 
 
-    <style name="StyledIndicatorsWhite" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+    <style name="StyledIndicatorsWhite" parent="Theme.MaterialComponents.Light.NoActionBar"> <!--@android:style/Theme.DeviceDefault.Light.NoActionBar-->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowDisablePreview">true</item>
+<!--        <item name="android:windowDisablePreview">true</item>-->
     </style>
     
-     <style name="StyledIndicatorsBlack" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+     <style name="StyledIndicatorsBlack" parent="Theme.MaterialComponents.NoActionBar"> <!--@android:style/Theme.DeviceDefault.NoActionBar-->
          <item name="android:windowNoTitle">true</item>
-         <item name="android:windowDisablePreview">true</item>
+<!--         <item name="android:windowDisablePreview">true</item>-->
     </style>
 
 </resources>

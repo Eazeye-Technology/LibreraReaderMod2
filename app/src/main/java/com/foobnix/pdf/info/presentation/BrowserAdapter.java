@@ -28,6 +28,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class BrowserAdapter extends BaseAdapter {
+    public boolean hidePath = false;
+
     private final Context c;
     private final FileFilter filter;
     private File currentDirectory;
@@ -133,7 +135,11 @@ public class BrowserAdapter extends BaseAdapter {
             itemMenu.setVisibility(View.GONE);
             extFile.setVisibility(View.GONE);
             title2.setVisibility(View.GONE);
-            textPath.setVisibility(View.GONE);
+            if (hidePath) {
+                textPath.setVisibility(View.GONE);
+            } else {
+                textPath.setVisibility(View.GONE);
+            }
             imageView.setScaleType(ScaleType.CENTER_INSIDE);
 
             starIcon.setVisibility(View.GONE);
@@ -161,7 +167,11 @@ public class BrowserAdapter extends BaseAdapter {
                 textPath.setVisibility(View.GONE);
             } else {
                 title2.setVisibility(View.VISIBLE);
-                textPath.setVisibility(View.VISIBLE);
+                if (hidePath) {
+                    textPath.setVisibility(View.GONE);
+                } else {
+                    textPath.setVisibility(View.VISIBLE);
+                }
             }
 
             FileMeta info = null;
