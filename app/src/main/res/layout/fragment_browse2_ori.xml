@@ -12,12 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh_button"
         android:layout_margin="4dp"
+        android:background="@drawable/bg_search_second"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="visible" >
-<!--
-android:background="@drawable/bg_search_second"
--->
+
         <ImageView
             android:id="@+id/onBack"
             style="@style/buttonWhite"
@@ -25,9 +24,7 @@ android:background="@drawable/bg_search_second"
             android:layout_height="@dimen/wh_button"
             android:layout_weight="0"
             android:contentDescription="@string/back"
-            android:src="@drawable/glyphicons_223_chevron_left"
-            android:tint="#000"
-            />
+            android:src="@drawable/glyphicons_223_chevron_left" />
 
         <View
             android:layout_width="1dip"
@@ -55,10 +52,7 @@ android:background="@drawable/bg_search_second"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/msg_loading"
-                    android:textColor="#000"
-                    />
-                <!--android:textColor="@color/white"
-                    -->
+                    android:textColor="@color/white" />
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -73,17 +67,13 @@ android:background="@drawable/bg_search_second"
         <ImageView
             android:id="@+id/pasteFrom"
             style="@style/buttonWhite"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/wh_button"
+            android:layout_height="@dimen/wh_button"
             android:layout_weight="0"
             android:contentDescription="@string/create_folder"
             android:padding="6dip"
             android:src="@drawable/glyphicons_basic_613_paste"
-            android:tint="#000"
-            />
-        <!--
-        android:tint="@color/tint_white"
-        -->
+            android:tint="@color/tint_white" />
 
 
         <View
@@ -94,18 +84,14 @@ android:background="@drawable/bg_search_second"
         <ImageView
             android:id="@+id/createFolder"
             style="@style/buttonWhite"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/wh_button"
+            android:layout_height="@dimen/wh_button"
             android:layout_weight="0"
             android:contentDescription="@string/create_folder"
             android:padding="6dip"
             android:src="@drawable/glyphicons_371_plus"
-            android:tint="#000"
-            />
-<!--
-@dimen/wh_button
-android:tint="@color/tint_white"
-            -->
+            android:tint="@color/tint_white" />
+
         <View
             android:layout_width="1dip"
             android:layout_height="match_parent"
@@ -129,29 +115,25 @@ android:tint="@color/tint_white"
 
         <ImageView
             android:id="@+id/onSort"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            style="@style/buttonWhite"
+            android:layout_width="@dimen/wh_button"
+            android:layout_height="@dimen/wh_button"
             android:layout_weight="0"
             android:contentDescription="@string/cd_sort_order"
-            android:src="@drawable/glyphicons_476_sort_attributes"
-            android:tint="#000"
-            />
-        <!--
-        style="@style/buttonWhite"
-           -->
+            android:src="@drawable/glyphicons_476_sort_attributes" />
+        
         <ImageView
                 android:contentDescription="@string/cd_sort_order"
                 android:id="@+id/sortOrder"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="@dimen/wh_button_small"
+                android:layout_height="@dimen/wh_button_small"
                 android:layout_weight="0"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:padding="4dip"
                 android:src="@drawable/glyphicons_222_chevron_up"
-                android:tint="#000"
-            />
-<!--android:tint="@color/white"-->
+                android:tint="@color/white" />
+
         <View
             android:layout_width="1dip"
             android:layout_height="match_parent"
@@ -159,17 +141,13 @@ android:tint="@color/tint_white"
 
         <ImageView
             android:id="@+id/onHome"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            style="@style/buttonWhite"
+            android:layout_width="@dimen/wh_button"
+            android:layout_height="@dimen/wh_button"
             android:layout_weight="0"
             android:contentDescription="@string/favorites"
-            android:tint="#000"
-            android:src="@drawable/glyphicons_21_home"
-            />
-<!--
-android:src="@drawable/glyphicons_336_folder"
-            style="@style/buttonWhite"
-            -->
+            android:src="@drawable/glyphicons_336_folder" />
+
         <View
             android:layout_width="1dip"
             android:layout_height="match_parent"
@@ -177,17 +155,12 @@ android:src="@drawable/glyphicons_336_folder"
 
         <ImageView
             android:id="@+id/onListGrid"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            style="@style/buttonWhite"
+            android:layout_width="@dimen/wh_button"
+            android:layout_height="@dimen/wh_button"
             android:layout_weight="0"
             android:contentDescription="@string/menu"
-            android:src="@drawable/my_glyphicons_114_paragraph_justify"
-            android:tint="#000"
-            />
-        <!--
-        @dimen/wh_button
-        style="@style/buttonWhite"
-            -->
+            android:src="@drawable/my_glyphicons_114_paragraph_justify" />
     </LinearLayout>
 
    <androidx.cardview.widget.CardView

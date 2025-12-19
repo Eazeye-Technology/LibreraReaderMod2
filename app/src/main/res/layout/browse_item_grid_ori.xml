@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
-    android:background="@drawable/browse_item_list_outline"
-    >
-<!--
-androidx.cardview.widget.CardView
-android:layout_margin="@dimen/dv"
-        android:background="?android:attr/selectableItemBackground"
+    android:layout_margin="@dimen/dv"
+    android:background="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="@dimen/radius"
-    card_view:cardElevation="@dimen/dv"
--->
+    card_view:cardElevation="@dimen/dv" >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:orientation="vertical"
-        android:padding="12dp"
-        >
+        android:orientation="vertical" >
 
         <androidx.cardview.widget.CardView
             android:id="@+id/imageParent"
@@ -120,16 +113,12 @@ android:layout_margin="@dimen/dv"
 
                 <ImageView
                     android:id="@+id/cloudImage"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="@dimen/wh_button_small"
+                    android:layout_height="@dimen/wh_button_small"
                     android:padding="3dip"
                     android:layout_weight="0"
                     android:src="@drawable/dropbox" />
-<!--
-android:layout_width="@dimen/wh_button_small"
-android:layout_height="@dimen/wh_button_small"
 
--->
                 <ImageView
                     android:id="@+id/starIcon"
                     style="@style/buttonWhite"
@@ -157,4 +146,4 @@ android:layout_height="@dimen/wh_button_small"
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

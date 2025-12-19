@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:orientation="vertical" >
-
+        android:orientation="vertical"
+        >
+<!--add
+android:background="#0000ff"
+-->
         <LinearLayout
             android:visibility="gone"
             android:id="@+id/playListParent"
@@ -182,8 +186,12 @@
                 android:layout_weight="1"
                 android:paddingBottom="3dip"
                 android:paddingTop="3dip"
-                android:progressTint="@android:color/white"
-                android:thumbTint="@android:color/white" />
+                android:progressTint="#FF000000"
+                android:thumbTint="#FF000000"
+                />
+            <!--android:progressTint="@android:color/white"
+                android:thumbTint="@android:color/white"
+                -->
 
             <TextView
                 android:id="@+id/maxSeek"

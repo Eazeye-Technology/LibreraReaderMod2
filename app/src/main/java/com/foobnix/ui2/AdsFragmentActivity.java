@@ -37,8 +37,12 @@ public abstract class AdsFragmentActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle arg0) {
-        if (AppState.get().isSystemThemeColor) {
-            AppState.get().appTheme = Dips.isDarkThemeOn() ? AppState.THEME_DARK : AppState.THEME_LIGHT;
+        if (MainTabs2.USE_NEW_UI) {
+            AppState.get().appTheme = AppState.THEME_LIGHT;
+        } else {
+            if (AppState.get().isSystemThemeColor) {
+                AppState.get().appTheme = Dips.isDarkThemeOn() ? AppState.THEME_DARK : AppState.THEME_LIGHT;
+            }
         }
 
         if (AppState.get().appTheme == AppState.THEME_LIGHT || AppState.get().appTheme == AppState.THEME_INK) {
@@ -46,6 +50,7 @@ public abstract class AdsFragmentActivity extends FragmentActivity {
         } else {
             setTheme(R.style.StyledIndicatorsBlack);
         }
+
         super.onCreate(arg0);
         myAds.intetrstialTimeout = intetrstialTimeoutSec;
         myAds.createHandler();

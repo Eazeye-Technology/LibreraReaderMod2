@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -233,7 +234,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
     @Override
     protected void onNewIntent(final Intent intent) {
-
+        super.onNewIntent(intent);
         if (TTSNotification.ACTION_TTS.equals(intent.getAction())) {
             return;
         }
@@ -398,20 +399,29 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         touch2.setOnMove(onMoveAction);
 
         moveCenter = findViewById(R.id.moveCenter);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha(moveCenter, 0xFF000000, 255);
+        }
 
         currentSeek = (TextView) findViewById(R.id.currentSeek);
         maxSeek = (TextView) findViewById(R.id.maxSeek);
+        if (MainTabs2.USE_NEW_UI) {
+            currentSeek.setTextColor(0xFF000000);
+            maxSeek.setTextColor(0xFF000000);
+        }
 
         toastBrightnessText = (TextView) findViewById(R.id.toastBrightnessText);
         toastBrightnessText.setVisibility(View.GONE);
         TintUtil.setDrawableTint(toastBrightnessText.getCompoundDrawables()[0], Color.WHITE);
 
         modeName = (TextView) findViewById(R.id.modeName);
-
         if (AppState.get().isEnableAccessibility) {
             modeName.setText(AppState.get().nameHorizontalMode + " (" + getString(R.string.accessibility) + ")");
         } else {
             modeName.setText(AppState.get().nameHorizontalMode);
+        }
+        if (MainTabs2.USE_NEW_UI) {
+            modeName.setTextColor(0xFF000000);
         }
 
         pagesCountIndicator = (TextView) findViewById(R.id.pagesCountIndicator);
@@ -433,7 +443,6 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         });
 
         currentSeek.setOnLongClickListener(new OnLongClickListener() {
-
             @Override
             public boolean onLongClick(View v) {
                 Dialogs.showDeltaPage(anchor, dc, dc.getCurentPageFirst1(), onRefresh);
@@ -465,19 +474,26 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         linkHistory.setVisibility(View.GONE);
 
         seekBar = (SeekBar) findViewById(R.id.seekBar1);
-
         if (AppState.get().isRTL) {
             seekBar.setRotation(180);
+        }
+        if (MainTabs2.USE_NEW_UI) {
+            //seekBar.setBackgroundColor(0xFFFF0000);
+            seekBar.getProgressDrawable().getCurrent().setColorFilter(0xFF000000, PorterDuff.Mode.SRC_IN);
+            seekBar.getThumb().setColorFilter(0xFF000000, PorterDuff.Mode.SRC_IN);
+            seekBar.setAlpha(1.0f);
         }
 
         onPageFlip1 = findViewById(R.id.autoScroll);
         onPageFlip1.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 DragingDialogs.pageFlippingDialog(anchor, dc, onRefresh);
             }
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) onPageFlip1, 0xFF000000, 255);
+        }
 
         pageshelper = (LinearLayout) findViewById(R.id.pageshelper);
         musicButtonPanel = findViewById(R.id.musicButtonPanel);
@@ -489,7 +505,6 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
         final ImageView onFullScreen = (ImageView) findViewById(R.id.onFullScreen);
         onFullScreen.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 if (dc == null) {
@@ -514,6 +529,9 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
             }
         });
         onFullScreen.setImageResource(DocumentController.getFullScreenIcon(HorizontalViewActivity.this, AppState.get().fullScreenMode));
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha(onFullScreen, 0xFF000000, 255);
+        }
 
         final ImageView onTextReplacement = (ImageView) findViewById(R.id.onTextReplacement);
         onTextReplacement.setOnClickListener(new OnClickListener() {
@@ -543,6 +561,9 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         // dayNightButton.setVisibility(View.GONE);
         // AppState.get().isDayNotInvert = true;
         // }
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) dayNightButton, 0xFF000000, 255);
+        }
 
         onBC = (UnderlineImageView) findViewById(R.id.onBC);
         onBC.underline(AppState.get().isEnableBC);
@@ -572,25 +593,27 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         onMove.setVisibility(DocumentController.isEinkOrMode(this) && !isTextFomat ? View.VISIBLE : View.GONE);
 
         findViewById(R.id.thumbnail).setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(final View v) {
                 DragingDialogs.gotoPageDialog(anchor, dc);
-
             }
         });
-        findViewById(R.id.onShowSearch).setOnClickListener(new View.OnClickListener() {
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) findViewById(R.id.thumbnail), 0xFF000000, 255);
+        }
 
+        findViewById(R.id.onShowSearch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 showSearchDialog();
             }
-
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) findViewById(R.id.onShowSearch), 0xFF000000, 255);
+        }
 
         outline = (ImageView) findViewById(R.id.onDocDontext);
         outline.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(final View v) {
                 if (dc != null) {
@@ -598,22 +621,28 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                 }
             }
         });
-        findViewById(R.id.onBookmarks).setOnClickListener(onBookmarks);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) outline, 0xFF000000, 255);
+        }
 
+        findViewById(R.id.onBookmarks).setOnClickListener(onBookmarks);
         findViewById(R.id.onBookmarks).setOnLongClickListener(onBookmarksLong);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) findViewById(R.id.onBookmarks), 0xFF000000, 255);
+        }
 
         findViewById(R.id.onRecent).setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(final View v) {
-
                 DragingDialogs.recentBooks(anchor, dc);
             }
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) findViewById(R.id.onRecent), 0xFF000000, 255);
+        }
 
         textToSpeach = (ImageView) findViewById(R.id.textToSpeach);
         textToSpeach.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(final View v) {
                 LOG.d("bookTTS", AppSP.get().isDoubleCoverAlone, AppSP.get().isDouble, AppSP.get().isCut);
@@ -629,6 +658,9 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
             hideShow();
             return true;
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) textToSpeach, 0xFF000000, 255);
+        }
         ttsActive = findViewById(R.id.ttsActive);
 
         // ttsActive.setOnClickListener(new View.OnClickListener() {
@@ -641,7 +673,6 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
         onModeChange = (ImageView) findViewById(R.id.onModeChange);
         onModeChange.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 if (dc == null) {
@@ -809,10 +840,16 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
             }
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) onModeChange, 0xFF000000, 255);
+        }
 
         onCrop = (UnderlineImageView) findViewById(R.id.onCrop);
         onCrop.setVisibility(isTextFomat && !AppSP.get().isCrop ? View.GONE : View.VISIBLE);
-
+        if (MainTabs2.USE_NEW_UI) {
+            onCrop.setVisibility(View.GONE);
+            onBC.setVisibility(View.GONE);
+        }
 
         onCrop.setOnClickListener(v -> DragingDialogs.customCropDialog(anchor, dc, onCropChange));
         onCrop.setOnLongClickListener(v -> {
@@ -823,7 +860,6 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
         final View bookMenu = findViewById(R.id.bookMenu);
         bookMenu.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(final View v) {
                 if (dc == null || dc.getCurrentBook() == null) {
@@ -852,8 +888,11 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
             }
         });
-        modeName.setOnClickListener(new OnClickListener() {
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) bookMenu, 0xFF000000, 255);
+        }
 
+        modeName.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 bookMenu.performClick();
@@ -874,7 +913,6 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
 
         findViewById(R.id.bookPref).setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(final View v) {
                 if (dc != null) {
@@ -882,22 +920,25 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                 }
             }
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) findViewById(R.id.bookPref), 0xFF000000, 255);
+        }
 
         onClose = findViewById(R.id.bookClose);
         Apps.accessibilityButtonSize(onClose);
         onClose.setVisibility(View.VISIBLE);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) onClose, 0xFF000000, 255);
+        }
 
         onClose.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(final View v) {
                 nullAdapter();
                 closeDialogs();
                 showInterstial();
             }
-
         });
-
         onClose.setOnLongClickListener(onCloseLongClick);
 
         findViewById(R.id.editTop2).setVisibility(View.GONE);
@@ -905,13 +946,15 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
         lockModelImage = (ImageView) findViewById(R.id.lockUnlock);
         lockModelImage.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 AppSP.get().isLocked = !AppSP.get().isLocked;
                 updateLockMode();
             }
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) lockModelImage, 0xFF000000, 255);
+        }
         updateLockMode();
 
         Keyboards.hideNavigationOnCreate(HorizontalViewActivity.this);
@@ -1139,9 +1182,12 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                     if (Dips.isEInk() || AppState.get().appTheme == AppState.THEME_INK || AppState.get().isEnableBC) {
                         onBC.setVisibility(View.VISIBLE);
                     }
-
                     onCrop.underline(AppSP.get().isCrop);
                     onCrop.invalidate();
+                    if (MainTabs2.USE_NEW_UI) {
+                        onCrop.setVisibility(View.GONE);
+                        onBC.setVisibility(View.GONE);
+                    }
 
                     ttsActive.setDC(dc);
                     ttsActive.addOnDialogRunnable(new Runnable() {
@@ -1464,6 +1510,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Android6.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 
@@ -1775,6 +1822,12 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         if (page <= viewPager.getAdapter().getCount() - 1) {
             viewPager.setCurrentItem(page, false);
         }
+
+        if (MainTabs2.USE_NEW_UI) {
+            onCrop.setVisibility(View.GONE);
+            onBC.setVisibility(View.GONE);
+        }
+
 
         Info info = OutlineHelper.getForamtingInfo(dc, false);
         maxSeek.setText(info.textPage);

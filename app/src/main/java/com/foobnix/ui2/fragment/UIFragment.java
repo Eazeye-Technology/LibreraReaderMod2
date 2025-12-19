@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
@@ -55,6 +57,7 @@ public abstract class UIFragment<T> extends Fragment {
     public static String INTENT_TINT_CHANGE = "INTENT_TINT_CHANGE";
     protected volatile MyProgressBar MyProgressBar;
     protected RecyclerView recyclerView;
+
     Handler handler;
     View adFrame;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -343,7 +346,9 @@ public abstract class UIFragment<T> extends Fragment {
             recyclerView.setAdapter(searchAdapter);
 
         } else if (mode == AppState.MODE_COVERS || mode == AppState.MODE_GRID) {
-            final int num = Math.max(1, Dips.screenWidthDP() / AppState.get().coverBigSize);
+            final int num =
+                    MainTabs2.USE_NEW_UI ? 5 : //default 5 columns, Library
+                    Math.max(1, Dips.screenWidthDP() / AppState.get().coverBigSize);
 
             GridLayoutManager mGridManager = new GridLayoutManager(getActivity(), num);
             mGridManager.setSpanSizeLookup(new SpanSizeLookup() {
@@ -392,7 +397,10 @@ public abstract class UIFragment<T> extends Fragment {
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setAdapter(authorsAdapter);
         } else if (mode == AppState.MODE_LIST_COMPACT) {
-            final int num = Math.max(2, Dips.screenWidthDP() / Dips.dpToPx(300));
+            final int num =
+                    MainTabs2.USE_NEW_UI ? 3 : //default 3 columns, bookmarks
+                            Math.max(2, Dips.screenWidthDP() / Dips.dpToPx(300));
+
             GridLayoutManager mGridManager = new GridLayoutManager(getActivity(), num);
             mGridManager.setSpanSizeLookup(new SpanSizeLookup() {
 

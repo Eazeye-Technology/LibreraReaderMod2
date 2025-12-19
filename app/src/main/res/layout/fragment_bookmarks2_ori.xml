@@ -2,9 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="30dp"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/topPanel"
@@ -179,25 +177,6 @@
             android:src="@drawable/glyphicons_599_menu_close"
             android:tint="@color/tint_gray" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="25dp"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Bookmarks"
-            android:textSize="24dp"
-            android:id="@+id/recentName"
-            />
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

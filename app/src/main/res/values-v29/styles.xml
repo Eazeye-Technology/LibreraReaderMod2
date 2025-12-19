@@ -5,13 +5,18 @@
         <item name="android:windowNoTitle">true</item>
 <!--        <item name="android:windowDisablePreview">true</item>-->
 <!--        <item name="android:windowIsTranslucent">true</item>-->
-
+        <!-- Status bar color. -->
+<!--        <item name="android:statusBarColor">#F1EDEC</item>-->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="StyledIndicatorsBlack" parent="Theme.MaterialComponents.NoActionBar"> <!--Theme.AppCompat.NoActionBar-->
         <item name="android:windowNoTitle">true</item>
 <!--        <item name="android:windowDisablePreview">true</item>-->
 <!--        <item name="android:windowIsTranslucent">true</item>-->
+        <!-- Status bar color. -->
+<!--        <item name="android:statusBarColor">#F1EDEC</item>-->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 </resources>

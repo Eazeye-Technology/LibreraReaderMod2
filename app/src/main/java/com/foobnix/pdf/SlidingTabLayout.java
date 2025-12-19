@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.artifex.mupdf.fitz.Text;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.IntegerResponse;
 import com.foobnix.android.utils.LOG;
@@ -210,15 +212,23 @@ public class SlidingTabLayout extends HorizontalScrollView {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
         // textView.setTypeface(Typeface.DEFAULT_BOLD);
 
-        TypedValue outValue = new TypedValue();
-        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
-        textView.setBackgroundResource(outValue.resourceId);
-
-        if (myPOS == POS_HORIZONTAL) {
-            textView.setAllCaps(true);
+        if (MainTabs2.USE_NEW_UI) {
+            //skip
         } else {
-            textView.setSingleLine();
-            textView.setEllipsize(TextUtils.TruncateAt.END);
+            TypedValue outValue = new TypedValue();
+            getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+            textView.setBackgroundResource(outValue.resourceId);
+        }
+
+        if (MainTabs2.USE_NEW_UI) {
+            textView.setAllCaps(false);
+        } else {
+            if (myPOS == POS_HORIZONTAL) {
+                textView.setAllCaps(true);
+            } else {
+                textView.setSingleLine();
+                textView.setEllipsize(TextUtils.TruncateAt.END);
+            }
         }
 
         int padding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
@@ -257,6 +267,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
             if (tabView == null) {
                 tabView = createDefaultTabView(getContext());
+
                 if (AppState.get().appTheme == AppState.THEME_INK) {
                     ((TextView) tabView).setTextSize(16);
                 }
@@ -294,18 +305,25 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
                 tabTitleView.setCompoundDrawablePadding(Dips.dpToPx(5));
 
-                if (AppState.get().appTheme == AppState.THEME_INK) {
-                    // TintUtil.setDrawableTint(drawable, Color.BLACK);
-                    tabTitleView.setTextColor(TintUtil.color);
-                } else {
-                    if(drawable!=null) {
-                        TintUtil.setDrawableTint(drawable, Color.WHITE);
+                if (MainTabs2.USE_NEW_UI) {
+                    if (drawable != null) {
+                        TintUtil.setDrawableTint(drawable, 0xFF000000); //black
                     }
-                    tabTitleView.setTextColor(Color.WHITE);
+                    tabTitleView.setTextColor(0xFF000000); //black
+                } else {
+                    if (AppState.get().appTheme == AppState.THEME_INK) {
+                        // TintUtil.setDrawableTint(drawable, Color.BLACK);
+                        tabTitleView.setTextColor(TintUtil.color);
+                    } else {
+                        if (drawable != null) {
+                            TintUtil.setDrawableTint(drawable, Color.WHITE);
+                        }
+                        tabTitleView.setTextColor(Color.WHITE);
+                    }
                 }
 
                 //tabView.setOnClickListener(tabClickListener);
-                tabView.setOnClickListener(new DoubleClickListener() {
+                DoubleClickListener doubleClickListener = new DoubleClickListener() {
                     @Override
                     public void onSingleClick(View v) {
                         tabClickListener.onClick(v);
@@ -317,10 +335,24 @@ public class SlidingTabLayout extends HorizontalScrollView {
                             onDoubleClickAction.onResultRecive(j);
                         }
                     }
-                });
+                };
+                if (MainTabs2.USE_NEW_UI) {
+                    //skip
+                } else {
+                    tabView.setOnClickListener(doubleClickListener);
+                }
 
-
-                getmTabStrip().addView(tabView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+                if (MainTabs2.USE_NEW_UI) {
+                    LinearLayout tabViewWrap = new LinearLayout(getContext());
+                    tabViewWrap.addView(tabView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+                    tabViewWrap.setOnClickListener(doubleClickListener);
+                    tabViewWrap.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+                    LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
+                    getmTabStrip().addView(tabViewWrap, p);
+//                    getmTabStrip().addView(tabView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+                } else {
+                    getmTabStrip().addView(tabView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+                }
 
             }
         }
@@ -343,7 +375,13 @@ public class SlidingTabLayout extends HorizontalScrollView {
             return;
         }
 
-        TextView selectedChild = (TextView) getmTabStrip().getChildAt(tabIndex);
+        TextView selectedChild = null;
+        View selectedChild_ = getmTabStrip().getChildAt(tabIndex);
+        if (selectedChild_ instanceof TextView) {
+            selectedChild = (TextView) selectedChild_;
+        } else if (selectedChild_ instanceof ViewGroup) {
+            selectedChild = (TextView) ((ViewGroup) selectedChild_).getChildAt(0);
+        }
 
         if (selectedChild != null) {
             int targetScrollX = selectedChild.getLeft() + positionOffset;
@@ -366,7 +404,13 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     public void updateIcons(int position) {
         for (int i = 0; i < getmTabStrip().getChildCount(); i++) {
-            TextView childAt = (TextView) getmTabStrip().getChildAt(i);
+            View childAt_ = getmTabStrip().getChildAt(i);
+            TextView childAt = null;
+            if (childAt_ instanceof TextView) {
+                childAt = (TextView) childAt_;
+            } else if (childAt_ instanceof ViewGroup) {
+                childAt = (TextView) ((ViewGroup) childAt_).getChildAt(0);
+            }
             int myColor = i == position ? Color.WHITE : TintUtil.colorSecondTab;
 
 
@@ -377,12 +421,17 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 drawable = childAt.getCompoundDrawables()[0];
             }
 
-            if (AppState.get().appTheme == AppState.THEME_INK) {
-                TintUtil.setDrawableTint(drawable, TintUtil.color);
-                childAt.setTextColor(TintUtil.color);
+            if (MainTabs2.USE_NEW_UI) {
+                TintUtil.setDrawableTint(drawable, 0xFF000000);
+                childAt.setTextColor(0xFF000000); //black
             } else {
-                childAt.setTextColor(myColor);
-                TintUtil.setDrawableTint(drawable, myColor);
+                if (AppState.get().appTheme == AppState.THEME_INK) {
+                    TintUtil.setDrawableTint(drawable, TintUtil.color);
+                    childAt.setTextColor(TintUtil.color);
+                } else {
+                    childAt.setTextColor(myColor);
+                    TintUtil.setDrawableTint(drawable, myColor);
+                }
             }
         }
     }
@@ -462,7 +511,12 @@ public class SlidingTabLayout extends HorizontalScrollView {
         @Override
         public void onClick(View v) {
             for (int i = 0; i < getmTabStrip().getChildCount(); i++) {
-                if (v == getmTabStrip().getChildAt(i)) {
+                View childAt_ = getmTabStrip().getChildAt(i);
+                View childAt2_ = null;
+                if (childAt_ instanceof ViewGroup) {
+                    childAt2_ = ((ViewGroup) childAt_).getChildAt(0);
+                }
+                if (v == childAt_ || (childAt2_ != null && v == childAt2_)) {
                     mViewPager.setCurrentItem(i, AppState.get().appTheme != AppState.THEME_INK);
                     return;
                 }

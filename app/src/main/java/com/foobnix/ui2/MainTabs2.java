@@ -517,9 +517,15 @@ public class MainTabs2 extends AdsFragmentActivity {
 
         indicator.setViewPager(pager);
 
-        indicator.setDividerColors(getResources().getColor(R.color.tint_divider));
-        indicator.setSelectedIndicatorColors(Color.WHITE);
-        indicator.setBackgroundColor(TintUtil.color);
+        if (USE_NEW_UI) {
+            indicator.setDividerColors(0x00000000); //transparent
+            indicator.setSelectedIndicatorColors(0xff000000); //black
+            indicator.setBackgroundColor(0xFFF1EDEC); //gray
+        } else {
+            indicator.setDividerColors(getResources().getColor(R.color.tint_divider));
+            indicator.setSelectedIndicatorColors(Color.WHITE);
+            indicator.setBackgroundColor(TintUtil.color);
+        }
 
         if (!AppState.get().tapPositionTop || !AppState.get().tabWithNames) {
             indicator.setDividerColors(Color.TRANSPARENT);

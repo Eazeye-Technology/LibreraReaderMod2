@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,6 +96,11 @@ import java.util.Set;
 import java.util.Stack;
 
 public class SearchFragment2 extends UIFragment<FileMeta> {
+    private ImageView searchPage;
+    private TextView tvTitle;
+    private LinearLayout ll_search_wx_global;
+    private AutoCompleteTextView filterLine_Library_global;
+
 
     public static final String EMPTY_ID = "\u00A0";
     public static final Pair<Integer, Integer> PAIR = new Pair<Integer, Integer>(R.string.library, R.drawable.glyphicons_589_book_open);
@@ -380,10 +386,28 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
         sortBy = (TextView) view.findViewById(R.id.sortBy);
         sortOrder = (ImageView) view.findViewById(R.id.sortOrder);
         menu2 = (ImageView) view.findViewById(R.id.menu2);
+        ImageView menu2_2 = (ImageView) view.findViewById(R.id.menu2_2);
         myAutoCompleteImage = (ImageView) view.findViewById(R.id.myAutoCompleteImage);
         searchEditText = (AutoCompleteTextView) view.findViewById(R.id.filterLine);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
+        searchPage = view.findViewById(R.id.searchPage);
+        searchPage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ll_search_wx_global.getVisibility() == View.VISIBLE) {
+                    ll_search_wx_global.setVisibility(View.INVISIBLE);
+                    tvTitle.setVisibility(View.VISIBLE);
+                    filterLine_Library_global.setText("");
+                } else {
+                    ll_search_wx_global.setVisibility(View.VISIBLE);
+                    tvTitle.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        tvTitle = (TextView) view.findViewById(R.id.tvTitle);
+        ll_search_wx_global = (LinearLayout) view.findViewById(R.id.ll_search_wx_global);
+        filterLine_Library_global = (AutoCompleteTextView) view.findViewById(R.id.filterLine_Library_global);
 
         onRefresh.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -420,6 +444,24 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
 
         searchEditText.addTextChangedListener(filterTextWatcher);
         searchEditText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        filterLine_Library_global.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchEditText.setText(filterLine_Library_global.getText());
+            }
+        });
+        filterLine_Library_global.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+
         EditTextHelper.enableKeyboardSearch(searchEditText, new Runnable() {
 
             @Override
@@ -561,14 +603,17 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
             }
         });
 
-        menu2.setOnClickListener(new OnClickListener() {
+        OnClickListener clickListener = new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (view.getRootView().findViewById(R.id.imageMenu1) != null) {
                     view.getRootView().findViewById(R.id.imageMenu1).performClick();
                 }
             }
-        });
+        };
+        menu2.setOnClickListener(clickListener);
+        menu2_2.setOnClickListener(clickListener);
+
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter(BooksService.INTENT_NAME));
 

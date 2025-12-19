@@ -124,10 +124,14 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 
         BrightnessHelper.applyBrigtness(this);
 
-        if (AppState.get().isDayNotInvert) {
-            setTheme(R.style.StyledIndicatorsWhite);
-        } else {
+        if (MainTabs2.USE_NEW_UI) {
             setTheme(R.style.StyledIndicatorsBlack);
+        } else {
+            if (AppState.get().isDayNotInvert) {
+                setTheme(R.style.StyledIndicatorsWhite);
+            } else {
+                setTheme(R.style.StyledIndicatorsBlack);
+            }
         }
         super.onCreate(savedInstanceState);
 

@@ -105,7 +105,7 @@ public class BookmarksAdapter2 extends AppRecycleAdapter<AppBookmark, BookmarksV
     public class BookmarksViewHolder extends RecyclerView.ViewHolder {
         public TextView page, text, title;
         public ImageView remove;
-        public CardView parent;
+        public View/*CardView*/ parent;
         public ImageView image, cloudImage;
 
         public BookmarksViewHolder(View view) {
@@ -116,7 +116,7 @@ public class BookmarksAdapter2 extends AppRecycleAdapter<AppBookmark, BookmarksV
             image = (ImageView) view.findViewById(R.id.image);
             cloudImage = (ImageView) view.findViewById(R.id.cloudImage);
             remove = view.findViewById(R.id.remove);
-            parent = (CardView) view;
+            parent = (View)/*(CardView)*/ view;
         }
     }
 

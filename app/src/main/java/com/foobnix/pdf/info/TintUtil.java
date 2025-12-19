@@ -21,6 +21,7 @@ import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.LOG;
 import com.foobnix.model.AppState;
 import com.foobnix.pdf.info.wrapper.MagicHelper;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 
 import java.security.spec.ECField;
@@ -243,12 +244,22 @@ public class TintUtil {
 
     @SuppressLint("NewApi")
     public static void setTintBgSimple(View txtView, int alpha) {
-        ColorDrawable colorDrawable = new ColorDrawable(color);
-        colorDrawable.setAlpha(alpha);
-        if (Build.VERSION.SDK_INT >= 16) {
-            txtView.setBackground(colorDrawable.getCurrent());
+        if (MainTabs2.USE_NEW_UI) {
+            ColorDrawable colorDrawable = new ColorDrawable(0xFFF1EDEC);
+            colorDrawable.setAlpha(255);
+            if (Build.VERSION.SDK_INT >= 16) {
+                txtView.setBackground(colorDrawable.getCurrent());
+            } else {
+                txtView.setBackgroundDrawable(colorDrawable);
+            }
         } else {
-            txtView.setBackgroundDrawable(colorDrawable);
+            ColorDrawable colorDrawable = new ColorDrawable(color);
+            colorDrawable.setAlpha(alpha);
+            if (Build.VERSION.SDK_INT >= 16) {
+                txtView.setBackground(colorDrawable.getCurrent());
+            } else {
+                txtView.setBackgroundDrawable(colorDrawable);
+            }
         }
     }
 
@@ -309,10 +320,17 @@ public class TintUtil {
     @SuppressLint("NewApi")
     public static void setStatusBarColor(Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= 21) {
-            Window window = activity.getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(MagicHelper.darkerColor(color));
+            if (MainTabs2.USE_NEW_UI) {
+                Window window = activity.getWindow();
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(0xFFF1EDEC);
+            } else {
+                Window window = activity.getWindow();
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(MagicHelper.darkerColor(color));
+            }
         }
     }
 

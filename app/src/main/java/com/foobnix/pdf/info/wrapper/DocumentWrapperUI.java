@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Handler;
 import android.view.Gravity;
@@ -269,24 +270,21 @@ public class DocumentWrapperUI {
     DrawView drawView;
     ProgressDraw progressDraw;
     public View.OnClickListener onHideShowToolBar = new View.OnClickListener() {
-
         @Override
         public void onClick(final View arg0) {
             doHideShowToolBar();
         }
     };
     UnderlineImageView crop, cut, onBC;
-    LinearLayout pageshelper;    public View.OnClickListener onShowSearch = new View.OnClickListener() {
-
+    LinearLayout pageshelper;
+    public View.OnClickListener onShowSearch = new View.OnClickListener() {
         @Override
         public void onClick(final View arg0) {
             showSearchDialog();
         }
-
     };
     String quickBookmark;
     Runnable clearFlags = new Runnable() {
-
         @Override
         public void run() {
             try {
@@ -747,13 +745,14 @@ public class DocumentWrapperUI {
             reverseKeysIndicator.setVisibility(View.GONE);
         }
 
-        moveLeft.setVisibility(Dips.isSmallScreen() && Dips.isVertical() ? View.GONE : View.VISIBLE);
-        moveRight.setVisibility(Dips.isSmallScreen() && Dips.isVertical() ? View.GONE : View.VISIBLE);
-        zoomPlus.setVisibility(Dips.isSmallScreen() && Dips.isVertical() ? View.GONE : View.VISIBLE);
-        zoomMinus.setVisibility(Dips.isSmallScreen() && Dips.isVertical() ? View.GONE : View.VISIBLE);
+        if (MainTabs2.USE_NEW_UI) {
+            editTop2.setVisibility(View.GONE);
 
-        onTextReplacement.setVisibility(View.GONE);
-        if (dc.isTextFormat()) {
+            moveLeft.setVisibility(View.GONE);
+            moveRight.setVisibility(View.GONE);
+            zoomPlus.setVisibility(View.GONE);
+            zoomMinus.setVisibility(View.GONE);
+            onTextReplacement.setVisibility(View.GONE);
             moveLeft.setVisibility(View.GONE);
             moveRight.setVisibility(View.GONE);
             zoomPlus.setVisibility(View.GONE);
@@ -761,17 +760,38 @@ public class DocumentWrapperUI {
             crop.setVisibility(View.GONE);
             cut.setVisibility(View.GONE);
             onModeChange.setVisibility(View.GONE);
-            onTextReplacement.setVisibility(View.VISIBLE);
-            if (Dips.isEInk() || AppState.get().appTheme == AppState.THEME_INK || AppState.get().isEnableBC) {
-                onBC.setVisibility(View.VISIBLE);
-            } else {
-                onBC.setVisibility(View.GONE);
+            onTextReplacement.setVisibility(View.GONE);
+            if (dc.isTextFormat()) {
+                onTextReplacement.setVisibility(View.VISIBLE);
             }
-            if (AppSP.get().isCrop) {
-                crop.setVisibility(View.VISIBLE);
-            }
-            if (AppSP.get().isCut) {
-                cut.setVisibility(View.VISIBLE);
+            onBC.setVisibility(View.GONE);
+        } else {
+            moveLeft.setVisibility(Dips.isSmallScreen() && Dips.isVertical() ? View.GONE : View.VISIBLE);
+            moveRight.setVisibility(Dips.isSmallScreen() && Dips.isVertical() ? View.GONE : View.VISIBLE);
+            zoomPlus.setVisibility(Dips.isSmallScreen() && Dips.isVertical() ? View.GONE : View.VISIBLE);
+            zoomMinus.setVisibility(Dips.isSmallScreen() && Dips.isVertical() ? View.GONE : View.VISIBLE);
+
+            onTextReplacement.setVisibility(View.GONE);
+            if (dc.isTextFormat()) {
+                moveLeft.setVisibility(View.GONE);
+                moveRight.setVisibility(View.GONE);
+                zoomPlus.setVisibility(View.GONE);
+                zoomMinus.setVisibility(View.GONE);
+                crop.setVisibility(View.GONE);
+                cut.setVisibility(View.GONE);
+                onModeChange.setVisibility(View.GONE);
+                onTextReplacement.setVisibility(View.VISIBLE);
+                if (Dips.isEInk() || AppState.get().appTheme == AppState.THEME_INK || AppState.get().isEnableBC) {
+                    onBC.setVisibility(View.VISIBLE);
+                } else {
+                    onBC.setVisibility(View.GONE);
+                }
+                if (AppSP.get().isCrop) {
+                    crop.setVisibility(View.VISIBLE);
+                }
+                if (AppSP.get().isCut) {
+                    cut.setVisibility(View.VISIBLE);
+                }
             }
         }
 
@@ -889,7 +909,6 @@ public class DocumentWrapperUI {
 //        } else {
 //            TintUtil.setTintImageWithAlpha(moveCenter, Color.WHITE);
 //        }
-
     }
 
     public void showHideHistory() {
@@ -947,6 +966,13 @@ public class DocumentWrapperUI {
 
         seekBar = (SeekBar) a.findViewById(R.id.seekBar1);
         seekBar.setAccessibilityDelegate(new View.AccessibilityDelegate());
+        if (MainTabs2.USE_NEW_UI) {
+            //seekBar.setBackgroundColor(0xFFFF0000);
+            seekBar.getProgressDrawable().getCurrent().setColorFilter(0xFF000000, PorterDuff.Mode.SRC_IN);
+            seekBar.getThumb().setColorFilter(0xFF000000, PorterDuff.Mode.SRC_IN);
+            seekBar.setAlpha(1.0f);
+        }
+
         speedSeekBar = (SeekBar) a.findViewById(R.id.seekBarSpeed);
         seekSpeedLayot = a.findViewById(R.id.seekSpeedLayot);
         anchor = (FrameLayout) a.findViewById(R.id.anchor);
@@ -1081,6 +1107,9 @@ public class DocumentWrapperUI {
 
         moveCenter = a.findViewById(R.id.moveCenter);
         moveCenter.setOnClickListener(onMoveCenter);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha(moveCenter, 0xFF000000, 255);
+        }
 
         moveRight = a.findViewById(R.id.moveRight);
         moveRight.setOnClickListener(onMoveRight);
@@ -1088,6 +1117,9 @@ public class DocumentWrapperUI {
         ImageView brightness = (ImageView) a.findViewById(R.id.brightness);
         brightness.setOnClickListener(onSun);
         brightness.setImageResource(!AppState.get().isDayNotInvert ? R.drawable.glyphicons_232_sun : R.drawable.glyphicons_231_moon);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) brightness, 0xFF000000, 255);
+        }
 
         // if (Dips.isEInk(dc.getActivity())) {
         // brightness.setVisibility(View.GONE);
@@ -1118,45 +1150,73 @@ public class DocumentWrapperUI {
 
         View prefTop = a.findViewById(R.id.prefTop);
         prefTop.setOnClickListener(onPrefTop);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) prefTop, 0xFF000000, 255);
+        }
 
         fullscreen = (ImageView) a.findViewById(R.id.fullscreen);
-
         fullscreen.setOnClickListener(onFull);
         fullscreen.setImageResource(DocumentController.getFullScreenIcon(a, AppState.get().fullScreenMode));
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha(fullscreen, 0xFF000000, 255);
+        }
 
         onTextReplacement = a.findViewById(R.id.onTextReplacement);
         onTextReplacement.setOnClickListener(v -> DragingDialogs.textReplaces(anchor, dc));
-
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) onTextReplacement, 0xFF000000, 255);
+        }
 
         onCloseBook = a.findViewById(R.id.close);
         Apps.accessibilityButtonSize(onCloseBook);
-
         onCloseBook.setOnClickListener(onClose);
         onCloseBook.setOnLongClickListener(onCloseLongClick);
         onCloseBook.setVisibility(View.INVISIBLE);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) onCloseBook, 0xFF000000, 255);
+        }
 
         showSearch = (ImageView) a.findViewById(R.id.onShowSearch);
         showSearch.setOnClickListener(onShowSearch);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) showSearch, 0xFF000000, 255);
+        }
+
+
         autoScroll = ((ImageView) a.findViewById(R.id.autoScroll));
         autoScroll.setOnClickListener(onAutoScroll);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) autoScroll, 0xFF000000, 255);
+        }
 
         // ((View)
         // a.findViewById(R.id.onScreenMode)).setOnClickListener(onScreenMode);
 
         nextTypeBootom = (TextView) a.findViewById(R.id.nextTypeBootom);
-
         nextTypeBootom.setOnClickListener(onNextType);
+        if (MainTabs2.USE_NEW_UI) {
+            nextTypeBootom.getBackground().setColorFilter(0xFF000000, PorterDuff.Mode.SRC_IN);
+            nextTypeBootom.getBackground().getCurrent().setColorFilter(0xFF000000, PorterDuff.Mode.SRC_IN);
+            nextTypeBootom.setTextColor(0xFF000000);
+            nextTypeBootom.setAlpha(1.0f);
+        }
 
         nextScreenType = ((ImageView) a.findViewById(R.id.imageNextScreen));
         nextScreenType.setOnClickListener(onNextType);
 
         onDocDontext = (ImageView) a.findViewById(R.id.onDocDontext);
         onDocDontext.setOnClickListener(onShowContext);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) onDocDontext, 0xFF000000, 255);
+        }
 
         lockUnlock = (ImageView) a.findViewById(R.id.lockUnlock);
         lockUnlockTop = (ImageView) a.findViewById(R.id.lockUnlockTop);
         lockUnlock.setOnClickListener(onLockUnlock);
         lockUnlockTop.setOnClickListener(onLockUnlock);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) lockUnlock, 0xFF000000, 255);
+        }
 
         textToSpeachTop = (ImageView) a.findViewById(R.id.textToSpeachTop);
         textToSpeachTop.setOnClickListener(onTextToSpeach);
@@ -1183,30 +1243,45 @@ public class DocumentWrapperUI {
             hideShow();
             return true;
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) textToSpeach, 0xFF000000, 255);
+        }
 
         drawView = (DrawView) a.findViewById(R.id.drawView);
 
         View bookmarks = a.findViewById(R.id.onBookmarks);
         bookmarks.setOnClickListener(onBookmarks);
         bookmarks.setOnLongClickListener(onBookmarksLong);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) bookmarks, 0xFF000000, 255);
+        }
 
         toastBrightnessText = (TextView) a.findViewById(R.id.toastBrightnessText);
         toastBrightnessText.setVisibility(View.GONE);
         TintUtil.setDrawableTint(toastBrightnessText.getCompoundDrawables()[0], Color.WHITE);
 
         TextView modeName = (TextView) a.findViewById(R.id.modeName);
-
         if (AppState.get().isEnableAccessibility) {
             modeName.setText(AppState.get().nameVerticalMode + " (" + dc.getString(R.string.accessibility) + ")");
         } else {
             modeName.setText(AppState.get().nameVerticalMode);
         }
+        if (MainTabs2.USE_NEW_UI) {
+            modeName.setTextColor(0xFF000000);
+        }
+
 
         pagesCountIndicator = (TextView) a.findViewById(R.id.currentPageIndex);
         pagesCountIndicator.setVisibility(View.GONE);
 
         currentSeek = (TextView) a.findViewById(R.id.currentSeek);
+        if (MainTabs2.USE_NEW_UI) {
+            currentSeek.setTextColor(0xFF000000);
+        }
         maxSeek = (TextView) a.findViewById(R.id.maxSeek);
+        if (MainTabs2.USE_NEW_UI) {
+            maxSeek.setTextColor(0xFF000000);
+        }
         bookName = (TextView) a.findViewById(R.id.bookName);
 
         currentTime = (TextView) a.findViewById(R.id.currentTime);
@@ -1214,7 +1289,6 @@ public class DocumentWrapperUI {
         batteryLevel.setOnClickListener(onHideShowToolBar);
 
         currentSeek.setOnLongClickListener(new OnLongClickListener() {
-
             @Override
             public boolean onLongClick(View v) {
                 Dialogs.showDeltaPage(anchor, dc, dc.getCurentPageFirst1(), updateUIRunnable);
@@ -1222,7 +1296,6 @@ public class DocumentWrapperUI {
             }
         });
         maxSeek.setOnLongClickListener(new OnLongClickListener() {
-
             @Override
             public boolean onLongClick(View v) {
                 Dialogs.showDeltaPage(anchor, dc, dc.getCurentPageFirst1(), updateUIRunnable);
@@ -1232,12 +1305,19 @@ public class DocumentWrapperUI {
 
         View thumbnail = a.findViewById(R.id.thumbnail);
         thumbnail.setOnClickListener(onThumbnail);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) thumbnail, 0xFF000000, 255);
+        }
 
         View bookMenu = a.findViewById(R.id.bookMenu);
         if (MainTabs2.MOD_VERSION) {
             //FIXME:click lower button <up down scroll page>
         }
         bookMenu.setOnClickListener(onItemMenu);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) bookMenu, 0xFF000000, 255);
+        }
+
         modeName.setOnClickListener(onItemMenu);
         modeName.setOnLongClickListener(onCloseLongClick);
 //        modeName.setOnLongClickListener(new OnLongClickListener() {
@@ -1257,6 +1337,9 @@ public class DocumentWrapperUI {
 
         ImageView recent = (ImageView) a.findViewById(R.id.onRecent);
         recent.setOnClickListener(onRecent);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) recent, 0xFF000000, 255);
+        }
 
         anchor.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 
@@ -1290,6 +1373,9 @@ public class DocumentWrapperUI {
         // bottom 1
         TintUtil.setStatusBarColor(a);
 
+        if (MainTabs2.USE_NEW_UI) {
+            //skip
+        }
         TintUtil.setTintBgSimple(a.findViewById(R.id.menuLayout), AppState.get().transparencyUI);
         TintUtil.setTintBgSimple(a.findViewById(R.id.bottomBar1), AppState.get().transparencyUI);
         TintUtil.setBackgroundFillColorBottomRight(lirbiLogo, ColorUtils.setAlphaComponent(TintUtil.color, AppState.get().transparencyUI));
@@ -1860,24 +1946,27 @@ public class DocumentWrapperUI {
     }
 
     public void hideShowEditIcon() {
-        if (dc != null && !BookType.PDF.is(dc.getCurrentBook().getPath())) {
-            editTop2.setVisibility(View.GONE);
-        } else if (AppSP.get().isCrop || AppSP.get().isCut) {
+        if (MainTabs2.USE_NEW_UI) {
             editTop2.setVisibility(View.GONE);
         } else {
-            boolean passwordProtected = dc.isPasswordProtected();
-            LOG.d("passwordProtected", passwordProtected);
-            if (dc != null && passwordProtected) {
+            if (dc != null && !BookType.PDF.is(dc.getCurrentBook().getPath())) {
+                editTop2.setVisibility(View.GONE);
+            } else if (AppSP.get().isCrop || AppSP.get().isCut) {
                 editTop2.setVisibility(View.GONE);
             } else {
-                if (AppsConfig.MUPDF_FZ_VERSION.equals(AppsConfig.MUPDF_1_11)) {
-                    editTop2.setVisibility(View.VISIBLE);
+                boolean passwordProtected = dc.isPasswordProtected();
+                LOG.d("passwordProtected", passwordProtected);
+                if (dc != null && passwordProtected) {
+                    editTop2.setVisibility(View.GONE);
                 } else {
-                    editTop2.setVisibility(View.VISIBLE);
+                    if (AppsConfig.MUPDF_FZ_VERSION.equals(AppsConfig.MUPDF_1_11)) {
+                        editTop2.setVisibility(View.VISIBLE);
+                    } else {
+                        editTop2.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         }
-
     }
 
     public DocumentController getController() {
@@ -2016,8 +2105,9 @@ public class DocumentWrapperUI {
         LOG.d("DocumentWrapperUI", "onPause");
         handlerTimer.removeCallbacks(updateTimePower);
         dc.resetReadTimer();
-    }    public View.OnClickListener onPrefTop = new View.OnClickListener() {
+    }
 
+    public View.OnClickListener onPrefTop = new View.OnClickListener() {
         @Override
         public void onClick(final View arg0) {
             DragingDialogs.preferences(anchor, dc, onRefresh, new Runnable() {

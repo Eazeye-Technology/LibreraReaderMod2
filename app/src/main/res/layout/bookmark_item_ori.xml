@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    >
-<!--
-android:layout_margin="@dimen/dv"
+    android:layout_margin="@dimen/dv"
     android:background="?android:attr/selectableItemBackground"
     android:elevation="@dimen/dv"
-    card_view:cardCornerRadius="@dimen/radius"
--->
+    card_view:cardCornerRadius="@dimen/radius">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="2dip"
-        android:background="@drawable/browse_item_list_outline"
-        >
-<!--
-android:background="?android:attr/selectableItemBackground"
--->
+        android:padding="2dip">
+
         <RelativeLayout
-            android:layout_width="100dip"
-            android:layout_height="150dip"
-            android:layout_margin="20dp"
+            android:layout_width="50dip"
+            android:layout_height="75dip"
+            android:layout_margin="@dimen/dv"
             android:layout_weight="0"
             android:elevation="@dimen/dv"
             android:outlineProvider="bounds">
-<!--@dimen/dv-->
+
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="100dip"
-                android:layout_height="150dip"
+                android:layout_width="50dip"
+                android:layout_height="75dip"
                 android:layout_weight="0"
                 android:scaleType="centerCrop" />
 
@@ -83,15 +77,27 @@ android:background="?android:attr/selectableItemBackground"
 
                 <ImageView
                     android:id="@+id/cloudImage"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="@dimen/wh_button_small"
+                    android:layout_height="@dimen/wh_button_small"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="4dip"
                     android:layout_weight="0"
                     android:padding="3dip"
                     android:src="@drawable/dropbox" />
-<!--@dimen/wh_button_small-->
+
+
+                <ImageView
+                    android:id="@+id/remove"
+                    android:layout_width="@dimen/wh_button_small"
+                    android:layout_height="@dimen/wh_button_small"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="2dip"
+                    android:contentDescription="@string/remove"
+                    android:src="@drawable/glyphicons_599_menu_close"
+                    android:tint="@color/lt_grey_dima" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,25 +133,7 @@ android:background="?android:attr/selectableItemBackground"
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-            <ImageView
-                android:id="@+id/remove"
-                android:layout_width="@dimen/wh_button_small"
-                android:layout_height="@dimen/wh_button_small"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="2dip"
-                android:contentDescription="@string/remove"
-                android:src="@drawable/glyphicons_599_menu_close"
-                android:tint="@color/lt_grey_dima"
-                android:layout_marginRight="20dp"
-                />
-        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

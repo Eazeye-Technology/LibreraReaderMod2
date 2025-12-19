@@ -178,9 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -229,97 +227,6 @@
                 android:textColor="@color/white"
                 android:textSize="9sp" />
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="?android:attr/actionBarSize"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="2dip"
-                android:layout_centerHorizontal="true"
-                >
-
-                <ImageView
-                    android:id="@+id/moveCenter"
-                    style="@style/buttonWhite"
-                    android:layout_width="@dimen/wh_button"
-                    android:layout_height="@dimen/wh_button"
-                    android:layout_weight="0"
-                    android:contentDescription="align document"
-                    android:src="@drawable/glyphicons_112_paragraph_center" />
-
-                <ImageView
-                    android:id="@+id/onMove"
-                    style="@style/buttonWhite"
-                    android:layout_width="@dimen/wh_button"
-                    android:layout_height="@dimen/wh_button"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/move"
-                    android:src="@drawable/glyphicons_809_drop_plus"
-                    android:visibility="visible" />
-
-                <com.foobnix.pdf.info.view.UnderlineImageView
-                    android:id="@+id/onBC"
-                    style="@style/buttonWhite"
-                    android:layout_width="@dimen/wh_button"
-                    android:layout_height="@dimen/wh_button"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/contrast"
-                    android:src="@drawable/glyphicons_92_contrast"
-                    android:visibility="visible" />
-
-                <com.foobnix.pdf.info.view.UnderlineImageView
-                    android:id="@+id/onCrop"
-                    style="@style/buttonWhite"
-                    android:layout_width="@dimen/wh_button"
-                    android:layout_height="@dimen/wh_button"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/crop_white_borders"
-                    android:src="@drawable/glyphicons_94_crop"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/bookNight"
-                    style="@style/buttonWhite"
-                    android:layout_width="@dimen/wh_button"
-                    android:layout_height="@dimen/wh_button"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/brightness"
-                    android:src="@drawable/glyphicons_232_sun" />
-
-                <ImageView
-                    android:id="@+id/onFullScreen"
-                    style="@style/buttonWhite"
-                    android:layout_width="@dimen/wh_button"
-                    android:layout_height="@dimen/wh_button"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/full_screen"
-                    android:src="@drawable/glyphicons_216_fullscreen" />
-
-                <ImageView
-                    android:id="@+id/onTextReplacement"
-                    style="@style/buttonWhite"
-                    android:layout_width="@dimen/wh_button"
-                    android:layout_height="@dimen/wh_button"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/full_screen"
-                    android:src="@drawable/my_glyphicons_pen" />
-
-                <ImageView
-                    android:id="@+id/bookPref"
-                    style="@style/buttonWhite"
-                    android:layout_width="@dimen/wh_button"
-                    android:layout_height="@dimen/wh_button"
-                    android:layout_weight="0"
-                    android:contentDescription="@string/preferences"
-                    android:src="@drawable/glyphicons_137_cogwheel" />
-            </LinearLayout>
-
             <ImageView
                 android:id="@+id/bookClose"
                 style="@style/buttonWhiteClose"
@@ -334,10 +241,94 @@
                 android:src="@drawable/glyphicons_599_menu_close" />
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/actionBarSize"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="2dip">
+
+            <ImageView
+                android:id="@+id/moveCenter"
+                style="@style/buttonWhite"
+                android:layout_width="@dimen/wh_button"
+                android:layout_height="@dimen/wh_button"
+                android:layout_weight="0"
+                android:contentDescription="align document"
+                android:src="@drawable/glyphicons_112_paragraph_center" />
+
+            <ImageView
+                android:id="@+id/onMove"
+                style="@style/buttonWhite"
+                android:layout_width="@dimen/wh_button"
+                android:layout_height="@dimen/wh_button"
+                android:layout_weight="0"
+                android:contentDescription="@string/move"
+                android:src="@drawable/glyphicons_809_drop_plus"
+                android:visibility="visible" />
+
+            <com.foobnix.pdf.info.view.UnderlineImageView
+                android:id="@+id/onBC"
+                style="@style/buttonWhite"
+                android:layout_width="@dimen/wh_button"
+                android:layout_height="@dimen/wh_button"
+                android:layout_weight="0"
+                android:contentDescription="@string/contrast"
+                android:src="@drawable/glyphicons_92_contrast"
+                android:visibility="visible" />
+
+            <com.foobnix.pdf.info.view.UnderlineImageView
+                android:id="@+id/onCrop"
+                style="@style/buttonWhite"
+                android:layout_width="@dimen/wh_button"
+                android:layout_height="@dimen/wh_button"
+                android:layout_weight="0"
+                android:contentDescription="@string/crop_white_borders"
+                android:src="@drawable/glyphicons_94_crop"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/bookNight"
+                style="@style/buttonWhite"
+                android:layout_width="@dimen/wh_button"
+                android:layout_height="@dimen/wh_button"
+                android:layout_weight="0"
+                android:contentDescription="@string/brightness"
+                android:src="@drawable/glyphicons_232_sun" />
+
+            <ImageView
+                android:id="@+id/onFullScreen"
+                style="@style/buttonWhite"
+                android:layout_width="@dimen/wh_button"
+                android:layout_height="@dimen/wh_button"
+                android:layout_weight="0"
+                android:contentDescription="@string/full_screen"
+                android:src="@drawable/glyphicons_216_fullscreen" />
+
+            <ImageView
+                android:id="@+id/onTextReplacement"
+                style="@style/buttonWhite"
+                android:layout_width="@dimen/wh_button"
+                android:layout_height="@dimen/wh_button"
+                android:layout_weight="0"
+                android:contentDescription="@string/full_screen"
+                android:src="@drawable/my_glyphicons_pen" />
+
+            <ImageView
+                android:id="@+id/bookPref"
+                style="@style/buttonWhite"
+                android:layout_width="@dimen/wh_button"
+                android:layout_height="@dimen/wh_button"
+                android:layout_weight="0"
+                android:contentDescription="@string/preferences"
+                android:src="@drawable/glyphicons_137_cogwheel" />
+        </LinearLayout>
+
         <include
             android:id="@+id/showHypenLangPanel"
             layout="@layout/layout_hypen_panel"
             android:visibility="visible" />
+
     </LinearLayout>
 
 

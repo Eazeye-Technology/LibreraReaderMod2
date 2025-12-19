@@ -41,6 +41,7 @@ import com.foobnix.pdf.info.IMG;
 import com.foobnix.pdf.info.MyADSProvider;
 import com.foobnix.pdf.info.OutlineHelper;
 import com.foobnix.pdf.info.PageUrl;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.model.AnnotationType;
@@ -215,7 +216,12 @@ public abstract class DocumentController {
             a.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
             final View decorView = a.getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            if (MainTabs2.USE_NEW_UI) {
+                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR); //for android:windowLightStatusBar
+            } else {
+                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            }
 
             setNavBarTintColor(a);
 
