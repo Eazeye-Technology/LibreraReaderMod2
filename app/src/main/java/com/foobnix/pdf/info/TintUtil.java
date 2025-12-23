@@ -44,17 +44,25 @@ public class TintUtil {
     public static int COLOR_ORANGE = Color.parseColor("#FF8C00");
 
     public static int getColorInDayNighth() {
-        if(AppState.get().appTheme == AppState.THEME_INK){
+        if (MainTabs2.USE_NEW_UI) {
             return Color.BLACK;
+        } else {
+            if (AppState.get().appTheme == AppState.THEME_INK) {
+                return Color.BLACK;
+            }
+            return AppState.get().appTheme == AppState.THEME_LIGHT ? TintUtil.color : Color.LTGRAY;
         }
-        return AppState.get().appTheme == AppState.THEME_LIGHT ? TintUtil.color : Color.LTGRAY;
     }
 
     public static int getColorInDayNighthBook() {
-        if(AppState.get().appTheme == AppState.THEME_INK){
+        if (MainTabs2.USE_NEW_UI) {
             return Color.BLACK;
+        } else {
+            if (AppState.get().appTheme == AppState.THEME_INK) {
+                return Color.BLACK;
+            }
+            return AppState.get().isDayNotInvert ? TintUtil.color : Color.LTGRAY;
         }
-        return AppState.get().isDayNotInvert ? TintUtil.color : Color.LTGRAY;
     }
 
     static Random random = new Random();

@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
-import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -36,7 +35,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -272,9 +270,9 @@ public class PrefFragment2 extends UIFragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         if (MainTabs2.MOD_VERSION) {
-            inflate = inflater.inflate(R.layout.fragment_preferences_mod, container, false);
-        } else {
             inflate = inflater.inflate(R.layout.fragment_preferences, container, false);
+        } else {
+            inflate = inflater.inflate(R.layout.fragment_preferences_old, container, false);
         }
 
         singIn = inflate.findViewById(R.id.signIn);

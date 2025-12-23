@@ -2,40 +2,35 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:myseek="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/scroll"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground">
+    android:background="?android:attr/colorBackground"
+    android:id="@+id/scroll"
+    >
 
-
+    <!--MainTabs2.MOD_VERSION-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="3dip">
-
-
+        >
 
         <TextView
             android:id="@+id/closeMenu"
             style="@style/textLink"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            android:layout_height="0dp"
             android:layout_weight="0"
             android:text="@string/close_menu" />
 
-
-          <TextView
-            android:id="@+id/adsSettigns"
-            style="@style/textLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:layout_weight="0"
-            android:text="@string/ad_privacy_settings" />
+        <TextView
+        android:id="@+id/adsSettigns"
+        style="@style/textLink"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0"
+        android:text="@string/ad_privacy_settings" />
 
 
         <LinearLayout
@@ -43,8 +38,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_second"
-            android:gravity="center_vertical">
-
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 style="@style/textLinkWhite"
@@ -84,13 +81,15 @@
 
         </LinearLayout>
 
-       " />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="4dip">
+            android:padding="4dip"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <ImageView
                 android:layout_width="@dimen/wh_button"
@@ -140,7 +139,10 @@
             android:id="@+id/section1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_search_second">
+            android:background="@drawable/bg_search_second"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 style="@style/textLinkWhite"
@@ -158,7 +160,10 @@
             android:layout_marginLeft="5dip"
             android:singleLine="true"
             android:text="@string/scan_device_for_new_books"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <TextView
             android:id="@+id/searchPaths"
@@ -168,7 +173,10 @@
             android:layout_marginLeft="5dip"
             android:padding="0dip"
             android:singleLine="false"
-            android:text="/mnt/sdcard \r\n /emmc /n /sdcard1" />
+            android:text="/mnt/sdcard \r\n /emmc /n /sdcard1"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <TextView
             android:id="@+id/onConfigPath"
@@ -178,12 +186,18 @@
             android:layout_marginLeft="5dip"
             android:layout_weight="0"
             android:padding="0dip"
-            android:text="@string/add_folder" />
+            android:text="@string/add_folder"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <CheckBox
                 android:id="@+id/supportPDF"
@@ -215,7 +229,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <CheckBox
                 android:id="@+id/supportMOBI"
@@ -245,7 +262,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <CheckBox
                 android:id="@+id/supportDOCX"
@@ -275,7 +295,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <CheckBox
                 android:id="@+id/supportCBZ"
@@ -307,7 +330,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -370,123 +396,196 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/section2"
-            style="@style/textLinkWhite"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dip"
-            android:background="@drawable/bg_search_second"
-            android:text="@string/general_settings" />
+            android:orientation="vertical"
+            android:layout_margin="24px"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40px"
+                android:orientation="horizontal"
+                android:layout_marginTop="12px"
+                android:layout_marginBottom="16px"
+                android:layout_marginLeft="12px"
+                android:layout_marginRight="12px"
+                >
+                <TextView
+                    android:id="@+id/section2"
+                    android:layout_width="0dp"
+                    android:layout_height="28px"
+                    android:layout_weight="1"
+                    android:text="@string/general_settings"
+                    android:textColor="#FF000000"
+                    android:textSize="22px"
+                    android:layout_gravity="center|center_vertical"
+                    />
+                <RelativeLayout
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_gravity="center|center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="24px"
+                        android:layout_height="24px"
+                        android:src="@drawable/glyphicons_599_menu_close"
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY"
+                        android:tint="#FF000000"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+    <!--
+    style="@style/textLinkWhite"
+    android:background="@drawable/bg_search_second"
+        -->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="135dp"
+                    android:text="@string/tabs_position"
+                    android:textStyle="bold"
+                    android:textSize="14px"
+                    />
+
+                <TextView
+                    android:id="@+id/tapPositionTop"
+                    style="@style/textLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/top"
+                    android:textSize="14px"
+                    android:textColor="#FF000000"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="135dp"
+                    android:text="@string/screen"
+                    android:textStyle="bold"
+                    android:textSize="14px"
+                    />
+
+                <TextView
+                    android:id="@+id/fullscreen"
+                    style="@style/textLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"
+                    android:textSize="14px"
+                    android:textColor="#FF000000"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="135dp"
+                    android:text="@string/orientation"
+                    android:textStyle="bold"
+                    android:textSize="14px"
+                    />
+
+                <TextView
+                    android:id="@+id/screenOrientation"
+                    style="@style/textLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dip"
+                    android:text="@string/automatic"
+                    android:textSize="14px"
+                    android:textColor="#FF000000"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="135dp"
+                    android:text="@string/language"
+                    android:textStyle="bold"
+                    android:textSize="14px"
+                    />
+
+                <TextView
+                    android:id="@+id/appLang"
+                    style="@style/textLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dip"
+                    android:text="Russian"
+                    android:textSize="14px"
+                    android:textColor="#FF000000"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="135dp"
+                    android:text="@string/font_size"
+                    android:textStyle="bold"
+                    android:textSize="14px"
+                    />
+
+                <TextView
+                    android:id="@+id/appFontScale"
+                    style="@style/textLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dip"
+                    android:text="Normal"
+                    android:textSize="14px"
+                    android:textColor="#FF000000"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
 
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="135dp"
-                android:text="@string/tabs_position"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tapPositionTop"
-                style="@style/textLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/top" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="135dp"
-                android:text="@string/screen"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/fullscreen"
-                style="@style/textLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="135dp"
-                android:text="@string/orientation"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/screenOrientation"
-                style="@style/textLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100dip"
-                android:text="@string/automatic" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="135dp"
-                android:text="@string/language"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/appLang"
-                style="@style/textLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100dip"
-                android:text="Russian" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="135dp"
-                android:text="@string/font_size"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/appFontScale"
-                style="@style/textLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="100dip"
-                android:text="Normal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="5dip">
 
             <TextView
@@ -527,7 +626,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="5dip"
             android:gravity="center_vertical">
 
@@ -562,13 +661,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="4dip"
-            android:layout_marginBottom="4dip"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="5dip"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -653,286 +751,342 @@
             android:layout_height="1dp"
             android:layout_marginTop="1dip"
             android:layout_marginBottom="1dip"
-            android:background="@color/lt_grey_alpha" />
+            android:background="@color/lt_grey_alpha"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip"
-                android:text="@string/brightness"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/autoSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dip"
-                android:layout_weight="0"
-                android:singleLine="true"
-                android:text="@string/system_brightness"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <com.foobnix.pdf.info.view.CustomSeek
-            android:id="@+id/customBrightness"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/isEnableBlueFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_weight="0"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/onBlueFilter"
-                style="@style/textLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dip"
-                android:text="@string/bluelight_filter" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/onKeyCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:padding="5dip"
-                android:src="@drawable/glyphicons_5_settings"
-                 app:tint="@color/tint_gray" />
-
+            android:orientation="vertical"
+            android:layout_margin="24px"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="5px"
+                    android:text="@string/brightness"
+                    android:textStyle="bold"
+                    android:textSize="14px"
+                    />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dip"
-                        android:text="@string/keys"
-                        android:textStyle="bold" />
+                <CheckBox
+                    android:id="@+id/autoSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4px"
+                    android:layout_weight="0"
+                    android:singleLine="true"
+                    android:text="@string/system_brightness"
+                    android:textSize="14px"
+                    />
+            </LinearLayout>
+
+            <com.foobnix.pdf.info.view.CustomSeek
+                android:id="@+id/customBrightness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/isEnableBlueFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="0"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/onBlueFilter"
+                    style="@style/textLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dip"
+                    android:text="@string/bluelight_filter"
+                    android:textSize="14px"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/onKeyCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:padding="5dip"
+                    android:src="@drawable/glyphicons_5_settings"
+                     app:tint="@color/tint_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textNextKeys"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dip"
-                            android:singleLine="true"
-                            android:text="Next Keys: 92,94,105,106" />
+                            android:text="@string/keys"
+                            android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/textPrevKeys"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dip"
-                            android:singleLine="true"
-                            android:text="Prev Keys: 93,96,104,107" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textNextKeys"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dip"
+                                android:singleLine="true"
+                                android:text="Next Keys: 92,94,105,106" />
+
+                            <TextView
+                                android:id="@+id/textPrevKeys"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dip"
+                                android:singleLine="true"
+                                android:text="Prev Keys: 93,96,104,107" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/onReverse"
+                    android:layout_width="100dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="@string/reverse_keys"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="3dip"
+                android:layout_marginBottom="1dip"
+                android:background="@color/lt_grey_alpha" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/isRememberMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/remember_reading_mode"
+                    android:textSize="14px"
+                    />
+
+                <TextView
+                    android:id="@+id/selectedOpenMode"
+                    style="@style/textLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:maxLines="2"
+                    android:minWidth="100dip"
+                    android:singleLine="false"
+                    android:text="@string/mode_vertical"
+                    android:textSize="14px"
+                    />
+
+                <ImageView
+                    android:id="@+id/moreModeSettings"
+                    android:contentDescription="@string/settings"
+                    android:layout_width="40px"
+                    android:layout_height="40px"
+                    android:layout_weight="0"
+                    android:padding="4dip"
+                    android:src="@drawable/glyphicons_137_cogwheel"
+                     app:tint="@color/tint_gray" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/isAppPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/request_a_password_when_the_application_starts"
+                    android:textSize="14px"
+                    />
+
+                <TextView
+                    android:id="@+id/appPassword"
+                    style="@style/textLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:minWidth="100dip"
+                    android:singleLine="false"
+                    android:text="@string/password"
+                    android:textSize="14px"
+                    />
             </LinearLayout>
 
             <CheckBox
-                android:id="@+id/onReverse"
-                android:layout_width="100dip"
+                android:id="@+id/isOpenLastBook"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@string/reverse_keys"
-                android:textSize="12sp" />
-        </LinearLayout>
+                android:text="@string/opening_the_last_book_when_the_application_starts"
+                android:textSize="14px"
+                />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="3dip"
-            android:layout_marginBottom="1dip"
-            android:background="@color/lt_grey_alpha" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+             <CheckBox
+                android:id="@+id/isAlwaysOpenOnPage1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/open_books_on_page_1"
+                 android:textSize="14px"
+                 />
 
             <CheckBox
-                android:id="@+id/isRememberMode"
+                android:id="@+id/isRestoreSearchQuery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/restore_search_query_when_the_application_starts"
+                android:textSize="14px"
+                />
+
+            <CheckBox
+                android:id="@+id/isShowCloseAppDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_application_close_dialog_every_time"
+                android:textSize="14px"
+                />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/remember_reading_mode" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/selectedOpenMode"
-                style="@style/textLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:maxLines="2"
-                android:minWidth="100dip"
-                android:singleLine="false"
-                android:text="@string/mode_vertical" />
+                <CheckBox
+                    android:id="@+id/isRememberDictionary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/open_in_the_dictionary" />
 
-            <ImageView
-                android:id="@+id/moreModeSettings"
-                android:contentDescription="@string/settings"
-                android:layout_width="@dimen/wh_button"
-                android:layout_height="@dimen/wh_button"
-                android:layout_weight="0"
-                android:padding="4dip"
-                android:src="@drawable/glyphicons_137_cogwheel"
-                 app:tint="@color/tint_gray" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/selectedDictionaly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:padding="5dip"
+                    android:singleLine="true"
+                    android:text="GoogleTranslate" />
+            </LinearLayout>
 
             <CheckBox
-                android:id="@+id/isAppPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/request_a_password_when_the_application_starts" />
-
-            <TextView
-                android:id="@+id/appPassword"
-                style="@style/textLink"
+                android:id="@+id/isLoopAutoplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:minWidth="100dip"
-                android:singleLine="false"
-                android:text="@string/password" />
-        </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/isOpenLastBook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/opening_the_last_book_when_the_application_starts" />
-
-         <CheckBox
-            android:id="@+id/isAlwaysOpenOnPage1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/open_books_on_page_1" />
-
-        <CheckBox
-            android:id="@+id/isRestoreSearchQuery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/restore_search_query_when_the_application_starts" />
-
-        <CheckBox
-            android:id="@+id/isShowCloseAppDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/show_application_close_dialog_every_time" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <CheckBox
-                android:id="@+id/isRememberDictionary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/open_in_the_dictionary" />
-
-            <TextView
-                android:id="@+id/selectedDictionaly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:padding="5dip"
                 android:singleLine="true"
-                android:text="GoogleTranslate" />
+                android:text="@string/cyclic_scrolling_return_to_1_page_"
+                android:visibility="gone" />
+
+            <CheckBox
+                android:id="@+id/isDisplayAllFilesInFolder"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:text="@string/display_all_file_types_in_folders" />
+
+            <CheckBox
+                android:id="@+id/isShowWhatIsNewDialog"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:text="@string/show_the_dialog_what_is_new_for_updates" />
+
+            <CheckBox
+                android:id="@+id/isEnableAccessibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0"
+                android:text="@string/accessibility_mode"
+                android:textSize="14px"
+                />
+
+            <CheckBox
+                android:id="@+id/isMenuIntegration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="0"
+                android:text="@string/integration_in_the_context_menu"
+                android:textSize="14px"
+                />
+
+
         </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/isLoopAutoplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="@string/cyclic_scrolling_return_to_1_page_"
-            android:visibility="gone" />
 
-        <CheckBox
-            android:id="@+id/isDisplayAllFilesInFolder"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:maxLines="2"
-            android:text="@string/display_all_file_types_in_folders" />
 
-        <CheckBox
-            android:id="@+id/isShowWhatIsNewDialog"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:maxLines="2"
-            android:text="@string/show_the_dialog_what_is_new_for_updates" />
 
-        <CheckBox
-            android:id="@+id/isEnableAccessibility"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="0"
-            android:text="@string/accessibility_mode" />
 
-        <CheckBox
-            android:id="@+id/isMenuIntegration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="0"
-            android:text="@string/integration_in_the_context_menu" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <LinearLayout
@@ -1001,7 +1155,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -1022,7 +1179,8 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -1043,7 +1201,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -1092,7 +1253,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:background="@drawable/bg_search_second"
-            android:text="@string/book_covers" />
+            android:text="@string/book_covers"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <TextView
             android:id="@+id/onContrast"
@@ -1115,31 +1279,43 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dip"
             android:text="@string/cover_image_size"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <com.foobnix.pdf.info.view.CustomSeek
             android:id="@+id/coverSmallSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            myseek:text="@string/list"/>
+            myseek:text="@string/list"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <com.foobnix.pdf.info.view.CustomSeek
                 android:id="@+id/coverBigSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                myseek:text="@string/grid"></com.foobnix.pdf.info.view.CustomSeek>
+                myseek:text="@string/grid"
+                />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1172,31 +1348,45 @@
             android:layout_height="1dp"
             android:layout_marginTop="1dip"
             android:layout_marginBottom="1dip"
-            android:background="@color/lt_grey_alpha" />
+            android:background="@color/lt_grey_alpha"
+            android:visibility="gone"
+            />
 
         <CheckBox
             android:id="@+id/isShowImages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/show_book_covers" />
+            android:text="@string/show_book_covers"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <CheckBox
             android:id="@+id/isBookCoverEffect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/enable_effect_of_the_book_cover" />
+            android:text="@string/enable_effect_of_the_book_cover"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <CheckBox
             android:id="@+id/isCropBookCovers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/crop_images_in_the_book_cover" />
+            android:text="@string/crop_images_in_the_book_cover"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <CheckBox
             android:id="@+id/isBorderAndShadow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/borders_and_shadow_around_the_book_cover" />
+            android:text="@string/borders_and_shadow_around_the_book_cover"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <TextView
             android:id="@+id/section7"
@@ -1204,19 +1394,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_second"
-            android:text="@string/tabs_position" />
+            android:text="@string/tabs_position"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <CheckBox
             android:id="@+id/isshowPrefAsMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/show_preferences_tab_in_the_left_menu" />
+            android:text="@string/show_preferences_tab_in_the_left_menu"
+            android:visibility="gone"
+            />
 
         <com.jmedeisis.draglinearlayout.DragLinearLayout
             android:id="@+id/dragLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <include layout="@layout/item_tab_line" />
 
@@ -1226,7 +1424,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:id="@+id/tabsDefaul"
@@ -1253,7 +1454,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:background="@drawable/bg_search_second"
-            android:text="@string/widget" />
+            android:text="@string/widget"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <!-- Prefs. > Preferences > Widget -->
 
@@ -1261,7 +1465,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -1340,13 +1547,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:background="@drawable/bg_search_second"
-            android:text="@string/import_or_export_application_settings_to_json_file" />
+            android:text="@string/import_or_export_application_settings_to_json_file"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:visibility="visible">
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:id="@+id/importButton"
@@ -1394,7 +1606,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1415,7 +1630,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1436,7 +1654,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1503,7 +1724,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1524,7 +1748,10 @@
             android:id="@+id/sectionSync"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
 
             <LinearLayout
@@ -1613,7 +1840,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dip"
             android:background="@drawable/bg_search_second"
-            android:text="Product: Lirbi Free" />
+            android:text="Product: Lirbi Free"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <LinearLayout
 
@@ -1622,7 +1852,8 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="4dip"
-            android:visibility="visible">
+            android:visibility="gone">
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <ImageView
                 android:tag="@string/no_tint"
@@ -1649,7 +1880,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dip"
-            android:text="Version: 1.2.3" />
+            android:text="Version: 1.2.3"
+            />
 
 
         <TextView
@@ -1660,14 +1892,20 @@
             android:layout_marginTop="4dip"
             android:padding="0dp"
             android:singleLine="true"
-            android:text="@string/what_is_new_in" />
+            android:text="@string/what_is_new_in"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dip"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1687,7 +1925,8 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dip">
+            android:layout_marginTop="7dip"
+            >
 
             <TextView
                 android:layout_width="match_parent"
@@ -1699,7 +1938,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dip"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:layout_width="100dip"
@@ -1718,7 +1960,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            >
+            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
                 android:layout_width="100dip"
@@ -1789,7 +2034,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:singleLine="false"
-            android:text="@string/rate_pdf_reader1" />
+            android:text="@string/rate_pdf_reader1"
+            android:visibility="gone"
+            />
+        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
 
 

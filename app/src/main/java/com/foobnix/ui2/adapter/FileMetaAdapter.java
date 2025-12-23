@@ -350,14 +350,18 @@ public class FileMetaAdapter extends AppRecycleAdapter<FileMeta, RecyclerView.Vi
                         }
                     });
                 } else {
-                    holder.image.setImageResource(R.drawable.glyphicons_145_folder_open);
-                    TintUtil.setTintImageWithAlpha(holder.image, holder.image.getContext() instanceof MainTabs2 ? TintUtil.getColorInDayNighth() : TintUtil.getColorInDayNighthBook());
+                    if (MainTabs2.USE_NEW_UI) {
+                        holder.image.setImageResource(R.drawable.ic_my_filemanager_folder_002);
+                        TintUtil.setTintImageWithAlpha(holder.image, 0xFF000000);
+                    } else {
+                        holder.image.setImageResource(R.drawable.glyphicons_145_folder_open);
+                        TintUtil.setTintImageWithAlpha(holder.image, holder.image.getContext() instanceof MainTabs2 ? TintUtil.getColorInDayNighth() : TintUtil.getColorInDayNighthBook());
+                    }
                 }
 
             }
 
             TintUtil.setTintImageWithAlpha(holder.starIcon, holder.starIcon.getContext() instanceof MainTabs2 ? TintUtil.getColorInDayNighth() : TintUtil.getColorInDayNighthBook());
-
 
             if (onStarClickListener != null) {
                 holder.starIcon.setOnClickListener(new OnClickListener() {

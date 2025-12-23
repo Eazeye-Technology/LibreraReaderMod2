@@ -9,7 +9,6 @@
     android:background="?android:attr/colorBackground">
 
 
-    <!--MainTabs2.MOD_VERSION-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,10 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_second"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:gravity="center_vertical">
+
 
             <TextView
                 style="@style/textLinkWhite"
@@ -87,15 +84,13 @@
 
         </LinearLayout>
 
+       " />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="4dip"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:padding="4dip">
 
             <ImageView
                 android:layout_width="@dimen/wh_button"
@@ -145,10 +140,7 @@
             android:id="@+id/section1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_search_second"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:background="@drawable/bg_search_second">
 
             <TextView
                 style="@style/textLinkWhite"
@@ -166,10 +158,7 @@
             android:layout_marginLeft="5dip"
             android:singleLine="true"
             android:text="@string/scan_device_for_new_books"
-            android:textStyle="bold"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/searchPaths"
@@ -179,10 +168,7 @@
             android:layout_marginLeft="5dip"
             android:padding="0dip"
             android:singleLine="false"
-            android:text="/mnt/sdcard \r\n /emmc /n /sdcard1"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="/mnt/sdcard \r\n /emmc /n /sdcard1" />
 
         <TextView
             android:id="@+id/onConfigPath"
@@ -192,18 +178,12 @@
             android:layout_marginLeft="5dip"
             android:layout_weight="0"
             android:padding="0dip"
-            android:text="@string/add_folder"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/add_folder" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/supportPDF"
@@ -235,10 +215,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/supportMOBI"
@@ -268,10 +245,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/supportDOCX"
@@ -301,10 +275,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/supportCBZ"
@@ -336,10 +307,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1033,10 +1001,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:gravity="center_vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -1057,8 +1022,7 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            >
+            android:gravity="center_vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -1079,10 +1043,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:gravity="center_vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -1131,10 +1092,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:background="@drawable/bg_search_second"
-            android:text="@string/book_covers"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/book_covers" />
 
         <TextView
             android:id="@+id/onContrast"
@@ -1157,43 +1115,31 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dip"
             android:text="@string/cover_image_size"
-            android:textStyle="bold"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:textStyle="bold" />
 
         <com.foobnix.pdf.info.view.CustomSeek
             android:id="@+id/coverSmallSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            myseek:text="@string/list"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            myseek:text="@string/list"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <com.foobnix.pdf.info.view.CustomSeek
                 android:id="@+id/coverBigSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                myseek:text="@string/grid"
-                />
+                myseek:text="@string/grid"></com.foobnix.pdf.info.view.CustomSeek>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1226,45 +1172,31 @@
             android:layout_height="1dp"
             android:layout_marginTop="1dip"
             android:layout_marginBottom="1dip"
-            android:background="@color/lt_grey_alpha"
-            android:visibility="gone"
-            />
+            android:background="@color/lt_grey_alpha" />
 
         <CheckBox
             android:id="@+id/isShowImages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/show_book_covers"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/show_book_covers" />
 
         <CheckBox
             android:id="@+id/isBookCoverEffect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/enable_effect_of_the_book_cover"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/enable_effect_of_the_book_cover" />
 
         <CheckBox
             android:id="@+id/isCropBookCovers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/crop_images_in_the_book_cover"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/crop_images_in_the_book_cover" />
 
         <CheckBox
             android:id="@+id/isBorderAndShadow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/borders_and_shadow_around_the_book_cover"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/borders_and_shadow_around_the_book_cover" />
 
         <TextView
             android:id="@+id/section7"
@@ -1272,27 +1204,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_second"
-            android:text="@string/tabs_position"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/tabs_position" />
 
         <CheckBox
             android:id="@+id/isshowPrefAsMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/show_preferences_tab_in_the_left_menu"
-            android:visibility="gone"
-            />
+            android:text="@string/show_preferences_tab_in_the_left_menu" />
 
         <com.jmedeisis.draglinearlayout.DragLinearLayout
             android:id="@+id/dragLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="vertical">
 
             <include layout="@layout/item_tab_line" />
 
@@ -1302,10 +1226,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tabsDefaul"
@@ -1332,10 +1253,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:background="@drawable/bg_search_second"
-            android:text="@string/widget"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/widget" />
 
         <!-- Prefs. > Preferences > Widget -->
 
@@ -1343,10 +1261,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -1425,18 +1340,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:background="@drawable/bg_search_second"
-            android:text="@string/import_or_export_application_settings_to_json_file"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/import_or_export_application_settings_to_json_file" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/importButton"
@@ -1484,10 +1394,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1508,10 +1415,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1532,10 +1436,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1602,10 +1503,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1626,10 +1524,7 @@
             android:id="@+id/sectionSync"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="vertical">
 
 
             <LinearLayout
@@ -1718,10 +1613,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dip"
             android:background="@drawable/bg_search_second"
-            android:text="Product: Lirbi Free"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="Product: Lirbi Free" />
 
         <LinearLayout
 
@@ -1730,8 +1622,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="4dip"
-            android:visibility="gone">
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:visibility="visible">
 
             <ImageView
                 android:tag="@string/no_tint"
@@ -1758,8 +1649,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dip"
-            android:text="Version: 1.2.3"
-            />
+            android:text="Version: 1.2.3" />
 
 
         <TextView
@@ -1770,20 +1660,14 @@
             android:layout_marginTop="4dip"
             android:padding="0dp"
             android:singleLine="true"
-            android:text="@string/what_is_new_in"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/what_is_new_in" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dip"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -1803,8 +1687,7 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dip"
-            >
+            android:layout_marginTop="7dip">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1816,10 +1699,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dip"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="100dip"
@@ -1838,10 +1718,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            >
-            <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="100dip"
@@ -1912,10 +1789,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:singleLine="false"
-            android:text="@string/rate_pdf_reader1"
-            android:visibility="gone"
-            />
-        <!--FIXME:MainTabs2.IS_MOD_VERSION-->
+            android:text="@string/rate_pdf_reader1" />
 
 
 

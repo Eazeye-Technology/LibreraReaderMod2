@@ -1186,6 +1186,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
                 item.setGravity(Gravity.CENTER);
                 if (MainTabs2.USE_NEW_UI) {
                     item.setTextColor(0xff000000); //block
+                    item.setTextSize(16);
                 } else {
                     item.setTextColor(getResources().getColor(R.color.white));
                 }
@@ -1196,8 +1197,17 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
 
                 if (i == split.length - 1) {
                     item.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-                    item.setMinimumWidth(Dips.DP_40);
+                    if (MainTabs2.USE_NEW_UI) {
+                        item.setMinimumWidth(40);
+                    } else {
+                        item.setMinimumWidth(Dips.DP_40);
+                    }
                     item.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                } else {
+                    if (MainTabs2.USE_NEW_UI) {
+                        item.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                        item.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                    }
                 }
 
                 item.setOnClickListener(new OnClickListener() {
@@ -1252,9 +1262,24 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
                     }
                 });
 
-                paths.addView(slash);
-                paths.addView(item, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
-
+                if (MainTabs2.USE_NEW_UI) {
+                    LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
+                            24, 24);
+//                    p.leftMargin = 10;
+//                    p.rightMargin = 10;
+                    p.gravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
+                    slash.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                    paths.addView(slash, p);
+                    LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(
+                            LayoutParams.WRAP_CONTENT, 24);
+                    p2.gravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
+                    item.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                    paths.addView(item, p2);
+                    paths.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                } else {
+                    paths.addView(slash);
+                    paths.addView(item, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+                }
             }
 
             TextView stub = new TextView(getActivity());
