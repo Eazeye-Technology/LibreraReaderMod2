@@ -30,11 +30,13 @@
 
     <style name="navBGButton">
         <item name="android:tint">@color/tint_white</item>
+<!--        <item name="android:tint">@color/black</item>-->
         <item name="android:background">@drawable/wp_button</item>
     </style>
 
     <style name="wpButton">
         <item name="android:tint">@color/tint_white</item>
+<!--        <item name="android:tint">@color/black</item>-->
         <item name="android:padding">5dip</item>
         <item name="android:layout_margin">2dip</item>
         <item name="android:background">@drawable/wp_button</item>
@@ -52,6 +54,7 @@
         <item name="android:layout_marginLeft">1.5dip</item>
         <item name="android:layout_marginRight">1.5dip</item>
         <item name="android:tint">?android:attr/textColorLink</item>
+<!--        <item name="android:tint">@color/black</item>-->
     </style>
 
 
@@ -61,6 +64,7 @@
         <item name="android:layout_marginLeft">1.5dip</item>
         <item name="android:layout_marginRight">1.5dip</item>
         <item name="android:tint">@color/white</item>
+<!--        <item name="android:tint">@color/black</item>-->
     </style>
 
     <style name="buttonWhiteClose" parent="buttonWhite">
@@ -93,6 +97,7 @@
         <item name="android:clickable">true</item>
         <item name="android:padding">4dip</item>
         <item name="android:tint">@color/tint_gray</item>
+<!--        <item name="android:tint">@color/black</item>-->
     </style>
 
     <style name="textSection">

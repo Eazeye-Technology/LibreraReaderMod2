@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <!--https://class.m.imooc.com/qadetail?qid=268675-->
+    <!--android:tint无效-->
     <style name="StyledIndicatorsWhite" parent="Theme.MaterialComponents.Light"> <!--Theme.AppCompat.Light-->
         <item name="android:windowNoTitle">true</item>
 <!--        <item name="android:windowDisablePreview">true</item>-->

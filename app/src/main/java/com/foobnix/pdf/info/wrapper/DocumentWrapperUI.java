@@ -88,6 +88,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+//see public void onLoadBookFinish() {
 /**
  * @author iivanenko
  */
@@ -2137,8 +2138,18 @@ public class DocumentWrapperUI {
     }
 
     public void onLoadBookFinish() {
+        if (MainTabs2.USE_NEW_UI) {
+            initUI(a);//FIXME:need refresh
+        }
         onCloseBook.setVisibility(View.VISIBLE);
-    }    Runnable updateUIRunnable = new Runnable() {
+        if (MainTabs2.USE_NEW_UI) {
+            //FIXME:need refresh
+            TintUtil.setTintImageWithAlpha((ImageView) onCloseBook, 0xFF000000, 255);
+        }
+    }
+
+
+    Runnable updateUIRunnable = new Runnable() {
 
         @Override
         public void run() {

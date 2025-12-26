@@ -327,6 +327,11 @@
             android:resizeableActivity="true"
             android:screenOrientation="behind"
             android:windowSoftInputMode="stateHidden">
+            <!--
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:launchMode="singleTask"
+            -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -44,6 +44,7 @@ android:background="#0000ff"
                 android:contentDescription="move left"
                 android:src="@drawable/glyphicons_309_square_empty_left" />
 
+
             <ImageView
                 android:id="@+id/moveCenter"
                 style="@style/buttonWhite"
@@ -157,8 +158,8 @@ android:background="#0000ff"
             android:layout_marginRight="2dip"
             android:layout_weight="0"
             android:contentDescription="@string/close"
-            android:src="@drawable/glyphicons_599_menu_close" />
-
+            android:src="@drawable/glyphicons_599_menu_close"
+            />
     </RelativeLayout>
 
     <include
