@@ -26,6 +26,7 @@ import com.foobnix.dao2.FileMeta;
 import com.foobnix.model.AppSP;
 import com.foobnix.model.AppState;
 import com.foobnix.model.MyPath;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.model.BookCSS;
 import com.foobnix.sys.TempHolder;
@@ -1037,6 +1038,9 @@ public class TxtUtils {
         TextView textView = (TextView) view;
         String text = textView.getText().toString();
         textView.setText(underline(text));
+        if (MainTabs2.USE_NEW_UI) {
+            textView.setTextColor(0xFF000000);
+        }
         return textView;
     }
 
@@ -1409,79 +1413,102 @@ public class TxtUtils {
     }
 
     public static void setLinkTextColor(TextView txt) {
-
-        int color = AppState.get().uiTextColor;
-        if (AppState.get().isUiTextColor) {
-            color = AppState.get().uiTextColor;
+        if (MainTabs2.USE_NEW_UI) {
+            txt.setTextColor(0xFF000000);
         } else {
-            TypedArray out = txt.getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorLink});
-            color = out.getColor(0, Color.WHITE);
+            int color = AppState.get().uiTextColor;
+            if (AppState.get().isUiTextColor) {
+                color = AppState.get().uiTextColor;
+            } else {
+                TypedArray out = txt.getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorLink});
+                color = out.getColor(0, Color.WHITE);
+            }
+            txt.setTextColor(color);
         }
-        txt.setTextColor(color);
     }
 
-
+    //FIXME:
     public static void updateAllLinks(ViewGroup parent, int color, boolean accentImages) {
+        {
+            if (MainTabs2.USE_NEW_UI) {
+                //txt.setTextColor(0xFF000000);
+                color = 0xFF000000;
+            }
+            try {
+                int childCount = parent.getChildCount();
+                ColorStateList tint = ColorStateList.valueOf(color);
+                for (int i = 0; i < childCount; i++) {
+                    View child = parent.getChildAt(i);
 
-        try {
-            int childCount = parent.getChildCount();
-            ColorStateList tint = ColorStateList.valueOf(color);
-            for (int i = 0; i < childCount; i++) {
-                View child = parent.getChildAt(i);
-
-                if ("no_tint".equals(child.getTag())) {
-                    continue;
-                }
-
-                if (child instanceof ViewGroup) {
-                    updateAllLinks((ViewGroup) child, color, accentImages);
-                }
-                if (child instanceof TextView) {
-                    if ("textLink".equals(child.getTag())) {
-                        ((TextView) child).setTextColor(color);
+                    if ("no_tint".equals(child.getTag())) {
+                        continue;
                     }
-                }
-                if (Build.VERSION.SDK_INT >= 21) {
-                    if (child instanceof CheckBox) {
-                        ((CheckBox) child).setButtonTintList(tint);
-                    } else if (child instanceof ImageView) {
-                        ImageView imageView = (ImageView) child;
 
-                        if (imageView.getId() == R.id.closePopup && !AppState.get().isUiTextColor) {
-                            imageView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
-                        } else if (accentImages || AppState.get().isUiTextColor) {
-                            if (AppState.get().uiTextColor == AppState.get().tintColor) {
-                                imageView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+                    if (child instanceof ViewGroup) {
+                        updateAllLinks((ViewGroup) child, color, accentImages);
+                    }
+                    if (child instanceof TextView) {
+                        if ("textLink".equals(child.getTag())) {
+                            ((TextView) child).setTextColor(color);
+                        }
+                    }
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        if (child instanceof CheckBox) {
+                            ((CheckBox) child).setButtonTintList(tint);
+                        } else if (child instanceof ImageView) {
+                            ImageView imageView = (ImageView) child;
+
+                            if (imageView.getId() == R.id.closePopup && !AppState.get().isUiTextColor) {
+                                if (MainTabs2.USE_NEW_UI) {
+                                    imageView.setImageTintList(ColorStateList.valueOf(Color.BLACK));
+                                } else {
+                                    imageView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+                                }
+                            } else if (accentImages || AppState.get().isUiTextColor) {
+                                if (MainTabs2.USE_NEW_UI) {
+                                    imageView.setImageTintList(ColorStateList.valueOf(Color.BLACK));
+                                } else {
+                                    if (AppState.get().uiTextColor == AppState.get().tintColor) {
+                                        imageView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+                                    } else {
+                                        imageView.setImageTintList(tint);
+                                    }
+                                }
                             } else {
-                                imageView.setImageTintList(tint);
+                                if (MainTabs2.USE_NEW_UI) {
+                                    imageView.setImageTintList(ColorStateList.valueOf(Color.BLACK));
+                                } else {
+                                    imageView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
+                                }
+                            }
+                        } else if (child instanceof SeekBar) {
+                            SeekBar seekBar = (SeekBar) child;
+                            seekBar.setSaveEnabled(false);
+                            seekBar.setSaveFromParentEnabled(false);
+
+                            if (MainTabs2.USE_NEW_UI) {
+                                seekBar.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
+                                seekBar.setThumbTintList(ColorStateList.valueOf(Color.BLACK));
+                                seekBar.setIndeterminateTintList(ColorStateList.valueOf(Color.BLACK));
+                            } else {
+                                if (AppState.get().isUiTextColor || accentImages) {
+                                    seekBar.setProgressTintList(tint);
+                                    seekBar.setThumbTintList(tint);
+                                    seekBar.setIndeterminateTintList(tint);
+                                } else {
+                                    seekBar.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
+                                    seekBar.setThumbTintList(ColorStateList.valueOf(Color.WHITE));
+                                    seekBar.setIndeterminateTintList(ColorStateList.valueOf(Color.WHITE));
+                                }
                             }
 
-                        } else {
-                            imageView.setImageTintList(ColorStateList.valueOf(Color.WHITE));
                         }
-                    } else if (child instanceof SeekBar) {
-                        SeekBar seekBar = (SeekBar) child;
-                        seekBar.setSaveEnabled(false);
-                        seekBar.setSaveFromParentEnabled(false);
-
-                        if (AppState.get().isUiTextColor || accentImages) {
-                            seekBar.setProgressTintList(tint);
-                            seekBar.setThumbTintList(tint);
-                            seekBar.setIndeterminateTintList(tint);
-
-                        } else {
-                            seekBar.setProgressTintList(ColorStateList.valueOf(Color.WHITE));
-                            seekBar.setThumbTintList(ColorStateList.valueOf(Color.WHITE));
-                            seekBar.setIndeterminateTintList(ColorStateList.valueOf(Color.WHITE));
-                        }
-
                     }
                 }
+            } catch (Exception e) {
+                LOG.e(e);
             }
-        } catch (Exception e) {
-            LOG.e(e);
         }
-
     }
 
     public static int visibleIf(boolean isVisible) {

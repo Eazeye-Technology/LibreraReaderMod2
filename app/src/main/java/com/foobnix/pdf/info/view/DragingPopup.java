@@ -20,6 +20,7 @@ import com.foobnix.android.utils.Keyboards;
 import com.foobnix.android.utils.LOG;
 import com.foobnix.android.utils.TxtUtils;
 import com.foobnix.model.AppProfile;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.widget.DraggbleTouchListener;
@@ -92,16 +93,21 @@ public abstract class DragingPopup {
 
         TextView titleView = (TextView) popupView.findViewById(R.id.dialogTitle);
         titleView.setText(title);
+        if (MainTabs2.USE_NEW_UI) {
+            titleView.setTextColor(0xFF000000);
+        }
 
         View closePopup = popupView.findViewById(R.id.closePopup);
         Apps.accessibilityButtonSize(closePopup);
         closePopup.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 closeDialog();
             }
         });
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) closePopup, 0xFF000000, 255);
+        }
 
 
         rootWidth = ((View) anchor.getParent()).getWidth();

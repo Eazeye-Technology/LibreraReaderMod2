@@ -480,6 +480,10 @@ public class PrefFragment2 extends UIFragment {
         section6 = inflate.findViewById(R.id.section6);
         section7 = inflate.findViewById(R.id.section7);
 
+        if (MainTabs2.USE_NEW_UI) {
+            ImageView closeMenu = (ImageView) inflate.findViewById(R.id.closeMenu2);
+            TintUtil.setTintImageWithAlpha(closeMenu, 0xFF000000, 255);
+        }
 
         onTintChanged();
 

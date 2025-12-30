@@ -941,7 +941,12 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         });
         onClose.setOnLongClickListener(onCloseLongClick);
 
-        findViewById(R.id.editTop2).setVisibility(View.GONE);
+        if (MainTabs2.USE_NEW_UI) {
+            //FIXME: book mode horizontal does not support annot
+            findViewById(R.id.editTop2).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.editTop2).setVisibility(View.GONE);
+        }
         findViewById(R.id.nextTypeBootom).setVisibility(View.GONE);
 
         lockModelImage = (ImageView) findViewById(R.id.lockUnlock);

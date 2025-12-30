@@ -297,21 +297,18 @@ public class DocumentWrapperUI {
         }
     };
     View.OnClickListener onRecent = new View.OnClickListener() {
-
         @Override
         public void onClick(View v) {
             DragingDialogs.recentBooks(anchor, dc);
         }
     };
     View.OnClickListener onThumbnail = new View.OnClickListener() {
-
         @Override
         public void onClick(final View v) {
             DragingDialogs.gotoPageDialog(anchor, dc);
         }
     };
     SeekBar.OnSeekBarChangeListener onSeek = new SeekBar.OnSeekBarChangeListener() {
-
         @Override
         public void onStopTrackingTouch(final SeekBar seekBar) {
         }
@@ -322,20 +319,17 @@ public class DocumentWrapperUI {
 
         @Override
         public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
-
             dc.onGoToPage(progress + 1);
-
             Apps.accessibilityText(a, a.getString(R.string.m_current_page) + " " + dc.getCurentPageFirst1());
             //updateUI();
         }
-    };    public View.OnClickListener onShowHideEditPanel = new View.OnClickListener() {
-
+    };
+    public View.OnClickListener onShowHideEditPanel = new View.OnClickListener() {
         @Override
         public void onClick(final View arg0) {
             if (AppSP.get().isCrop) {
                 onCrop.onClick(null);
             }
-
             DragingDialogs.editColorsPanel(anchor, dc, drawView, false);
         }
     };
@@ -747,7 +741,7 @@ public class DocumentWrapperUI {
         }
 
         if (MainTabs2.USE_NEW_UI) {
-            editTop2.setVisibility(View.GONE);
+            //editTop2.setVisibility(View.GONE); //PDF批注
 
             moveLeft.setVisibility(View.GONE);
             moveRight.setVisibility(View.GONE);
@@ -1090,6 +1084,9 @@ public class DocumentWrapperUI {
 
         editTop2 = (ImageView) a.findViewById(R.id.editTop2);
         editTop2.setOnClickListener(onShowHideEditPanel);
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha(editTop2, 0xFF000000, 255);
+        }
 
         goToPage1 = (ImageView) a.findViewById(R.id.goToPage1);
         goToPage1Top = (ImageView) a.findViewById(R.id.goToPage1Top);
@@ -1947,7 +1944,7 @@ public class DocumentWrapperUI {
     }
 
     public void hideShowEditIcon() {
-        if (MainTabs2.USE_NEW_UI) {
+        if (false) { //MainTabs2.USE_NEW_UI) {
             editTop2.setVisibility(View.GONE);
         } else {
             if (dc != null && !BookType.PDF.is(dc.getCurrentBook().getPath())) {
@@ -2138,14 +2135,14 @@ public class DocumentWrapperUI {
     }
 
     public void onLoadBookFinish() {
-        if (MainTabs2.USE_NEW_UI) {
-            initUI(a);//FIXME:need refresh
-        }
+//        if (MainTabs2.USE_NEW_UI) {
+//            initUI(a);//FIXME:need refresh
+//        }
         onCloseBook.setVisibility(View.VISIBLE);
-        if (MainTabs2.USE_NEW_UI) {
-            //FIXME:need refresh
-            TintUtil.setTintImageWithAlpha((ImageView) onCloseBook, 0xFF000000, 255);
-        }
+//        if (MainTabs2.USE_NEW_UI) {
+//            //FIXME:need refresh
+//            TintUtil.setTintImageWithAlpha((ImageView) onCloseBook, 0xFF000000, 255);
+//        }
     }
 
 
