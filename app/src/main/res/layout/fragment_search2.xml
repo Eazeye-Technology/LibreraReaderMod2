@@ -195,8 +195,8 @@
         android:layout_marginTop="25dp"
         >
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:visibility="visible"
             android:contentDescription="@string/cd_application_menu"
             android:id="@+id/menu2_2"
@@ -239,7 +239,7 @@
                 <!--EditText-->
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
-                    android:layout_height="24dp"
+                    android:layout_height="34dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="2dp"
@@ -258,7 +258,7 @@
                         android:id="@+id/filterLine_Library_global"
                         android:maxLines="1"
                         android:hint="Search"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="2dp"
                         android:layout_gravity="left|center_vertical"
                         android:paddingLeft="20dp"
                         android:singleLine="true"
@@ -269,8 +269,8 @@
         </RelativeLayout>
         <ImageView
             android:id="@+id/searchPage"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/glyphicons_28_search"
             android:layout_gravity="center_vertical|left"
             />
