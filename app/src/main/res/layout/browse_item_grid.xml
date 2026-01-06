@@ -8,6 +8,8 @@
     android:background="@drawable/browse_item_list_outline"
     >
 <!--
+RecentFragment2
+LibraryFragment
 androidx.cardview.widget.CardView
 android:layout_margin="@dimen/dv"
         android:background="?android:attr/selectableItemBackground"
@@ -72,7 +74,6 @@ android:layout_margin="@dimen/dv"
 
             <TextView
                 android:id="@+id/title2"
-                style="@style/textLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -81,6 +82,8 @@ android:layout_margin="@dimen/dv"
                 android:singleLine="true"
                 android:text="Bom Marley"
                 android:textSize="12sp" />
+            <!--style="@style/textLink"
+                -->
 
             <LinearLayout
                 android:id="@+id/infoLayout"
