@@ -20,7 +20,7 @@
             android:id="@+id/closeMenu"
             style="@style/textLink"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="0px"
             android:layout_weight="0"
             android:text="@string/close_menu" />
 
@@ -28,7 +28,7 @@
         android:id="@+id/adsSettigns"
         style="@style/textLink"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="0px"
         android:layout_weight="0"
         android:text="@string/ad_privacy_settings" />
 
@@ -55,7 +55,7 @@
                 style="@style/textLinkWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dip"
+                android:layout_marginRight="5px"
                 android:layout_weight="0"
                 android:ellipsize="end"
                 android:gravity="center"
@@ -65,12 +65,12 @@
                 android:visibility="visible" />
 
             <TextView
-                android:layout_marginLeft="10dip"
+                android:layout_marginLeft="10px"
                 android:id="@+id/onCloseApp"
                 style="@style/textLinkWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dip"
+                android:layout_marginRight="5px"
                 android:layout_weight="0"
                 android:ellipsize="end"
                 android:gravity="center"
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="4dip"
+            android:padding="4px"
             android:visibility="gone"
             >
             <!--FIXME:MainTabs2.IS_MOD_VERSION-->
@@ -94,7 +94,7 @@
             <ImageView
                 android:layout_width="@dimen/wh_button"
                 android:layout_height="@dimen/wh_button"
-                android:padding="8dip"
+                android:padding="8px"
                 android:visibility="invisible" />
 
             <View
@@ -126,7 +126,7 @@
                 android:layout_width="@dimen/wh_button"
                 android:layout_height="@dimen/wh_button"
                 android:contentDescription="@string/settings"
-                android:padding="4dip"
+                android:padding="4px"
                 android:src="@drawable/glyphicons_137_cogwheel"
                 app:tint="@color/tint_gray" />
 
@@ -157,7 +157,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
+            android:layout_marginLeft="5px"
             android:singleLine="true"
             android:text="@string/scan_device_for_new_books"
             android:textStyle="bold"
@@ -170,8 +170,8 @@
             style="@style/textLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:padding="0dip"
+            android:layout_marginLeft="5px"
+            android:padding="0px"
             android:singleLine="false"
             android:text="/mnt/sdcard \r\n /emmc /n /sdcard1"
             android:visibility="gone"
@@ -183,9 +183,9 @@
             style="@style/textLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
+            android:layout_marginLeft="5px"
             android:layout_weight="0"
-            android:padding="0dip"
+            android:padding="0px"
             android:text="@string/add_folder"
             android:visibility="gone"
             />
@@ -203,9 +203,9 @@
                 android:id="@+id/supportPDF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="0dip"
-                android:minWidth="110dp"
-                android:padding="-5dip"
+                android:layout_margin="0px"
+                android:minWidth="110px"
+                android:padding="-5px"
                 android:text="PDF"
                 android:textSize="11sp" />
 
@@ -213,7 +213,7 @@
                 android:id="@+id/supportDJVU"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="90dp"
+                android:minWidth="90px"
                 android:text="DJVU"
                 android:textSize="11sp" />
 
@@ -221,7 +221,7 @@
                 android:id="@+id/supportFB2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="110dp"
+                android:minWidth="110px"
                 android:text="FB2"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -238,7 +238,7 @@
                 android:id="@+id/supportMOBI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="110dp"
+                android:minWidth="110px"
                 android:text="MOBI/AZW"
                 android:textSize="11sp" />
 
@@ -246,7 +246,7 @@
                 android:id="@+id/supportEPUB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="90dp"
+                android:minWidth="90px"
                 android:text="EPUB"
                 android:textSize="11sp" />
 
@@ -254,7 +254,7 @@
                 android:id="@+id/supportXPS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="110dp"
+                android:minWidth="110px"
                 android:text="XPS"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -271,7 +271,7 @@
                 android:id="@+id/supportDOCX"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="110dp"
+                android:minWidth="110px"
                 android:text="DOC/DOCX"
                 android:textSize="11sp" />
 
@@ -279,7 +279,7 @@
                 android:id="@+id/supportRTF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="90dp"
+                android:minWidth="90px"
                 android:text="RTF"
                 android:textSize="11sp" />
 
@@ -287,7 +287,7 @@
                 android:id="@+id/supportODT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="110dp"
+                android:minWidth="110px"
                 android:text="ODT"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -304,7 +304,7 @@
                 android:id="@+id/supportCBZ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="110dp"
+                android:minWidth="110px"
                 android:text="CBZ/CBR"
                 android:textSize="11sp" />
 
@@ -312,7 +312,7 @@
                 android:id="@+id/supportZIP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="90dip"
+                android:minWidth="90px"
                 android:text="ZIP"
                 android:textSize="11sp" />
 
@@ -320,7 +320,7 @@
                 android:id="@+id/supportTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="110dp"
+                android:minWidth="110px"
                 android:text="HTML/TXT"
                 android:textSize="11sp" />
 
@@ -338,7 +338,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="5px"
                 android:text="@string/search_not_supported_formats"
                 android:visibility="gone" />
 
@@ -353,7 +353,7 @@
                     android:id="@+id/supportArch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="110dp"
+                    android:minWidth="110px"
                     android:text="@string/archives"
                     android:textSize="11sp" />
 
@@ -361,9 +361,9 @@
                     android:id="@+id/supportOther"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="110dp"
+                    android:minWidth="110px"
                     android:text="@string/other"
-                    android:textSize="11sp" />
+                    android:textSize="11px" />
             </LinearLayout>
 
             <LinearLayout
@@ -376,7 +376,7 @@
                     android:layout_width="@dimen/wh_button"
                     android:layout_height="@dimen/wh_button"
                     android:layout_weight="0"
-                    android:padding="4dip"
+                    android:padding="4px"
                     android:src="@drawable/glyphicons_140_adjust"
                      app:tint="@color/tint_gray"
                     android:visibility="visible" />
@@ -406,20 +406,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="40px"
                 android:orientation="horizontal"
-                android:layout_marginTop="12px"
-                android:layout_marginBottom="16px"
+                android:layout_marginTop="10px"
+                android:layout_marginBottom="10px"
                 android:layout_marginLeft="12px"
                 android:layout_marginRight="12px"
+                android:visibility="gone"
                 >
                 <TextView
                     android:id="@+id/section2"
-                    android:layout_width="0dp"
-                    android:layout_height="28px"
+                    android:layout_width="0px"
+                    android:layout_height="40px"
                     android:layout_weight="1"
                     android:text="@string/general_settings"
                     android:textColor="#FF000000"
                     android:textSize="22px"
                     android:layout_gravity="center|center_vertical"
+                    android:gravity="left|center_vertical"
                     />
                 <RelativeLayout
                     android:layout_width="40px"
@@ -428,11 +430,11 @@
                     >
                     <ImageView
                         android:id="@+id/closeMenu2"
-                        android:layout_width="24px"
-                        android:layout_height="24px"
+                        android:layout_width="32px"
+                        android:layout_height="32px"
                         android:src="@drawable/glyphicons_599_menu_close"
                         android:layout_centerInParent="true"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerInside"
                         myseek:tint="#FF000000"
                         />
                 </RelativeLayout>
@@ -443,14 +445,16 @@
         -->
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip">
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="5px"
+                android:gravity="center_vertical"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="135dp"
+                    android:minWidth="135px"
                     android:text="@string/tabs_position"
                     android:textStyle="bold"
                     android:textSize="14px"
@@ -468,14 +472,16 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip">
+                android:layout_width="match_parent"
+                android:layout_height="48px"
+                android:layout_marginLeft="5px"
+                android:gravity="center_vertical"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="135dp"
+                    android:minWidth="135px"
                     android:text="@string/screen"
                     android:textStyle="bold"
                     android:textSize="14px"
@@ -494,14 +500,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip"
+                android:layout_height="48px"
+                android:layout_marginLeft="5px"
                 android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="135dp"
+                    android:minWidth="135px"
                     android:text="@string/orientation"
                     android:textStyle="bold"
                     android:textSize="14px"
@@ -512,7 +518,7 @@
                     style="@style/textLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="100dip"
+                    android:minWidth="100px"
                     android:text="@string/automatic"
                     android:textSize="14px"
                     android:textColor="#FF000000"
@@ -521,13 +527,15 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip">
+                android:layout_height="48px"
+                android:layout_marginLeft="5px"
+                android:gravity="center_vertical"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="135dp"
+                    android:minWidth="135px"
                     android:text="@string/language"
                     android:textStyle="bold"
                     android:textSize="14px"
@@ -538,7 +546,7 @@
                     style="@style/textLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="100dip"
+                    android:minWidth="100px"
                     android:text="Russian"
                     android:textSize="14px"
                     android:textColor="#FF000000"
@@ -547,13 +555,15 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip">
+                android:layout_height="48px"
+                android:layout_marginLeft="5px"
+                android:gravity="center_vertical"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="135dp"
+                    android:minWidth="135px"
                     android:text="@string/font_size"
                     android:textStyle="bold"
                     android:textSize="14px"
@@ -564,7 +574,7 @@
                     style="@style/textLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="100dip"
+                    android:minWidth="100px"
                     android:text="Normal"
                     android:textSize="14px"
                     android:textColor="#FF000000"
@@ -586,13 +596,13 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginLeft="5dip">
+            android:layout_height="0px"
+            android:layout_marginLeft="5px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="135dp"
+                android:minWidth="135px"
                 android:text="@string/theme"
                 android:textStyle="bold" />
 
@@ -608,12 +618,12 @@
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip">
+            android:layout_marginLeft="5px">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="135dp"
+                android:minWidth="135px"
                 android:text="@string/engine"
                 android:textStyle="bold" />
 
@@ -627,14 +637,14 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginLeft="5dip"
+            android:layout_height="0px"
+            android:layout_marginLeft="5px"
             android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="135dp"
+                android:minWidth="135px"
                 android:text="@string/theme_color"
                 android:textStyle="bold" />
 
@@ -648,23 +658,23 @@
                 <include
                     android:id="@+id/color1"
                     layout="@layout/item_color"
-                    android:layout_width="25dip"
-                    android:layout_height="25dip"
-                    android:layout_margin="1dip" />
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:layout_margin="1px" />
 
                 <include
                     android:id="@+id/color2"
                     layout="@layout/item_color"
-                    android:layout_width="25dip"
-                    android:layout_height="25dip"
-                    android:layout_margin="1dip" />
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:layout_margin="1px" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginLeft="5dip"
+            android:layout_height="0px"
+            android:layout_marginLeft="5px"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             >
@@ -672,7 +682,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="135dp"
+                android:minWidth="135px"
                 android:text="@string/accent"
                 android:textStyle="bold" />
 
@@ -686,16 +696,16 @@
                 <include
                     android:id="@+id/color1_a"
                     layout="@layout/item_color"
-                    android:layout_width="25dip"
-                    android:layout_height="25dip"
-                    android:layout_margin="1dip" />
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:layout_margin="1px" />
 
                 <include
                     android:id="@+id/color2_a"
                     layout="@layout/item_color"
-                    android:layout_width="25dip"
-                    android:layout_height="25dip"
-                    android:layout_margin="1dip" />
+                    android:layout_width="25px"
+                    android:layout_height="25px"
+                    android:layout_margin="1px" />
             </LinearLayout>
             <CheckBox
                 android:id="@+id/isAccentTextColor"
@@ -735,23 +745,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dip"
+                    android:layout_marginLeft="5px"
                     android:text="Color Preferences"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dip"
+                    android:layout_marginLeft="5px"
                     android:text="Book Text and Background colors" />
             </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="1dip"
-            android:layout_marginBottom="1dip"
+            android:layout_height="1px"
+            android:layout_marginTop="1px"
+            android:layout_marginBottom="1px"
             android:background="@color/lt_grey_alpha"
             />
 
@@ -779,7 +789,8 @@
                 <CheckBox
                     android:id="@+id/autoSettings"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48px"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="4px"
                     android:layout_weight="0"
                     android:singleLine="true"
@@ -803,8 +814,8 @@
                 <CheckBox
                     android:id="@+id/isEnableBlueFilter"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
+                    android:layout_height="48px"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="0"
                     android:text="" />
 
@@ -813,7 +824,9 @@
                     style="@style/textLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dip"
+                    android:layout_gravity="center_vertical|left"
+                    android:gravity="center_vertical|left"
+                    android:layout_marginLeft="4px"
                     android:text="@string/bluelight_filter"
                     android:textSize="14px"
                     />
@@ -823,7 +836,7 @@
                 android:id="@+id/onKeyCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
+                android:layout_marginTop="5px"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:visibility="gone">
@@ -832,7 +845,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:padding="5dip"
+                    android:padding="5px"
                     android:src="@drawable/glyphicons_5_settings"
                      app:tint="@color/tint_gray" />
 
@@ -850,7 +863,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dip"
+                            android:layout_marginLeft="5px"
                             android:text="@string/keys"
                             android:textStyle="bold" />
 
@@ -863,7 +876,7 @@
                                 android:id="@+id/textNextKeys"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dip"
+                                android:layout_marginLeft="5px"
                                 android:singleLine="true"
                                 android:text="Next Keys: 92,94,105,106" />
 
@@ -871,7 +884,7 @@
                                 android:id="@+id/textPrevKeys"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dip"
+                                android:layout_marginLeft="5px"
                                 android:singleLine="true"
                                 android:text="Prev Keys: 93,96,104,107" />
                         </LinearLayout>
@@ -880,18 +893,18 @@
 
                 <CheckBox
                     android:id="@+id/onReverse"
-                    android:layout_width="100dip"
+                    android:layout_width="100px"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="@string/reverse_keys"
-                    android:textSize="12sp" />
+                    android:textSize="12px" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="3dip"
-                android:layout_marginBottom="1dip"
+                android:layout_height="1px"
+                android:layout_marginTop="3px"
+                android:layout_marginBottom="1px"
                 android:background="@color/lt_grey_alpha" />
 
 
@@ -904,7 +917,8 @@
                 <CheckBox
                     android:id="@+id/isRememberMode"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48px"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="@string/remember_reading_mode"
                     android:textSize="14px"
@@ -915,9 +929,10 @@
                     style="@style/textLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="0"
                     android:maxLines="2"
-                    android:minWidth="100dip"
+                    android:minWidth="100px"
                     android:singleLine="false"
                     android:text="@string/mode_vertical"
                     android:textSize="14px"
@@ -929,7 +944,7 @@
                     android:layout_width="40px"
                     android:layout_height="40px"
                     android:layout_weight="0"
-                    android:padding="4dip"
+                    android:padding="4px"
                     android:src="@drawable/glyphicons_137_cogwheel"
                      app:tint="@color/tint_gray" />
 
@@ -945,7 +960,8 @@
                 <CheckBox
                     android:id="@+id/isAppPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48px"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="@string/request_a_password_when_the_application_starts"
                     android:textSize="14px"
@@ -956,8 +972,9 @@
                     style="@style/textLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="0"
-                    android:minWidth="100dip"
+                    android:minWidth="100px"
                     android:singleLine="false"
                     android:text="@string/password"
                     android:textSize="14px"
@@ -967,7 +984,8 @@
             <CheckBox
                 android:id="@+id/isOpenLastBook"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48px"
+                android:layout_gravity="center_vertical"
                 android:text="@string/opening_the_last_book_when_the_application_starts"
                 android:textSize="14px"
                 />
@@ -975,15 +993,17 @@
              <CheckBox
                 android:id="@+id/isAlwaysOpenOnPage1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/open_books_on_page_1"
+                 android:layout_height="48px"
+                 android:layout_gravity="center_vertical"
+                 android:text="@string/open_books_on_page_1"
                  android:textSize="14px"
                  />
 
             <CheckBox
                 android:id="@+id/isRestoreSearchQuery"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48px"
+                android:layout_gravity="center_vertical"
                 android:text="@string/restore_search_query_when_the_application_starts"
                 android:textSize="14px"
                 />
@@ -991,7 +1011,8 @@
             <CheckBox
                 android:id="@+id/isShowCloseAppDialog"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48px"
+                android:layout_gravity="center_vertical"
                 android:text="@string/show_application_close_dialog_every_time"
                 android:textSize="14px"
                 />
@@ -1006,15 +1027,17 @@
                 <CheckBox
                     android:id="@+id/isRememberDictionary"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48px"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/open_in_the_dictionary" />
 
                 <TextView
                     android:id="@+id/selectedDictionaly"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dip"
-                    android:padding="5dip"
+                    android:layout_height="48px"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10px"
+                    android:padding="5px"
                     android:singleLine="true"
                     android:text="GoogleTranslate" />
             </LinearLayout>
@@ -1022,7 +1045,8 @@
             <CheckBox
                 android:id="@+id/isLoopAutoplay"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48px"
+                android:layout_gravity="center_vertical"
                 android:singleLine="true"
                 android:text="@string/cyclic_scrolling_return_to_1_page_"
                 android:visibility="gone" />
@@ -1031,7 +1055,8 @@
                 android:id="@+id/isDisplayAllFilesInFolder"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48px"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:maxLines="2"
                 android:text="@string/display_all_file_types_in_folders" />
@@ -1040,7 +1065,8 @@
                 android:id="@+id/isShowWhatIsNewDialog"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48px"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:maxLines="2"
                 android:text="@string/show_the_dialog_what_is_new_for_updates" />
@@ -1048,8 +1074,8 @@
             <CheckBox
                 android:id="@+id/isEnableAccessibility"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_height="48px"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="0"
                 android:text="@string/accessibility_mode"
                 android:textSize="14px"
@@ -1058,8 +1084,8 @@
             <CheckBox
                 android:id="@+id/isMenuIntegration"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_height="48px"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="0"
                 android:text="@string/integration_in_the_context_menu"
                 android:textSize="14px"
@@ -1093,46 +1119,46 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dip"
+            android:layout_marginTop="4px"
             android:orientation="vertical"
             android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="5px"
                 android:text="@string/customize_font_background_colors"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dip"
+                android:layout_marginTop="3px"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/onDayColor"
-                    android:layout_width="90dip"
-                    android:layout_height="24dip"
-                    android:layout_marginLeft="5dip"
+                    android:layout_width="90px"
+                    android:layout_height="24px"
+                    android:layout_marginLeft="5px"
                     android:background="#FFFFFF"
                     android:gravity="center"
-                    android:paddingLeft="5dip"
-                    android:paddingRight="5dip"
+                    android:paddingLeft="5px"
+                    android:paddingRight="5px"
                     android:text="@string/day"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/onNigthColor"
-                    android:layout_width="90dip"
-                    android:layout_height="24dip"
-                    android:layout_marginLeft="5dip"
+                    android:layout_width="90px"
+                    android:layout_height="24px"
+                    android:layout_marginLeft="5px"
                     android:background="#000000"
                     android:gravity="center"
-                    android:paddingLeft="5dip"
-                    android:paddingRight="5dip"
+                    android:paddingLeft="5px"
+                    android:paddingRight="5px"
                     android:text="@string/nigth"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold" />
@@ -1141,14 +1167,14 @@
                     android:id="@+id/onDefaultColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="0dip"
-                    android:layout_marginLeft="10dip"
+                    android:layout_margin="0px"
+                    android:layout_marginLeft="10px"
                     android:layout_weight="0"
                     android:ellipsize="end"
-                    android:padding="5dip"
+                    android:padding="5px"
                     android:singleLine="true"
                     android:text="@string/restore_defaults_short"
-                    android:textSize="12sp" />
+                    android:textSize="12px" />
             </LinearLayout>
         </LinearLayout>
 
@@ -1164,7 +1190,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip"
+                android:padding="5px"
                 android:src="@drawable/glyphicons_144_database_search"
                  app:tint="@color/tint_gray" />
 
@@ -1186,7 +1212,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip"
+                android:padding="5px"
                 android:src="@drawable/glyphicons_filetypes_1_file_text"
                  app:tint="@color/tint_gray" />
 
@@ -1210,7 +1236,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip"
+                android:padding="5px"
                 android:src="@drawable/glyphicons_371_plus"
                  app:tint="@color/tint_gray" />
 
@@ -1252,7 +1278,7 @@
             style="@style/textLinkWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
+            android:layout_marginTop="10px"
             android:background="@drawable/bg_search_second"
             android:text="@string/book_covers"
             android:visibility="gone"
@@ -1269,16 +1295,16 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="1dip"
-            android:layout_marginBottom="1dip"
+            android:layout_height="1px"
+            android:layout_marginTop="1px"
+            android:layout_marginBottom="1px"
             android:background="@color/lt_grey_alpha"
             android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
+            android:layout_marginLeft="5px"
             android:text="@string/cover_image_size"
             android:textStyle="bold"
             android:visibility="gone"
@@ -1321,7 +1347,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dip"
+                android:layout_marginLeft="4px"
                 android:singleLine="true"
                 android:text="@string/column_count" />
 
@@ -1330,8 +1356,8 @@
                 style="@style/textLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dip"
-                android:minWidth="60dip"
+                android:layout_marginLeft="8px"
+                android:minWidth="60px"
                 android:text="2"
                 android:textAllCaps="true" />
 
@@ -1346,9 +1372,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="1dip"
-            android:layout_marginBottom="1dip"
+            android:layout_height="1px"
+            android:layout_marginTop="1px"
+            android:layout_marginBottom="1px"
             android:background="@color/lt_grey_alpha"
             android:visibility="gone"
             />
@@ -1444,7 +1470,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:minWidth="100dip"
+                android:minWidth="100px"
                 android:text="@string/apply" />
         </LinearLayout>
 
@@ -1453,7 +1479,7 @@
             style="@style/textLinkWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
+            android:layout_marginTop="10px"
             android:background="@drawable/bg_search_second"
             android:text="@string/widget"
             android:visibility="gone"
@@ -1474,14 +1500,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="5px"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="135dp"
+                    android:minWidth="135px"
                     android:text="@string/show" />
 
                 <TextView
@@ -1489,21 +1515,21 @@
                     style="@style/textLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="100dip"
+                    android:minWidth="100px"
                     android:text="@string/recent" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="5px"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="135dp"
+                    android:minWidth="135px"
                     android:text="@string/layout" />
 
                 <TextView
@@ -1511,14 +1537,14 @@
                     style="@style/textLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="100dip"
+                    android:minWidth="100px"
                     android:text="@string/grid" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip"
+                android:layout_marginLeft="5px"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -1526,7 +1552,7 @@
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minWidth="135dp"
+                    android:minWidth="135px"
                     android:text="@string/number_of_books" />
 
                 <TextView
@@ -1546,7 +1572,7 @@
             style="@style/textLinkWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
+            android:layout_marginTop="10px"
             android:background="@drawable/bg_search_second"
             android:text="@string/import_or_export_application_settings_to_json_file"
             android:visibility="gone"
@@ -1567,7 +1593,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:minWidth="100dip"
+                android:minWidth="100px"
                 android:text="@string/import_" />
 
             <TextView
@@ -1575,9 +1601,9 @@
                 style="@style/textLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
+                android:layout_marginLeft="10px"
                 android:layout_weight="0"
-                android:minWidth="100dip"
+                android:minWidth="100px"
                 android:text="@string/export_" />
 
             <TextView
@@ -1585,9 +1611,9 @@
                 style="@style/textLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
+                android:layout_marginLeft="10px"
                 android:layout_weight="0"
-                android:minWidth="100dip"
+                android:minWidth="100px"
                 android:text="@string/migration" />
         </LinearLayout>
 
@@ -1615,7 +1641,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="135dip"
+                android:width="135px"
                 android:text="@string/profile_root" />
 
             <TextView
@@ -1639,7 +1665,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="135dip"
+                android:width="135px"
                 android:text="@string/folder_with_fonts" />
 
             <TextView
@@ -1663,7 +1689,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="135dip"
+                android:width="135px"
                 android:text="@string/folder_for_downloaded_books" />
 
             <TextView
@@ -1686,7 +1712,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="135dip"
+                android:width="135px"
                 android:text="@string/cloud_sync_folder" />
 
             <TextView
@@ -1709,7 +1735,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="135dip"
+                android:width="135px"
                 android:text="@string/backup_folder" />
 
             <TextView
@@ -1733,7 +1759,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="135dip"
+                android:width="135px"
                 android:text="@string/audio_books_folder" />
 
             <TextView
@@ -1767,7 +1793,7 @@
                     android:layout_width="@dimen/wh_button_small"
                     android:layout_height="@dimen/wh_button_small"
                     android:layout_weight="0"
-                    android:padding="2dip"
+                    android:padding="2px"
                     android:src="@drawable/gdrive"
                     android:visibility="gone" />
 
@@ -1797,14 +1823,14 @@
                 android:id="@+id/syncInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dip"
+                android:padding="4px"
                 android:text="ivan@gmail.com" />
 
             <TextView
                 android:id="@+id/syncInfo2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dip"
+                android:padding="4px"
                 android:text="ivan@gmail.com" />
 
 
@@ -1827,7 +1853,7 @@
                     android:layout_width="@dimen/wh_button"
                     android:layout_height="@dimen/wh_button"
                     android:layout_weight="0"
-                    android:padding="4dip"
+                    android:padding="4px"
                     android:src="@drawable/glyphicons_137_cogwheel"
                      app:tint="@color/tint_gray" />
             </LinearLayout>
@@ -1839,7 +1865,7 @@
             style="@style/textLinkWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dip"
+            android:layout_marginTop="4px"
             android:background="@drawable/bg_search_second"
             android:text="Product: Lirbi Free"
             android:visibility="gone"
@@ -1852,7 +1878,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="4dip"
+            android:padding="4px"
             android:visibility="gone">
             <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
@@ -1861,11 +1887,11 @@
                 android:id="@+id/imageView1"
                 android:layout_width="@dimen/wh_button"
                 android:layout_height="@dimen/wh_button"
-                android:layout_margin="4dip"
+                android:layout_margin="4px"
                 android:src="@mipmap/icon_pdf_pro" />
 
             <TextView
-                android:id="@+id/downloadPRO"
+                android:id="@+id/downloapxRO"
                 style="@style/textLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -1880,7 +1906,7 @@
             android:id="@+id/pVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dip"
+            android:layout_marginTop="7px"
             android:text="Version: 1.2.3"
             />
 
@@ -1890,8 +1916,8 @@
             style="@style/textLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dip"
-            android:padding="0dp"
+            android:layout_marginTop="4px"
+            android:padding="0px"
             android:singleLine="true"
             android:text="@string/what_is_new_in"
             android:visibility="gone"
@@ -1901,7 +1927,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dip"
+            android:layout_marginTop="4px"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:visibility="gone"
@@ -1918,7 +1944,7 @@
                 style="@style/textLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
+                android:layout_marginLeft="10px"
                 android:text="@string/licenses_for_libraries" />
         </LinearLayout>
 
@@ -1926,7 +1952,7 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dip"
+            android:layout_marginTop="7px"
             >
 
             <TextView
@@ -1938,16 +1964,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dip"
+            android:layout_marginTop="7px"
             android:gravity="center_vertical"
             android:visibility="gone"
             >
             <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
-                android:layout_width="100dip"
+                android:layout_width="100px"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dip"
+                android:paddingLeft="5px"
                 android:text="@string/support" />
 
             <TextView
@@ -1967,9 +1993,9 @@
             <!--FIXME:MainTabs2.IS_MOD_VERSION-->
 
             <TextView
-                android:layout_width="100dip"
+                android:layout_width="100px"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dip"
+                android:paddingLeft="5px"
                 android:text="@string/web" />
 
             <TextView
@@ -1987,9 +2013,9 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="100dip"
+                android:layout_width="100px"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dip"
+                android:paddingLeft="5px"
                 android:text="@string/beta_version" />
 
             <TextView
@@ -2007,9 +2033,9 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="100dip"
+                android:layout_width="100px"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dip"
+                android:paddingLeft="5px"
                 android:text="FAQ" />
 
             <TextView

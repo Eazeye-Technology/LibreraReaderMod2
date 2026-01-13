@@ -58,6 +58,7 @@ import com.foobnix.pdf.info.AppsConfig;
 import com.foobnix.pdf.info.ExtUtils;
 import com.foobnix.pdf.info.IMG;
 import com.foobnix.pdf.info.Prefs;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.view.AlertDialogs;
@@ -346,6 +347,7 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
 
     }
 
+    CircleProgressBar progressLoading1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search2, container, false);
@@ -390,6 +392,7 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
         myAutoCompleteImage = (ImageView) view.findViewById(R.id.myAutoCompleteImage);
         searchEditText = (AutoCompleteTextView) view.findViewById(R.id.filterLine);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        progressLoading1 = (CircleProgressBar) view.findViewById(R.id.progressLoading1);
 
         searchPage = view.findViewById(R.id.searchPage);
         searchPage.setOnClickListener(new OnClickListener() {
@@ -582,6 +585,7 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
             } else {
                 checkForDeleteBooks();
                 searchAndOrderAsync();
+                progressLoading1.setVisibility(View.VISIBLE);
             }
         }
 
@@ -917,6 +921,10 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
 
     @Override
     public void populateDataInUI(List<FileMeta> items) {
+        if (progressLoading1 != null) {
+            progressLoading1.setVisibility(View.GONE);
+        }
+
         cacheItems = items;
         handler.removeCallbacks(sortAndSeach);
 

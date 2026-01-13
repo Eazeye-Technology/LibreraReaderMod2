@@ -2440,23 +2440,18 @@ public class PrefFragment2 extends UIFragment {
                     }
                 });
 
-        TextView proText = inflate.findViewById(R.id.downloadPRO);
-        TxtUtils.underlineTextView(proText);
-        ((View) proText.getParent()).
-
-                setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(final View v) {
-                        Urls.openPdfPro(getActivity());
-                    }
-                });
-
-        if (AppsConfig.checkIsProInstalled(
-
-                getActivity())) {
-            //((View) proText.getParent()).setVisibility(View.GONE);
-        }
+//        TextView proText = inflate.findViewById(R.id.downloadPRO);
+//        TxtUtils.underlineTextView(proText);
+//        ((View) proText.getParent()).setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(final View v) {
+//                        Urls.openPdfPro(getActivity());
+//                    }
+//                });
+//        if (AppsConfig.checkIsProInstalled(
+//                getActivity())) {
+//            //((View) proText.getParent()).setVisibility(View.GONE);
+//        }
 
         inflate.findViewById(R.id.cleanRecent).
 

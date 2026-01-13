@@ -14,8 +14,8 @@ android {
         targetSdk 36
 //        versionCode 1
 //        versionName "1.0"
-        versionCode 14200//5246
-        versionName "1.42.0" //"""8.8.76"
+        versionCode 14400//5246
+        versionName "1.44.0" //"""8.8.76"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
