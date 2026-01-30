@@ -46,6 +46,7 @@ import com.foobnix.opds.OPDS;
 import com.foobnix.opds.SamlibOPDS;
 import com.foobnix.pdf.info.ADS;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.Urls;
@@ -349,7 +350,7 @@ public class OpdsFragment2 extends UIFragment<Entry> {
             public void onClick(View v) {
                 ADS.hideAdsTemp(getActivity());
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), MainTabs2.DIALOG_STYLE);
                 View view = LayoutInflater.from(v.getContext()).inflate(R.layout.dialog_proxy_server, null, false);
 
                 final CheckBox proxyEnable = (CheckBox) view.findViewById(R.id.proxyEnable);

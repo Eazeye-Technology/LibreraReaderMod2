@@ -14,12 +14,13 @@ import android.widget.TextView;
 
 import com.foobnix.model.AppProfile;
 import com.foobnix.model.AppState;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 
 public class KeyCodeDialog {
 
     public KeyCodeDialog(final Activity a, final Runnable onClose) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.press_any_key);
         View layout = LayoutInflater.from(a).inflate(R.layout.key_dialog, null);
         final EditText keyNext = (EditText) layout.findViewById(R.id.keyNext);

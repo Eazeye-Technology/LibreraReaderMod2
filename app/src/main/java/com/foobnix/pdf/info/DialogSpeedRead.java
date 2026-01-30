@@ -24,6 +24,7 @@ import com.foobnix.pdf.info.model.BookCSS;
 import com.foobnix.pdf.info.view.CustomSeek;
 import com.foobnix.pdf.info.view.MyPopupMenu;
 import com.foobnix.pdf.info.wrapper.DocumentController;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.sys.TempHolder;
 
@@ -38,7 +39,7 @@ public class DialogSpeedRead {
     static String[] punctuations = {".", ";", ":", "?", "!"};
 
     public static void show(final Context a, final DocumentController dc) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
 
         View layout = LayoutInflater.from(a).inflate(R.layout.dialog_speed_reading, null, false);
 

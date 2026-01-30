@@ -40,6 +40,7 @@ import com.foobnix.pdf.info.BookmarksData;
 import com.foobnix.pdf.info.Clouds;
 import com.foobnix.pdf.info.ExtUtils;
 import com.foobnix.pdf.info.IMG;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.view.Dialogs;
@@ -126,8 +127,7 @@ public class FileInformationDialog {
 
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(a);
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
 
         final View dialog = LayoutInflater.from(a).inflate(R.layout.dialog_file_info, null, false);
 
@@ -613,7 +613,7 @@ public class FileInformationDialog {
         if (file == null || onDeleteAction == null) {
             return;
         }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         String name = file.getName();
         if (ExtUtils.isExteralSD(file.getPath())) {
             try {

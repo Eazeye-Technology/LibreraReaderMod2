@@ -34,6 +34,7 @@ import com.foobnix.dao2.FileMeta;
 import com.foobnix.ext.CacheZipUtils;
 import com.foobnix.ext.CacheZipUtils.CacheDir;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.io.SearchCore;
 import com.foobnix.pdf.info.model.BookCSS;
@@ -73,7 +74,7 @@ public class MultyDocSearchDialog {
 
     public static void show(FragmentActivity c) {
         Model.get().path = BookCSS.get().dirLastPath == null ? Environment.getExternalStorageDirectory().getPath() : BookCSS.get().dirLastPath;
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.search_for_text_in_multiple_documents);
         builder.setView(getDialogView(c));
         builder.setCancelable(false);

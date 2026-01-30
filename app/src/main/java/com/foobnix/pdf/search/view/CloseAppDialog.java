@@ -62,7 +62,7 @@ public class CloseAppDialog {
             return;
         }
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(c);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
 
         View inflate = LayoutInflater.from(c).inflate(R.layout.dialog_exit, null, false);
 
@@ -193,7 +193,7 @@ public class CloseAppDialog {
         }
 
         if (v == null) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(a);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
             dialog.setItems(items.toArray(new String[items.size()]), listener);
 
             // dialog.setNegativeButton(R.string.don_t_show_this_dialog, new

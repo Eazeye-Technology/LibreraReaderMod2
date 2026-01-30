@@ -52,7 +52,7 @@ public class Urls {
     public static void openWevView(final Context a, String url, final Runnable onClose) {
         LOG.d(">>> open WevView", url);
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(a);
+        AlertDialog.Builder alert = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         alert.setTitle(url);
 
         LinearLayout wrapper = new LinearLayout(a);

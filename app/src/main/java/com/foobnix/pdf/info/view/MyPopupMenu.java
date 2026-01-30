@@ -246,7 +246,7 @@ public class MyPopupMenu {
                 p1.setSelection(pos - 2);
             }
         } else {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
             ListView list = new ListView(c);
             list.setDivider(null);
             list.setAdapter(a);

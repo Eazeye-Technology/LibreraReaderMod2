@@ -114,6 +114,7 @@ import com.foobnix.pdf.info.FontExtractor;
 import com.foobnix.pdf.info.IMG;
 import com.foobnix.pdf.info.OutlineHelper;
 import com.foobnix.pdf.info.PageUrl;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.Urls;
@@ -1271,7 +1272,7 @@ public class DragingDialogs {
 
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(controller.getActivity());
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(controller.getActivity(), MainTabs2.DIALOG_STYLE);
                         dialog.setTitle(R.string.speak_into_file_wav);
 
                         View inflate = LayoutInflater.from(v.getContext()).inflate(R.layout.dialog_tts_wav, null, false);
@@ -4894,7 +4895,7 @@ public class DragingDialogs {
 
                     @Override
                     public void onClick(final View v) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), MainTabs2.DIALOG_STYLE);
                         builder.setTitle(R.string.custom_css);
                         final EditText edit = new EditText(v.getContext());
                         edit.setMinWidth(Dips.dpToPx(1000));
@@ -5917,7 +5918,7 @@ public class DragingDialogs {
 
                     @Override
                     public void onClick(View v) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(controller.getActivity());
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(controller.getActivity(), MainTabs2.DIALOG_STYLE);
                         builder.setTitle(R.string.customize);
 
                         final LinearLayout root = new LinearLayout(controller.getActivity());

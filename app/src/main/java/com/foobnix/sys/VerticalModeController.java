@@ -26,6 +26,7 @@ import com.foobnix.model.AppSP;
 import com.foobnix.model.AppState;
 import com.foobnix.pdf.info.ExtUtils;
 import com.foobnix.pdf.info.PageUrl;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.model.AnnotationType;
 import com.foobnix.pdf.info.model.OutlineLinkWrapper;
@@ -719,7 +720,7 @@ public class VerticalModeController extends DocumentController {
                 });
             } else {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), MainTabs2.DIALOG_STYLE);
                 builder.setTitle(R.string.save_changes);
 
                 builder.setMessage(getCurrentBook().getAbsolutePath());
@@ -853,7 +854,7 @@ public class VerticalModeController extends DocumentController {
 
     @Override
     public void toPageDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), MainTabs2.DIALOG_STYLE);
         final EditText number = new EditText(getActivity());
 
         number.setInputType(InputType.TYPE_CLASS_NUMBER);

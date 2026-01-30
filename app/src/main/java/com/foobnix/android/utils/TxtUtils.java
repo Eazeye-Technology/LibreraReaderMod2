@@ -1046,6 +1046,11 @@ public class TxtUtils {
 
     public static TextView underline(TextView textView, String text) {
         textView.setText(underline(text));
+        if (MainTabs2.USE_NEW_UI) {
+            if (textView != null) {
+                textView.setTextColor(0xFF000000);
+            }
+        }
         return textView;
     }
 
@@ -1372,43 +1377,82 @@ public class TxtUtils {
     }
 
     public static void updateAllLinks(View parent, boolean accentImage) {
-        try {
-            int color = AppState.get().uiTextColor;
-            if (parent instanceof ViewGroup) {
-                if (AppState.get().isUiTextColor) {
-                    color = AppState.get().uiTextColor;
+        if (MainTabs2.USE_NEW_UI) {
+            //FIXME:
+            try {
+                int color = 0xFF000000; //AppState.get().uiTextColor;
+                if (parent instanceof ViewGroup) {
+//                    if (AppState.get().isUiTextColor) {
+//                        color = AppState.get().uiTextColor;
+//                    } else {
+//                        TypedArray out = parent.getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorLink});
+//                        color = out.getColor(0, Color.WHITE);
+//                    }
+                    TxtUtils.updateAllLinks((ViewGroup) parent, color, accentImage);
                 } else {
-                    TypedArray out = parent.getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorLink});
-                    color = out.getColor(0, Color.WHITE);
+                    LOG.d("updateAllLinks parent is not ViewGroup");
                 }
-                TxtUtils.updateAllLinks((ViewGroup) parent, color, accentImage);
-            } else {
-                LOG.d("updateAllLinks parent is not ViewGroup");
-            }
-            if (AppState.get().uiTextColor == AppState.get().tintColor) {
-                color = Color.WHITE;
-            }
+//                if (AppState.get().uiTextColor == AppState.get().tintColor) {
+//                    color = Color.WHITE;
+//                }
+                color = 0xFF000000;
 
-            List<Integer> ids = Arrays.asList(
-                    R.id.restoreDefaultProfile,
-                    R.id.onCloseApp,
-                    R.id.title,
-                    R.id.chapter,
-                    R.id.currentSeek,
-                    R.id.maxSeek,
-                    R.id.modeName,
-                    R.id.nextTypeBootom
-            );
-            if (AppState.get().isUiTextColor) {
-                for (int id : ids) {
-                    TextView view = parent.findViewById(id);
-                    if (view != null) view.setTextColor(color);
+                List<Integer> ids = Arrays.asList(
+                        R.id.restoreDefaultProfile,
+                        R.id.onCloseApp,
+                        R.id.title,
+                        R.id.chapter,
+                        R.id.currentSeek,
+                        R.id.maxSeek,
+                        R.id.modeName,
+                        R.id.nextTypeBootom
+                );
+                if (AppState.get().isUiTextColor) {
+                    for (int id : ids) {
+                        TextView view = parent.findViewById(id);
+                        if (view != null) view.setTextColor(color);
+                    }
                 }
+            } catch (Exception e) {
+                LOG.e(e);
             }
+        } else {
+            try {
+                int color = AppState.get().uiTextColor;
+                if (parent instanceof ViewGroup) {
+                    if (AppState.get().isUiTextColor) {
+                        color = AppState.get().uiTextColor;
+                    } else {
+                        TypedArray out = parent.getContext().getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorLink});
+                        color = out.getColor(0, Color.WHITE);
+                    }
+                    TxtUtils.updateAllLinks((ViewGroup) parent, color, accentImage);
+                } else {
+                    LOG.d("updateAllLinks parent is not ViewGroup");
+                }
+                if (AppState.get().uiTextColor == AppState.get().tintColor) {
+                    color = Color.WHITE;
+                }
 
-
-        } catch (Exception e) {
-            LOG.e(e);
+                List<Integer> ids = Arrays.asList(
+                        R.id.restoreDefaultProfile,
+                        R.id.onCloseApp,
+                        R.id.title,
+                        R.id.chapter,
+                        R.id.currentSeek,
+                        R.id.maxSeek,
+                        R.id.modeName,
+                        R.id.nextTypeBootom
+                );
+                if (AppState.get().isUiTextColor) {
+                    for (int id : ids) {
+                        TextView view = parent.findViewById(id);
+                        if (view != null) view.setTextColor(color);
+                    }
+                }
+            } catch (Exception e) {
+                LOG.e(e);
+            }
         }
     }
 

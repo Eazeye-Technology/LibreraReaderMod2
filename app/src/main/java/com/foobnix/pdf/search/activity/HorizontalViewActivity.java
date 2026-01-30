@@ -1085,7 +1085,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                     input.setSingleLine(true);
                     input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(HorizontalViewActivity.this);
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(HorizontalViewActivity.this, MainTabs2.DIALOG_STYLE);
                     dialog.setTitle(R.string.enter_password);
                     dialog.setView(input);
                     dialog.setCancelable(false);
@@ -1984,7 +1984,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
             }
 
             if (isInitPosistion != currentPosistion) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this, MainTabs2.DIALOG_STYLE);
                 dialog.setCancelable(false);
                 dialog.setMessage(R.string.apply_a_new_screen_orientation_);
                 dialog.setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {

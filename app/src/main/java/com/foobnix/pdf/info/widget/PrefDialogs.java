@@ -90,7 +90,7 @@ public class PrefDialogs {
         final PathAdapter recentAdapter = new PathAdapter();
         recentAdapter.setPaths(JsonDB.get(BookCSS.get().searchPathsJson));
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.scan_device_for_new_books);
 
         final ListView list = new ListView(a);
@@ -442,7 +442,7 @@ public class PrefDialogs {
         final BrowserAdapter adapter = new BrowserAdapter(a, new ExtFilter(browseexts));
         adapter.setCurrentDirectory(new File(getLastPath()));
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.choose_);
 
         final EditText text = new EditText(a);
@@ -552,7 +552,7 @@ public class PrefDialogs {
             adapter.setCurrentDirectory(path);
         }
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.choose_);
 
         final EditText text = new EditText(a);

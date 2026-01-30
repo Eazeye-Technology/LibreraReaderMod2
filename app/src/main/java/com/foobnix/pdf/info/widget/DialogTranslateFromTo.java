@@ -22,6 +22,7 @@ import com.foobnix.android.utils.Views;
 import com.foobnix.model.AppState;
 import com.foobnix.pdf.info.DictsHelper;
 import com.foobnix.pdf.info.DictsHelper.DictItem;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 
 import com.foobnix.LibreraApp;
@@ -182,7 +183,7 @@ public class DialogTranslateFromTo {
 
     public static AlertDialog show(final Activity a, boolean onlyoffline, final Runnable runnable, final boolean isAddDict) {
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(a);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         alertDialog.setTitle(R.string.choose_);
 
         View body = LayoutInflater.from(a).inflate(R.layout.dialog_translate_from_to, null, false);

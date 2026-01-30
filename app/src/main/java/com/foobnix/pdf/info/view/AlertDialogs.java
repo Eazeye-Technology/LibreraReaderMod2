@@ -22,6 +22,7 @@ import com.foobnix.android.utils.LOG;
 import com.foobnix.android.utils.TxtUtils;
 import com.foobnix.android.utils.UI;
 import com.foobnix.dao2.FileMeta;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.Urls;
 import com.foobnix.pdf.info.wrapper.DocumentController;
@@ -36,7 +37,7 @@ public class AlertDialogs {
     }
 
     public static void openUrl(final Activity c, final String url) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.open_web_page);
         builder.setMessage(url);
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -75,7 +76,7 @@ public class AlertDialogs {
     }
 
     public static AlertDialog showOkDialog(final Activity c, final String message, int actionString, final Runnable action, Runnable onDismiss) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setMessage(message);
         builder.setCancelable(true);
         builder.setPositiveButton(actionString, new DialogInterface.OnClickListener() {
@@ -119,7 +120,7 @@ public class AlertDialogs {
     }
 
     public static void showDialog(final Activity c, final String message, String okButton, final Runnable onAction, final Runnable onCancel) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setMessage(message);
         builder.setCancelable(true);
         builder.setPositiveButton(okButton, new DialogInterface.OnClickListener() {
@@ -158,7 +159,7 @@ public class AlertDialogs {
     }
 
     public static AlertDialog showViewDialog(final Activity c, Runnable ondissmiss, final View... childs) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setCancelable(true);
 
         ScrollView scroll = new ScrollView(c);
@@ -209,7 +210,7 @@ public class AlertDialogs {
     }
 
     public static void showEditDialog(Activity a, String title, String hint, StringResponse onAdd) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(title);
 
         final EditText edit = new EditText(a);
@@ -262,7 +263,7 @@ public class AlertDialogs {
 
     public static void editFileTxt(Activity a, File file, final File outDir, StringResponse onSave) {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
 
 
         final EditText name = new EditText(a);

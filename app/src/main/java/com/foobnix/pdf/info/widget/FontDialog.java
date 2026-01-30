@@ -20,6 +20,7 @@ import com.foobnix.android.utils.Keyboards;
 import com.foobnix.android.utils.LOG;
 import com.foobnix.android.utils.TxtUtils;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.model.BookCSS;
 import com.foobnix.pdf.info.view.CustomColorView;
@@ -139,7 +140,7 @@ public class FontDialog {
         int visibleFB2 = TxtUtils.visibleIf(isFB2);
         inflate.findViewById(R.id.isFB2).setVisibility(visibleFB2);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.customize_fonts);
         builder.setView(inflate);
 

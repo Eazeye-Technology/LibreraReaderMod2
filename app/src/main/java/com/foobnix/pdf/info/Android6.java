@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.foobnix.android.utils.LOG;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 
 public class Android6 {
@@ -69,7 +70,7 @@ public class Android6 {
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(a, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(a, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(a);
+                AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
                 builder.setCancelable(false);
                 builder.setMessage(R.string.you_need_grant_permission);
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {

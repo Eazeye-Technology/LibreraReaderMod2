@@ -1598,7 +1598,7 @@ public class DocumentWrapperUI {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Activity a = dc.getActivity();
-                final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
                 builder.setTitle(R.string.custom_value);
 
                 final CustomSeek myValue = new CustomSeek(a);

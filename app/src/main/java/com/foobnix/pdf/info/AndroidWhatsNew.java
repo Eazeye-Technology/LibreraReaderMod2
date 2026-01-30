@@ -19,6 +19,7 @@ import com.foobnix.model.AppProfile;
 import com.foobnix.model.AppState;
 import com.foobnix.opds.OPDS;
 import com.foobnix.pdf.info.view.AlertDialogs;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 
 import org.jsoup.Jsoup;
@@ -146,7 +147,7 @@ public class AndroidWhatsNew {
             }
         });
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setView(inflate);
         builder.setNegativeButton(R.string.close, new OnClickListener() {
 
@@ -220,7 +221,7 @@ public class AndroidWhatsNew {
 
         notes.setText(textNotes);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setTitle(c.getString(R.string.what_is_new_in) + " " + Apps.getApplicationName(c) + " " + versionName);
         builder.setView(inflate);
         builder.setNegativeButton(R.string.close, new OnClickListener() {

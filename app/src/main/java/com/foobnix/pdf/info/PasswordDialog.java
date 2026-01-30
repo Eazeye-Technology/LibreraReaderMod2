@@ -22,6 +22,7 @@ import com.foobnix.android.utils.TxtUtils;
 import com.foobnix.model.AppState;
 import com.foobnix.pdf.info.view.EditTextHelper;
 import com.foobnix.pdf.info.wrapper.PasswordState;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 
 import java.util.UUID;
@@ -110,7 +111,7 @@ public class PasswordDialog {
     public static AlertDialog showDialog(final Activity a, final boolean isSetPassord, final Runnable onDismiss) {
 
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setCancelable(false);
         if (isSetPassord) {
             builder.setTitle(R.string.set_an_application_password);

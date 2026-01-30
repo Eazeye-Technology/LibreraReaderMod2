@@ -34,6 +34,7 @@ import com.foobnix.android.utils.TxtUtils;
 import com.foobnix.dao2.FileMeta;
 import com.foobnix.pdf.info.ExtUtils;
 import com.foobnix.pdf.info.Playlists;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.view.drag.OnStartDragListener;
@@ -54,7 +55,7 @@ public class DialogsPlaylist {
     static AlertDialog create;
 
     public static void showPlaylistsDialog(final Context a, final Runnable refresh, final File file) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
 
         if (file != null) {
             builder.setTitle(R.string.add_to_playlist);
@@ -169,7 +170,7 @@ public class DialogsPlaylist {
     }
 
     public static void addPlaylistDialog(final Context a, final Runnable onRefresh) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.create_playlist);
 
         final EditText edit = new EditText(a);
@@ -228,7 +229,7 @@ public class DialogsPlaylist {
     static ItemTouchHelper mItemTouchHelper;
 
     public static void showPlayList(final Context a, final String file, final Runnable refresh) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(Playlists.formatPlaylistName(file));
 
         RecyclerView recyclerView = new RecyclerView(a);

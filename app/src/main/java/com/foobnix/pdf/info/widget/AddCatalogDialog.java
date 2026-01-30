@@ -30,6 +30,7 @@ import com.foobnix.opds.Entry;
 import com.foobnix.opds.Feed;
 import com.foobnix.opds.Hrefs;
 import com.foobnix.pdf.info.IMG;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.view.MyProgressBar;
@@ -46,7 +47,7 @@ public class AddCatalogDialog {
 
     public static void showDialogLogin(final Activity a, String url, final Runnable onRefresh) {
         LOG.d("showDialogLogin", url);
-        AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
 
         builder.setTitle(R.string.authentication_required);
         View dialog = LayoutInflater.from(a).inflate(R.layout.dialog_add_catalog_login, null, false);
@@ -118,7 +119,7 @@ public class AddCatalogDialog {
 
     public static void showDialog(final Activity a, final Runnable onRefresh, final Entry e, final boolean validate) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
 
         View dialog = LayoutInflater.from(a).inflate(R.layout.dialog_add_catalog, null, false);
 

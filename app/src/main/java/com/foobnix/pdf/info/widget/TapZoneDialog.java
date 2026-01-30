@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import com.foobnix.android.utils.BaseItemLayoutAdapter;
 import com.foobnix.android.utils.Views;
 import com.foobnix.model.AppState;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 
 import java.util.Arrays;
@@ -51,7 +52,7 @@ public class TapZoneDialog {
 		topSide.setSelection(AppState.get().tapZoneTop, false);
 		bottomSide.setSelection(AppState.get().tapZoneBottom, false);
 
-		final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
 		builder.setTitle(R.string.customize_tap_zones);
 		builder.setView(inflate);
 

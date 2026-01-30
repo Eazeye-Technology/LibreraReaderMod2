@@ -27,6 +27,7 @@ import com.foobnix.android.utils.Keyboards;
 import com.foobnix.android.utils.LOG;
 import com.foobnix.android.utils.TxtUtils;
 import com.foobnix.model.AppState;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.search.activity.msg.MessegeBrightness;
 
@@ -202,7 +203,7 @@ public class BrightnessHelper {
 
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), MainTabs2.DIALOG_STYLE);
                 builder.setTitle(R.string.bluelight_filter);
 
                 final View inflate = LayoutInflater.from(a).inflate(R.layout.dialog_bluelight, null, false);

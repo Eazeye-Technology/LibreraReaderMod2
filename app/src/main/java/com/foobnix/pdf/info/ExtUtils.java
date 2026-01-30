@@ -899,7 +899,7 @@ public class ExtUtils {
         });
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.select_the_reading_mode);
 
         if (AppState.get().appTheme == AppState.THEME_INK) {
@@ -1417,7 +1417,7 @@ public class ExtUtils {
             protected void onPreExecute() {
                 TempHolder.get().isConverting = true;
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
                 View view = LayoutInflater.from(a).inflate(R.layout.dialog_loading_book, null, false);
                 final TextView text = (TextView) view.findViewById(R.id.text1);
 

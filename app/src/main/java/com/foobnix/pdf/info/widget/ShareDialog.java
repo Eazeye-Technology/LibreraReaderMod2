@@ -96,7 +96,7 @@ public class ShareDialog {
 
         final String chooseTitle = file != null ? file.getPath() : a.getString(R.string.choose_);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.choose_)//
                 .setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
                     @Override
@@ -128,7 +128,7 @@ public class ShareDialog {
     ;
 
     public static void showsItemsDialog(final Activity a, String title, final String[] items) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(title)//
                 .setItems(items, new DialogInterface.OnClickListener() {
                     @Override
@@ -149,7 +149,7 @@ public class ShareDialog {
         items.add(a.getString(R.string.move));
         items.add(a.getString(R.string.cancel));
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
@@ -332,7 +332,7 @@ public class ShareDialog {
             items.add(a.getString(R.string.file_info));
         }
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
@@ -529,7 +529,7 @@ public class ShareDialog {
 
 
     public static void showAddToCloudDialog(final Activity a, final File file) {
-        final AlertDialog.Builder inner = new AlertDialog.Builder(a);
+        final AlertDialog.Builder inner = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         inner.setTitle(R.string.upload_to_cloud);
 
         List<Pair<Integer, Integer>> list = Arrays.asList(//

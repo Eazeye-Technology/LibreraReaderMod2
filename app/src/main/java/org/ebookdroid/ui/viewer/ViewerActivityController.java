@@ -22,6 +22,7 @@ import com.foobnix.model.AppBook;
 import com.foobnix.model.AppSP;
 import com.foobnix.model.AppState;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.model.OutlineLinkWrapper;
 import com.foobnix.pdf.info.wrapper.DocumentController;
@@ -265,7 +266,7 @@ public class ViewerActivityController extends ActionController<VerticalViewActiv
         input.setSingleLine(true);
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getManagedComponent());
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getManagedComponent(), MainTabs2.DIALOG_STYLE);
         dialog.setTitle(R.string.enter_password);
         dialog.setView(input);
         dialog.setCancelable(false);

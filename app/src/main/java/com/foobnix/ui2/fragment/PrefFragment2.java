@@ -1132,7 +1132,7 @@ public class PrefFragment2 extends UIFragment {
                 setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), MainTabs2.DIALOG_STYLE);
                         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_custom_reading_modes, null, false);
                         builder.setView(view);
 
@@ -2459,7 +2459,7 @@ public class PrefFragment2 extends UIFragment {
 
                     @Override
                     public void onClick(final View v) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), MainTabs2.DIALOG_STYLE);
 
                         builder.setMessage(getString(R.string.clear_all_recent) + "?");
                         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -2487,7 +2487,7 @@ public class PrefFragment2 extends UIFragment {
 
                     @Override
                     public void onClick(final View v) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), MainTabs2.DIALOG_STYLE);
 
                         builder.setMessage(getString(R.string.clear_all_bookmars) + "?");
                         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -2518,7 +2518,7 @@ public class PrefFragment2 extends UIFragment {
 
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity(), MainTabs2.DIALOG_STYLE);
                         alert.setTitle(R.string.licenses_for_libraries);
 
                         WebView wv = new WebView(getActivity());

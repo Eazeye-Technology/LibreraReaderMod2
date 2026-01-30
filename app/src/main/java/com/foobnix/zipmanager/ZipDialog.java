@@ -21,6 +21,7 @@ import com.foobnix.android.utils.Views;
 import com.foobnix.ext.CacheZipUtils;
 import com.foobnix.mobi.parser.IOUtils;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.search.view.AsyncProgressTask;
 import com.foobnix.sys.ArchiveEntry;
@@ -45,7 +46,7 @@ public class ZipDialog {
             return;
         }
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(a);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         dialog.setPositiveButton(R.string.close, new OnClickListener() {
 
             @Override

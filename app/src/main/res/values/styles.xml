@@ -53,7 +53,8 @@
         <item name="android:padding">4dip</item>
         <item name="android:layout_marginLeft">1.5dip</item>
         <item name="android:layout_marginRight">1.5dip</item>
-        <item name="android:tint">?android:attr/textColorLink</item>
+        <item name="android:tint">#FF000000</item>
+        <!--?android:attr/textColorLink-->
 <!--        <item name="android:tint">@color/black</item>-->
     </style>
 
@@ -77,7 +78,8 @@
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
         <item name="android:tag">textLink</item>
-        <item name="android:textColor">?android:attr/textColorLink</item>
+        <item name="android:textColor">#FF000000</item>
+        <!--?android:attr/textColorLink-->
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
@@ -89,7 +91,8 @@
     <style name="textLinkStyle">
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textColor">?android:attr/textColorLink</item>
+        <item name="android:textColor">#FF000000</item>
+        <!--?android:attr/textColorLink-->
     </style>
 
     <style name="buttonClear">

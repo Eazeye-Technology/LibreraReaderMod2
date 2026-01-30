@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.foobnix.android.utils.Keyboards;
 import com.foobnix.model.AppBookmark;
 import com.foobnix.pdf.info.BookmarksData;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.presentation.BookmarksAdapter;
 
@@ -21,7 +22,7 @@ public class ListBoxHelper {
     public static void showAddDialog(final DocumentController controller, final List<AppBookmark> objects, final BookmarksAdapter bookmarksAdapter, String text, final Runnable onRefresh) {
         final Activity a = controller.getActivity();
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
 
         builder.setTitle(a.getString(R.string.bookmark_on_page_) + " " + controller.getCurentPageFirst1());
 
@@ -96,7 +97,7 @@ public class ListBoxHelper {
 
     public static void showEditDeleteDialog(final AppBookmark bookmark, DocumentController controller, final BookmarksAdapter bookmarksAdapter, final List<AppBookmark> objects, Runnable onRefresh) {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(controller.getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(controller.getActivity(), MainTabs2.DIALOG_STYLE);
         builder.setTitle(controller.getActivity().getString(R.string.bookmark_on_page_) + " " + controller.getCurentPage());
 
 

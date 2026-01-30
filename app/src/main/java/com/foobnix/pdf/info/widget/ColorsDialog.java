@@ -29,6 +29,7 @@ import com.foobnix.android.utils.Views;
 import com.foobnix.model.AppProfile;
 import com.foobnix.model.AppState;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.model.BookCSS;
 import com.foobnix.pdf.info.view.CustomSeek;
@@ -276,7 +277,7 @@ public class ColorsDialog {
 
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
                 builder.setTitle(R.string.dialog_color_picker);
                 final EditText input = new EditText(c);
                 input.setText(fontRGB.getText());
@@ -313,7 +314,7 @@ public class ColorsDialog {
 
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
                 builder.setTitle(R.string.dialog_color_picker);
                 final EditText input = new EditText(c);
                 input.setSingleLine();
@@ -388,7 +389,7 @@ public class ColorsDialog {
             }
         });
 
-        AlertDialog.Builder d = new AlertDialog.Builder(c);
+        AlertDialog.Builder d = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         d.setView(view);
         d.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
 

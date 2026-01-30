@@ -327,7 +327,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
             }
 
             if (isInitPosition != currentPosition) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this, MainTabs2.DIALOG_STYLE);
                 dialog.setCancelable(false);
                 dialog.setMessage(R.string.apply_a_new_screen_orientation_);
                 dialog.setPositiveButton(R.string.yes, new AlertDialog.OnClickListener() {

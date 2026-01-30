@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    https://doc.yonyoucloud.com/doc/wiki/project/android-weekly/issue-145/tips-and-tricks.html
+    -->
+    <!--Theme.AppCompat.Light.Dialog-->
+    <style name="AlertDialogCustom" parent="Theme.Material3.Light.Dialog.MinWidth">
+        <item name="colorAccent">#000000</item>
+        <item name="android:windowMinWidthMajor">50%</item>
+        <item name="android:windowMinWidthMinor">50%</item>
+    </style>
+    <style name="AlertDialogCustom.Destructive" parent="AlertDialogCustom">
+<!--        <item name="android:buttonBarPositiveButtonStyle">@style/DestructiveButton</item>-->
+    </style>
+    <style name="DestructiveButton" parent="android:Widget.DeviceDefault.Button.Borderless">
+        <item name="android:textColor">#FF0000</item>
+    </style>
+</resources>

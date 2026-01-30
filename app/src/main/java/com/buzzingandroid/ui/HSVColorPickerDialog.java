@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.foobnix.android.utils.Dips;
 import com.foobnix.model.AppState;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.wrapper.MagicHelper;
 
@@ -113,7 +114,7 @@ public class HSVColorPickerDialog extends AlertDialog {
 
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), MainTabs2.DIALOG_STYLE);
                 builder.setTitle(R.string.dialog_color_picker);
                 final EditText input = new EditText(v.getContext());
                 input.setSingleLine();

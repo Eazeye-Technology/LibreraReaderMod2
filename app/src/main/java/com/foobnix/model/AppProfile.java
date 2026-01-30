@@ -27,6 +27,7 @@ import com.foobnix.android.utils.TxtUtils;
 import com.foobnix.drive.GFile;
 import com.foobnix.pdf.info.Android6;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.model.BookCSS;
@@ -277,7 +278,7 @@ public class AppProfile {
 
     public static void showDialog(Activity a, ResultResponse<String> onclick) {
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         // builder.setTitle(R.string.tag);
 
         View inflate = LayoutInflater.from(a).inflate(R.layout.dialog_tags, null, false);
@@ -386,7 +387,7 @@ public class AppProfile {
     }
 
     public static void addDialog(final Activity a, final Runnable onRefresh) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.profile);
 
         final EditText edit = new EditText(a);

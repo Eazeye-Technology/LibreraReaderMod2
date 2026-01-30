@@ -55,6 +55,7 @@ import com.foobnix.model.AppSP;
 import com.foobnix.model.AppState;
 import com.foobnix.model.TagData;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.WebViewHepler;
@@ -450,7 +451,7 @@ public class Dialogs {
         scroll.addView(root);
 
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.replacements);
         builder.setCancelable(true);
         builder.setView(scroll);
@@ -553,7 +554,7 @@ public class Dialogs {
             }
         });
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setView(imageView);
 
         builder.setPositiveButton(R.string.close, new DialogInterface.OnClickListener() {
@@ -569,7 +570,7 @@ public class Dialogs {
 
     public static void customValueDialog(final Context a, final int initValue,
                                          final IntegerResponse reponse) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.custom_value);
 
         final CustomSeek myValue = new CustomSeek(a);
@@ -604,7 +605,7 @@ public class Dialogs {
     }
 
     public static void showLinksColorDialog(final Activity a, final Runnable action) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setCancelable(true);
         builder.setTitle(R.string.link_color);
 
@@ -697,7 +698,7 @@ public class Dialogs {
 
     public static AlertDialog loadingBook(Context c, final Runnable onCancel) {
         try {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
             View view = LayoutInflater.from(c).inflate(R.layout.dialog_loading_book, null, false);
             final TextView text = (TextView) view.findViewById(R.id.text1);
 
@@ -756,7 +757,7 @@ public class Dialogs {
 
     public static void showEditDialog(final Context c, boolean editOnly, String title, String init,
                                       final ResultResponse<String> onresult) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setTitle(title);
         final EditText input = new EditText(c);
         input.setSingleLine();
@@ -814,7 +815,7 @@ public class Dialogs {
 
     public static void showEditDialog2(final Activity c, String title, String init,
                                        final ResultResponse<String> onresult) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setTitle(title);
         final EditText input = new EditText(c);
         input.setSingleLine();
@@ -856,7 +857,7 @@ public class Dialogs {
         Vibro.vibrate();
         String txt = controller.getString(R.string.set_the_current_page_number);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(anchor.getContext());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(anchor.getContext(), MainTabs2.DIALOG_STYLE);
         builder.setMessage(txt);
 
         final EditText edit = new EditText(anchor.getContext());
@@ -912,7 +913,7 @@ public class Dialogs {
     }
 
     public static void showContrastDialogByUrl(final Activity c, final Runnable action) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(c, MainTabs2.DIALOG_STYLE);
         builder.setCancelable(true);
         builder.setTitle(R.string.contrast_and_brightness);
 
@@ -1049,7 +1050,7 @@ public class Dialogs {
     }
 
     public static void addTagsDialog(final Context a, final Runnable onRefresh) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setTitle(R.string.tag);
 
         final EditText edit = new EditText(a);
@@ -1123,7 +1124,7 @@ public class Dialogs {
 
         LOG.d("showTagsDialog book tags", tag);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(a);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         // builder.setTitle(R.string.tag);
 
         View inflate = LayoutInflater.from(a).inflate(R.layout.dialog_tags, null, false);
@@ -1325,7 +1326,7 @@ public class Dialogs {
         text.setTextIsSelectable(true);
         text.setPadding(Dips.DP_8, Dips.DP_8, Dips.DP_8, Dips.DP_8);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, MainTabs2.DIALOG_STYLE);
         builder.setView(text);
 
         builder.setPositiveButton(R.string.close, new DialogInterface.OnClickListener() {
