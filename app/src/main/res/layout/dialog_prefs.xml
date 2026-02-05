@@ -13,7 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:background="#FFFFFF"
+            >
 
             <View
                 android:layout_width="1dip"
@@ -23,7 +25,6 @@
 
             <TextView
                 android:id="@+id/moreSettings"
-                style="@style/textLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -31,7 +32,8 @@
                 android:lines="2"
                 android:singleLine="false"
                 android:text="@string/reading_settings" />
-
+<!--style="@style/textLink"
+                -->
             <View
                 android:id="@+id/moreSettingsDiv"
                 android:layout_width="1dip"
@@ -41,7 +43,6 @@
 
             <TextView
                 android:id="@+id/performanceSettigns"
-                style="@style/textLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -49,7 +50,8 @@
                 android:lines="2"
                 android:singleLine="false"
                 android:text="@string/advanced_settings" />
-
+<!--style="@style/textLink"
+                -->
             <View
                 android:layout_width="1dip"
                 android:layout_height="match_parent"
@@ -58,7 +60,6 @@
 
             <TextView
                 android:id="@+id/statusBarSettings"
-                style="@style/textLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -66,7 +67,8 @@
                 android:lines="2"
                 android:singleLine="false"
                 android:text="@string/status_bar" />
-
+<!--style="@style/textLink"
+                -->
             <View
                 android:layout_width="1dip"
                 android:layout_height="match_parent"
@@ -225,9 +227,11 @@
                 android:layout_marginLeft="4dip"
                 android:layout_weight="1"
                 android:ellipsize="end"
+                android:textStyle="bold"
                 android:text="@string/screen_orientation"
-                android:textStyle="bold" />
-
+                />
+<!--
+                -->
             <TextView
                 android:id="@+id/screenOrientation"
                 style="@style/textLink"
@@ -260,7 +264,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
 
             <CheckBox
                 android:id="@+id/isCharacterEncoding"
@@ -286,7 +292,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -324,7 +332,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -383,7 +393,9 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="2dip"
-            android:background="@color/lt_grey_alpha" />
+            android:background="@color/lt_grey_alpha"
+            android:visibility="gone"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -549,7 +561,9 @@
             android:id="@+id/allBGConfig"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
 
             <View
                 android:layout_width="match_parent"

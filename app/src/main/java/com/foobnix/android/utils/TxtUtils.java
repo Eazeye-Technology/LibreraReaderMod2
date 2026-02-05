@@ -1031,6 +1031,22 @@ public class TxtUtils {
 
     }
 
+    public static TextView blackTextView(View view) {
+        if (MainTabs2.USE_NEW_UI) {
+            //mark
+        }
+        if (view == null) {
+            return null;
+        }
+        TextView textView = (TextView) view;
+        String text = textView.getText().toString();
+        textView.setText(text);
+        if (MainTabs2.USE_NEW_UI) {
+            textView.setTextColor(0xFF000000);
+        }
+        return textView;
+    }
+
     public static TextView underlineTextView(View view) {
         if (view == null) {
             return null;

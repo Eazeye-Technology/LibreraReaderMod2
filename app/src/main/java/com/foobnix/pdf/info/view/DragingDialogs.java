@@ -184,7 +184,9 @@ import java.util.regex.Pattern;
 public class DragingDialogs {
 
     public final static int PREF_WIDTH = 330;
-    public final static int PREF_HEIGHT = 560;
+    public final static int PREF_HEIGHT =
+            MainTabs2.USE_NEW_UI ? 280 :
+            560;
 
     public static final String EDIT_COLORS_PANEL = "editColorsPanel";
     static String lastSearchText = "";
@@ -5228,6 +5230,7 @@ public class DragingDialogs {
         return dialog;
     }
 
+    //FIXME: 阅读器内的设置对话框
     public static DragingPopup preferences(final FrameLayout anchor, final DocumentController controller, final Runnable onRefresh, final Runnable updateUIRefresh) {
         final int initHash = Objects.appHash();
 
@@ -5250,6 +5253,7 @@ public class DragingDialogs {
 
             @Override
             public View getContentView(final LayoutInflater inflater) {
+                //FIXME:阅读器内的设置对话框
                 View inflate = inflater.inflate(R.layout.dialog_prefs, null, false);
 
                 // TOP panel start
@@ -5393,7 +5397,11 @@ public class DragingDialogs {
                 });
 
                 boolean isTxtOrZip = BookType.TXT.is(controller.getCurrentBook().getPath()) || BookType.ZIP.is(controller.getCurrentBook().getPath());
-                isPreText.setVisibility(isTxtOrZip ? View.VISIBLE : View.GONE);
+                if (MainTabs2.USE_NEW_UI) {
+                    //hidden
+                } else {
+                    isPreText.setVisibility(isTxtOrZip ? View.VISIBLE : View.GONE);
+                }
 
                 CheckBox isLineBreaksText = inflate.findViewById(R.id.isLineBreaksText);
                 isLineBreaksText.setChecked(AppState.get().isLineBreaksText);
@@ -5405,7 +5413,11 @@ public class DragingDialogs {
                     }
                 });
 
-                isLineBreaksText.setVisibility(isTxtOrZip ? View.VISIBLE : View.GONE);
+                if (MainTabs2.USE_NEW_UI) {
+                    //hidden
+                } else {
+                    isLineBreaksText.setVisibility(isTxtOrZip ? View.VISIBLE : View.GONE);
+                }
 
                 //
 
@@ -5465,15 +5477,25 @@ public class DragingDialogs {
                 // inflate.findViewById(R.id.moreSettingsImage);
                 // moreSettingsImage.setVisibility(controller.isTextFormat() ?
                 // View.VISIBLE : View.GONE);
-                TxtUtils.underlineTextView(moreSettings).setOnClickListener(new OnClickListener() {
+                if (MainTabs2.USE_NEW_UI) {
+                    TxtUtils.blackTextView(moreSettings).setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            moreBookSettings(anchor, controller, onRefresh, updateUIRefresh);
+                        }
+                    });
+                } else {
+                    TxtUtils.underlineTextView(moreSettings).setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            moreBookSettings(anchor, controller, onRefresh, updateUIRefresh);
+                        }
+                    });
+                }
 
-                    @Override
-                    public void onClick(View v) {
-                        moreBookSettings(anchor, controller, onRefresh, updateUIRefresh);
-                    }
-                });
-
-                TextView performanceSettings = TxtUtils.underlineTextView(inflate.findViewById(R.id.performanceSettigns));
+                TextView performanceSettings =
+                        MainTabs2.USE_NEW_UI ? TxtUtils.blackTextView(inflate.findViewById(R.id.performanceSettigns)) :
+                        TxtUtils.underlineTextView(inflate.findViewById(R.id.performanceSettigns));
                 performanceSettings.setOnClickListener(new OnClickListener() {
 
                     @Override
@@ -5482,7 +5504,9 @@ public class DragingDialogs {
                     }
                 });
 
-                TextView statusBarSettings = TxtUtils.underlineTextView(inflate.findViewById(R.id.statusBarSettings));
+                TextView statusBarSettings =
+                        MainTabs2.USE_NEW_UI ? TxtUtils.blackTextView(inflate.findViewById(R.id.statusBarSettings)) :
+                        TxtUtils.underlineTextView(inflate.findViewById(R.id.statusBarSettings));
                 statusBarSettings.setOnClickListener(new OnClickListener() {
 
                     @Override
@@ -5503,8 +5527,12 @@ public class DragingDialogs {
                 });
                 fontSizeSp.setValueText("" + BookCSS.get().fontSizeSp);
 
-                inflate.findViewById(R.id.fontSizeLayout).setVisibility(ExtUtils.isTextFomat(controller.getCurrentBook().getPath()) ? View.VISIBLE : View.GONE);
-                inflate.findViewById(R.id.fontNameSelectionLayout).setVisibility(ExtUtils.isTextFomat(controller.getCurrentBook().getPath()) ? View.VISIBLE : View.GONE);
+                if (MainTabs2.USE_NEW_UI) {
+                    //FIXME: hidden
+                } else {
+                    inflate.findViewById(R.id.fontSizeLayout).setVisibility(ExtUtils.isTextFomat(controller.getCurrentBook().getPath()) ? View.VISIBLE : View.GONE);
+                    inflate.findViewById(R.id.fontNameSelectionLayout).setVisibility(ExtUtils.isTextFomat(controller.getCurrentBook().getPath()) ? View.VISIBLE : View.GONE);
+                }
 
                 final TextView textFontName = inflate.findViewById(R.id.textFontName);
                 textFontName.setOnClickListener(new OnClickListener() {

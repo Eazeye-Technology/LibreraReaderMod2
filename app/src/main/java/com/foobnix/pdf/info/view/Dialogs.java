@@ -707,6 +707,9 @@ public class Dialogs {
             pr.setSaveFromParentEnabled(false);
 
             int color = TintUtil.color;
+            if (MainTabs2.USE_NEW_UI) {
+                color = 0xFF000000;
+            }
             //final int tintColor = AppState.get().isUiTextColor ? AppState.get().uiTextColor : color;
 
 
@@ -714,7 +717,12 @@ public class Dialogs {
 
             TintUtil.setTintImageNoAlpha(image, color);
             TintUtil.setDrawableTint(pr.getIndeterminateDrawable().getCurrent(), color);
-            TintUtil.setTintText(text, color);
+            if (MainTabs2.USE_NEW_UI) {
+                //Please wait... 加载对话框
+                TintUtil.setTintText(text, color);
+            } else {
+                TintUtil.setTintText(text, color);
+            }
 
             image.setOnClickListener(new OnClickListener() {
 
