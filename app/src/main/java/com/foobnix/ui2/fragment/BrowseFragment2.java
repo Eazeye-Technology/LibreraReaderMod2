@@ -91,6 +91,7 @@ import java.util.Map;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class BrowseFragment2 extends UIFragment<FileMeta> {
+    private final static int PATHS_SIZE = 16; //Folder, File: 16px, fragment_browse2.xml
 
     public static final Pair<Integer, Integer> PAIR = new Pair<Integer, Integer>(R.string.folders, R.drawable.glyphicons_145_folder_open);
     public static final String EXTRA_INIT_PATH = "EXTRA_PATH";
@@ -1087,6 +1088,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
             String id = ExtUtils.getExtSDDisplayName(getContext(), displayPath);
 
             TextView slash = new TextView(getActivity());
+            slash.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
             slash.setText(id);
             if (MainTabs2.USE_NEW_UI) {
                 slash.setTextColor(0xff000000); //block
@@ -1103,6 +1105,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
             final String[] split = path.split("/");
 
             TextView nameView = new TextView(getActivity());
+            nameView.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
             if (split.length == 0) {
                 nameView.setText(name + ": " + Clouds.get().getUserLogin(displayPath) + " ");
             } else {
@@ -1124,6 +1127,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
 
             if (split.length == 0 && Clouds.isCloud(displayPath)) {
                 TextView logout = new TextView(getActivity());
+                logout.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
                 logout.setText(TxtUtils.underline(getActivity().getString(R.string.logout)));
                 if (MainTabs2.USE_NEW_UI) {
                     logout.setTextColor(0xff000000); //block
@@ -1173,6 +1177,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
                     continue;
                 }
                 TextView slash = new TextView(getActivity());
+                slash.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
                 if (MainTabs2.USE_NEW_UI) {
                     slash.setText(" > ");
                     slash.setTextColor(0xff000000); //block
@@ -1182,6 +1187,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
                 }
 
                 TextView item = new TextView(getActivity());
+                item.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
                 item.setText(part);
                 item.setGravity(Gravity.CENTER);
                 if (MainTabs2.USE_NEW_UI) {
@@ -1283,6 +1289,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
             }
 
             TextView stub = new TextView(getActivity());
+            stub.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
 
             if (AppState.get().isHideReadBook) {
                 stub.setText(" (" + (itemsCount + readCount) + "/" + readCount + ") ");

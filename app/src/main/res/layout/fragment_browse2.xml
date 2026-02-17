@@ -29,11 +29,10 @@ android:background="@drawable/bg_search_second"
                 android:layout_height="24px"
                 android:contentDescription="@string/back"
                 android:src="@drawable/glyphicons_223_chevron_left"
-                android:tint="#000"
                 android:id="@+id/onBack"
                 style="@style/buttonWhite"
                 android:layout_centerInParent="true"
-                />
+                card_view:tint="#000" />
         </RelativeLayout>
 
         <View
