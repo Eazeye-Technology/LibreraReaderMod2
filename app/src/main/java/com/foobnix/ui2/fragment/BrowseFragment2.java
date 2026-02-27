@@ -91,6 +91,7 @@ import java.util.Map;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class BrowseFragment2 extends UIFragment<FileMeta> {
+    private final static boolean ALWAYS_SHOW_SDCARD = true; //always show sdcard root
     private final static int PATHS_SIZE = 16; //Folder, File: 16px, fragment_browse2.xml
 
     public static final Pair<Integer, Integer> PAIR = new Pair<Integer, Integer>(R.string.folders, R.drawable.glyphicons_145_folder_open);
@@ -785,20 +786,22 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
     }
 
     public String getInitPath() {
-        try {
-            String pathArgument = getArguments() != null ? getArguments().getString(EXTRA_INIT_PATH, null) : "";
-            if (TxtUtils.isNotEmpty(pathArgument)) {
-                return pathArgument;
+        if (!ALWAYS_SHOW_SDCARD) {
+            try {
+                String pathArgument = getArguments() != null ? getArguments().getString(EXTRA_INIT_PATH, null) : "";
+                if (TxtUtils.isNotEmpty(pathArgument)) {
+                    return pathArgument;
+                }
+            } catch (Exception e) {
+                LOG.e(e);
             }
-        } catch (Exception e) {
-            LOG.e(e);
-        }
-        String path = BookCSS.get().dirLastPath == null ? Environment.getExternalStorageDirectory().getPath() : BookCSS.get().dirLastPath;
-        if (ExtUtils.isExteralSD(path)) {
-            return path;
-        }
-        if (new File(path).isDirectory()) {
-            return path;
+            String path = BookCSS.get().dirLastPath == null ? Environment.getExternalStorageDirectory().getPath() : BookCSS.get().dirLastPath;
+            if (ExtUtils.isExteralSD(path)) {
+                return path;
+            }
+            if (new File(path).isDirectory()) {
+                return path;
+            }
         }
         return Environment.getExternalStorageDirectory().getPath();
     }
@@ -1192,7 +1195,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
                 item.setGravity(Gravity.CENTER);
                 if (MainTabs2.USE_NEW_UI) {
                     item.setTextColor(0xff000000); //block
-                    item.setTextSize(16);
+                    //item.setTextSize(16); //see upper item.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
                 } else {
                     item.setTextColor(getResources().getColor(R.color.white));
                 }
