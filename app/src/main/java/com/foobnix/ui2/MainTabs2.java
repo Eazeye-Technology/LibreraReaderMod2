@@ -2,6 +2,7 @@ package com.foobnix.ui2;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener;
@@ -72,6 +74,7 @@ import com.foobnix.ui2.fragment.PrefFragment2;
 import com.foobnix.ui2.fragment.RecentFragment2;
 import com.foobnix.ui2.fragment.SearchFragment2;
 import com.foobnix.ui2.fragment.UIFragment;
+import com.upgradetool.upgrade.UpgradeUtil;
 //import com.google.android.gms.auth.api.signin.GoogleSignIn;
 //import com.google.android.ump.ConsentDebugSettings;
 //import com.google.android.ump.ConsentForm;
@@ -292,6 +295,8 @@ public class MainTabs2 extends AdsFragmentActivity {
         super.attachBaseContext(MyContextWrapper.wrap(context));
     }
 
+    public UpgradeUtil upgradeUtil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -335,6 +340,25 @@ public class MainTabs2 extends AdsFragmentActivity {
         DocumentController.doContextMenu(this);
 
         setContentView(R.layout.main_tabs);
+
+        if (UpgradeUtil.USE_UPGRADE) {
+            upgradeUtil = new UpgradeUtil(this);
+            upgradeUtil.onCreate_upgrade();
+        }
+
+        int stateStarted = 0;
+        if (savedInstanceState != null) {
+            stateStarted = savedInstanceState.getInt(STATE_STARTED, 0);
+            stateStarted_ = stateStarted;
+        }
+        if (stateStarted == 0) {
+            if (UpgradeUtil.USE_UPGRADE) {
+                if (upgradeUtil != null) {
+                    upgradeUtil.onCreateUpdateReceiver();
+                    upgradeUtil.checkVersion();
+                }
+            }
+        }
 
         imageMenu = findViewById(R.id.imageMenu1);
         imageMenuParent = findViewById(R.id.imageParent1);
@@ -846,6 +870,9 @@ public class MainTabs2 extends AdsFragmentActivity {
         EventBus.getDefault().unregister(this);
         IMG.clearMemoryCache();
         super.onDestroy();
+        if (UpgradeUtil.USE_UPGRADE && upgradeUtil != null) {
+            upgradeUtil.onDestroyUpdateReceiver();
+        }
     }
 
     @Override
@@ -944,4 +971,21 @@ public class MainTabs2 extends AdsFragmentActivity {
     };
 
 
+    private static final String STATE_STARTED = "STATE_STARTED";
+    public int stateStarted_ = 0;
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE_STARTED, 1);
+    }
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (UpgradeUtil.USE_UPGRADE) {
+            Dialog dialog = upgradeUtil.onCreateDailog_upgrade(id);
+            if (dialog != null) {
+                return dialog;
+            }
+        }
+        return super.onCreateDialog(id);
+    }
 }

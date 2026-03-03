@@ -380,6 +380,12 @@ android:theme="@style/Theme.LibreraReaderMod2"
             android:name="com.foobnix.pdf.info.widget.StackGridWidgetService"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+
+        <service
+            android:name="com.upgradetool.upgrade.UpdateService"
+            android:label="UpdateService"
+            android:process=":update" />
     </application>
 
 </manifest>

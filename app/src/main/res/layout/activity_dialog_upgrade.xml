@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="312px"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24px"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#00585858"
+            app:cardCornerRadius="0px"
+            app:cardElevation="0px"
+            android:layout_gravity="center|center_vertical"
+            android:layout_margin="5px"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:id="@+id/tvDialogTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24px"
+                        android:text="Update available"
+                        android:textColor="#000000"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:visibility="visible"
+                        />
+                    <!--New note-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="24px"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16px"
+                        android:text="A new version for the Focus tablet is available."
+                        android:textColor="#FF000000"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    android:layout_marginTop="16px"
+                    android:layout_marginRight="-10px"
+                    >
+
+                    <Button
+                        android:id="@+id/btnSave"
+                        style="@style/Widget.Material3.Button.TextButton.Icon"
+                        android:layout_width="166px"
+                        android:layout_height="40px"
+                        android:drawableLeft="@drawable/ic_my_if_download"
+                        android:paddingLeft="30px"
+                        android:paddingTop="0px"
+                        android:paddingRight="30px"
+                        android:paddingBottom="0px"
+                        android:text="Download"
+                        android:textColor="#000000"
+                        android:textSize="14px" />
+                    <!--app:icon="@drawable/ic_outline_delete_forever_24_w"
+                        -->
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>
