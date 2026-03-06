@@ -904,6 +904,10 @@ public class DocumentWrapperUI {
 //        } else {
 //            TintUtil.setTintImageWithAlpha(moveCenter, Color.WHITE);
 //        }
+
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) lockUnlock, 0xFF000000, 255);
+        }
     }
 
     public void showHideHistory() {
@@ -1201,6 +1205,10 @@ public class DocumentWrapperUI {
 
         nextScreenType = ((ImageView) a.findViewById(R.id.imageNextScreen));
         nextScreenType.setOnClickListener(onNextType);
+
+        if (MainTabs2.USE_NEW_UI) {
+            nextTypeBootom.setVisibility(View.GONE); //隐藏缩放比例
+        }
 
         onDocDontext = (ImageView) a.findViewById(R.id.onDocDontext);
         onDocDontext.setOnClickListener(onShowContext);

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Build;
@@ -207,9 +208,10 @@ public abstract class DocumentController {
     public static void setNavBarTintColor(Activity a) {
         //不修改底部导航栏颜色
         //search: 修改安卓底部颜色
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            a.getWindow().setNavigationBarColor(TintUtil.color);
-//        }
+            a.getWindow().setNavigationBarColor(Color.WHITE);
+        }
     }
 
     public static void runNormalScreen(final Activity a) {
