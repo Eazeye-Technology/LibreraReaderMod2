@@ -48,8 +48,8 @@
         android:vmSafeMode="false"
         android:theme="@style/AppTheme.HighContrast"
         tools:replace="label, icon, roundIcon"
-        android:icon="@mipmap/ic_launcher_bookmanager"
-        android:roundIcon="@mipmap/ic_launcher_bookmanager_round"
+        android:icon="@mipmap/ic_launcher_bookmanager2"
+        android:roundIcon="@mipmap/ic_launcher_bookmanager2_round"
         >
 <!--
 android:icon="@mipmap/ic_launcher"

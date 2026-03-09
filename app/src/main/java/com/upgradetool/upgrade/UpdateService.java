@@ -199,7 +199,7 @@ public class UpdateService extends Service {
 						//指定通知被创建的时间
 						.setWhen(System.currentTimeMillis())
 						//设置通知的小图标
-						.setSmallIcon(R.mipmap.ic_launcher_bookmanager)
+						.setSmallIcon(R.mipmap.ic_launcher_bookmanager2)
 						//设置通知的大图标
 						//.setLargeIcon(BitmapFactory.decodeResource(getResources(),
 						//		R.drawable.ic_launcher_background))

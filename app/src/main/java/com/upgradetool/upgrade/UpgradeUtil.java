@@ -66,7 +66,7 @@ public class UpgradeUtil {
         // If do not grant write external storage permission.
         if (requstInstallPacakgesPermission != PackageManager.PERMISSION_GRANTED) {
             AlertDialog dialog3 = new AlertDialog.Builder(mAct)
-                    .setIcon(R.mipmap.ic_launcher_bookmanager)
+                    .setIcon(R.mipmap.ic_launcher_bookmanager2)
                     .setTitle("Permission request")
                     .setMessage(
                             "Please allow to use the storage permission"
@@ -111,7 +111,7 @@ public class UpgradeUtil {
             if (!haveInstallPermission) {//没有权限
                 if (true) {
                     AlertDialog dialog2 = new AlertDialog.Builder(mAct)
-                            .setIcon(R.mipmap.ic_launcher_bookmanager)
+                            .setIcon(R.mipmap.ic_launcher_bookmanager2)
                             .setTitle("Permission request")
                             .setMessage("Installing the application requires opening unknown source permissions. Please enable permissions in the settings")
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
