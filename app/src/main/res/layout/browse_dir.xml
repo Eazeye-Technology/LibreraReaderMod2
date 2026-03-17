@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="56px"
-    android:layout_margin="4px"
+    android:layout_height="@dimen/browse_dir_ll_height"
+    android:layout_margin="@dimen/browse_dir_ll_margin"
     android:background="@drawable/browse_item_list_outline"
     >
 <!--
@@ -16,10 +16,10 @@ card_view:cardCornerRadius="@dimen/radius"
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="60dp"
+        android:minHeight="@dimen/browse_dir_ll_ll_min_height"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="2dip"
+        android:padding="@dimen/browse_dir_ll_ll_padding"
         >
 <!--
 android:background="#FCFCFC"
@@ -31,8 +31,8 @@ android:background="?android:attr/selectableItemBackground"
 
            <ImageView
                android:id="@+id/image1"
-               android:layout_width="20px"
-               android:layout_height="16px"
+               android:layout_width="@dimen/browse_dir_ll_iv1_width"
+               android:layout_height="@dimen/browse_dir_ll_iv1_height"
 
                android:layout_weight="0"
                android:src="@drawable/ic_my_filemanager_folder_002" />
@@ -46,11 +46,11 @@ android:background="?android:attr/selectableItemBackground"
                 android:text="123"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:paddingLeft="2dip"
-                android:paddingRight="3dip"
+                android:paddingLeft="@dimen/browse_dir_ll_tv1_padding_left"
+                android:paddingRight="@dimen/browse_dir_ll_tv1_padding_right"
                 android:background="@color/foobnix_light_blue_alfa"
                 android:visibility="visible"
-                android:textSize="14sp" />
+                android:textSize="@dimen/browse_dir_ll_tv1_text_size" />
 
            <ImageView
                android:id="@+id/imageCloud"
@@ -60,15 +60,15 @@ android:background="?android:attr/selectableItemBackground"
                android:layout_width="0dp"
                android:layout_height="0dp"
                android:layout_weight="0"
-               android:paddingLeft="4dip"
-               android:paddingRight="4dip"
+               android:paddingLeft="@dimen/browse_dir_ll_iv2_padding_left"
+               android:paddingRight="@dimen/browse_dir_ll_iv2_padding_right"
                android:src="@drawable/glyphicons_761_sync" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16px"
+            android:layout_marginLeft="@dimen/browse_dir_ll_ll2_margin_left"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical" >
@@ -81,7 +81,7 @@ android:background="?android:attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="Page"
-                android:textSize="16px"
+                android:textSize="@dimen/browse_dir_ll_tv2_text_size"
                 android:textStyle="bold" />
 <!--16sp-->
             <TextView
@@ -92,7 +92,7 @@ android:background="?android:attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="/path/"
-                android:textSize="12sp"
+                android:textSize="@dimen/browse_dir_ll_tv3_text_size"
                 android:textStyle="normal" />
         </LinearLayout>
 <!--wrap_content-->
@@ -101,18 +101,18 @@ android:background="?android:attr/selectableItemBackground"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/play"
-            android:layout_marginRight="10dip"
-            android:textSize="14sp" />
+            android:layout_marginRight="@dimen/browse_dir_ll_tv4_margin_right"
+            android:textSize="@dimen/browse_dir_ll_tv4_text_size" />
 <!--wrap_content-->
         <ImageView
             android:id="@+id/starIcon"
-            android:layout_width="24px"
-            android:layout_height="24px"
-            android:layout_marginRight="4dip"
+            android:layout_width="@dimen/browse_dir_ll_iv3_width"
+            android:layout_height="@dimen/browse_dir_ll_iv3_height"
+            android:layout_marginRight="@dimen/browse_dir_ll_iv3_margin_right"
             android:layout_weight="0"
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/glyphicons_50_star_empty"
-            android:tint="@color/tint_gray" />
+            card_view:tint="@color/tint_gray" />
     </LinearLayout>
 
 </LinearLayout>

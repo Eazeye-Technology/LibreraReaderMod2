@@ -11,7 +11,6 @@
   {"name": "Wikipedia", "path": "https://%s.m.wikipedia.org/wiki/%s"},
   {"name": "Wiktionary", "path": "https://%s.m.wiktionary.org/wiki/%s"},
   {"name": "Academic.ru", "path": "https://dic.academic.ru/searchall.php?SWord=%s"},
-  {"name": "Treccani.it", "path": "https://www.treccani.it/vocabolario/ricerca/%s"},
   {"name": "Deepl.com", "path": "https://www.deepl.com/translator#%s/%s/%s"},
   {"name": "Vocabulary.com", "path": "https://www.vocabulary.com/dictionary/%s"},
   {"name": "Ukrlit.org", "path": "http://ukrlit.org/slovnyk/%s"},

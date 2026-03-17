@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fragment_search2_process_width">8px</dimen>
+    <dimen name="fragment_search2_circle_progress_bar_width">200px</dimen>
+    <dimen name="fragment_search2_circle_progress_bar_height">200px</dimen>
+</resources>

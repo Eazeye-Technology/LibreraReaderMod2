@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fragment_preferences_ll_height">48px</dimen>
+    <dimen name="fragment_preferences_ll_margin_left">5px</dimen>
+    <dimen name="fragment_preferences_ll_tv1_min_width">135px</dimen>
+    <dimen name="fragment_preferences_ll_tv1_text_size">14px</dimen>
+    <dimen name="fragment_preferences_ll_tv2_min_width">100px</dimen> <!--??-->
+    <dimen name="fragment_preferences_ll_tv2_text_size">14px</dimen>
+
+
+
+    
+    <dimen name="fragment_preferences_ll2_margin">24px</dimen>
+
+    <dimen name="fragment_preferences_ll2_tv1_text_size">14px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_height">48px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_margin_left">4px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_text_size">14px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_tv_margin_left">4px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_tv_text_size">14px</dimen>
+
+    <dimen name="fragment_preferences_ll2_view1_margin_top">3px</dimen>
+
+    <dimen name="fragment_preferences_ll2_cb1_tv2_min_width">100px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_tv2_text_size">14px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_tv2_iv_width">40px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_tv2_iv_height">40px</dimen>
+    <dimen name="fragment_preferences_ll2_cb1_tv2_iv_padding">4px</dimen>
+
+</resources>

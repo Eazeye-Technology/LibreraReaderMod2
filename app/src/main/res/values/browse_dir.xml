@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="browse_dir_ll_height">56px</dimen>
+    <dimen name="browse_dir_ll_margin">4px</dimen>
+
+    <dimen name="browse_dir_ll_ll_min_height">60dp</dimen> <!--dp-->
+    <dimen name="browse_dir_ll_ll_padding">2dip</dimen> <!--dp-->
+
+    <dimen name="browse_dir_ll_iv1_width">20px</dimen>
+    <dimen name="browse_dir_ll_iv1_height">16px</dimen>
+
+    <dimen name="browse_dir_ll_tv1_padding_left">2dp</dimen> <!--dp-->
+    <dimen name="browse_dir_ll_tv1_padding_right">3dp</dimen> <!--dp-->
+    <dimen name="browse_dir_ll_tv1_text_size">14sp</dimen> <!--dp-->
+
+    <dimen name="browse_dir_ll_iv2_padding_left">4dip</dimen> <!--dp-->
+    <dimen name="browse_dir_ll_iv2_padding_right">4dip</dimen> <!--dp-->
+
+    <dimen name="browse_dir_ll_ll2_margin_left">16px</dimen>
+
+    <dimen name="browse_dir_ll_tv2_text_size">16px</dimen>
+    <dimen name="browse_dir_ll_tv3_text_size">12sp</dimen> <!--dp-->
+    <dimen name="browse_dir_ll_tv4_margin_right">10dip</dimen> <!--dp-->
+    <dimen name="browse_dir_ll_tv4_text_size">14sp</dimen> <!--dp-->
+
+    <dimen name="browse_dir_ll_iv3_width">24px</dimen> <!--dp-->
+    <dimen name="browse_dir_ll_iv3_height">24px</dimen> <!--dp-->
+    <dimen name="browse_dir_ll_iv3_margin_right">4dip</dimen> <!--dp-->
+</resources>

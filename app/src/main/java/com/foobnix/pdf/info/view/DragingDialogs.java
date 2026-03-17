@@ -232,7 +232,6 @@ public class DragingDialogs {
                 wv.getSettings().setJavaScriptEnabled(true);
                 wv.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
-
                 wv.loadUrl(url);
 
                 wv.setFocusable(true);

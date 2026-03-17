@@ -294,11 +294,11 @@
         </com.foobnix.ui2.fast.FastScrollRecyclerView>
         <com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
             android:id="@+id/progressLoading1"
-            app:mlpb_progress_stoke_width="8px"
+            app:mlpb_progress_stoke_width="@dimen/fragment_search2_process_width"
             app:mlpb_progress_color="#000000"
             app:mlpb_enable_circle_background="false"
-            android:layout_width="200px"
-            android:layout_height="200px"
+            android:layout_width="@dimen/fragment_search2_circle_progress_bar_width"
+            android:layout_height="@dimen/fragment_search2_circle_progress_bar_height"
             android:visibility="gone"
             android:layout_centerInParent="true"
             />
