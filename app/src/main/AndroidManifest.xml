@@ -46,7 +46,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:vmSafeMode="false"
-        android:theme="@style/AppTheme.HighContrast"
+        android:theme="@style/AppTheme"
         tools:replace="label, icon, roundIcon"
         android:icon="@mipmap/ic_launcher_bookmanager2"
         android:roundIcon="@mipmap/ic_launcher_bookmanager2_round"

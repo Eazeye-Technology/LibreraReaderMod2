@@ -40,8 +40,10 @@ import java.util.concurrent.Executors;
 
 public class UpgradeUtil {
     public final static boolean USE_UPGRADE = true;//true;
-    public final static String USE_UPGRADE_URL1 = "http://cbcx-sj.jmtxkj.cn";
-    public final static String USE_UPGRADE_URL2 = "/mdown/txkjnote2/";
+//    public final static String USE_UPGRADE_URL1 = "http://cbcx-sj.jmtxkj.cn";
+//    public final static String USE_UPGRADE_URL2 = "/mdown/txkjnote2/";
+    public final static String USE_UPGRADE_URL1 = "https://software.eazeye.com";
+    public final static String USE_UPGRADE_URL2 = "/update.json";
 
 
     private final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 100; //FIXME:???
