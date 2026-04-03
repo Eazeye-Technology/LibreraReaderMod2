@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_dialog_upgrade_text_size1">24px</dimen>
+    <dimen name="activity_dialog_upgrade_text_size2">16px</dimen>
+    <dimen name="activity_dialog_upgrade_text_size3">14px</dimen>
+
+    <dimen name="activity_dialog_upgrade_btn_width_download">166px</dimen>
+    <dimen name="activity_dialog_upgrade_btn_height_download">40px</dimen>
+
+    <dimen name="activity_dialog_upgrade_btn_width_delete1">106px</dimen>
+    <dimen name="activity_dialog_upgrade_btn_height_delete1">40px</dimen>
+    <dimen name="activity_dialog_upgrade_btn_width_delete2">156px</dimen>
+    <dimen name="activity_dialog_upgrade_btn_height_delete2">40px</dimen>
+    <dimen name="activity_dialog_upgrade_btn_margin_left_delete2">12px</dimen>
+
+    <!--312 + 24 * 2-->
+    <dimen name="activity_dialog_upgrade_min_width">360px</dimen>
+    <dimen name="activity_dialog_upgrade_padding">24px</dimen>
+</resources>

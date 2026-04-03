@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -18,7 +19,7 @@ public class ActivityUpgradeDialog {
         return R.style.MyThemeOverlayAlertDialog;
     }
 
-    private final static int WIN_WIDTH = 312 + 24 * 2;//312;
+    //private final static int WIN_WIDTH = 312 + 24 * 2;//312;
 
     private Activity mContext;
     private Runnable mRunnable;
@@ -47,7 +48,7 @@ public class ActivityUpgradeDialog {
             @Override
             public void onShow(DialogInterface dialogInterface) {
                 AlertDialog dialog = (AlertDialog) dialogInterface;
-                Button btnSave = (Button) dialog.findViewById(R.id.btnSave);
+                RelativeLayout btnSave = (RelativeLayout) dialog.findViewById(R.id.btnSave);
 //                Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
                 btnSave.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -73,6 +74,7 @@ public class ActivityUpgradeDialog {
         try {
             Window window = dialog.getWindow();
             if (window != null) {
+                int WIN_WIDTH = mContext.getResources().getDimensionPixelSize(R.dimen.activity_dialog_upgrade_min_width);
                 window.setLayout(WIN_WIDTH, WindowManager.LayoutParams.WRAP_CONTENT);
             }
         } catch (Throwable eee) {
