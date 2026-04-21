@@ -6,23 +6,32 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:layout_margin="24px"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingBottom="24dp"
     >
 
     <LinearLayout
         android:id="@+id/pathContainer"
         android:layout_width="match_parent"
-        android:layout_height="72px"
+        android:layout_height="80dp"
         android:layout_margin="4px"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="visible" >
+        <!--
+        24dp
+        PATHS_SIZE
+        breadcrumb
+        android:layout_height="72px"
+        -->
 <!--
 android:background="@drawable/bg_search_second"
 -->
         <RelativeLayout
             android:layout_width="48px"
             android:layout_height="48px"
+            android:visibility="gone"
             >
             <ImageView
                 android:layout_width="24px"
@@ -39,6 +48,31 @@ android:background="@drawable/bg_search_second"
             android:layout_width="1dip"
             android:layout_height="match_parent"
             android:background="@color/tint_divider" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:layout_marginRight="2px"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:visibility="gone"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/msg_loading"
+                android:textColor="#000"
+                android:textSize="22dp"
+                />
+        </LinearLayout>
+        </HorizontalScrollView>
 
         <HorizontalScrollView
             android:id="@+id/scroller"
@@ -166,12 +200,13 @@ android:tint="@color/tint_white"
 
         <ImageView
             android:id="@+id/onHome"
-            android:layout_width="24px"
-            android:layout_height="24px"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_weight="0"
             android:contentDescription="@string/favorites"
             android:tint="#000"
             android:src="@drawable/glyphicons_21_home"
+            android:layout_gravity="center_vertical"
             />
 <!--
 android:src="@drawable/glyphicons_336_folder"

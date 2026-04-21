@@ -27,4 +27,9 @@
     <dimen name="fragment_preferences_ll2_cb1_tv2_iv_height">40px</dimen>
     <dimen name="fragment_preferences_ll2_cb1_tv2_iv_padding">4px</dimen>
 
+
+
+
+    <!--426px-->
+    <dimen name="main_tabs_drawer_width">480px</dimen>
 </resources>

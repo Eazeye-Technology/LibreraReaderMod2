@@ -92,7 +92,9 @@ import java.util.Map;
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class BrowseFragment2 extends UIFragment<FileMeta> {
     private final static boolean ALWAYS_SHOW_SDCARD = true; //always show sdcard root
-    private final static int PATHS_SIZE = 16; //Folder, File: 16px, fragment_browse2.xml
+    private final static boolean PATHS_USE_DP = true; //22dp font size breadcrumb
+    private final static int PATHS_SIZE = PATHS_USE_DP ? 22 : 16; //Folder, File: 16px, fragment_browse2.xml
+    private final static boolean USE_TEST_COLOR = false;
 
     public static final Pair<Integer, Integer> PAIR = new Pair<Integer, Integer>(R.string.folders, R.drawable.glyphicons_145_folder_open);
     public static final String EXTRA_INIT_PATH = "EXTRA_PATH";
@@ -1091,7 +1093,8 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
             String id = ExtUtils.getExtSDDisplayName(getContext(), displayPath);
 
             TextView slash = new TextView(getActivity());
-            slash.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+            slash.setTextSize(PATHS_USE_DP ? TypedValue.COMPLEX_UNIT_DIP : TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+            if (USE_TEST_COLOR) slash.setBackgroundColor(Color.RED);
             slash.setText(id);
             if (MainTabs2.USE_NEW_UI) {
                 slash.setTextColor(0xff000000); //block
@@ -1108,7 +1111,8 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
             final String[] split = path.split("/");
 
             TextView nameView = new TextView(getActivity());
-            nameView.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+            nameView.setTextSize(PATHS_USE_DP ? TypedValue.COMPLEX_UNIT_DIP : TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+            if (USE_TEST_COLOR) nameView.setBackgroundColor(Color.RED);
             if (split.length == 0) {
                 nameView.setText(name + ": " + Clouds.get().getUserLogin(displayPath) + " ");
             } else {
@@ -1130,8 +1134,9 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
 
             if (split.length == 0 && Clouds.isCloud(displayPath)) {
                 TextView logout = new TextView(getActivity());
-                logout.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+                logout.setTextSize(PATHS_USE_DP ? TypedValue.COMPLEX_UNIT_DIP : TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
                 logout.setText(TxtUtils.underline(getActivity().getString(R.string.logout)));
+                if (USE_TEST_COLOR) logout.setBackgroundColor(Color.RED);
                 if (MainTabs2.USE_NEW_UI) {
                     logout.setTextColor(0xff000000); //block
                 } else {
@@ -1180,7 +1185,8 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
                     continue;
                 }
                 TextView slash = new TextView(getActivity());
-                slash.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+                slash.setTextSize(PATHS_USE_DP ? TypedValue.COMPLEX_UNIT_DIP : TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+                if (USE_TEST_COLOR) slash.setBackgroundColor(Color.RED);
                 if (MainTabs2.USE_NEW_UI) {
                     slash.setText(" > ");
                     slash.setTextColor(0xff000000); //block
@@ -1190,32 +1196,37 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
                 }
 
                 TextView item = new TextView(getActivity());
-                item.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+                item.setTextSize(PATHS_USE_DP ? TypedValue.COMPLEX_UNIT_DIP : TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+                if (USE_TEST_COLOR) item.setBackgroundColor(Color.RED);
                 item.setText(part);
                 item.setGravity(Gravity.CENTER);
                 if (MainTabs2.USE_NEW_UI) {
-                    item.setTextColor(0xff000000); //block
+                    item.setTextColor(USE_TEST_COLOR ? 0xff00ff00 : 0xff000000); //block
                     //item.setTextSize(16); //see upper item.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
                 } else {
                     item.setTextColor(getResources().getColor(R.color.white));
                 }
                 item.setSingleLine();
-                TypedValue outValue = new TypedValue();
-                getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
-                item.setBackgroundResource(outValue.resourceId);
-
-                if (i == split.length - 1) {
-                    item.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-                    if (MainTabs2.USE_NEW_UI) {
-                        item.setMinimumWidth(40);
-                    } else {
-                        item.setMinimumWidth(Dips.DP_40);
-                    }
-                    item.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                if (MainTabs2.USE_NEW_UI) {
+                    //stop white area blocking textview
                 } else {
-                    if (MainTabs2.USE_NEW_UI) {
+                    TypedValue outValue = new TypedValue();
+                    getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+                    item.setBackgroundResource(outValue.resourceId);
+
+                    if (i == split.length - 1) {
                         item.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-                        item.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                        if (MainTabs2.USE_NEW_UI) {
+                            item.setMinimumWidth(40);
+                        } else {
+                            item.setMinimumWidth(Dips.DP_40);
+                        }
+                        item.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                    } else {
+                        if (MainTabs2.USE_NEW_UI) {
+                            item.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                            item.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+                        }
                     }
                 }
 
@@ -1273,14 +1284,14 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
 
                 if (MainTabs2.USE_NEW_UI) {
                     LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
-                            24, 24);
+                            PATHS_USE_DP ? LayoutParams.MATCH_PARENT : 24, PATHS_USE_DP ? LayoutParams.MATCH_PARENT : 24);
 //                    p.leftMargin = 10;
 //                    p.rightMargin = 10;
                     p.gravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
                     slash.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                     paths.addView(slash, p);
                     LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(
-                            LayoutParams.WRAP_CONTENT, 24);
+                            LayoutParams.WRAP_CONTENT,  PATHS_USE_DP ? LayoutParams.MATCH_PARENT : 24);
                     p2.gravity = Gravity.CENTER | Gravity.CENTER_VERTICAL;
                     item.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
                     paths.addView(item, p2);
@@ -1292,7 +1303,8 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
             }
 
             TextView stub = new TextView(getActivity());
-            stub.setTextSize(TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+            stub.setTextSize(PATHS_USE_DP ? TypedValue.COMPLEX_UNIT_DIP : TypedValue.COMPLEX_UNIT_PX, PATHS_SIZE);
+            if (USE_TEST_COLOR) stub.setBackgroundColor(Color.RED);
 
             if (AppState.get().isHideReadBook) {
                 stub.setText(" (" + (itemsCount + readCount) + "/" + readCount + ") ");
