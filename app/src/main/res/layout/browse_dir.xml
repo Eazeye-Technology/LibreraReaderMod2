@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/browse_dir_ll_height"
-    android:layout_margin="@dimen/browse_dir_ll_margin"
-    android:background="@drawable/browse_item_list_outline"
+    android:layout_height="56dp"
+    android:layout_margin="8dp"
+    card_view:strokeWidth="1dp"
+    card_view:strokeColor="@color/md_theme_outlineVariant_highContrast"
+    card_view:cardElevation="0dp"
     >
 <!--
 android:elevation="@dimen/dv"
@@ -19,7 +21,8 @@ card_view:cardCornerRadius="@dimen/radius"
         android:minHeight="@dimen/browse_dir_ll_ll_min_height"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/browse_dir_ll_ll_padding"
+        android:padding="16dp"
+        android:background="@color/md_theme_surface_highContrast"
         >
 <!--
 android:background="#FCFCFC"
@@ -31,44 +34,42 @@ android:background="?android:attr/selectableItemBackground"
 
            <ImageView
                android:id="@+id/image1"
-               android:layout_width="@dimen/browse_dir_ll_iv1_width"
-               android:layout_height="@dimen/browse_dir_ll_iv1_height"
-
-               android:layout_weight="0"
-               android:src="@drawable/ic_my_filemanager_folder_002" />
+               android:layout_width="24dp"
+               android:layout_height="24dp"
+               android:src="@drawable/ic_my_filemanager_folder_002"
+               android:tint="@color/md_theme_onSurfaceVariant_highContrast"/>
 <!--@drawable/glyphicons_145_folder_open-->
 
             <TextView
                 android:id="@+id/count"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:text="123"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:paddingLeft="@dimen/browse_dir_ll_tv1_padding_left"
-                android:paddingRight="@dimen/browse_dir_ll_tv1_padding_right"
-                android:background="@color/foobnix_light_blue_alfa"
+                android:textColor="@color/md_theme_onSecondaryContainer_highContrast"
+                android:paddingStart="@dimen/browse_dir_ll_tv1_padding_left"
+                android:paddingEnd="@dimen/browse_dir_ll_tv1_padding_right"
+                android:background="@color/md_theme_secondaryContainer_highContrast"
                 android:visibility="visible"
-                android:textSize="@dimen/browse_dir_ll_tv1_text_size" />
+                style="@style/TextAppearance.Material3.LabelSmall" />
 
            <ImageView
                android:id="@+id/imageCloud"
                android:visibility="gone"
                android:layout_alignParentBottom="true"
-               android:layout_alignParentRight="true"
+               android:layout_alignParentEnd="true"
                android:layout_width="0dp"
                android:layout_height="0dp"
-               android:layout_weight="0"
-               android:paddingLeft="@dimen/browse_dir_ll_iv2_padding_left"
-               android:paddingRight="@dimen/browse_dir_ll_iv2_padding_right"
+               android:paddingStart="@dimen/browse_dir_ll_iv2_padding_left"
+               android:paddingEnd="@dimen/browse_dir_ll_iv2_padding_right"
                android:src="@drawable/glyphicons_761_sync" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/browse_dir_ll_ll2_margin_left"
+            android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical" >
@@ -81,9 +82,9 @@ android:background="?android:attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="Page"
-                android:textSize="@dimen/browse_dir_ll_tv2_text_size"
-                android:textStyle="bold" />
-<!--16sp-->
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/md_theme_onSurface_highContrast"/>
+
             <TextView
                 android:id="@+id/text2"
                 android:layout_width="match_parent"
@@ -92,8 +93,7 @@ android:background="?android:attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="/path/"
-                android:textSize="@dimen/browse_dir_ll_tv3_text_size"
-                android:textStyle="normal" />
+                style="@style/TextAppearance.Material3.BodySmall" />
         </LinearLayout>
 <!--wrap_content-->
         <TextView
@@ -101,18 +101,17 @@ android:background="?android:attr/selectableItemBackground"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/play"
-            android:layout_marginRight="@dimen/browse_dir_ll_tv4_margin_right"
-            android:textSize="@dimen/browse_dir_ll_tv4_text_size" />
+            android:layout_marginEnd="16dp"
+            style="@style/TextAppearance.Material3.BodyLarge" />
 <!--wrap_content-->
         <ImageView
             android:id="@+id/starIcon"
-            android:layout_width="@dimen/browse_dir_ll_iv3_width"
-            android:layout_height="@dimen/browse_dir_ll_iv3_height"
-            android:layout_marginRight="@dimen/browse_dir_ll_iv3_margin_right"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_weight="0"
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/glyphicons_50_star_empty"
-            card_view:tint="@color/tint_gray" />
+            card_view:tint="@color/md_theme_onSurfaceVariant_highContrast" />
     </LinearLayout>
 
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>
