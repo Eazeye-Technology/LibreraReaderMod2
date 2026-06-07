@@ -1,6 +1,6 @@
 //===========================================================================
 // Summary:
-//		字符串工具类。
+//		String Util Class
 // Usage:
 //		Null
 // Remarks:
@@ -27,19 +27,10 @@ public class StringUtil {
 		return instance;
 	}
 
-	/**
-	 * 是否是无效的字符
-	 * @return
-	 */
 	public boolean isInvalidStr(String str) {
 		return str == null || str.trim().length() == 0;
 	}
 
-	/**
-	   * 顺序的拼接字符串，使用StringBuffer，线程安全
-	   * @param args
-	   * @return
-	   */
 	public String appendBuffer(String...args) {
 	     StringBuffer buffer = new StringBuffer();
 	     for (String s: args) {
@@ -49,11 +40,6 @@ public class StringUtil {
 	     return buffer.toString();
 	}
 
-	   /**
-	   * 顺序的拼接字符串，使用StringBuilder，非线程安全
-	   * @param args
-	   * @return
-	   */
 	public String appendBuild(String... args) {
 	     StringBuilder builder = new StringBuilder();
 	     for (String s: args) {
@@ -70,12 +56,7 @@ public class StringUtil {
 	    	 return removeIllegalCharacters(str);
 	     }  
 	}
-	
-	 /**
-	   * 顺序的拼接字符串，使用StringBuilder，非线程安全
-	   * @param args
-	   * @return
-	   */
+
 	public String toValid(String str) {
 	     if (isInvalidStr(str)) {
 	    	 return "";
@@ -83,12 +64,7 @@ public class StringUtil {
 	    	 return str;
 	     }  
 	}
-	
-	/**
-	 * 对非法字符进行转义，目前只处理了单引号
-	 * @param str
-	 * @return
-	 */
+
 	public String removeIllegalCharacters(String str) {
 		if (str != null && str.length() != 0) {
 			str = str.replace("'", "''");

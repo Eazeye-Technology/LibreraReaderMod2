@@ -206,8 +206,8 @@ public abstract class DocumentController {
     }
 
     public static void setNavBarTintColor(Activity a) {
-        //不修改底部导航栏颜色
-        //search: 修改安卓底部颜色
+        //don't modify bottom navigation bar color
+        //search: modify android bottom color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            a.getWindow().setNavigationBarColor(TintUtil.color);
             a.getWindow().setNavigationBarColor(Color.WHITE);

@@ -821,7 +821,7 @@ public class DragLinearLayout extends LinearLayout {
         return bitmap;
     }
 
-    // ------------------------------扩展---------------------------------------
+    // ------------------------------extension---------------------------------------
 
     private boolean mDraggable = true;
     private boolean mOverScrollable = true;
@@ -858,7 +858,7 @@ public class DragLinearLayout extends LinearLayout {
     private LongClickDragListener mLongClickDragListener = new LongClickDragListener();
 
     /**
-     * @author chensuilun 长按进入编辑
+     * @author chensuilun long press enter edit mode
      */
     public class LongClickDragListener implements OnLongClickListener {
 

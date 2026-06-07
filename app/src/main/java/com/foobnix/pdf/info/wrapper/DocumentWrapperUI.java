@@ -741,7 +741,7 @@ public class DocumentWrapperUI {
         }
 
         if (MainTabs2.USE_NEW_UI) {
-            //editTop2.setVisibility(View.GONE); //PDF批注
+            //editTop2.setVisibility(View.GONE); //PDF Annotations
 
             moveLeft.setVisibility(View.GONE);
             moveRight.setVisibility(View.GONE);
@@ -1207,7 +1207,7 @@ public class DocumentWrapperUI {
         nextScreenType.setOnClickListener(onNextType);
 
         if (MainTabs2.USE_NEW_UI) {
-            nextTypeBootom.setVisibility(View.GONE); //隐藏缩放比例
+            nextTypeBootom.setVisibility(View.GONE); //hide scale info
         }
 
         onDocDontext = (ImageView) a.findViewById(R.id.onDocDontext);

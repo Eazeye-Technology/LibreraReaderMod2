@@ -5229,7 +5229,7 @@ public class DragingDialogs {
         return dialog;
     }
 
-    //FIXME: 阅读器内的设置对话框
+    //FIXME: reader inner setting dialog
     public static DragingPopup preferences(final FrameLayout anchor, final DocumentController controller, final Runnable onRefresh, final Runnable updateUIRefresh) {
         final int initHash = Objects.appHash();
 
@@ -5252,7 +5252,7 @@ public class DragingDialogs {
 
             @Override
             public View getContentView(final LayoutInflater inflater) {
-                //FIXME:阅读器内的设置对话框
+                //FIXME:reader inner setting dialog
                 View inflate = inflater.inflate(R.layout.dialog_prefs, null, false);
 
                 // TOP panel start

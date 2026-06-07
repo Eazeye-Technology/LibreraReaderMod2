@@ -39,9 +39,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class UpgradeUtil {
-    public final static boolean USE_UPGRADE = true;//true;
-//    public final static String USE_UPGRADE_URL1 = "http://cbcx-sj.jmtxkj.cn";
-//    public final static String USE_UPGRADE_URL2 = "/mdown/txkjnote2/";
+    public final static boolean USE_UPGRADE = true;
     public final static String USE_UPGRADE_URL1 = "https://software.eazeye.com";
     public final static String USE_UPGRADE_URL2 = "/update.json";
 
@@ -103,14 +101,12 @@ public class UpgradeUtil {
 
     //https://blog.csdn.net/changmu175/article/details/78906829
     private File m_apk;
-    //安装应用的流程
     private void installProcess() {
         checkPermissioin2();
         boolean haveInstallPermission;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //先获取是否有安装未知来源应用的权限
             haveInstallPermission = mAct.getPackageManager().canRequestPackageInstalls();
-            if (!haveInstallPermission) {//没有权限
+            if (!haveInstallPermission) {
                 if (true) {
                     AlertDialog dialog2 = new AlertDialog.Builder(mAct)
                             .setIcon(R.mipmap.ic_launcher_bookmanager2)
@@ -136,7 +132,6 @@ public class UpgradeUtil {
                 installApk(m_apk);
             }
         } else {
-            //有权限，开始安装应用程序
             installApk(m_apk);
         }
     }
@@ -145,7 +140,6 @@ public class UpgradeUtil {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void startInstallPermissionSettingActivity() {
         Uri packageURI = Uri.parse("package:" + mAct.getPackageName());
-        //注意这个是8.0新API
         Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
         mAct.startActivityForResult(intent, REQUEST_CODE_MANAGE_UNKNOWN);
     }
@@ -155,19 +149,18 @@ public class UpgradeUtil {
 //		super.onActivityResult(requestCode, resultCode, data);
     protected boolean onActivityResult2(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_MANAGE_UNKNOWN) {
-            installProcess();//再次执行安装流程，包含权限判等
+            installProcess();
             return true;
         }
         return  false;
     }
 
-    //安装应用，但必须有权限才能执行
     private void installApk(File apk) {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                 intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
-            } else {//Android7.0之后获取uri要用contentProvider
+            } else {
                 Uri uri = UriUtil.fromFile(mAct, apk);
                 intent.setDataAndType(uri, "application/vnd.android.package-archive");
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -177,7 +170,7 @@ public class UpgradeUtil {
             mAct.startActivity(intent);
         } catch (Throwable e) {
             e.printStackTrace();
-            Toast.makeText(mAct, "安装apk失败", Toast.LENGTH_LONG).show();
+            Toast.makeText(mAct, "Install apk failed", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -201,13 +194,13 @@ public class UpgradeUtil {
         try {
             String sdPath = "/mnt/sdcard";
             File sdDir = null;
-            boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);//判断sd卡是否存在
+            boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
             if (sdCardExist)  {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //Build.VERSION_CODES.Q) {
                     //https://www.jianshu.com/p/f53294992596
-                    sdDir = mAct.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);//获取跟目录
+                    sdDir = mAct.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
                 } else {
-                    sdDir = Environment.getExternalStorageDirectory();//获取跟目录
+                    sdDir = Environment.getExternalStorageDirectory();
                 }
                 sdPath = sdDir.toString();
             }
@@ -293,7 +286,6 @@ public class UpgradeUtil {
                                                 if (localPackageName != null && packageName != null &&
                                                         localPackageName.equals(packageName)) {
                                                     if (status == 1) {
-                                                        //保留最大版本号
                                                         if (D) {
                                                             Log.e(TAG, "LoginActivity.CheckVersionTask success serverVersion == " + serverVersion);
                                                             Log.e(TAG, "LoginActivity.CheckVersionTask success vint == " + vint);
@@ -394,7 +386,6 @@ public class UpgradeUtil {
                         @Override
                         public void run() {
                             String url = serverVersionUrl;
-                            //浏览器打开，如果有pathPage，优先用这个
                             if (serverPathPage != null && serverPathPage.length() > 0) {
                                 url = serverPathPage;
                             }
@@ -439,7 +430,7 @@ public class UpgradeUtil {
                         public void onShow(final DialogInterface arg0) {
                             String strNote = "";
                             if (serverNote != null && serverNote.length() > 0) {
-                                strNote = "\n" + "Update Notes：" + serverNote;
+                                strNote = "\n" + "Update Notes: " + serverNote;
                             }
                             if (serverForceUpdate != null && serverForceUpdate.equals("1")) {
                                 dialog3.setMessage("A new version is discovered, force an immediate update, otherwise it cannot be used.\n" +
@@ -459,7 +450,6 @@ public class UpgradeUtil {
                                 @Override
                                 public void onClick(View arg0) {
                                     String url = serverVersionUrl;
-                                    //浏览器打开，如果有pathPage，优先用这个
                                     if (serverPathPage != null && serverPathPage.length() > 0) {
                                         url = serverPathPage;
                                     }
@@ -492,13 +482,10 @@ public class UpgradeUtil {
                                 @Override
                                 public void onClick(View view) {
                                     b.setEnabled(false);
-                                    //		                	String appName = getResources().getString(R.string.mtmobile__app_name);
-                                    //							File updateDir = new File(Environment.getExternalStorageDirectory() + "/mtmobile/update");
-                                    //							String updateFilePath = updateDir + "/" + appName + ".apk";
                                     mUpdatePath = getUpdatePath();
                                     if (mUpdatePath == null || mUpdatePath.length() == 0) {
                                         Toast.makeText(mAct,
-                                                "下The download directory does not exist. Please restart the device and try again, or update it using a browser", Toast.LENGTH_SHORT).show();
+                                                "The download directory does not exist. Please restart the device and try again, or update it using a browser", Toast.LENGTH_SHORT).show();
                                     } else {
                                         File updateParent = new File(mUpdatePath);
                                         updateParent.mkdirs();
@@ -516,22 +503,15 @@ public class UpgradeUtil {
                                                 String updateFilePath = updateFileObj.getAbsolutePath();
                                                 if (updateFileObj.isFile() && updateFileObj.canRead()) {
                                                     if (false) {
-                                                        //文件已存在，不需要再下载
-                                                        //Uri uri = Uri.fromFile(updateFileObj); //
                                                         Uri uri = UriUtil.fromFile(mAct, updateFileObj);
                                                         Intent intent2 = new Intent(Intent.ACTION_VIEW);
                                                         intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                                         intent2.setDataAndType(uri, "application/vnd.android.package-archive");
                                                         UriUtil.prepare(intent2);
-                                                        //dismissDialog(DIALOG_UPGRADE);
                                                         try {
-                                                            //                                                        if (serverForceUpdate != null && serverForceUpdate.equals("1")) {
-                                                            //                                                            finish();
-                                                            //                                                        } else {
                                                             if (arg0 != null) {
                                                                 arg0.dismiss();
                                                             }
-                                                            //                                                        }
                                                         } catch (Throwable e) {
                                                             e.printStackTrace();
                                                         }
@@ -545,7 +525,6 @@ public class UpgradeUtil {
                                                         installProcess();
                                                     }
                                                 } else {
-                                                    //20151208：偷懒，删除更新目录下的所有文件
                                                     String updatePath = getUpdatePath();
                                                     FileUtil.deleteFolder(updatePath);
 
@@ -622,19 +601,15 @@ public class UpgradeUtil {
         public void run() {
             if (dialog3 != null) {
                 if (m_Progess < 100 && m_Status == UPGRADE_STATUS_OK) {
-                    dialog3.setMessage("下载中：" + m_Progess + "%");
+                    dialog3.setMessage("Downloading: " + m_Progess + "%");
                 } else if (m_Status == UPGRADE_STATUS_ERROR) {
-                    dialog3.setMessage("下载失败，请检查网络后重试\n(url=" + serverVersionUrl + ")");
+                    dialog3.setMessage("Download failed, please check network and retry\n(url=" + serverVersionUrl + ")");
                 } else {
-//                    if (serverForceUpdate != null && serverForceUpdate.equals("1")) {
-//                        finish();
-//                    } else {
                     try {
                         dialog3.dismiss();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-//                    }
                 }
             }
         }

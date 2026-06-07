@@ -14,7 +14,6 @@ public class UriUtil {
         return FileProvider.getUriForFile(context.getApplicationContext(), context.getPackageName()+".fileprovider", mediaFile);
     }
 
-    //如果使用了上面的方法，必须确保后面知道用这个prepare方法
     public static void prepare(Intent intent) {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
     }

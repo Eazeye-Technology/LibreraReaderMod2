@@ -42,7 +42,7 @@ public class AppSP {
     public String syncRootID;
 
     //
-    //FIXME:这里需要和ContentBrowser保持一致，所以必须固定死
+    //FIXME:same as ContentBrowser, fixed
     public String currentProfile = "Release"; //AppsConfig.IS_LOG ? "BETA" : "Librera";
     public String rootPath = new File(Environment.getExternalStorageDirectory(), "txkjreader"/*"Librera"*/).toString();
 
