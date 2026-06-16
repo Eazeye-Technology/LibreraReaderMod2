@@ -198,18 +198,18 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
             }
         }
     };
-    Runnable clearFlags = new Runnable() {
-
-        @Override
-        public void run() {
-            try {
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                LOG.d("FLAG clearFlags", "FLAG_KEEP_SCREEN_ON", "clear");
-            } catch (Exception e) {
-                LOG.e(e);
-            }
-        }
-    };
+//    Runnable clearFlags = new Runnable() { //memory leak
+//
+//        @Override
+//        public void run() {
+//            try {
+//                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//                LOG.d("FLAG clearFlags", "FLAG_KEEP_SCREEN_ON", "clear");
+//            } catch (Exception e) {
+//                LOG.e(e);
+//            }
+//        }
+//    };
     UpdatableFragmentPagerAdapter pagerAdapter;
     Runnable doShowHideWrapperControllsRunnable = new Runnable() {
 
@@ -2611,8 +2611,8 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
             if (AppState.get().inactivityTime > 0) {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 LOG.d("FLAG addFlags", "FLAG_KEEP_SCREEN_ON", "add", AppState.get().inactivityTime);
-                handler.removeCallbacks(clearFlags);
-                handler.postDelayed(clearFlags, TimeUnit.MINUTES.toMillis(AppState.get().inactivityTime));
+//                handler.removeCallbacks(clearFlags);  //memory leak
+//                handler.postDelayed(clearFlags, TimeUnit.MINUTES.toMillis(AppState.get().inactivityTime));
             }
 
             LOG.d("onPageSelected", pos);

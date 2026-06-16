@@ -1974,4 +1974,7 @@ public class ExtUtils {
         return true;
     }
 
+    public static void setContext(Context c) {
+        ExtUtils.context = c;
+    }
 }

@@ -14,8 +14,8 @@ android {
         targetSdk 36
 //        versionCode 1
 //        versionName "1.0"
-        versionCode 16070//5246
-        versionName "1.60.70" //"""8.8.76"
+        versionCode 16072//5246
+        versionName "1.60.72" //"""8.8.76"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -148,5 +148,13 @@ Need:
 
     implementation 'com.github.albfernandez:juniversalchardet:2.5.0'
 
-    implementation 'com.github.axet:lame:1.0.9' 
+    implementation 'com.github.axet:lame:1.0.9'
+
+    implementation 'com.google.guava:guava:31.0.1-jre'
+
+    //https://www.acra.ch/docs/Setup
+    //ACRA
+    implementation("ch.acra:acra-http:5.13.1")
+    implementation("ch.acra:acra-dialog:5.13.1")
+    implementation("ch.acra:acra-toast:5.13.1")
 }

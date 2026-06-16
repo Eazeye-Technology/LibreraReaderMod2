@@ -21,6 +21,14 @@ import com.foobnix.pdf.info.IMG;
 import com.foobnix.pdf.info.Prefs;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.tts.TTSNotification;
+
+import org.acra.ACRA;
+import org.acra.BuildConfig;
+import org.acra.config.CoreConfigurationBuilder;
+import org.acra.config.DialogConfigurationBuilder;
+import org.acra.config.HttpSenderConfigurationBuilder;
+import org.acra.data.StringFormat;
+import org.acra.sender.HttpSender;
 //import com.google.android.gms.ads.MobileAds;
 //import com.google.android.gms.ads.RequestConfiguration;
 //import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -146,5 +154,41 @@ public class LibreraApp extends MultiDexApplication {
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         LOG.d("onTrimMemory", level);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        // The following line triggers the initialization of ACRA
+//        CoreConfigurationBuilder builder = new CoreConfigurationBuilder(this);
+//        builder.setBuildConfigClass(BuildConfig.class).setReportFormat(StringFormat.JSON);
+//        builder.getPluginConfigurationBuilder(HttpSenderConfigurationBuilder.class)
+//                .setUri("http://192.168.1.118:8080/AcraServiceDemo/CrashApiAction")
+//                .setHttpMethod(HttpSender.Method.POST)
+//                .setEnabled(true);
+//        ACRA.init(this, builder);
+
+        //need android:usesCleartextTraffic="true"
+        String URL = "http://43.106.83.57:3456/report";
+        ACRA.init(this, new CoreConfigurationBuilder()
+                        //core configuration:
+                        .withBuildConfigClass(BuildConfig.class)
+                        .withReportFormat(StringFormat.JSON)
+                        .withPluginConfigurations(
+                                //each plugin you chose above can be configured with its builder like this:
+//                        new ToastConfigurationBuilder()
+//                                .withText(getString(R.string.acra_toast_text))
+//                                .build()
+                                new HttpSenderConfigurationBuilder()
+                                        .withUri(URL)
+                                        .withHttpMethod(HttpSender.Method.POST)
+                                        .withEnabled(true)
+                                        .build(),
+                                new DialogConfigurationBuilder()
+                                        .withText("It looks like the application has crashed. Tap OK to send a report.")// to " + URL + " .")
+                                        .build()
+                        )
+        );
     }
 }

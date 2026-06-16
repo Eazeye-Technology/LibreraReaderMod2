@@ -49,6 +49,7 @@ import com.foobnix.pdf.info.ADS;
 import com.foobnix.pdf.info.Android6;
 import com.foobnix.pdf.info.AppsConfig;
 import com.foobnix.pdf.info.Clouds;
+import com.foobnix.pdf.info.ExtUtils;
 import com.foobnix.pdf.info.IMG;
 import com.foobnix.pdf.info.PasswordDialog;
 import com.txkj.readingapp.R;
@@ -129,7 +130,7 @@ public class MainTabs2 extends AdsFragmentActivity {
 
             LOG.d("onPageSelected", uiFragment);
             Apps.accessibilityText(MainTabs2.this, adapter.getPageTitle(pos).toString() + " " + getString(R.string.tab_selected));
-
+//            throw new RuntimeException("not implementation");
         }
 
         @Override
@@ -847,6 +848,7 @@ public class MainTabs2 extends AdsFragmentActivity {
 
     @Override
     public void onDestroy() {
+        ExtUtils.setContext(null);
         GFile.timeout = 0;
         GFile.runSyncService(this);
 
