@@ -583,6 +583,9 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
             if (AppDB.get().getCount() == 0) {
                 seachAll();
             } else {
+                if (MainTabs2.USE_NEW_UI) {
+                    seachAll(); //FIXME:added, 2026/06/29
+                }
                 checkForDeleteBooks();
                 searchAndOrderAsync();
                 progressLoading1.setVisibility(View.VISIBLE);

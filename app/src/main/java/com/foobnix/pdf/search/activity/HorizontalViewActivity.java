@@ -1525,12 +1525,16 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         } else {
             lockModelImage.setImageResource(R.drawable.glyphicons_218_lock_open);
         }
+        //FIXME:added, 20260629, make button black
+        if (MainTabs2.USE_NEW_UI) {
+            TintUtil.setTintImageWithAlpha((ImageView) lockModelImage, 0xFF000000, 255);
+        }
+
 //        if (AppState.get().l) {
 //            TintUtil.setTintImageWithAlpha(moveCenter, Color.LTGRAY);
 //        } else {
 //            TintUtil.setTintImageWithAlpha(moveCenter, Color.WHITE);
 //        }
-
     }
 
     @Override

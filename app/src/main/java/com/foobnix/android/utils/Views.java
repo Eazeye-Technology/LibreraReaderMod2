@@ -28,6 +28,7 @@ import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 
 import com.foobnix.pdf.info.AppsConfig;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 
@@ -89,7 +90,12 @@ public class Views {
         textView.setFocusable(true);
         textView.setFocusableInTouchMode(true);
 
-        TintUtil.setDrawableTint(anchor.getDrawable(), Color.YELLOW);
+        //FIXME: added, make right bottom button black
+        if (MainTabs2.USE_NEW_UI) {
+            //skip
+        } else {
+            TintUtil.setDrawableTint(anchor.getDrawable(), Color.YELLOW);
+        }
 
         // TintUtil.setDrawableTint(anchor.getDrawable(), Color.WHITE);
 
