@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -298,6 +299,16 @@ public class MainTabs2 extends AdsFragmentActivity {
 
     public UpgradeUtil upgradeUtil;
 
+    //FIXME:added
+    private void setupPadding() {
+        if (true) {
+            //root_layout
+            //LinearLayout rootLayout = findViewById(R.id.parentParent);
+            SlidingTabLayout rootLayout = findViewById(R.id.slidingTabs1);
+            rootLayout.setPadding(0, 50, 0, 0);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -341,6 +352,7 @@ public class MainTabs2 extends AdsFragmentActivity {
         DocumentController.doContextMenu(this);
 
         setContentView(R.layout.main_tabs);
+        setupPadding();
 
         if (UpgradeUtil.USE_UPGRADE) {
             upgradeUtil = new UpgradeUtil(this);

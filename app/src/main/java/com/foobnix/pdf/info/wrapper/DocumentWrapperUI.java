@@ -1998,18 +1998,22 @@ public class DocumentWrapperUI {
     }
 
     public void showHelp() {
-        if (AppSP.get().isFirstTimeVertical) {
-            handler.postDelayed(new Runnable() {
+        if (MainTabs2.USE_NEW_UI) {
+            //skip
+        } else {
+            if (AppSP.get().isFirstTimeVertical) {
+                handler.postDelayed(new Runnable() {
 
-                @Override
-                public void run() {
-                    AppSP.get().isFirstTimeVertical = false;
-                    AppState.get().isEditMode = true;
-                    hideShow();
-                    Views.showHelpToast(lockUnlock);
+                    @Override
+                    public void run() {
+                        AppSP.get().isFirstTimeVertical = false;
+                        AppState.get().isEditMode = true;
+                        hideShow();
+                        Views.showHelpToast(lockUnlock);
 
-                }
-            }, 1000);
+                    }
+                }, 1000);
+            }
         }
     }
 

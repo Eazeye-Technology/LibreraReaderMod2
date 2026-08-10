@@ -1938,18 +1938,22 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
     }
 
     public void showHelp() {
-        if (AppSP.get().isFirstTimeHorizontal) {
-            handler.postDelayed(new Runnable() {
+        if (MainTabs2.USE_NEW_UI) {
+            //skip
+        } else {
+            if (AppSP.get().isFirstTimeHorizontal) {
+                handler.postDelayed(new Runnable() {
 
-                @Override
-                public void run() {
-                    AppSP.get().isFirstTimeHorizontal = false;
-                    AppState.get().isEditMode = true;
-                    hideShow();
-                    Views.showHelpToast(lockModelImage);
+                    @Override
+                    public void run() {
+                        AppSP.get().isFirstTimeHorizontal = false;
+                        AppState.get().isEditMode = true;
+                        hideShow();
+                        Views.showHelpToast(lockModelImage);
 
-                }
-            }, 1000);
+                    }
+                }, 1000);
+            }
         }
 
     }
