@@ -34,6 +34,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import com.cloudrail.si.CloudRail;
+import com.dseink.DualScreenConstant;
 import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.LOG;
@@ -299,16 +300,6 @@ public class MainTabs2 extends AdsFragmentActivity {
 
     public UpgradeUtil upgradeUtil;
 
-    //FIXME:added
-    private void setupPadding() {
-        if (true) {
-            //root_layout
-            //LinearLayout rootLayout = findViewById(R.id.parentParent);
-            SlidingTabLayout rootLayout = findViewById(R.id.slidingTabs1);
-            rootLayout.setPadding(0, 50, 0, 0);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -322,6 +313,8 @@ public class MainTabs2 extends AdsFragmentActivity {
 //            setTheme(R.style.StyledIndicatorsBlack);
 //        }
         super.onCreate(savedInstanceState);
+
+        Dips.initActivity(this);
 
         if (!Android6.canWrite(this)) {
             Android6.checkPermissions(this, true);
@@ -352,7 +345,7 @@ public class MainTabs2 extends AdsFragmentActivity {
         DocumentController.doContextMenu(this);
 
         setContentView(R.layout.main_tabs);
-        setupPadding();
+        DualScreenConstant.setupPadding(this);
 
         if (UpgradeUtil.USE_UPGRADE) {
             upgradeUtil = new UpgradeUtil(this);

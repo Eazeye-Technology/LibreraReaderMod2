@@ -13,6 +13,7 @@ import com.foobnix.android.utils.Vibro;
 import com.foobnix.model.AppSP;
 import com.foobnix.model.AppState;
 import com.foobnix.pdf.info.ExtUtils;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.model.AnnotationType;
 import com.foobnix.pdf.info.view.BrightnessHelper;
@@ -297,6 +298,10 @@ public class AdvGuestureDetector extends SimpleOnGestureListener implements IMul
 
     @Override
     public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
+        if (MainTabs2.USE_NEW_UI)  {
+            //disable scroll
+            return true;
+        }
         if (docCtrl.checkReadingTimer()) {
             return true;
         }

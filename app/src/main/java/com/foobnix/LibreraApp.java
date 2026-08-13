@@ -69,6 +69,7 @@ public class LibreraApp extends MultiDexApplication {
                     .build());
         }
         super.onCreate();
+        onCreate_EspeakApp();
 
         //AppsConfig.loadEngine(this);
 
@@ -307,5 +308,28 @@ public class LibreraApp extends MultiDexApplication {
         } catch (Throwable eee) {
             eee.printStackTrace();
         }
+    }
+
+
+
+
+
+
+
+    private static Context storageContext;
+
+    public void onCreate_EspeakApp() {
+        //super.onCreate();
+        Context appContext = getApplicationContext();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            LibreraApp.storageContext = appContext.createDeviceProtectedStorageContext();
+        }
+        else {
+            LibreraApp.storageContext = appContext;
+        }
+    }
+
+    public static Context getStorageContext() {
+        return LibreraApp.storageContext;
     }
 }

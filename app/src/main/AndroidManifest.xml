@@ -386,6 +386,91 @@ android:theme="@style/Theme.LibreraReaderMod2"
             android:name="com.upgradetool.upgrade.UpdateService"
             android:label="UpdateService"
             android:process=":update" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <service
+            android:name="com.reecedunn.espeak.TtsService"
+            android:label="@string/app_name"
+            android:directBootAware="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_TTS_SERVICE"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.TTS_SERVICE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.speech.tts"
+                android:resource="@xml/tts_engine" />
+        </service>
+
+        <activity
+            android:name="com.reecedunn.espeak.DownloadVoiceData"
+            android:theme="@android:style/Theme.Dialog"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.speech.tts.engine.INSTALL_TTS_DATA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.reecedunn.espeak.CheckVoiceData"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.speech.tts.engine.CHECK_TTS_DATA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.reecedunn.espeak.GetSampleText"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.speech.tts.engine.GET_SAMPLE_TEXT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.reecedunn.espeak.TtsSettingsActivity"
+            android:label="@string/tts_settings_label"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.speech.tts.engine.CONFIGURE_ENGINE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.reecedunn.espeak.eSpeakActivity"
+            android:label="@string/app_name"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
     </application>
 
 </manifest>

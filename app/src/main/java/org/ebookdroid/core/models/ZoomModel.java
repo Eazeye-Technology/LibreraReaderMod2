@@ -62,7 +62,7 @@ public class ZoomModel extends ListenerProxy {
     }
 
     public float getZoom() {
-        return currentZoom;
+        return currentZoom; //FIXME:breakpoint here
     }
 
     public void commit() {

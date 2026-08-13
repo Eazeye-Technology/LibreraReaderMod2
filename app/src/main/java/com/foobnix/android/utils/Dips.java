@@ -4,6 +4,7 @@
 package com.foobnix.android.utils;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -13,6 +14,9 @@ import android.provider.Settings;
 import android.view.Display;
 import android.view.Surface;
 import android.view.WindowManager;
+
+import com.dseink.DualScreenConstant;
+import com.dseink.ReflectUtils;
 
 import java.util.Locale;
 
@@ -57,6 +61,10 @@ public class Dips {
         Dips.context = context;
         wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     }
+    static Activity activity = null;
+    public static void initActivity(Activity activity) {
+        Dips.activity = activity;
+    }
 
     public static int spToPx(final int dp) {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().scaledDensity);
@@ -72,16 +80,38 @@ public class Dips {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static int screenWidth() {
+        int screenNum = 1;
+        if (getCurrentScreenPos() != DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+            screenNum = 2;
+        }
         if (Build.VERSION.SDK_INT >= 17) {
             try {
                 Point size = new Point();
                 wm.getDefaultDisplay().getRealSize(size);
-                return size.x;
+                return size.x / screenNum;
             } catch (Exception e) {
-                return Resources.getSystem().getDisplayMetrics().widthPixels;
+                return Resources.getSystem().getDisplayMetrics().widthPixels / screenNum;
             }
         } else {
-            return Resources.getSystem().getDisplayMetrics().widthPixels;
+            return Resources.getSystem().getDisplayMetrics().widthPixels / screenNum;
+        }
+    }
+
+    private static int getCurrentScreenPos() {
+        try {
+            Activity act = (Activity) activity;
+            //return act.getCurrentScreenPanel();
+            Integer result = null;
+            try {
+                result = ReflectUtils.reflect(act).method("getCurrentScreenPanel").get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result != null ? result.intValue() :
+                    DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH;
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH;
         }
     }
 

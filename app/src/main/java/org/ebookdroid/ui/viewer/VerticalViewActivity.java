@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import com.dseink.DualScreenConstant;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.Intents;
 import com.foobnix.android.utils.Keyboards;
@@ -135,12 +136,16 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
         }
         super.onCreate(savedInstanceState);
 
+        Dips.initActivity(this);
+
         //FirebaseAnalytics.getInstance(this);
 
         if (PasswordDialog.isNeedPasswordDialog(this)) {
             return;
         }
         setContentView(R.layout.activity_vertical_view);
+        DualScreenConstant.setupPadding2(this);
+
 
         if (!Android6.canWrite(this)) {
             Android6.checkPermissions(this, true);

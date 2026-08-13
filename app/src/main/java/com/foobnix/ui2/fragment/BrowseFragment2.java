@@ -1375,7 +1375,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
 
         if (MainTabs2.MOD_VERSION) {
             //FIXME:Folder tab page
-            onClose.setVisibility(View.GONE);
+//            onClose2.setVisibility(View.GONE); //FIXME:need to remove
             openAsBook.setVisibility(View.GONE);
             openAsbookImage.setVisibility(View.GONE);
 
@@ -1395,8 +1395,8 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
             createFolder.setVisibility(View.GONE);
             pasteFrom.setVisibility(View.GONE);
             //pathContainer.setVisibility(View.GONE);
-            onClose.setVisibility(View.GONE);
-            onAction.setVisibility(View.GONE);
+//            onClose.setVisibility(View.GONE); //FIXME:need to remove
+//            onAction.setVisibility(View.GONE); //FIXME:need to remove
             openAsBook.setVisibility(View.GONE);
             onHome.setVisibility(View.GONE);
         }

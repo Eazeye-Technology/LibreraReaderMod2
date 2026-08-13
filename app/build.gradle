@@ -157,4 +157,7 @@ Need:
     implementation("ch.acra:acra-http:5.13.1")
     implementation("ch.acra:acra-dialog:5.13.1")
     implementation("ch.acra:acra-toast:5.13.1")
+
+    //for dual-screen
+    compileOnly files('libs/classes.jar')
 }

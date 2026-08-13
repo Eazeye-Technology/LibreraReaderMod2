@@ -42,6 +42,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
+import com.dseink.DualScreenConstant;
 import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.Keyboards;
@@ -292,6 +293,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         PageImageState.get().cleanSelectedWords();
 
         setContentView(R.layout.activity_horiziontal_view);
+        DualScreenConstant.setupPadding2(this);
 
         if (!Android6.canWrite(this)) {
             Android6.checkPermissions(this, true);
