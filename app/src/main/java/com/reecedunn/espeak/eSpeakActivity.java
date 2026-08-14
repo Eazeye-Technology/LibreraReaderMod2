@@ -64,7 +64,7 @@ public class eSpeakActivity extends Activity {
     }
 
     private State mState;
-    private SpeechSynthesis/*TextToSpeech*/ mTts;
+    private TextToSpeech mTts;
     private List<Pair<String,String>> mInformation;
     private InformationListAdapter mInformationView;
     private EditText mText;
@@ -95,9 +95,9 @@ public class eSpeakActivity extends Activity {
             @SuppressWarnings("deprecation")
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    mTts.synthesize(mText.getText().toString(), false);//.speak(mText.getText().toString(), TextToSpeech.QUEUE_ADD, null, null);
+                    mTts.speak(mText.getText().toString(), TextToSpeech.QUEUE_ADD, null, null);
                 } else {
-                    mTts.synthesize(mText.getText().toString(), false);//speak(mText.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+                    mTts.speak(mText.getText().toString(), TextToSpeech.QUEUE_ADD, null);
                 }
             }
         });
@@ -130,7 +130,7 @@ public class eSpeakActivity extends Activity {
         unregisterReceiver(mOnEspeakInitialized);
 
         if (mTts != null) {
-            mTts.stop();//mTts.shutdown();
+            mTts.shutdown();
         }
     }
 
@@ -192,32 +192,20 @@ public class eSpeakActivity extends Activity {
      * Initializes the TTS engine.
      */
     private void initializeEngine() {
-        mTts = new SpeechSynthesis(LibreraApp.getStorageContext(), new SpeechSynthesis.SynthReadyCallback() {
-            @Override
-            public void onSynthDataReady(byte[] audioData) {
-
-            }
-
-            @Override
-            public void onSynthDataComplete() {
-
-            }
-        });
-        //mTts = new TextToSpeech(this, mInitListener);
+        mTts = new TextToSpeech(this, mInitListener);
     }
 
     @SuppressWarnings("deprecation")
     private Locale getTtsLanguage() {
         if (mTts != null) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                android.speech.tts.Voice voice = mTts.getVoice();
-//                if (voice != null) {
-//                    return voice.getLocale();
-//                }
-//            } else {
-//                return mTts.getLanguage();
-//            }
-            return Locale.getDefault();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                android.speech.tts.Voice voice = mTts.getVoice();
+                if (voice != null) {
+                    return voice.getLocale();
+                }
+            } else {
+                return mTts.getLanguage();
+            }
         }
         return null;
     }
@@ -246,7 +234,7 @@ public class eSpeakActivity extends Activity {
             statusText = getString(R.string.voice_data_failed_message);
             break;
         default:
-            if (true) { //!getPackageName().equals(mTts.getDefaultEngine())) {
+            if (!getPackageName().equals(mTts.getDefaultEngine())) {
                 statusText = getString(R.string.set_default_message);
             } else {
                 statusText = null;
