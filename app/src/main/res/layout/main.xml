@@ -74,6 +74,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ssml" />
 
+            <Button
+                android:id="@+id/install"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Install" />
+            <Button
+                android:id="@+id/install2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Install2" />
         </LinearLayout>
 
     </LinearLayout>

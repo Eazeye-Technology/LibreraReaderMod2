@@ -27,6 +27,7 @@ package com.reecedunn.espeak;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
 import android.util.Log;
 

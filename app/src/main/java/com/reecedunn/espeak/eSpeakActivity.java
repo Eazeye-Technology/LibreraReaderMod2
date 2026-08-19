@@ -101,6 +101,18 @@ public class eSpeakActivity extends Activity {
                 }
             }
         });
+        findViewById(R.id.install).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(eSpeakActivity.this, TtsSettingsActivity.class), REQUEST_DEFAULT);
+            }
+        });
+        findViewById(R.id.install2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchGeneralTtsSettings();
+            }
+        });
 
         findViewById(R.id.ssml).setOnClickListener(new View.OnClickListener() {
             @Override

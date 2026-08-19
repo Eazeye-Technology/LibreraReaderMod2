@@ -579,7 +579,7 @@ public class TTSService extends Service {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                 }
-                TTSEngine.get().getTTS().setOnUtteranceCompletedListener(null);
+                TTSEngine.get().setOnUtteranceCompletedListener(null);
                 TTSEngine.get().speek(LibreraApp.context.getString(R.string.the_book_is_over));
 
                 EventBus.getDefault().post(new TtsStatus());
@@ -631,7 +631,7 @@ public class TTSService extends Service {
             final String preText1 = preText;
 
             if (Build.VERSION.SDK_INT >= 15) {
-                TTSEngine.get().getTTS().setOnUtteranceProgressListener(new UtteranceProgressListener() {
+                TTSEngine.get().setOnUtteranceProgressListener(new UtteranceProgressListener() {
 
                     @Override
                     public void onStart(String utteranceId) {
@@ -683,7 +683,7 @@ public class TTSService extends Service {
                     }
                 });
             } else {
-                TTSEngine.get().getTTS().setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
+                TTSEngine.get().setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
 
                     @Override
                     public void onUtteranceCompleted(String utteranceId) {
