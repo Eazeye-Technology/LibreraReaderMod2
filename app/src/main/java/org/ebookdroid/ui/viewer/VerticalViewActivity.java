@@ -1,5 +1,6 @@
 package org.ebookdroid.ui.viewer;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.dseink.DualScreenConstant;
+import com.dseink.EinkUtils;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.Intents;
 import com.foobnix.android.utils.Keyboards;
@@ -31,6 +33,7 @@ import com.foobnix.pdf.info.ADS;
 import com.foobnix.pdf.info.Android6;
 import com.foobnix.pdf.info.ExtUtils;
 import com.foobnix.pdf.info.PasswordDialog;
+import com.foobnix.pdf.search.activity.PageImageState;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.model.BookCSS;
 import com.foobnix.pdf.info.view.BrightnessHelper;
@@ -60,6 +63,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
         super();
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onNewIntent(final Intent intent) {
         LOG.d("VerticalViewActivity", "onNewIntent");
@@ -196,6 +200,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
         super.attachBaseContext(MyContextWrapper.wrap(context));
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         Android6.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
@@ -447,6 +452,29 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 
     @Override
     public boolean onKeyUp(final int keyCode, final KeyEvent event) {
+        if (MainTabs2.USE_NEW_UI) {
+            if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                return super.onKeyUp(keyCode, event);
+            }
+            if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
+                //onPageDown();
+                //search nextChose
+//                if (closeDialogs()) {
+//                    return true;
+//                }
+                getController().getWrapperControlls().nextChose(false, event.getRepeatCount());
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
+                //onPageUp();
+                //search prevChose
+//                if (getController().getWrapperControlls().closeDialogs()) {
+//                    return true;
+//                }
+                getController().getWrapperControlls().prevChose(false, event.getRepeatCount());
+                return true;
+            }
+        }
+
         LOG.d("onKeyUp");
         if (isMyKey) {
             return true;

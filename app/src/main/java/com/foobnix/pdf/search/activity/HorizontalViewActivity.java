@@ -43,6 +43,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import com.dseink.DualScreenConstant;
+import com.dseink.EinkUtils;
 import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.Keyboards;
@@ -2288,6 +2289,46 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
     @Override
     public boolean onKeyUp(final int keyCode, final KeyEvent event) {
+        if (MainTabs2.USE_NEW_UI) {
+            if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                return super.onKeyUp(keyCode, event);
+            }
+            if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
+                //onPageDown();
+                //copy from below
+                if (closeDialogs()) {
+                    isMyKey = true;
+                    return true;
+                }
+                if (PageImageState.get().hasSelectedWords()) {
+                    dc.clearSelectedText();
+                    isMyKey = true;
+                    return true;
+                }
+                nextPage();
+                flippingTimer = 0;
+                isMyKey = true;
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
+                //onPageUp();
+                //copy from below
+                if (closeDialogs()) {
+                    isMyKey = true;
+                    return true;
+                }
+                if (PageImageState.get().hasSelectedWords()) {
+                    dc.clearSelectedText();
+                    isMyKey = true;
+                    return true;
+                }
+                prevPage();
+                flippingTimer = 0;
+                isMyKey = true;
+                return true;
+            }
+        }
+
+
         LOG.d("getChildCount", anchor.getChildCount(),anchor.getVisibility()==View.VISIBLE, keyCode, isMyKey);
         if (isMyKey) {
             return true;
