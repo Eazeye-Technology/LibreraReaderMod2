@@ -176,7 +176,7 @@ public class UpdateService extends Service {
 				//https://blog.csdn.net/a2241076850/article/details/75668457
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    startForeground(UPDATE_SERVICE_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE);
+                    startForeground(UPDATE_SERVICE_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
                 } else {
                     startForeground(UPDATE_SERVICE_ID, notification);
                 }
@@ -388,6 +388,7 @@ public class UpdateService extends Service {
 	public void refreshUpgrade(int progress, int total, int status) {
 		Intent intent = null;
 		intent = new Intent(UpgradeUtil.ACTION_UPGRADE)
+                .setPackage(getPackageName())
 		.putExtra(UpgradeUtil.EXTRA_UPGRADE_PROGRESS, progress)
 		.putExtra(UpgradeUtil.EXTRA_UPGRADE_TOTAL, total)
 		.putExtra(UpgradeUtil.EXTRA_UPGRADE_STATUS, status)
@@ -398,6 +399,7 @@ public class UpdateService extends Service {
 	public void sendBeginInstall(String path) {
 		Intent intent = null;
 		intent = new Intent(UpgradeUtil.ACTION_UPGRADE_INSTALL)
+                .setPackage(getPackageName())
 				.putExtra(UpgradeUtil.EXTRA_UPGRADE_PATH, path)
 		;
 		sendBroadcast(intent);

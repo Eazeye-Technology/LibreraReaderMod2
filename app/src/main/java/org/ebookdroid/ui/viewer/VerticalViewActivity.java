@@ -1,5 +1,6 @@
 package org.ebookdroid.ui.viewer;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
 import android.app.AlertDialog;
@@ -7,6 +8,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +18,9 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.dseink.DualScreenConstant;
 import com.dseink.EinkUtils;
@@ -142,6 +147,8 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 
         Dips.initActivity(this);
 
+        checkPermission();
+
         //FirebaseAnalytics.getInstance(this);
 
         if (PasswordDialog.isNeedPasswordDialog(this)) {
@@ -204,6 +211,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         Android6.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        onRequestPermissionsResult_2(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -518,6 +526,50 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
     public void onFinishActivity() {
         getController().closeActivityFinal(null);
 
+    }
+
+
+    //https://blog.csdn.net/zuo_er_lyf/article/details/82659426
+    //https://www.dev2qa.com/android-read-write-external-storage-file-example/
+    private final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 100;
+    private void checkPermission(){
+        // Check whether this app has write external storage permission or not.
+        int writeExternalStoragePermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int writeExternalStoragePermission2 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS);
+        int writeExternalStoragePermission3 = ContextCompat.checkSelfPermission(this, android.Manifest.permission.REQUEST_INSTALL_PACKAGES);
+        // If do not grant write external storage permission.
+        if (writeExternalStoragePermission != PackageManager.PERMISSION_GRANTED ||
+                writeExternalStoragePermission2 != PackageManager.PERMISSION_GRANTED ||
+                writeExternalStoragePermission3 != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request user to grant write external storage permission.
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.POST_NOTIFICATIONS,
+                    Manifest.permission.REQUEST_INSTALL_PACKAGES,
+            }, REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION);
+        } else {
+            //getPermission2();
+        }
+    }
+    //@Override
+    public void onRequestPermissionsResult_2(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //Android6Mod.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION) {
+            int grantResultsLength = grantResults.length;
+            if (grantResultsLength >= 3 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                    grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+                    grantResults[2] == PackageManager.PERMISSION_GRANTED
+            ) {
+                //Toast.makeText(getApplicationContext(), "You grant write external storage permission. Please click original button again to continue.", Toast.LENGTH_LONG).show();
+                //getPermission2();
+            } else {
+                //Toast.makeText(getApplicationContext(), "You denied write external storage permission.", Toast.LENGTH_LONG).show();
+                //getPermission2();
+            }
+        }
     }
 
 }

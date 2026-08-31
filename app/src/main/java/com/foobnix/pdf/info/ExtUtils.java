@@ -1094,7 +1094,7 @@ public class ExtUtils {
         // if (Apps.getTargetSdkVersion(a) >= 24) {
         // if (Apps.getTargetSdkVersion(a) >= 24) {
         if (Build.VERSION.SDK_INT >= 24) {
-            uriForFile = FileProvider.getUriForFile(a, Apps.getPackageName(a) + ".provider", file);
+            uriForFile = FileProvider.getUriForFile(a, Apps.getPackageName(a) + ".fileprovider", file);
         } else {
             uriForFile = Uri.fromFile(file);
         }

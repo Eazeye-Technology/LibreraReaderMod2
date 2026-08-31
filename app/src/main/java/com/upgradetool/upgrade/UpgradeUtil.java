@@ -41,13 +41,15 @@ import java.util.concurrent.Executors;
 public class UpgradeUtil {
     public final static boolean USE_UPGRADE = true;
     public final static String USE_UPGRADE_URL1 = "https://software.eazeye.com";
-    public final static String USE_UPGRADE_URL2 = "/update.json";
+//    public final static String USE_UPGRADE_URL2 = "/update.json";
+//    public final static String USE_UPGRADE_URL1 = "http://192.168.0.110:8080";
+    public final static String USE_UPGRADE_URL2 = "/update2.json";
 
 
     private final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 100; //FIXME:???
     //don't modify this
-    public final static boolean USE_UPGRADE_DEBUG_VERSION = false;//reverse version compare
-    private final static boolean USE_UPGRADE_NEWDIALOG = true;
+    public final static boolean USE_UPGRADE_DEBUG_VERSION = false;//true; //false;//reverse version compare
+    private final static boolean USE_UPGRADE_NEWDIALOG = false; //true; //if without download
 
     private final static boolean D = false;
     private final static String TAG = "UpgradeUtil";
@@ -57,8 +59,8 @@ public class UpgradeUtil {
         this.mAct = act;
     }
 
-    private final static String DOWNLOAD_FILE_PATH = "/txcxdri/download";
-    private final static String UPDATE_FILE_PATH = "/txcxdri/update";
+    private final static String DOWNLOAD_FILE_PATH = "/txkj/download";
+    private final static String UPDATE_FILE_PATH = "/txkj/update";
 
     private void checkPermissioin2() {
         // Check whether this app has write external storage permission or not.
@@ -69,7 +71,8 @@ public class UpgradeUtil {
                     .setIcon(R.mipmap.ic_launcher_bookmanager2)
                     .setTitle("Permission request")
                     .setMessage(
-                            "Please allow to use the storage permission"
+                            //"Please allow to use the storage permission"
+                            "Please allow to use the install packages permission"
                     )
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -175,7 +178,7 @@ public class UpgradeUtil {
     }
 
 
-    public static final String ACTION_UPGRADE_INSTALL = "ACTION_UPGRADE_INSTALL";
+    public static final String ACTION_UPGRADE_INSTALL = "com.ACTION_UPGRADE_INSTALL";
     public static final String EXTRA_UPGRADE_PATH = "EXTRA_UPGRADE_PATH";
     private void prepareInstall(IntentFilter filter) {
         filter.addAction(ACTION_UPGRADE_INSTALL);
@@ -183,7 +186,7 @@ public class UpgradeUtil {
 
 
 
-    public static final String ACTION_UPGRADE = "ACTION_UPGRADE";
+    public static final String ACTION_UPGRADE = "com.ACTION_UPGRADE";
     public static final String EXTRA_UPGRADE_PROGRESS = "EXTRA_UPGRADE_PROGRESS";
     public static final String EXTRA_UPGRADE_TOTAL = "EXTRA_UPGRADE_TOTAL";
     public static final String EXTRA_UPGRADE_STATUS = "EXTRA_UPGRADE_STATUS";
@@ -192,10 +195,16 @@ public class UpgradeUtil {
 
     public String getUpdatePath() {
         try {
+            //FIXME:added
+            File sd = mAct.getExternalFilesDir(null);
+            if (sd != null) {
+                return sd.getAbsolutePath();
+            }
+            //--------------------------
             String sdPath = "/mnt/sdcard";
             File sdDir = null;
             boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-            if (sdCardExist)  {
+            if (sdCardExist) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //Build.VERSION_CODES.Q) {
                     //https://www.jianshu.com/p/f53294992596
                     sdDir = mAct.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
@@ -483,6 +492,11 @@ public class UpgradeUtil {
                                 public void onClick(View view) {
                                     b.setEnabled(false);
                                     mUpdatePath = getUpdatePath();
+                                    //----------------
+                                    //FIXME:added
+                                    FileUtil.deleteFolder(mUpdatePath);
+                                    //----------------
+
                                     if (mUpdatePath == null || mUpdatePath.length() == 0) {
                                         Toast.makeText(mAct,
                                                 "The download directory does not exist. Please restart the device and try again, or update it using a browser", Toast.LENGTH_SHORT).show();
