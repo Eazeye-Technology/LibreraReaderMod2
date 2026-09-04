@@ -137,8 +137,8 @@ public class UpdateService extends Service {
 						(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 				String id = "channel_01222";
 				try {
-					notificationManager.deleteNotificationChannel(id);
-				} catch (Exception e){
+                    notificationManager.deleteNotificationChannel(id);
+                } catch (Exception e){
 					e.printStackTrace();
 				}
 				CharSequence name = getString(R.string.app_name);
@@ -159,7 +159,7 @@ public class UpdateService extends Service {
 				notificationManager.createNotificationChannel(notificationChannel);
 
 				Notification notification = new NotificationCompat.Builder(UpdateService.this, id)
-						.setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
+                        .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
 						.setContentTitle(getText(R.string.app_name))
 						.setContentText("Upgrading...")
 						.setWhen(System.currentTimeMillis())
@@ -180,7 +180,6 @@ public class UpdateService extends Service {
                 } else {
                     startForeground(UPDATE_SERVICE_ID, notification);
                 }
-
 			} else {
 				mNotificationManager.notify(mNotificationId, mNotification);
 			}
@@ -297,7 +296,12 @@ public class UpdateService extends Service {
 	    				refreshUpgrade(updateCount, 100, UpgradeUtil.UPGRADE_STATUS_OK);
 						this.mRemoteViews.setTextViewText(R.id.notificationPercent, updateCount + "%");
 						this.mRemoteViews.setProgressBar(R.id.notificationProgress, 100, updateCount, false);
-						mNotificationManager.notify(mNotificationId, mNotification);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            //FIXME:??? for stopping showing : Failed to post notification on channel "null"
+                            //skip
+                        } else {
+                            mNotificationManager.notify(mNotificationId, mNotification);
+                        }
 	    			}
 	    		}
 	    	}

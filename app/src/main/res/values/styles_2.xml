@@ -28,6 +28,10 @@
         <item name="android:colorBackground">#EBE7E7</item>
     </style>
 
+    <style name="MyThemeOverlayAlertDialogDark" parent="@style/ThemeOverlay.Material3.Dialog.Alert">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded</item>
+    </style>
+
     <style name="ShapeAppearanceOverlay.MyApp.Dialog.Rounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">40dp</item>

@@ -28,6 +28,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.dseink.EinkUtils;
 import com.txkj.readingapp.R;
 
 import org.json.JSONArray;
@@ -49,7 +50,7 @@ public class UpgradeUtil {
     private final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 100; //FIXME:???
     //don't modify this
     public final static boolean USE_UPGRADE_DEBUG_VERSION = false;//true; //false;//reverse version compare
-    private final static boolean USE_UPGRADE_NEWDIALOG = false; //true; //if without download
+    private final static boolean USE_UPGRADE_NEWDIALOG = true; //true; //if without download
 
     private final static boolean D = false;
     private final static String TAG = "UpgradeUtil";
@@ -201,24 +202,26 @@ public class UpgradeUtil {
                 return sd.getAbsolutePath();
             }
             //--------------------------
-            String sdPath = "/mnt/sdcard";
-            File sdDir = null;
-            boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-            if (sdCardExist) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //Build.VERSION_CODES.Q) {
-                    //https://www.jianshu.com/p/f53294992596
-                    sdDir = mAct.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
-                } else {
-                    sdDir = Environment.getExternalStorageDirectory();
+            if (true) { //I test it can be false
+                String sdPath = "/mnt/sdcard";
+                File sdDir = null;
+                boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+                if (sdCardExist) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //Build.VERSION_CODES.Q) {
+                        //https://www.jianshu.com/p/f53294992596
+                        sdDir = mAct.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+                    } else {
+                        sdDir = Environment.getExternalStorageDirectory();
+                    }
+                    sdPath = sdDir.toString();
                 }
-                sdPath = sdDir.toString();
+                File storageDir = new File(sdPath + UPDATE_FILE_PATH);
+                if (!storageDir.exists()) {
+                    storageDir.mkdirs();
+                }
+                String path = storageDir.toString();
+                return path;
             }
-            File storageDir = new File(sdPath + UPDATE_FILE_PATH);
-            if (!storageDir.exists()) {
-                storageDir.mkdirs();
-            }
-            String path = storageDir.toString();
-            return path;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -351,6 +354,21 @@ public class UpgradeUtil {
         }
     }
 
+    public String getLocalVersion() {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = mAct.getApplicationContext().getPackageManager()
+                    .getPackageInfo(mAct.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo != null) {
+            return packageInfo.versionName;
+        } else {
+            return "";
+        }
+    }
+
     public void afterCheckVersion() {
         PackageInfo packageInfo = null;
         try {
@@ -382,6 +400,7 @@ public class UpgradeUtil {
         return null;
     }
 
+    private ActivityUpgradeDialog dialog44;
     private AlertDialog dialog3;
     private androidx.appcompat.app.AlertDialog dialog4;
     //@Override
@@ -411,8 +430,81 @@ public class UpgradeUtil {
                             }
                         }
                     };
-                    dialog4 = new ActivityUpgradeDialog(mAct, runnable).create();
+                    Runnable runnable2 = new Runnable() {
+                        @Override
+                        public void run() {
+                            //b.setEnabled(false);
+                            mUpdatePath = getUpdatePath();
+                            //----------------
+                            //FIXME:added
+                            FileUtil.deleteFolder(mUpdatePath);
+                            //----------------
+
+                            if (mUpdatePath == null || mUpdatePath.length() == 0) {
+                                Toast.makeText(mAct,
+                                        "The download directory does not exist. Please restart the device and try again, or update it using a browser", Toast.LENGTH_SHORT).show();
+                            } else {
+                                File updateParent = new File(mUpdatePath);
+                                updateParent.mkdirs();
+                                if (!updateParent.isDirectory()) {
+                                    Toast.makeText(mAct,
+                                            "The download directory does not exist. Please restart the device and try again, or update it using a browser", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    String url = serverVersionUrl;//UpdateService.DOWNLOAD_URL;
+                                    if (url == null || url.length() == 0) {
+                                        Toast.makeText(mAct,
+                                                "Download URL is empty", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        String docName = getUrlFileName(url);
+                                        File updateFileObj = new File(mUpdatePath, docName);
+                                        String updateFilePath = updateFileObj.getAbsolutePath();
+                                        if (updateFileObj.isFile() && updateFileObj.canRead()) {
+                                            if (false) {
+                                                Uri uri = UriUtil.fromFile(mAct, updateFileObj);
+                                                Intent intent2 = new Intent(Intent.ACTION_VIEW);
+                                                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                intent2.setDataAndType(uri, "application/vnd.android.package-archive");
+                                                UriUtil.prepare(intent2);
+                                                try {
+//                                                    if (arg0 != null) {
+//                                                        arg0.dismiss();
+//                                                    }
+                                                } catch (Throwable e) {
+                                                    e.printStackTrace();
+                                                }
+                                                try {
+                                                    mAct.startActivity(intent2);
+                                                } catch (Throwable e) {
+                                                    e.printStackTrace();
+                                                }
+                                            } else {
+                                                m_apk = updateFileObj;
+                                                installProcess();
+                                            }
+                                        } else {
+                                            String updatePath = getUpdatePath();
+                                            FileUtil.deleteFolder(updatePath);
+
+                                            Intent intent = new Intent(mAct, UpdateService.class);
+                                            intent.putExtra(UpdateService.EXTRA_APP_NAME, "");
+                                            intent.putExtra(UpdateService.EXTRA_DOWNLOAD_URL, url);
+                                            intent.putExtra(UpdateService.EXTRA_DOWNLOAD_PATH, updateFilePath);
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                                mAct.startForegroundService(intent);
+                                            } else {
+                                                mAct.startService(intent);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    dialog44 = new ActivityUpgradeDialog(mAct, getLocalVersion(),
+                            serverVersionStr, runnable, runnable2);
+                    dialog4 = dialog44.create();
                     dialog4.show();
+                    EinkUtils.centerToLeftScreen(mAct, dialog4);
                 } else {
                     dialog3 = new AlertDialog.Builder(mAct)
                             .setTitle("Software upgrade")
@@ -434,6 +526,14 @@ public class UpgradeUtil {
                             .create();
                     dialog3.setCanceledOnTouchOutside(false);
                     dialog3.setCancelable(false);
+                    dialog3.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialogInterface) {
+//                            if (mAct instanceof MainActivity2) {
+//                                ((MainActivity2) mAct).onDialogDismiss();
+//                            }
+                        }
+                    });
                     dialog3.setOnShowListener(new DialogInterface.OnShowListener() {
                         @Override
                         public void onShow(final DialogInterface arg0) {
@@ -560,6 +660,7 @@ public class UpgradeUtil {
                         }
                     });
                     dialog3.show();
+                    EinkUtils.centerToLeftScreen(mAct, dialog3);
                 }
                 break;
         }
@@ -621,6 +722,18 @@ public class UpgradeUtil {
                 } else {
                     try {
                         dialog3.dismiss();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else if (dialog44 != null) {
+                if (m_Progess < 100 && m_Status == UPGRADE_STATUS_OK) {
+                    dialog44.setMessage("Downloading: " + m_Progess + "%");
+                } else if (m_Status == UPGRADE_STATUS_ERROR) {
+                    dialog44.setMessage("Download failed, please check network and retry\n(url=" + serverVersionUrl + ")");
+                } else {
+                    try {
+                        dialog44.dismiss();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

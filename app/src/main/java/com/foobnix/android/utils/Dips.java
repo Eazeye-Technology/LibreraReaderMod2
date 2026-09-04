@@ -16,6 +16,7 @@ import android.view.Surface;
 import android.view.WindowManager;
 
 import com.dseink.DualScreenConstant;
+import com.dseink.EinkUtils;
 import com.dseink.ReflectUtils;
 
 import java.util.Locale;
@@ -81,7 +82,8 @@ public class Dips {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static int screenWidth() {
         int screenNum = 1;
-        if (getCurrentScreenPos() != DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+        if (EinkUtils.getCurrentScreenPos(activity, DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH)
+                != DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
             screenNum = 2;
         }
         if (Build.VERSION.SDK_INT >= 17) {
@@ -94,24 +96,6 @@ public class Dips {
             }
         } else {
             return Resources.getSystem().getDisplayMetrics().widthPixels / screenNum;
-        }
-    }
-
-    private static int getCurrentScreenPos() {
-        try {
-            Activity act = (Activity) activity;
-            //return act.getCurrentScreenPanel();
-            Integer result = null;
-            try {
-                result = ReflectUtils.reflect(act).method("getCurrentScreenPanel").get();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return result != null ? result.intValue() :
-                    DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH;
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH;
         }
     }
 
