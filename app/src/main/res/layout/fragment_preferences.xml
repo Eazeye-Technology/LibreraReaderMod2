@@ -1092,6 +1092,18 @@
                 android:textSize="@dimen/fragment_preferences_ll2_cb1_text_size"
                 />
 
+            <TextView
+                android:id="@+id/autoupdate"
+                style="@style/textLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:minWidth="@dimen/fragment_preferences_ll2_cb1_tv2_min_width"
+                android:singleLine="false"
+                android:text="Auto Update"
+                android:textSize="@dimen/fragment_preferences_ll2_cb1_tv2_text_size"
+                />
 
         </LinearLayout>
 

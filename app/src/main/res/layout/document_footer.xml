@@ -12,7 +12,7 @@
         android:orientation="vertical"
         >
 <!--add
-android:background="#0000ff"
+        android:background="#0000ff"
 -->
         <LinearLayout
             android:visibility="gone"
@@ -60,7 +60,9 @@ android:background="#0000ff"
             android:paddingLeft="2dip"
             android:paddingRight="2dip"
             android:paddingTop="2dip"
-            android:visibility="visible" >
+            android:visibility="visible"
+            android:id="@+id/llDocumentFooterBottom3"
+            >
 
             <ImageView
                 android:id="@+id/linkHistory"
@@ -216,7 +218,9 @@ android:background="#0000ff"
             android:orientation="horizontal"
             android:paddingBottom="2dip"
             android:paddingLeft="2dip"
-            android:paddingRight="2dip" >
+            android:paddingRight="2dip"
+            android:id="@+id/llDocumentFooterBottom2"
+            >
 
             <ImageView
                 android:id="@+id/autoScroll"
@@ -275,6 +279,80 @@ android:background="#0000ff"
                 android:contentDescription="@string/block_page_movement_horizontally"
                 android:src="@drawable/glyphicons_217_lock" />
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                >
+                <ImageView
+                    android:id="@+id/iv_reading_001_settings"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_001_settings"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_002_auto_read"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_002_auto_read"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_003_tts_text_to_speech"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_003_tts_text_to_speech"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_004_light_night_mode"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_004_light_night_mode"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_005_annotation"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_005_annotation"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_006_lock_pan_zoom"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_006_lock_pan_zoom"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_007_book_menu"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_007_book_menu"
+                    android:background="#00000000"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </merge>

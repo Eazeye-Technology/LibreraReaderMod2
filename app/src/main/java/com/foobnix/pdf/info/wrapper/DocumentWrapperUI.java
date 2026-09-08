@@ -78,6 +78,7 @@ import com.foobnix.ui2.AppDB;
 import com.foobnix.ui2.MainTabs2;
 
 import org.ebookdroid.BookType;
+import org.ebookdroid.ui.viewer.VerticalViewActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -949,6 +950,10 @@ public class DocumentWrapperUI {
     public void initUI(final Activity a) {
         this.a = a;
         quickBookmark = a.getString(R.string.fast_bookmark);
+
+        if (VerticalViewActivity.USE_NEW_UI) {
+            initUI2(a);
+        }
 
         a.findViewById(R.id.showHypenLangPanel).setVisibility(View.GONE);
 
@@ -2259,13 +2264,109 @@ public class DocumentWrapperUI {
 
 
 
+    public void initUI2(final Activity a) {
+        //layout.document_title_buttons
+        //layout.document_footer
 
+        a.findViewById(R.id.iv_reading_001_settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onPrefTop.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_002_auto_read).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onAutoScroll.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_003_tts_text_to_speech).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onTextToSpeach.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_004_light_night_mode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSun.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_005_annotation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onShowHideEditPanel.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_006_lock_pan_zoom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLockUnlock.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_007_book_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemMenu.onClick(view);
+            }
+        });
 
-
-
-
-
-
-
-
+        a.findViewById(R.id.iv_reading_101_table_of_content).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onShowContext.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_102_book_marks).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBookmarks.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_103_go_to_page_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onThumbnail.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_104_search_in_book).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onShowSearch.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_105_recent_book_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRecent.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_106_center_zoom_reset_page).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onMoveCenter.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_107_exit_enter_full_screen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onFull.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_108_undo_link_navigation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onLinkHistory.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_109_close_book).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClose.onClick(view);
+            }
+        });
+        a.findViewById(R.id.llDocumentFooterBottom3).setVisibility(View.GONE);
+        a.findViewById(R.id.llDocumentFooterBottom2).setVisibility(View.GONE);
+        a.findViewById(R.id.llDocumentTitleButtons1).setVisibility(View.GONE);
+    }
 }

@@ -986,26 +986,31 @@ public class ExtUtils {
         }
         LOG.d("showDocumentWithoutDialog2", uri.getPath(), percent, playlist);
 
-        if (AppSP.get().readingMode == AppState.READING_MODE_BOOK) {
+        if (MainTabs2.USE_READER_HORIZONTAL) {
             openHorizontalView(c, uri, percent, playlist);
             return;
-        }
-
-        final Intent intent = new Intent(c, VerticalViewActivity.class);
-        try {
-            intent.putExtra(PasswordDialog.EXTRA_APP_PASSWORD, ((Activity) c).getIntent().getStringExtra(PasswordDialog.EXTRA_APP_PASSWORD));
-            intent.putExtra(DocumentController.EXTRA_PASSWORD, ((Activity) c).getIntent().getStringExtra(DocumentController.EXTRA_PASSWORD));
-
-            if (percent > 0f) {
-                Intents.putFloat(intent, DocumentController.EXTRA_PERCENT, percent);
+        } else {
+            if (AppSP.get().readingMode == AppState.READING_MODE_BOOK) {
+                openHorizontalView(c, uri, percent, playlist);
+                return;
             }
-        } catch (Exception e) {
-            LOG.e(e);
+
+            final Intent intent = new Intent(c, VerticalViewActivity.class);
+            try {
+                intent.putExtra(PasswordDialog.EXTRA_APP_PASSWORD, ((Activity) c).getIntent().getStringExtra(PasswordDialog.EXTRA_APP_PASSWORD));
+                intent.putExtra(DocumentController.EXTRA_PASSWORD, ((Activity) c).getIntent().getStringExtra(DocumentController.EXTRA_PASSWORD));
+
+                if (percent > 0f) {
+                    Intents.putFloat(intent, DocumentController.EXTRA_PERCENT, percent);
+                }
+            } catch (Exception e) {
+                LOG.e(e);
+            }
+            intent.setData(checkPlaylisturi(uri, intent, playlist));
+
+
+            c.startActivity(intent);
         }
-        intent.setData(checkPlaylisturi(uri, intent, playlist));
-
-
-        c.startActivity(intent);
     }
 
     public static Uri checkPlaylisturi(Uri uri, Intent intent, String playlist) {

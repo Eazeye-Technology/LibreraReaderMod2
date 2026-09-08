@@ -103,9 +103,18 @@ import java.util.List;
 
 @SuppressLint("NewApi")
 public class MainTabs2 extends AdsFragmentActivity {
+    public void checkVersion() {
+        if (UpgradeUtil.USE_UPGRADE) {
+            if (upgradeUtil != null) {
+                upgradeUtil.checkVersion();
+            }
+        }
+    }
+
     public final static int DIALOG_STYLE = R.style.AlertDialogCustom_Destructive;
     public final static boolean USE_NEW_UI = true;
     public final static boolean MOD_VERSION = true;
+    public final static boolean USE_READER_HORIZONTAL = false;
 
     public static final int REQUEST_CODE_ADD_RESOURCE = 123;
     public static final String EXTRA_EXIT = "EXTRA_EXIT";

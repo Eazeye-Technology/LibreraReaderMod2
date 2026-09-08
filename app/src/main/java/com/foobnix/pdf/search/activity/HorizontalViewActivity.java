@@ -2,6 +2,7 @@ package com.foobnix.pdf.search.activity;
 
 import android.Manifest;
 import android.app.ActionBar.LayoutParams;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -128,6 +129,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class HorizontalViewActivity extends AdsFragmentActivity {
+    public final static boolean USE_NEW_UI = true;
 
     public boolean prev = true;
     VerticalViewPager viewPager;
@@ -301,6 +303,10 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
         setContentView(R.layout.activity_horiziontal_view);
         DualScreenConstant.setupPadding2(this);
+
+        if (USE_NEW_UI) {
+            initUI2(this);
+        }
 
         if (!Android6.canWrite(this)) {
             Android6.checkPermissions(this, true);
@@ -2756,6 +2762,184 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                 //getPermission2();
             }
         }
+    }
+
+    public void initUI2(final Activity a) {
+        //layout.document_title_buttons
+        //layout.document_footer
+
+        a.findViewById(R.id.iv_reading_001_settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onPrefTop.onClick(view);
+                if (dc != null) {
+                    DragingDialogs.preferences(anchor, dc, onRefresh, reloadDoc);
+                }
+            }
+        });
+        a.findViewById(R.id.iv_reading_002_auto_read).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onAutoScroll.onClick(view);
+                DragingDialogs.pageFlippingDialog(anchor, dc, onRefresh);
+            }
+        });
+        a.findViewById(R.id.iv_reading_003_tts_text_to_speech).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                onTextToSpeach.onClick(view);
+                LOG.d("bookTTS", AppSP.get().isDoubleCoverAlone, AppSP.get().isDouble, AppSP.get().isCut);
+                if (AppSP.get().isDouble || AppSP.get().isCut) {
+                    modeOnePage();
+                    return;
+                }
+                DragingDialogs.textToSpeachDialog(anchor, dc);
+            }
+        });
+        a.findViewById(R.id.iv_reading_004_light_night_mode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                onSun.onClick(view);
+                if (dc == null) {
+                    return;
+                }
+                //FIXME:
+                //v.setEnabled(false);
+                AppState.get().isDayNotInvert = !AppState.get().isDayNotInvert;
+                nullAdapter();
+                dc.restartActivity();
+            }
+        });
+        a.findViewById(R.id.iv_reading_005_annotation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onShowHideEditPanel.onClick(view);
+                //FIXME: not support annotation
+            }
+        });
+        a.findViewById(R.id.iv_reading_006_lock_pan_zoom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                onLockUnlock.onClick(view);
+                AppSP.get().isLocked = !AppSP.get().isLocked;
+                updateLockMode();
+            }
+        });
+        a.findViewById(R.id.iv_reading_007_book_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                onItemMenu.onClick(view);
+                if (dc == null || dc.getCurrentBook() == null) {
+                    return;
+                }
+                ShareDialog.show(HorizontalViewActivity.this, dc.getCurrentBook(), new Runnable() {
+                    @Override
+                    public void run() {
+                        if (dc.getCurrentBook().delete()) {
+                            TempHolder.listHash++;
+                            AppDB.get().deleteBy(dc.getCurrentBook().getPath());
+                            dc.getActivity().finish();
+                        }
+                    }
+                }, dc.getCurentPage(), dc, new Runnable() {
+                    @Override
+                    public void run() {
+                        hideShow();
+
+                    }
+                });
+                Keyboards.hideNavigation(HorizontalViewActivity.this);
+                hideAds();
+            }
+        });
+
+        a.findViewById(R.id.iv_reading_101_table_of_content).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                onShowContext.onClick(view);
+                if (dc != null) {
+                    DragingDialogs.showContent(anchor, dc);
+                }
+            }
+        });
+        a.findViewById(R.id.iv_reading_102_book_marks).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBookmarks.onClick(view);
+            }
+        });
+        a.findViewById(R.id.iv_reading_103_go_to_page_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onThumbnail.onClick(view);
+                DragingDialogs.gotoPageDialog(anchor, dc);
+            }
+        });
+        a.findViewById(R.id.iv_reading_104_search_in_book).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onShowSearch.onClick(view);
+                showSearchDialog();
+            }
+        });
+        a.findViewById(R.id.iv_reading_105_recent_book_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onRecent.onClick(view);
+                DragingDialogs.recentBooks(anchor, dc);
+            }
+        });
+        a.findViewById(R.id.iv_reading_106_center_zoom_reset_page).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onMoveCenter.onClick(view);
+                authoFit();
+            }
+        });
+        a.findViewById(R.id.iv_reading_107_exit_enter_full_screen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                onFull.onClick(view);
+                if (dc == null) {
+                    return;
+                }
+
+                DocumentController.showFullScreenPopup(dc.getActivity(), v, id -> {
+                    AppState.get().fullScreenMode = id;
+                    DocumentController.chooseFullScreen(HorizontalViewActivity.this, AppState.get().fullScreenMode);
+                    //FIXME:
+                    //onFullScreen.setImageResource(DocumentController.getFullScreenIcon(HorizontalViewActivity.this, AppState.get().fullScreenMode));
+                    if (dc.isTextFormat()) {
+                        if (onRefresh != null) {
+                            onRefresh.run();
+                        }
+                        nullAdapter();
+                        dc.restartActivity();
+                    }
+                    return true;
+                }, AppState.get().fullScreenMode);
+            }
+        });
+        a.findViewById(R.id.iv_reading_108_undo_link_navigation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onLinkHistory.onClick(view);
+                dc.onLinkHistory();
+                showHideHistory();
+            }
+        });
+        a.findViewById(R.id.iv_reading_109_close_book).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                onClose.onClick(view);
+                nullAdapter();
+                closeDialogs();
+                showInterstial();
+            }
+        });
+        a.findViewById(R.id.llDocumentFooterBottom3).setVisibility(View.GONE);
+        a.findViewById(R.id.llDocumentFooterBottom2).setVisibility(View.GONE);
+        a.findViewById(R.id.rlDocumentTitleButtons1).setVisibility(View.GONE);
     }
 
 }

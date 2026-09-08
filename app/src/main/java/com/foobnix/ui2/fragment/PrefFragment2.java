@@ -1719,6 +1719,14 @@ public class PrefFragment2 extends UIFragment {
                 )
         );
 
+        TxtUtils.underlineTextView(inflate.findViewById(R.id.autoupdate)).setOnClickListener(v ->
+                {
+                    if (getActivity() instanceof MainTabs2) {
+                        ((MainTabs2) getActivity()).checkVersion();
+                    }
+                }
+        );
+
         // What is new
         CheckBox showWhatIsNew = inflate.findViewById(R.id.isShowWhatIsNewDialog);
         showWhatIsNew.setChecked(AppState.get().isShowWhatIsNewDialog);

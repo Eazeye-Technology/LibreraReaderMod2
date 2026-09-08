@@ -55,6 +55,8 @@ import org.ebookdroid.ui.viewer.viewers.PdfSurfaceView;
 import org.emdev.ui.AbstractActionActivity;
 
 public class VerticalViewActivity extends AbstractActionActivity<VerticalViewActivity, ViewerActivityController> {
+    public final static boolean USE_NEW_UI = true;
+
     public static final DisplayMetrics DM = new DisplayMetrics();
 
     IView view;
@@ -465,20 +467,20 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
                 return super.onKeyUp(keyCode, event);
             }
             if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
-                //onPageDown();
-                //search nextChose
-//                if (closeDialogs()) {
-//                    return true;
-//                }
-                getController().getWrapperControlls().nextChose(false, event.getRepeatCount());
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
                 //onPageUp();
                 //search prevChose
 //                if (getController().getWrapperControlls().closeDialogs()) {
 //                    return true;
 //                }
                 getController().getWrapperControlls().prevChose(false, event.getRepeatCount());
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
+                //onPageDown();
+                //search nextChose
+//                if (closeDialogs()) {
+//                    return true;
+//                }
+                getController().getWrapperControlls().nextChose(false, event.getRepeatCount());
                 return true;
             }
         }

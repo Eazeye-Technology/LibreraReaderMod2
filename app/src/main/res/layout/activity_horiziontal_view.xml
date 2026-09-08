@@ -234,6 +234,104 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                >
+                <ImageView
+                    android:id="@+id/iv_reading_101_table_of_content"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_101_table_of_content"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_102_book_marks"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_102_book_marks"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_103_go_to_page_dialog"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_103_go_to_page_dialog"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_104_search_in_book"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_104_search_in_book"
+                    android:background="#00000000"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_reading_105_recent_book_dialog"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:background="#00000000"
+                    android:src="@drawable/reading_105_recent_book_dialog"
+                    />
+
+
+
+                <ImageView
+                    android:id="@+id/iv_reading_106_center_zoom_reset_page"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_106_center_zoom_reset_page"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_107_exit_enter_full_screen"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_107_exit_enter_full_screen"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_108_undo_link_navigation"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_108_undo_link_navigation"
+                    android:background="#00000000"
+                    />
+                <ImageView
+                    android:id="@+id/iv_reading_109_close_book"
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:layout_margin="16px"
+                    android:scaleType="center"
+                    android:src="@drawable/reading_109_close_book"
+                    android:background="#00000000"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rlDocumentTitleButtons1"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -364,15 +462,30 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dip" />
 
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:id="@+id/new_toolbar_bottom"-->
+<!--        android:background="#FF0000"-->
+<!--        >-->
+<!--    </RelativeLayout>-->
+
     <FrameLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#96aa39"
         android:layout_alignParentBottom="true"
-        android:background="#96aa39">
-
+        android:layout_marginBottom="0dp"
+        >
+<!--
+        -->
         <include layout="@layout/document_footer" />
     </FrameLayout>
+
+
+
 
 
     <FrameLayout
