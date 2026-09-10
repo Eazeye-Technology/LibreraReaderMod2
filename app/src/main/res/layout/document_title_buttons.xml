@@ -17,8 +17,11 @@ android:background="#0000ff"
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             >
+            <View
+                android:layout_width="32px"
+                android:layout_height="match_parent"
+                />
             <ImageView
                 android:id="@+id/iv_reading_101_table_of_content"
                 android:layout_width="48px"
@@ -27,6 +30,10 @@ android:background="#0000ff"
                 android:scaleType="center"
                 android:src="@drawable/reading_101_table_of_content"
                 android:background="#00000000"
+                />
+            <View
+                android:layout_width="32px"
+                android:layout_height="match_parent"
                 />
             <ImageView
                 android:id="@+id/iv_reading_102_book_marks"
@@ -37,6 +44,10 @@ android:background="#0000ff"
                 android:src="@drawable/reading_102_book_marks"
                 android:background="#00000000"
                 />
+            <View
+                android:layout_width="32px"
+                android:layout_height="match_parent"
+                />
             <ImageView
                 android:id="@+id/iv_reading_103_go_to_page_dialog"
                 android:layout_width="48px"
@@ -45,6 +56,10 @@ android:background="#0000ff"
                 android:scaleType="center"
                 android:src="@drawable/reading_103_go_to_page_dialog"
                 android:background="#00000000"
+                />
+            <View
+                android:layout_width="32px"
+                android:layout_height="match_parent"
                 />
             <ImageView
                 android:id="@+id/iv_reading_104_search_in_book"
@@ -55,7 +70,10 @@ android:background="#0000ff"
                 android:src="@drawable/reading_104_search_in_book"
                 android:background="#00000000"
                 />
-
+            <View
+                android:layout_width="32px"
+                android:layout_height="match_parent"
+                />
             <ImageView
                 android:id="@+id/iv_reading_105_recent_book_dialog"
                 android:layout_width="48px"
@@ -65,9 +83,10 @@ android:background="#0000ff"
                 android:background="#00000000"
                 android:src="@drawable/reading_105_recent_book_dialog"
                 />
-
-
-
+            <View
+                android:layout_width="32px"
+                android:layout_height="match_parent"
+                />
             <ImageView
                 android:id="@+id/iv_reading_106_center_zoom_reset_page"
                 android:layout_width="48px"
@@ -76,6 +95,10 @@ android:background="#0000ff"
                 android:scaleType="center"
                 android:src="@drawable/reading_106_center_zoom_reset_page"
                 android:background="#00000000"
+                />
+            <View
+                android:layout_width="32px"
+                android:layout_height="match_parent"
                 />
             <ImageView
                 android:id="@+id/iv_reading_107_exit_enter_full_screen"
@@ -86,6 +109,10 @@ android:background="#0000ff"
                 android:src="@drawable/reading_107_exit_enter_full_screen"
                 android:background="#00000000"
                 />
+            <View
+                android:layout_width="32px"
+                android:layout_height="match_parent"
+                />
             <ImageView
                 android:id="@+id/iv_reading_108_undo_link_navigation"
                 android:layout_width="48px"
@@ -95,6 +122,12 @@ android:background="#0000ff"
                 android:src="@drawable/reading_108_undo_link_navigation"
                 android:background="#00000000"
                 />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            >
             <ImageView
                 android:id="@+id/iv_reading_109_close_book"
                 android:layout_width="48px"
