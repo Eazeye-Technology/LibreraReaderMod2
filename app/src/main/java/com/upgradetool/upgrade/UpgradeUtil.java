@@ -43,7 +43,7 @@ public class UpgradeUtil {
     public final static boolean USE_UPGRADE = true;
     public final static String USE_UPGRADE_URL1 = "https://software.eazeye.com";
 //    public final static String USE_UPGRADE_URL2 = "/update.json";
-//    public final static String USE_UPGRADE_URL1 = "http://192.168.0.110:8080";
+//    public final static String USE_UPGRADE_URL1 = "http://192.168.0.100:8080";
     public final static String USE_UPGRADE_URL2 = "/update2.json";
 
 
