@@ -595,21 +595,23 @@ public class DocumentWrapperUI {
             }
         }
 
-        if (!TTSEngine.get().isPlaying()) {
-            if (AppState.get().isUseVolumeKeys && AppState.get().getNextKeys().contains(keyCode)) {
-                if (closeDialogs()) {
+        if (!MainTabs2.USE_NEW_UI) { //skip pagedown pageup
+            if (!TTSEngine.get().isPlaying()) {
+                if (AppState.get().isUseVolumeKeys && AppState.get().getNextKeys().contains(keyCode)) {
+                    if (closeDialogs()) {
+                        return true;
+                    }
+                    nextChose(false, event.getRepeatCount());
                     return true;
                 }
-                nextChose(false, event.getRepeatCount());
-                return true;
-            }
 
-            if (AppState.get().isUseVolumeKeys && AppState.get().getPrevKeys().contains(keyCode)) {
-                if (closeDialogs()) {
+                if (AppState.get().isUseVolumeKeys && AppState.get().getPrevKeys().contains(keyCode)) {
+                    if (closeDialogs()) {
+                        return true;
+                    }
+                    prevChose(false, event.getRepeatCount());
                     return true;
                 }
-                prevChose(false, event.getRepeatCount());
-                return true;
             }
         }
 
@@ -1859,7 +1861,7 @@ public class DocumentWrapperUI {
         }
     };
 
-    private boolean closeDialogs() {
+    public boolean closeDialogs() {
         return dc.closeDialogs();
     }
 

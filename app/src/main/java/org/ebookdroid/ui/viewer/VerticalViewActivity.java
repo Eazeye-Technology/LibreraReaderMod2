@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -462,7 +463,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 
     @Override
     public boolean onKeyUp(final int keyCode, final KeyEvent event) {
-        if (MainTabs2.USE_NEW_UI) {
+        if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
                 return super.onKeyUp(keyCode, event);
             }
@@ -472,7 +473,11 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 //                if (getController().getWrapperControlls().closeDialogs()) {
 //                    return true;
 //                }
-                getController().getWrapperControlls().prevChose(false, event.getRepeatCount());
+                try {
+                    getController().getWrapperControlls().closeDialogs();
+                    getController().getWrapperControlls().nextChose(false, event.getRepeatCount());
+                    Toast.makeText(this, "Next Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1), Toast.LENGTH_SHORT).show();
+                } catch (Throwable eee) { eee.printStackTrace(); }
                 return true;
             } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
                 //onPageDown();
@@ -480,7 +485,12 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 //                if (closeDialogs()) {
 //                    return true;
 //                }
-                getController().getWrapperControlls().nextChose(false, event.getRepeatCount());
+                try {
+                    getController().getWrapperControlls().closeDialogs();
+                    getController().getWrapperControlls().prevChose(false, event.getRepeatCount());
+                    Toast.makeText(this, "Previous Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1), Toast.LENGTH_SHORT).show();
+
+                } catch (Throwable eee) { eee.printStackTrace(); }
                 return true;
             }
         }
@@ -500,6 +510,12 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 
     @Override
     public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+        if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
+            if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                return super.onKeyDown(keyCode, event);
+            }
+        }
+
         LOG.d("onKeyDown");
         isMyKey = false;
         int repeatCount = event.getRepeatCount();

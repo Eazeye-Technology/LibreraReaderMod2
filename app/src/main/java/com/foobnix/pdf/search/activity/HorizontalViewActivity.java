@@ -2309,34 +2309,43 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
             if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
                 //onPageDown();
                 //copy from below
-                if (closeDialogs()) {
-                    isMyKey = true;
-                    return true;
-                }
-                if (PageImageState.get().hasSelectedWords()) {
-                    dc.clearSelectedText();
-                    isMyKey = true;
-                    return true;
-                }
-                nextPage();
-                flippingTimer = 0;
-                isMyKey = true;
+//                if (closeDialogs()) {
+//                    isMyKey = true;
+//                    return true;
+//                }
+//                if (PageImageState.get().hasSelectedWords()) {
+//                    dc.clearSelectedText();
+//                    isMyKey = true;
+//                    return true;
+//                }
+                try {
+                    closeDialogs();
+                    nextPage();
+                    Toast.makeText(this, "Next Page: " + (dc.getCurentPage() + 1), Toast.LENGTH_SHORT).show();
+////                flippingTimer = 0;
+//                isMyKey = true;
+                } catch (Throwable eee) { eee.printStackTrace(); }
                 return true;
             } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
                 //onPageUp();
                 //copy from below
-                if (closeDialogs()) {
-                    isMyKey = true;
-                    return true;
-                }
-                if (PageImageState.get().hasSelectedWords()) {
-                    dc.clearSelectedText();
-                    isMyKey = true;
-                    return true;
-                }
-                prevPage();
-                flippingTimer = 0;
-                isMyKey = true;
+
+//                if (closeDialogs()) {
+//                    isMyKey = true;
+//                    return true;
+//                }
+//                if (PageImageState.get().hasSelectedWords()) {
+//                    dc.clearSelectedText();
+//                    isMyKey = true;
+//                    return true;
+//                }
+                try {
+                    closeDialogs();
+                    prevPage();
+                    Toast.makeText(this, "Previous Page: " + (dc.getCurentPage() + 1), Toast.LENGTH_SHORT).show();
+                } catch (Throwable eee) { eee.printStackTrace(); }
+//                flippingTimer = 0;
+//                isMyKey = true;
                 return true;
             }
         }
@@ -2404,6 +2413,11 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
     @Override
     public boolean onKeyDown(final int keyCode1, final KeyEvent event) {
+        if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
+            if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                return super.onKeyDown(keyCode1, event);
+            }
+        }
 
         int keyCode = event.getKeyCode();
         if (keyCode == 0) {
@@ -2481,38 +2495,39 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                 return true;
             }
 
-            if (!TTSEngine.get().isPlaying()) {
-                if (AppState.get().getNextKeys().contains(keyCode)) {
-                    if (closeDialogs()) {
+            if (!MainTabs2.USE_NEW_UI) { //skip pagedown pageup
+                if (!TTSEngine.get().isPlaying()) {
+                    if (AppState.get().getNextKeys().contains(keyCode)) {
+                        if (closeDialogs()) {
+                            isMyKey = true;
+                            return true;
+                        }
+                        if (PageImageState.get().hasSelectedWords()) {
+                            dc.clearSelectedText();
+                            isMyKey = true;
+                            return true;
+                        }
+                        nextPage();
+                        flippingTimer = 0;
+                        isMyKey = true;
+                        return true;
+                    } else if (AppState.get().getPrevKeys().contains(keyCode)) {
+                        if (closeDialogs()) {
+                            isMyKey = true;
+                            return true;
+                        }
+                        if (PageImageState.get().hasSelectedWords()) {
+                            dc.clearSelectedText();
+                            isMyKey = true;
+                            return true;
+                        }
+                        prevPage();
+                        flippingTimer = 0;
                         isMyKey = true;
                         return true;
                     }
-                    if (PageImageState.get().hasSelectedWords()) {
-                        dc.clearSelectedText();
-                        isMyKey = true;
-                        return true;
-                    }
-                    nextPage();
-                    flippingTimer = 0;
-                    isMyKey = true;
-                    return true;
-                } else if (AppState.get().getPrevKeys().contains(keyCode)) {
-                    if (closeDialogs()) {
-                        isMyKey = true;
-                        return true;
-                    }
-                    if (PageImageState.get().hasSelectedWords()) {
-                        dc.clearSelectedText();
-                        isMyKey = true;
-                        return true;
-                    }
-                    prevPage();
-                    flippingTimer = 0;
-                    isMyKey = true;
-                    return true;
                 }
             }
-
 
         }
 
