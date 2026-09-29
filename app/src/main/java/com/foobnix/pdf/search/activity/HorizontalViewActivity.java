@@ -897,7 +897,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                         hideShow();
 
                     }
-                });
+                }, anchor);
                 Keyboards.hideNavigation(HorizontalViewActivity.this);
                 hideAds();
 
@@ -1229,6 +1229,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
                     HypenPanelHelper.init(parentParent, dc);
 
+                    afterInit();
                 }
 
             }
@@ -1272,8 +1273,12 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
         });
 
+        //afterInit();
+    }
 
-    }    Runnable flippingRunnable = new Runnable() {
+
+
+    Runnable flippingRunnable = new Runnable() {
 
         @Override
         public void run() {
@@ -2862,7 +2867,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                         hideShow();
 
                     }
-                });
+                }, anchor);
                 Keyboards.hideNavigation(HorizontalViewActivity.this);
                 hideAds();
             }
@@ -2957,4 +2962,76 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         a.findViewById(R.id.rlDocumentTitleButtons1).setVisibility(View.GONE);
     }
 
+    private void afterInit() {
+        if (dc != null) {
+            int screenPos = EinkUtils.getCurrentScreenPos(this,
+                    DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE);
+            if (screenPos == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+                //search DocumentWrapperUI.onModeChange
+                //search HorizontalViewActivity.onModeChange
+                //p.getMenu().add(R.string.two_pages)
+                closeDialogs();
+                onModeChange.setImageResource(R.drawable.my_glyphicons_two_pages_12);
+                AppSP.get().isDouble = true;
+                AppSP.get().isCut = false;
+                AppSP.get().isDoubleCoverAlone = false;
+                AppSP.get().isSmartReflow = false;
+
+                SettingsManager.getBookSettings().updateFromAppState();
+                SharedBooks.save(SettingsManager.getBookSettings());
+
+                if (dc.isTextFormat()) {
+                    nullAdapter();
+                    dc.restartActivity();
+                    dc.cleanImageMatrix();
+                } else {
+                    TTSEngine.get().stop();
+                    dc.cleanImageMatrix();
+                    reloadDoc.run();
+                    authoFit();
+                }
+
+                LinearLayout rl_book_menu = (LinearLayout)findViewById(R.id.rl_book_menu);
+                if (rl_book_menu != null) {
+                    LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)rl_book_menu.getLayoutParams();
+                    if (lp != null) {
+                        lp.weight = 1;
+                    }
+                    rl_book_menu.requestLayout();
+                }
+            } else {
+                //p.getMenu().add(R.string.one_page)
+                closeDialogs();
+                onModeChange.setImageResource(R.drawable.my_glyphicons_two_page_one);
+                AppSP.get().isDouble = false;
+                AppSP.get().isDoubleCoverAlone = false;
+                AppSP.get().isCut = false;
+                AppSP.get().isSmartReflow = false;
+
+                SettingsManager.getBookSettings().updateFromAppState();
+                SharedBooks.save(SettingsManager.getBookSettings());
+
+
+                if (dc.isTextFormat()) {
+                    nullAdapter();
+                    dc.restartActivity();
+                    dc.cleanImageMatrix();
+                } else {
+                    TTSEngine.get().stop();
+                    dc.cleanImageMatrix();
+                    reloadDoc.run();
+                    authoFit();
+                }
+
+                LinearLayout rl_book_menu = (LinearLayout)findViewById(R.id.rl_book_menu);
+                if (rl_book_menu != null) {
+                    LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)rl_book_menu.getLayoutParams();
+                    if (lp != null) {
+                        lp.weight = 0;
+                    }
+                    rl_book_menu.requestLayout();
+                }
+            }
+        }
+    }
 }

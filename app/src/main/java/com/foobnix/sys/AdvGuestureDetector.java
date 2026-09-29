@@ -298,7 +298,7 @@ public class AdvGuestureDetector extends SimpleOnGestureListener implements IMul
 
     @Override
     public boolean onScroll(final MotionEvent e1, final MotionEvent e2, final float distanceX, final float distanceY) {
-        if (MainTabs2.USE_NEW_UI)  {
+        if (MainTabs2.USE_NEW_UI_DISABLE_SCROLL)  {
             //disable scroll
             return true;
         }

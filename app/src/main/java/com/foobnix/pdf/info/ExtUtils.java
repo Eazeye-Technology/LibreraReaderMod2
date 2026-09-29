@@ -43,6 +43,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.dseink.DualScreenConstant;
 import com.foobnix.LibreraApp;
 import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.Dips;
@@ -766,7 +767,7 @@ public class ExtUtils {
         }
         if (MainTabs2.MOD_VERSION) {
             AppSP.get().readingMode = AppState.READING_MODE_SCROLL;
-            showDocumentWithoutDialog(c, file, null);
+            showDocumentWithoutDialog(c, file, null, 0);
             return true;
         }
 
@@ -777,20 +778,20 @@ public class ExtUtils {
 
             if (AppState.get().prefScrollMode.contains(ext)) {
                 AppSP.get().readingMode = AppState.READING_MODE_SCROLL;
-                showDocumentWithoutDialog(c, file, null);
+                showDocumentWithoutDialog(c, file, null, 0);
                 return true;
             } else if (AppState.get().prefBookMode.contains(ext)) {
                 AppSP.get().readingMode = AppState.READING_MODE_BOOK;
-                showDocumentWithoutDialog(c, file, null);
+                showDocumentWithoutDialog(c, file, null, 0);
                 return true;
             } else if (AppState.get().prefMusicianMode.contains(ext)) {
                 AppSP.get().readingMode = AppState.READING_MODE_MUSICIAN;
-                showDocumentWithoutDialog(c, file, null);
+                showDocumentWithoutDialog(c, file, null, 0);
                 return true;
             }
         }
         if (AppState.get().isRememberMode) {
-            showDocumentWithoutDialog(c, file, null);
+            showDocumentWithoutDialog(c, file, null, 0);
             return true;
         }
 
@@ -916,7 +917,7 @@ public class ExtUtils {
             public void onClick(View v) {
                 dialog.dismiss();
                 AppSP.get().readingMode = AppState.READING_MODE_SCROLL;
-                showDocumentWithoutDialog(c, file, null);
+                showDocumentWithoutDialog(c, file, null, 0);
             }
         });
         horizontal.setOnClickListener(new View.OnClickListener() {
@@ -925,7 +926,7 @@ public class ExtUtils {
             public void onClick(View v) {
                 dialog.dismiss();
                 AppSP.get().readingMode = AppState.READING_MODE_BOOK;
-                showDocumentWithoutDialog(c, file, null);
+                showDocumentWithoutDialog(c, file, null, 0);
             }
         });
 
@@ -935,7 +936,7 @@ public class ExtUtils {
             public void onClick(View v) {
                 dialog.dismiss();
                 AppSP.get().readingMode = AppState.READING_MODE_MUSICIAN;
-                showDocumentWithoutDialog(c, file, null);
+                showDocumentWithoutDialog(c, file, null, 0);
             }
         });
 
@@ -963,23 +964,22 @@ public class ExtUtils {
 
     }
 
-    public static void showDocumentWithoutDialog(final Context c, final File file, String playlist) {
-        showDocumentWithoutDialog2(c, Uri.fromFile(file), 0.0f, playlist);
+    public static void showDocumentWithoutDialog(final Context c, final File file, String playlist, int isUseDualScreen) {
+        showDocumentWithoutDialog2(c, Uri.fromFile(file), 0.0f, playlist, isUseDualScreen);
     }
 
 
-    public static void showDocumentWithoutDialog2(final Context c, final Uri uri, final float percent, final String playList) {
+    public static void showDocumentWithoutDialog2(final Context c, final Uri uri, final float percent, final String playList, int isUseDualScreen) {
         Safe.run(new Runnable() {
-
             @Override
             public void run() {
-                showDocumentInner(c, uri, percent, playList);
+                showDocumentInner(c, uri, percent, playList, isUseDualScreen);
             }
         }, true);
 
     }
 
-    public static void showDocumentInner(final Context c, final Uri uri, final float percent, String playlist) {
+    public static void showDocumentInner(final Context c, final Uri uri, final float percent, String playlist, int isUseDualScreen) {
         if (!isValidFile(uri)) {
             Toast.makeText(c, R.string.file_not_found, Toast.LENGTH_LONG).show();
             return;
@@ -987,11 +987,11 @@ public class ExtUtils {
         LOG.d("showDocumentWithoutDialog2", uri.getPath(), percent, playlist);
 
         if (MainTabs2.USE_READER_HORIZONTAL) {
-            openHorizontalView(c, uri, percent, playlist);
+            openHorizontalView(c, uri, percent, playlist, isUseDualScreen);
             return;
         } else {
             if (AppSP.get().readingMode == AppState.READING_MODE_BOOK) {
-                openHorizontalView(c, uri, percent, playlist);
+                openHorizontalView(c, uri, percent, playlist, isUseDualScreen);
                 return;
             }
 
@@ -1003,6 +1003,7 @@ public class ExtUtils {
                 if (percent > 0f) {
                     Intents.putFloat(intent, DocumentController.EXTRA_PERCENT, percent);
                 }
+                intent.putExtra(DualScreenConstant.EXTRA_LAUNCH_SCREEN, isUseDualScreen);
             } catch (Exception e) {
                 LOG.e(e);
             }
@@ -1028,7 +1029,7 @@ public class ExtUtils {
         return uri;
     }
 
-    private static void openHorizontalView(final Context c, final Uri uri, final float percent, String playlist) {
+    private static void openHorizontalView(final Context c, final Uri uri, final float percent, String playlist, int isUseDualScreen) {
         if (uri == null) {
             Toast.makeText(c, R.string.file_not_found, Toast.LENGTH_LONG).show();
             return;
@@ -1044,6 +1045,8 @@ public class ExtUtils {
         try {
             intent.putExtra(PasswordDialog.EXTRA_APP_PASSWORD, ((Activity) c).getIntent().getStringExtra(PasswordDialog.EXTRA_APP_PASSWORD));
             intent.putExtra(DocumentController.EXTRA_PASSWORD, ((Activity) c).getIntent().getStringExtra(DocumentController.EXTRA_PASSWORD));
+
+            intent.putExtra(DualScreenConstant.EXTRA_LAUNCH_SCREEN, isUseDualScreen);
         } catch (Exception e) {
             LOG.e(e);
         }
@@ -1051,6 +1054,7 @@ public class ExtUtils {
         if (percent > 0f) {
             Intents.putFloat(intent, DocumentController.EXTRA_PERCENT, percent);
         }
+
         c.startActivity(intent);
 
         // FileMetaDB.get().addRecent(file.getPath());
@@ -1488,11 +1492,11 @@ public class ExtUtils {
                         public void run() {
                             if (a instanceof VerticalViewActivity) {
                                 AppSP.get().readingMode = AppState.READING_MODE_SCROLL;
-                                showDocumentWithoutDialog(a, (File) result, null);
+                                showDocumentWithoutDialog(a, (File) result, null, 0);
 
                             } else if (a instanceof HorizontalViewActivity) {
                                 AppSP.get().readingMode = AppState.READING_MODE_BOOK;
-                                showDocumentWithoutDialog(a, (File) result, null);
+                                showDocumentWithoutDialog(a, (File) result, null, 0);
                             } else {
                                 showDocumentWithoutDialog2(a, (File) result);
                             }

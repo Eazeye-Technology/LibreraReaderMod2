@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.documentfile.provider.DocumentFile;
@@ -46,7 +47,7 @@ import java.io.File;
 
 public class DefaultListeners {
 
-    public static void bindAdapter(final Activity a, final FileMetaAdapter searchAdapter, final DocumentController dc, final Runnable onClick) {
+    public static void bindAdapter(final Activity a, final FileMetaAdapter searchAdapter, final DocumentController dc, final Runnable onClick, final FrameLayout anchor) {
         searchAdapter.setOnItemClickListener(new ResultResponse<FileMeta>() {
 
             @Override
@@ -56,7 +57,7 @@ public class DefaultListeners {
 
                     @Override
                     public void run() {
-                        ExtUtils.showDocumentWithoutDialog(a, new File(result.getPath()), null);
+                        ExtUtils.showDocumentWithoutDialog(a, new File(result.getPath()), null, 0);
 
                     }
                 });
@@ -64,15 +65,15 @@ public class DefaultListeners {
             }
 
         });
-        searchAdapter.setOnItemLongClickListener(getOnItemLongClickListener(a, searchAdapter));
-        searchAdapter.setOnMenuClickListener(getOnMenuClick(a, searchAdapter));
+        searchAdapter.setOnItemLongClickListener(getOnItemLongClickListener(a, searchAdapter, anchor));
+        searchAdapter.setOnMenuClickListener(getOnMenuClick(a, searchAdapter, anchor));
         searchAdapter.setOnStarClickListener(getOnStarClick(a));
     }
 
-    public static void bindAdapter(final Activity a, final FileMetaAdapter searchAdapter) {
+    public static void bindAdapter(final Activity a, final FileMetaAdapter searchAdapter, final FrameLayout anchor) {
         searchAdapter.setOnItemClickListener(getOnItemClickListener(a));
-        searchAdapter.setOnItemLongClickListener(getOnItemLongClickListener(a, searchAdapter));
-        searchAdapter.setOnMenuClickListener(getOnMenuClick(a, searchAdapter));
+        searchAdapter.setOnItemLongClickListener(getOnItemLongClickListener(a, searchAdapter, anchor));
+        searchAdapter.setOnMenuClickListener(getOnMenuClick(a, searchAdapter, anchor));
         searchAdapter.setOnStarClickListener(getOnStarClick(a));
         searchAdapter.setOnTagClickListner(new ResultResponse<String>() {
 
@@ -188,7 +189,7 @@ public class DefaultListeners {
         return false;
     }
 
-    public static ResultResponse<FileMeta> getOnItemLongClickListener(final Activity a, final FileMetaAdapter searchAdapter) {
+    public static ResultResponse<FileMeta> getOnItemLongClickListener(final Activity a, final FileMetaAdapter searchAdapter, final FrameLayout anchor) {
         return new ResultResponse<FileMeta>() {
 
             @Override
@@ -232,7 +233,7 @@ public class DefaultListeners {
 
                 };
                 if (ExtUtils.doifFileExists(a, file)) {
-                    FileInformationDialog.showFileInfoDialog(a, file, onDeleteAction);
+                    FileInformationDialog.showFileInfoDialog(a, file, onDeleteAction, anchor);
                 }
                 return true;
             }
@@ -376,7 +377,7 @@ public class DefaultListeners {
         }.execute();
     }
 
-    public static ResultResponse<FileMeta> getOnMenuClick(final Activity a, final FileMetaAdapter searchAdapter) {
+    public static ResultResponse<FileMeta> getOnMenuClick(final Activity a, final FileMetaAdapter searchAdapter, final FrameLayout anchor) {
         return new ResultResponse<FileMeta>() {
 
             @Override
@@ -400,15 +401,15 @@ public class DefaultListeners {
                 };
 
                 if (ExtUtils.isExteralSD(result.getPath())) {
-                    ShareDialog.show(a, file, onDeleteAction, -1, null, null);
+                    ShareDialog.show(a, file, onDeleteAction, -1, null, null, anchor);
                 } else {
 
                     if (ExtUtils.doifFileExists(a, result.getPath())) {
 
                         if (ExtUtils.isNotSupportedFile(file)) {
-                            ShareDialog.showArchive(a, file, onDeleteAction);
+                            ShareDialog.showArchive(a, file, onDeleteAction, anchor);
                         } else {
-                            ShareDialog.show(a, file, onDeleteAction, -1, null, null);
+                            ShareDialog.show(a, file, onDeleteAction, -1, null, null, anchor);
                         }
                     }
                 }

@@ -2198,7 +2198,7 @@ public class DocumentWrapperUI {
                     hideShow();
 
                 }
-            });
+            }, anchor);
             Keyboards.hideNavigation(a);
             hideAds();
         }

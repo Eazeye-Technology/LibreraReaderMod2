@@ -113,6 +113,7 @@ public class MainTabs2 extends AdsFragmentActivity {
 
     public final static int DIALOG_STYLE = R.style.AlertDialogCustom_Destructive;
     public final static boolean USE_NEW_UI = true;
+    public final static boolean USE_NEW_UI_DISABLE_SCROLL = false;
     public final static boolean MOD_VERSION = true;
     public final static boolean USE_READER_HORIZONTAL = false;
 

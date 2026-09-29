@@ -6,12 +6,15 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Color;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.util.Pair;
 
+import com.dseink.DualScreenConstant;
+import com.dseink.EinkUtils;
 import com.foobnix.StringResponse;
 import com.foobnix.android.utils.BaseItemLayoutAdapter;
 import com.foobnix.android.utils.IO;
@@ -35,6 +38,7 @@ import com.foobnix.pdf.info.DialogSpeedRead;
 import com.foobnix.pdf.info.ExtUtils;
 import com.foobnix.pdf.info.IMG;
 import com.foobnix.pdf.info.Playlists;
+import com.foobnix.pdf.info.view.DragingDialogs;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.Urls;
@@ -68,7 +72,7 @@ import java.util.List;
 
 public class ShareDialog {
 
-    public static void showArchive(final Activity a, final File file, final Runnable onDeleteAction) {
+    public static void showArchive(final Activity a, final File file, final Runnable onDeleteAction, final FrameLayout anchor) {
         if (ExtUtils.isNotValidFile(file)) {
             Toast.makeText(a, R.string.file_not_found, Toast.LENGTH_LONG).show();
             return;
@@ -117,15 +121,13 @@ public class ShareDialog {
                         } else if (canDelete && which == i++) {
                             FileInformationDialog.dialogDelete(a, file, onDeleteAction);
                         } else if (isShowInfo && which == i++) {
-                            FileInformationDialog.showFileInfoDialog(a, file, onDeleteAction);
+                            FileInformationDialog.showFileInfoDialog(a, file, onDeleteAction, anchor);
                         }
 
                     }
                 });
         builder.show();
     }
-
-    ;
 
     public static void showsItemsDialog(final Activity a, String title, final String[] items) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
@@ -230,7 +232,7 @@ public class ShareDialog {
         create.show();
     }
 
-    public static void show(final Activity a, final File file, final Runnable onDeleteAction, final int page, final DocumentController dc, final Runnable hideShow) {
+    public static void show(final Activity a, final File file, final Runnable onDeleteAction, final int page, final DocumentController dc, final Runnable hideShow, final FrameLayout anchor) {
 
 
         if (file == null) {
@@ -331,6 +333,10 @@ public class ShareDialog {
         if (isShowInfo) {
             items.add(a.getString(R.string.file_info));
         }
+        if (anchor != null) {
+            items.add("Toggle dual-screen");
+            items.add(a.getString(R.string.page_position));//"Scale"); //show scale dialog //Move and Resize //Move and Zoom
+        }
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
         builder.setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
@@ -373,7 +379,7 @@ public class ShareDialog {
                             } else {
                                 AppSP.get().readingMode = AppState.READING_MODE_SCROLL;
                             }
-                            ExtUtils.showDocumentWithoutDialog(a, file, a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST));
+                            ExtUtils.showDocumentWithoutDialog(a, file, a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST), 0);
 
                         }
                     });
@@ -390,7 +396,7 @@ public class ShareDialog {
                                 } else {
                                     AppSP.get().readingMode = AppState.READING_MODE_BOOK;
                                 }
-                                ExtUtils.showDocumentWithoutDialog(a, file, a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST));
+                                ExtUtils.showDocumentWithoutDialog(a, file, a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST), 0);
                             }
                         });
                     }
@@ -401,7 +407,7 @@ public class ShareDialog {
                         @Override
                         public void run() {
                             AppSP.get().readingMode = AppState.READING_MODE_MUSICIAN;
-                            ExtUtils.showDocumentWithoutDialog(a, file, a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST));
+                            ExtUtils.showDocumentWithoutDialog(a, file, a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST), 0);
                         }
                     });
                 }
@@ -499,7 +505,11 @@ public class ShareDialog {
                     EventBus.getDefault().post(new UpdateAllFragments());
 
                 } else if (isShowInfo && which == i++) {
-                    FileInformationDialog.showFileInfoDialog(a, file, onDeleteAction);
+                    FileInformationDialog.showFileInfoDialog(a, file, onDeleteAction, anchor);
+                } else if (anchor != null && which == i++) { //Toggle dual-screen
+                    toggleDualScreen(a, dc, file);
+                } else if (anchor != null && which == i++) { // //show Scale dialog
+                    showScaleDialog(a, anchor, dc);
                 }
 
             }
@@ -519,6 +529,8 @@ public class ShareDialog {
 
         });
         create.show();
+        EinkUtils.centerToLeftScreen(a, create);
+
 //        MyPopupMenu menu = new MyPopupMenu(a, null);
 //
 //        menu.getMenu(R.drawable.glyphicons_basic_578_share, R.string.share, () -> ExtUtils.openPDFInTextReflow(a, file, page + 1, dc));
@@ -609,4 +621,79 @@ public class ShareDialog {
         inner.show();
     }
 
+
+    private static boolean isUseDualScreen = false;
+    public static void toggleDualScreen(Activity a, final DocumentController dc, final File file) {
+        isUseDualScreen = EinkUtils.getCurrentScreenPos(a, DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE)
+                == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH;
+        isUseDualScreen = !isUseDualScreen;
+        moveToScreenPanel(isUseDualScreen, a);
+        if (isUseDualScreen) {
+            //horizon
+            if (dc != null) {
+                dc.onCloseActivityFinal(new Runnable() {
+                    @Override
+                    public void run() {
+//                        if (dc.isMusicianMode()) {
+//                            AppSP.get().readingMode = AppState.READING_MODE_SCROLL;
+//                        } else {
+                            AppSP.get().readingMode = AppState.READING_MODE_BOOK;
+//                        }
+                        ExtUtils.showDocumentWithoutDialog(a, file,
+                                a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST), DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH);
+                    }
+                });
+            }
+        } else {
+            //vertical
+            dc.onCloseActivityFinal(new Runnable() {
+                @Override
+                public void run() {
+//                    if (dc.isMusicianMode()) {
+//                        AppSP.get().readingMode = AppState.READING_MODE_BOOK;
+//                    } else {
+                        AppSP.get().readingMode = AppState.READING_MODE_SCROLL;
+//                    }
+                    ExtUtils.showDocumentWithoutDialog(a, file,
+                            a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST), DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE);
+                }
+            });
+
+        }
+    }
+
+    private static int screenPos = 0;
+    private static void moveToScreenPanel(boolean isUseDualScreen, Activity a) {
+        if (isUseDualScreen) {
+            screenPos = EinkUtils.getCurrentScreenPos(a, 0);
+            EinkUtils.moveToScreenPanel(a, DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH);
+        } else {
+            EinkUtils.moveToScreenPanel(a, screenPos);
+        }
+    }
+
+    //Scale
+    //Contrast and Brightness
+    //class AdvGuestureDetector, disable scroll, USE_NEW_UI_DISABLE_SCROLL, onTwoFingerPinch(), onScroll()
+    //avc.base.getZoomModel().scaleZoom(factor1);
+    //PageImaveView
+    //PdfSurfaceView
+    //
+    //@Subscribe
+    //public void onMovePage(MovePageAction event) {
+    public static void showScaleDialog(Activity a, final FrameLayout anchor, final DocumentController dc) {
+        if (false) {
+            DragingDialogs.contrastAndBrigtness(anchor, dc, new Runnable() {
+                @Override
+                public void run() {
+//                onBC.underline(AppState.get().isEnableBC);
+                    dc.updateRendering();
+                }
+            }, null);
+        } else if (true) {
+            DragingDialogs.onMoveDialog(anchor, dc, null, null);
+        } else {
+            DragingDialogs.onScaleDialog(anchor, dc, null, null, dc);
+        }
+    }
 }

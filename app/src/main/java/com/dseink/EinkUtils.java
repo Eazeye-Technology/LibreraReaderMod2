@@ -95,4 +95,21 @@ public class EinkUtils {
             }
         }
     }
+
+    public static boolean moveToScreenPanel(Activity activity, int panel) {
+        try {
+            Activity act = (Activity) activity;
+            //return act.getCurrentScreenPanel();
+            Boolean result = null;
+            try {
+                result = ReflectUtils.reflect(act).method("moveToScreenPanel", panel).get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result != null ? result.booleanValue() : false;
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

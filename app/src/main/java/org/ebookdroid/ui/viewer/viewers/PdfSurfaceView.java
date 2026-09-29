@@ -9,7 +9,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
 
+import com.foobnix.android.utils.LOG;
 import com.foobnix.pdf.search.activity.msg.MessagePageXY;
+import com.foobnix.pdf.search.activity.msg.MovePageAction;
 
 import org.ebookdroid.common.settings.types.PageAlign;
 import org.ebookdroid.core.EventPool;
@@ -18,8 +20,11 @@ import org.ebookdroid.core.ViewState;
 import org.ebookdroid.ui.viewer.IActivityController;
 import org.ebookdroid.ui.viewer.IView;
 import org.ebookdroid.ui.viewer.IViewController;
+import org.ebookdroid.ui.viewer.VerticalViewActivity;
+import org.ebookdroid.ui.viewer.ViewerActivityController;
 import org.emdev.utils.MathUtils;
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public final class PdfSurfaceView extends android.view.View implements IView{
 
@@ -34,6 +39,7 @@ public final class PdfSurfaceView extends android.view.View implements IView{
         super(baseActivity.getContext());
         this.base = baseActivity;
         this.scroller = new Scroller(getContext());
+        EventBus.getDefault().register(this);
     }
 
 
@@ -312,5 +318,71 @@ public final class PdfSurfaceView extends android.view.View implements IView{
     @Override
     public PointF getBase(final RectF viewRect) {
         return new PointF(viewRect.left, viewRect.top);
+    }
+
+
+
+    @Subscribe
+    public void onMovePage(MovePageAction event) {
+//        if (pageNumber != event.getPage()) {
+//            return;
+//        }
+//        int k = Dips.dpToPx(3);
+//        float scale = 0.03f;
+//
+//        final float values[] = new float[9];
+//        imageMatrix().getValues(values);
+//        float mScale = values[Matrix.MSCALE_X];
+//
+//        int w = (drawableWidth) / 2;
+//        int h = (drawableHeight) / 2;
+//
+//        if (MovePageAction.CENTER == event.getAction()) {
+//            LOG.d("Action center", event.getPage());
+//            PageImageState.get().isAutoFit = true;
+//            onAutoFit(new MessageAutoFit(event.getPage()));
+//            return;
+//        }
+
+        if (MovePageAction.LEFT == event.getAction()) {
+//            imageMatrix().postTranslate(-1 * k, 0);
+            this.getView().scrollBy(100, 0);
+        } else if (MovePageAction.RIGHT == event.getAction()) {
+//            imageMatrix().postTranslate(k, 0);
+            this.getView().scrollBy(-100, 0);
+        } else if (MovePageAction.UP == event.getAction()) {
+//            imageMatrix().postTranslate(0, k * -1);
+            this.getView().scrollBy(0, -100);
+        } else if (MovePageAction.DOWN == event.getAction()) {
+//            imageMatrix().postTranslate(0, k);
+            this.getView().scrollBy(0, 100);
+        } else if (MovePageAction.ZOOM_PLUS == event.getAction()) {
+//            imageMatrix().postScale(1 + scale, 1 + scale, w, h);
+            this.base.getZoomModel().scaleZoom(1.1f);
+            this.base.getZoomModel().commit();
+        } else if (MovePageAction.ZOOM_MINUS == event.getAction()) {
+//            imageMatrix().postScale(1 - scale, 1 - scale, w, h);
+            this.base.getZoomModel().scaleZoom(0.9f);
+            this.base.getZoomModel().commit();
+        } else if (MovePageAction.CENTER == event.getAction()) {
+            //this.base.getZoomModel().alignDocument(); //setZoom(1.0f);
+            //((VerticalViewActivity)this.base).getController().getWrapperControlls().getController().alignDocument();
+            //this.base.getZoomModel().initZoom(1.0f);
+            if (this.base instanceof ViewerActivityController) {
+                ((ViewerActivityController) this.base).getWrapperControlls().getController().alignDocument();
+                ((ViewerActivityController) this.base).getWrapperControlls().getController().centerHorizontal();
+            }
+        }
+//        LOG.d("MMM SCALE", mScale);
+
+//        PageImageState.get().isAutoFit = false;
+//        invalidateAndMsg();
+
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        EventBus.getDefault().unregister(this);
     }
 }

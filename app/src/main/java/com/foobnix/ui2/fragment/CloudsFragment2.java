@@ -81,7 +81,7 @@ public class CloudsFragment2 extends UIFragment<FileMeta> {
 
         metaAdapter = new FileMetaAdapter();
         metaAdapter.tempValue = FileMetaAdapter.TEMP_VALUE_FOLDER_PATH;
-        bindAdapter(metaAdapter);
+        bindAdapter(metaAdapter, null);
         bindAuthorsSeriesAdapter(metaAdapter);
 
         onGridList();

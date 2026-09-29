@@ -801,6 +801,146 @@ public class DragingDialogs {
 
     }
 
+
+    public static void onScaleDialog(final FrameLayout anchor, final DocumentController controller, final Runnable onRefresh, final Runnable updateUIRefresh, final DocumentController dc) {
+        if (controller == null) {
+            return;
+        }
+
+        //Scale
+        DragingPopup dialog = new DragingPopup("Zoom", anchor, 280, 250) {
+
+            @Override
+            @SuppressLint("NewApi")
+            public View getContentView(LayoutInflater inflater) {
+                final Activity activity = controller.getActivity();
+                final View view = inflater.inflate(R.layout.dialog_move_manually, null, false);
+                ImageView onUp = view.findViewById(R.id.onUp);
+                ImageView onDonw = view.findViewById(R.id.onDown);
+                ImageView onLeft = view.findViewById(R.id.onLeft);
+                ImageView onRight = view.findViewById(R.id.onRight);
+                ImageView onPlus = view.findViewById(R.id.onPlus);
+                ImageView onMinus = view.findViewById(R.id.onMinus);
+                ImageView onCenter = view.findViewById(R.id.onCenter);
+                final ImageView onCrop = view.findViewById(R.id.onCrop);
+
+                onUp.setVisibility(View.GONE);
+                onDonw.setVisibility(View.GONE);
+                onLeft.setVisibility(View.GONE);
+                onRight.setVisibility(View.GONE);
+                onPlus.setVisibility(View.VISIBLE);
+                onMinus.setVisibility(View.VISIBLE);
+                onCenter.setVisibility(View.VISIBLE);
+                onCrop.setVisibility(View.GONE);
+
+                if (AppState.get().isDayNotInvert) {
+                    TintUtil.setTintImageWithAlpha(onUp);
+                    TintUtil.setTintImageWithAlpha(onDonw);
+                    TintUtil.setTintImageWithAlpha(onLeft);
+                    TintUtil.setTintImageWithAlpha(onRight);
+                    TintUtil.setTintImageWithAlpha(onPlus);
+                    TintUtil.setTintImageWithAlpha(onMinus);
+                    TintUtil.setTintImageWithAlpha(onCenter);
+                    TintUtil.setTintImageWithAlpha(onCrop);
+                } else {
+                    TintUtil.setTintImageWithAlpha(onUp, Color.WHITE);
+                    TintUtil.setTintImageWithAlpha(onDonw, Color.WHITE);
+                    TintUtil.setTintImageWithAlpha(onLeft, Color.WHITE);
+                    TintUtil.setTintImageWithAlpha(onRight, Color.WHITE);
+                    TintUtil.setTintImageWithAlpha(onPlus, Color.WHITE);
+                    TintUtil.setTintImageWithAlpha(onMinus, Color.WHITE);
+                    TintUtil.setTintImageWithAlpha(onCenter, Color.WHITE);
+                    TintUtil.setTintImageWithAlpha(onCrop, Color.WHITE);
+                }
+
+                onCrop.setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        AppSP.get().isCrop = !AppSP.get().isCrop;
+                        SettingsManager.getBookSettings().updateFromAppState();
+                        updateUIRefresh.run();
+
+                        if (AppSP.get().isCrop) {
+                            TintUtil.setTintImageWithAlpha(onCrop, TintUtil.COLOR_ORANGE);
+                        } else {
+                            TintUtil.setTintImageWithAlpha(onCrop, AppState.get().isDayNotInvert ? TintUtil.color : Color.WHITE);
+                        }
+                    }
+                });
+
+                if (AppSP.get().isCrop) {
+                    TintUtil.setTintImageWithAlpha(onCrop, TintUtil.COLOR_ORANGE);
+                } else {
+                    TintUtil.setTintImageWithAlpha(onCrop, AppState.get().isDayNotInvert ? TintUtil.color : Color.WHITE);
+                }
+
+                OnClickListener listner = new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        int id = v.getId();
+                        int aciton = -1;
+
+                        if (id == R.id.onUp) {
+                            aciton = MovePageAction.UP;
+                        } else if (id == R.id.onDown) {
+                            aciton = MovePageAction.DOWN;
+                        } else if (id == R.id.onLeft) {
+                            aciton = MovePageAction.LEFT;
+                        } else if (id == R.id.onRight) {
+                            aciton = MovePageAction.RIGHT;
+                        } else if (id == R.id.onPlus) {
+                            aciton = MovePageAction.ZOOM_PLUS;
+                        } else if (id == R.id.onMinus) {
+                            aciton = MovePageAction.ZOOM_MINUS;
+                        } else if (id == R.id.onCenter) {
+                            aciton = MovePageAction.CENTER;
+                        }
+
+
+                        if (aciton == MovePageAction.UP) {
+
+                        } else if (aciton == MovePageAction.DOWN) {
+
+                        } else if (aciton == MovePageAction.LEFT) {
+
+                        } else if (aciton == MovePageAction.RIGHT) {
+
+                        } else if (aciton == MovePageAction.ZOOM_PLUS) {
+                            //controller.
+                            //dc.getUi()
+                        } else if (aciton == MovePageAction.ZOOM_MINUS) {
+
+                        } else if (aciton == MovePageAction.CENTER) {
+
+                        }
+                    }
+                };
+
+                onUp.setOnClickListener(listner);
+                onDonw.setOnClickListener(listner);
+                onLeft.setOnClickListener(listner);
+                onRight.setOnClickListener(listner);
+                onPlus.setOnClickListener(listner);
+                onMinus.setOnClickListener(listner);
+                onCenter.setOnClickListener(listner);
+
+                return view;
+            }
+        };
+        dialog.setOnCloseListener(new Runnable() {
+
+            @Override
+            public void run() {
+
+            }
+
+        });
+        dialog.show("MovePage");
+
+    }
+
     public static void textToSpeachDialog(final FrameLayout anchor, final DocumentController controller) {
         if (controller == null) {
             return;
@@ -2747,7 +2887,7 @@ public class DragingDialogs {
                     public void run() {
                         closeDialog();
                     }
-                });
+                }, anchor);
 
                 return recyclerView;
             }

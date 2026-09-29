@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,6 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dseink.DualScreenConstant;
+import com.dseink.EinkUtils;
 import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.Keyboards;
@@ -170,7 +173,18 @@ public abstract class DragingPopup {
             String tag = getTAG() + Dips.screenWidth();
             if (cache.containsKey(tag)) {
                 Place place = cache.get(tag);
-                AnchorHelper.setXY(anchor, place.x, place.y);
+
+                Activity act = (Activity) anchor.getContext();
+                if (anchor != null && EinkUtils.getCurrentScreenPos(act,
+                        DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE) == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+                    //EinkUtils.centerToLeftScreen();
+                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                    act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                    int screenWidth = displayMetrics.widthPixels;
+                    AnchorHelper.setXY(anchor, place.x - (int)(screenWidth*0.25), place.y);
+                } else {
+                    AnchorHelper.setXY(anchor, place.x, place.y);
+                }
                 popupView.getLayoutParams().width = place.width;
                 popupView.getLayoutParams().height = place.height;
 
@@ -178,7 +192,17 @@ public abstract class DragingPopup {
 
                 popupView.requestLayout();
             } else {
-                AnchorHelper.setXY(anchor, Dips.dpToPx(Dips.screenWidthDP() - width) / 2, (Dips.screenHeight() - heigth) / 2);
+                Activity act = (Activity) anchor.getContext();
+                if (anchor != null && EinkUtils.getCurrentScreenPos(act,
+                        DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE) == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+                    //EinkUtils.centerToLeftScreen();
+                    DisplayMetrics displayMetrics = new DisplayMetrics();
+                    act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                    int screenWidth = displayMetrics.widthPixels;
+                    AnchorHelper.setXY(anchor, Dips.dpToPx(Dips.screenWidthDP() - width) / 2  - (int)(screenWidth*0.25), (Dips.screenHeight() - heigth) / 2);
+                } else {
+                    AnchorHelper.setXY(anchor, Dips.dpToPx(Dips.screenWidthDP() - width) / 2, (Dips.screenHeight() - heigth) / 2);
+                }
                 popupView.getLayoutParams().width = Dips.dpToPx(width);
                 popupView.getLayoutParams().height = heigth;// Dips.dpToPx(heigth);
                 popupView.requestLayout();
@@ -311,7 +335,7 @@ public abstract class DragingPopup {
                 postAction();
             }
         });
-        topHeaderLayout.setOnTouchListener(new OnTouchListener() {
+        topHeaderLayout.setOnTouchListener(new OnTouchListener() { //drag here
 
             private GestureDetector gestureDetector = new GestureDetector(topHeaderLayout.getContext(), new GestureDetector.SimpleOnGestureListener() {
                 @Override

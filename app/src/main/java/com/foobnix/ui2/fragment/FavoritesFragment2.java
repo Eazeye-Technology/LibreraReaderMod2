@@ -71,7 +71,7 @@ public class FavoritesFragment2 extends UIFragment<FileMeta> {
 
         recentAdapter = new FileMetaAdapter();
         recentAdapter.tempValue = FileMetaAdapter.TEMP_VALUE_FOLDER_PATH;
-        bindAdapter(recentAdapter);
+        bindAdapter(recentAdapter, null);
         bindAuthorsSeriesAdapter(recentAdapter);
 
         syncronizedBooksTitle = getString(R.string.synchronized_books);

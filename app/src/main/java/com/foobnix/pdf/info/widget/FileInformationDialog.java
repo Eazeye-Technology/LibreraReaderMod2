@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -95,11 +96,11 @@ public class FileInformationDialog {
         return TxtUtils.joinList("\n", res);
     }
 
-    public static void showFileInfoDialog(final Activity a, final File file, final Runnable onDeleteAction) {
-        showFileInfoDialog(a, file, onDeleteAction, true);
+    public static void showFileInfoDialog(final Activity a, final File file, final Runnable onDeleteAction, final FrameLayout anchor) {
+        showFileInfoDialog(a, file, onDeleteAction, true, anchor);
     }
 
-    public static void showFileInfoDialog(final Activity a, final File file, final Runnable onDeleteAction, boolean firstTime) {
+    public static void showFileInfoDialog(final Activity a, final File file, final Runnable onDeleteAction, boolean firstTime, final FrameLayout anchor) {
         ADS.hideAdsTemp(a);
 
         final FileMeta fileMeta = AppDB.get().getOrCreate(file.getPath());
@@ -113,7 +114,7 @@ public class FileInformationDialog {
             new AsyncProgressResultToastTask(a, new ResultResponse<Boolean>() {
                 @Override
                 public boolean onResultRecive(Boolean result) {
-                    showFileInfoDialog(a, file, onDeleteAction, false);
+                    showFileInfoDialog(a, file, onDeleteAction, false, anchor);
                     return false;
                 }
             }) {
@@ -258,7 +259,7 @@ public class FileInformationDialog {
                 adapter.getItemsList().addAll(result);
                 recyclerView.setAdapter(adapter);
 
-                DefaultListeners.bindAdapter(a, adapter);
+                DefaultListeners.bindAdapter(a, adapter, anchor);
                 adapter.setOnItemLongClickListener(new ResultResponse<FileMeta>() {
 
                     @Override

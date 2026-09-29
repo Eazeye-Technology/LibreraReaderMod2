@@ -257,7 +257,7 @@ public class DialogsPlaylist {
                 Playlists.updatePlaylist(file, res);
                 EventBus.getDefault().post(new UpdateAllFragments());
 
-                ExtUtils.showDocumentWithoutDialog2(a, Uri.fromFile(new File(result)), -1, file);
+                ExtUtils.showDocumentWithoutDialog2(a, Uri.fromFile(new File(result)), -1, file, 0);
             }
 
         }, false);
@@ -368,7 +368,7 @@ public class DialogsPlaylist {
 
                         @Override
                         public void run() {
-                            ExtUtils.showDocumentWithoutDialog(a, new File(s), palylistPath);
+                            ExtUtils.showDocumentWithoutDialog(a, new File(s), palylistPath, 0);
                         }
                     });
                 }

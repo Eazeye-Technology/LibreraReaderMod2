@@ -339,7 +339,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
         });
 
         searchAdapter = new FileMetaAdapter();
-        bindAdapter(searchAdapter);
+        bindAdapter(searchAdapter, null);
         bindAuthorsSeriesAdapter(searchAdapter);
 
         onGridList();
@@ -626,7 +626,7 @@ public class BrowseFragment2 extends UIFragment<FileMeta> {
                         deleteFolderPopup(getActivity(), result.getPath());
                     }
                 } else {
-                    DefaultListeners.getOnItemLongClickListener(getActivity(), searchAdapter).onResultRecive(result);
+                    DefaultListeners.getOnItemLongClickListener(getActivity(), searchAdapter, null).onResultRecive(result);
                 }
                 return false;
             }

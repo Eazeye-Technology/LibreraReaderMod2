@@ -564,7 +564,7 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
         });
         sortOrder.setVisibility(TxtUtils.visibleIf(AppState.get().isVisibleSorting));
 
-        bindAdapter(searchAdapter);
+        bindAdapter(searchAdapter, null);
 
         searchAdapter.setOnAuthorClickListener(onAuthorClick);
         searchAdapter.setOnSeriesClickListener(onSeriesClick);

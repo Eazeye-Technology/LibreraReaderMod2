@@ -136,7 +136,7 @@ public class RecentFragment2 extends UIFragment<FileMeta> {
             recentAdapter.hidePath = true;
         }
         recentAdapter.tempValue = FileMetaAdapter.TEMP_VALUE_FOLDER_PATH;
-        bindAdapter(recentAdapter);
+        bindAdapter(recentAdapter, null);
         bindAuthorsSeriesAdapter(recentAdapter);
 
         recentAdapter.setOnDeleteClickListener(onDeleteRecentClick);

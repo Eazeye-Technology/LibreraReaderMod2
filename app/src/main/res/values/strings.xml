@@ -281,7 +281,7 @@
    <string name="serie">Series</string>
    <string name="___READING___SCREEN___SECTION___"></string>
    <string name="enter_password">Enter Password</string>
-   <string name="page_position">Move and Resize</string>
+   <string name="page_position">Move and Zoom</string> <!--Move and Resize-->
    <string name="open_web_page">Open Web page</string>
    <string name="hide_app">Minimize</string>
    <string name="go_to_the_library">Open Library</string>

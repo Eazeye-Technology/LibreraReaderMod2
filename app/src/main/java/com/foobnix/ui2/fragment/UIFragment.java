@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -182,8 +183,8 @@ public abstract class UIFragment<T> extends Fragment {
         notifyFragment();
     }
 
-    public void bindAdapter(FileMetaAdapter searchAdapter) {
-        DefaultListeners.bindAdapter(getActivity(), searchAdapter);
+    public void bindAdapter(FileMetaAdapter searchAdapter, final FrameLayout anchor) {
+        DefaultListeners.bindAdapter(getActivity(), searchAdapter, anchor);
     }
 
     public void bindAuthorsSeriesAdapter(FileMetaAdapter searchAdapter) {
