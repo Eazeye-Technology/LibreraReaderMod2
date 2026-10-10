@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
@@ -463,8 +464,10 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 
     @Override
     public boolean onKeyUp(final int keyCode, final KeyEvent event) {
+        Log.e("onKeyUp", "onKeyUp 1");
         if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                Log.e("onKeyUp", "onKeyUp 2");
                 return super.onKeyUp(keyCode, event);
             }
             if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
@@ -478,6 +481,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
                     getController().getWrapperControlls().nextChose(false, event.getRepeatCount());
                     Toast.makeText(this, "Next Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1), Toast.LENGTH_SHORT).show();
                 } catch (Throwable eee) { eee.printStackTrace(); }
+                Log.e("onKeyUp", "onKeyUp 3 page down");
                 return true;
             } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
                 //onPageDown();
@@ -491,52 +495,64 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
                     Toast.makeText(this, "Previous Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1), Toast.LENGTH_SHORT).show();
 
                 } catch (Throwable eee) { eee.printStackTrace(); }
+                Log.e("onKeyUp", "onKeyUp 4 page up");
                 return true;
             }
         }
 
         LOG.d("onKeyUp");
-        if (isMyKey) {
-            return true;
-        }
+        if (USE_REPEAT_LOGIC) {
+            if (isMyKey) {
+                Log.e("onKeyUp", "onKeyUp 5 isMyKey");
+                return true;
+            }
 
-        if (getController().getWrapperControlls().dispatchKeyEventUp(event)) {
-            return true;
+            if (getController().getWrapperControlls().dispatchKeyEventUp(event)) {
+                Log.e("onKeyUp", "onKeyUp 6");
+                return true;
+            }
         }
+        Log.e("onKeyUp", "onKeyUp 7 end");
         return super.onKeyUp(keyCode, event);
     }
 
     long keyTimeout = 0;
 
+    private final static boolean USE_REPEAT_LOGIC = false;
     @Override
     public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+        Log.e("onKeyUp", "onKeyDown 1");
         if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                Log.e("onKeyUp", "onKeyDown 2");
                 return super.onKeyDown(keyCode, event);
             }
         }
 
+        Log.e("onKeyUp", "onKeyDown 3");
         LOG.d("onKeyDown");
-        isMyKey = false;
-        int repeatCount = event.getRepeatCount();
-        if (repeatCount >= 1 && repeatCount < DocumentController.REPEAT_SKIP_AMOUNT) {
-            isMyKey = true;
-            return true;
+        if (USE_REPEAT_LOGIC) {
+            isMyKey = false;
+            int repeatCount = event.getRepeatCount();
+            if (repeatCount >= 1 && repeatCount < DocumentController.REPEAT_SKIP_AMOUNT) {
+                isMyKey = true;
+                return true;
+            }
+
+            if (repeatCount == 0 && System.currentTimeMillis() - keyTimeout < 250) {
+                LOG.d("onKeyDown timeout", System.currentTimeMillis() - keyTimeout);
+                isMyKey = true;
+                return true;
+            }
+
+            keyTimeout = System.currentTimeMillis();
+
+            if (getController().getWrapperControlls().dispatchKeyEventDown(event)) {
+                isMyKey = true;
+                return true;
+            }
         }
-
-        if (repeatCount == 0 && System.currentTimeMillis() - keyTimeout < 250) {
-            LOG.d("onKeyDown timeout", System.currentTimeMillis() - keyTimeout);
-            isMyKey = true;
-            return true;
-        }
-
-        keyTimeout = System.currentTimeMillis();
-
-
-        if (getController().getWrapperControlls().dispatchKeyEventDown(event)) {
-            isMyKey = true;
-            return true;
-        }
+        Log.e("onKeyUp", "onKeyDown 4");
         return super.onKeyDown(keyCode, event);
     }
 
