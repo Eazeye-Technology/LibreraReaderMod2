@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Environment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,6 +71,9 @@ import org.ebookdroid.droids.mupdf.codec.PdfContext;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -653,6 +658,67 @@ public class FileInformationDialog {
                     onDeleteAction.run();
                     AppData.get().removeRecent(new FileMeta(file.getPath()));
                 }
+
+            }
+        }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int id) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    public static void dialogImport(final Activity a, final File file, final Runnable onDeleteAction) {
+        if (file == null || onDeleteAction == null) {
+            return;
+        }
+        final AlertDialog.Builder builder = new AlertDialog.Builder(a, MainTabs2.DIALOG_STYLE);
+        String name = file.getName();
+        builder.setMessage("Import this file to Download folder?" + "\n\"" + name + "\"").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int id) {
+                new AsyncProgressResultToastTask(a) {
+                    @Override
+                    protected Boolean doInBackground(Object... objects) {
+                        try {
+                            if (file != null) {
+                                try {
+                                    File downloadsDir = Environment.getExternalStoragePublicDirectory(
+                                            Environment.DIRECTORY_DOWNLOADS);
+                                    if (!downloadsDir.exists()) downloadsDir.mkdirs();
+                                    File destFile = new File(downloadsDir, file.getName());
+                                    try (FileInputStream fis = new FileInputStream(file);
+                                         FileOutputStream fos = new FileOutputStream(destFile)) {
+                                        byte[] buffer = new byte[8192];
+                                        int len;
+                                        while ((len = fis.read(buffer)) != -1) {
+                                            fos.write(buffer, 0, len);
+                                        }
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                } catch (Throwable eee) {
+                                    eee.printStackTrace();
+                                }
+                            }
+                        } catch (Exception e) {
+                            LOG.e(e);
+                            return false;
+                        }
+                        return true;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Boolean result) {
+                        super.onPostExecute(result);
+                        if (result != null && result.booleanValue()  == true) {
+                            Toast.makeText(a, "File import completed", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(a, "File import failed", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }.execute();
 
             }
         }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {

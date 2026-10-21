@@ -1,6 +1,7 @@
 package com.foobnix.pdf.search.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +21,7 @@ import android.os.Looper;
 import android.os.Parcelable;
 import android.text.InputType;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -2305,8 +2307,64 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         ttsActive.setLayoutParams(layoutParams);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
-    public boolean onKeyUp(final int keyCode, final KeyEvent event) {
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        //Log.e(TAG, "dispatchKeyEvent == " + event.toString());
+        try {
+            if (event != null && event.getAction() == KeyEvent.ACTION_UP) {
+                int keyCode = event.getKeyCode();
+                if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
+                    if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                        Log.e("onKeyUp", "onKeyUp 2");
+                        return true; //super.dispatchKeyEvent(event);
+                    }
+                    if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
+                        try {
+                            closeDialogs();
+                            nextPage();
+                            Toast.makeText(this, "Next Page: " + (dc.getCurentPage() + 1), Toast.LENGTH_SHORT).show();
+                        } catch (Throwable eee) {
+                            eee.printStackTrace();
+                            Toast.makeText(this, "Next Page: " + (dc.getCurentPage() + 1) + "," + eee.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        flippingTimer = 0;
+                        isMyKey = true;
+                        return true;
+                    } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
+                        try {
+                            closeDialogs();
+                            prevPage();
+                            Toast.makeText(this, "Previous Page: " + (dc.getCurentPage() + 1), Toast.LENGTH_SHORT).show();
+                        } catch (Throwable eee) {
+                            eee.printStackTrace();
+                            Toast.makeText(this, "Previous Page: " + (dc.getCurentPage() + 1) + "," + eee.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        flippingTimer = 0;
+                        isMyKey = true;
+                        return true;
+                    }
+                }
+            } else if (event != null && event.getAction() == KeyEvent.ACTION_DOWN) {
+                int keyCode = event.getKeyCode();
+                if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
+                    if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                        Log.e("onKeyDown", "onKeyDown 2");
+                        return true; //return super.dispatchKeyEvent(event);
+                    }
+                    return true; //
+                }
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+
+    //see dispatchKeyEvent
+    //@Override
+    public boolean onKeyUp__(final int keyCode, final KeyEvent event) {
         if (MainTabs2.USE_NEW_UI) {
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
                 return super.onKeyUp(keyCode, event);
@@ -2327,9 +2385,12 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                     closeDialogs();
                     nextPage();
                     Toast.makeText(this, "Next Page: " + (dc.getCurentPage() + 1), Toast.LENGTH_SHORT).show();
-////                flippingTimer = 0;
-//                isMyKey = true;
-                } catch (Throwable eee) { eee.printStackTrace(); }
+                } catch (Throwable eee) {
+                    eee.printStackTrace();
+                    Toast.makeText(this, "Next Page: " + (dc.getCurentPage() + 1) + "," + eee.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                flippingTimer = 0;
+                isMyKey = true;
                 return true;
             } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
                 //onPageUp();
@@ -2348,9 +2409,12 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                     closeDialogs();
                     prevPage();
                     Toast.makeText(this, "Previous Page: " + (dc.getCurentPage() + 1), Toast.LENGTH_SHORT).show();
-                } catch (Throwable eee) { eee.printStackTrace(); }
-//                flippingTimer = 0;
-//                isMyKey = true;
+                } catch (Throwable eee) {
+                    eee.printStackTrace();
+                    Toast.makeText(this, "Previous Page: " + (dc.getCurentPage() + 1) + "," + eee.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                flippingTimer = 0;
+                isMyKey = true;
                 return true;
             }
         }
@@ -2416,8 +2480,9 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         return super.onKeyUp(keyCode, event);
     }
 
-    @Override
-    public boolean onKeyDown(final int keyCode1, final KeyEvent event) {
+    //see dispatchKeyEvent
+    //@Override
+    public boolean onKeyDown___(final int keyCode1, final KeyEvent event) {
         if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
                 return super.onKeyDown(keyCode1, event);

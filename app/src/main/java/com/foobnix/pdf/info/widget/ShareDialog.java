@@ -96,6 +96,7 @@ public class ShareDialog {
 
         if (isShowInfo) {
             items.add(a.getString(R.string.file_info));
+            items.add("Import file to Download folder");
         }
 
         final String chooseTitle = file != null ? file.getPath() : a.getString(R.string.choose_);
@@ -122,6 +123,8 @@ public class ShareDialog {
                             FileInformationDialog.dialogDelete(a, file, onDeleteAction);
                         } else if (isShowInfo && which == i++) {
                             FileInformationDialog.showFileInfoDialog(a, file, onDeleteAction, anchor);
+                        } else if (isShowInfo && which == i++) {
+                            FileInformationDialog.dialogImport(a, file, onDeleteAction);
                         }
 
                     }
@@ -332,6 +335,7 @@ public class ShareDialog {
 
         if (isShowInfo) {
             items.add(a.getString(R.string.file_info));
+            items.add("Import file to Download folder");
         }
         if (anchor != null) {
             items.add("Toggle dual-screen");
@@ -506,6 +510,8 @@ public class ShareDialog {
 
                 } else if (isShowInfo && which == i++) {
                     FileInformationDialog.showFileInfoDialog(a, file, onDeleteAction, anchor);
+                } else if (isShowInfo && which == i++) {
+                    FileInformationDialog.dialogImport(a, file, onDeleteAction);
                 } else if (anchor != null && which == i++) { //Toggle dual-screen
                     toggleDualScreen(a, dc, file);
                 } else if (anchor != null && which == i++) { // //show Scale dialog

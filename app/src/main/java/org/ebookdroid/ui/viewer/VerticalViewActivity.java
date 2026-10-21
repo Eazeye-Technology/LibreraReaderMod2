@@ -460,10 +460,75 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 
     }
 
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        //Log.e(TAG, "dispatchKeyEvent == " + event.toString());
+        try {
+            if (event != null && event.getAction() == KeyEvent.ACTION_UP) {
+                int keyCode = event.getKeyCode();
+                if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
+                    if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                        Log.e("onKeyUp", "onKeyUp 2");
+                        return true; //super.dispatchKeyEvent(event);
+                    }
+                    if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
+                        //onPageUp();
+                        //search prevChose
+//                if (getController().getWrapperControlls().closeDialogs()) {
+//                    return true;
+//                }
+                        try {
+                            getController().getWrapperControlls().closeDialogs();
+                            getController().getWrapperControlls().nextChose(false, event.getRepeatCount());
+                            Toast.makeText(this, "Next Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1), Toast.LENGTH_SHORT).show();
+                        } catch (Throwable eee) {
+                            eee.printStackTrace();
+                            Toast.makeText(this, "Next Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1) + "," + eee.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        isMyKey = true;
+                        Log.e("onKeyUp", "onKeyUp 3 page down");
+                        return true;
+                    } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
+                        //onPageDown();
+                        //search nextChose
+//                if (closeDialogs()) {
+//                    return true;
+//                }
+                        try {
+                            getController().getWrapperControlls().closeDialogs();
+                            getController().getWrapperControlls().prevChose(false, event.getRepeatCount());
+                            Toast.makeText(this, "Previous Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1), Toast.LENGTH_SHORT).show();
+                        } catch (Throwable eee) {
+                            eee.printStackTrace();
+                            Toast.makeText(this, "Previous Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1) + "," + eee.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        isMyKey = true;
+                        Log.e("onKeyUp", "onKeyUp 4 page up");
+                        return true;
+                    }
+                }
+            } else if (event != null && event.getAction() == KeyEvent.ACTION_DOWN) {
+                int keyCode = event.getKeyCode();
+                if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
+                    if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
+                        Log.e("onKeyDown", "onKeyDown 2");
+                        return true; //super.dispatchKeyEvent(event);
+                    }
+                }
+                return true; //
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
     private volatile boolean isMyKey = false;
 
-    @Override
-    public boolean onKeyUp(final int keyCode, final KeyEvent event) {
+    //see dispatchKeyEvent
+    //@Override
+    public boolean onKeyUp___(final int keyCode, final KeyEvent event) {
         Log.e("onKeyUp", "onKeyUp 1");
         if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
@@ -480,7 +545,11 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
                     getController().getWrapperControlls().closeDialogs();
                     getController().getWrapperControlls().nextChose(false, event.getRepeatCount());
                     Toast.makeText(this, "Next Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1), Toast.LENGTH_SHORT).show();
-                } catch (Throwable eee) { eee.printStackTrace(); }
+                } catch (Throwable eee) {
+                    eee.printStackTrace();
+                    Toast.makeText(this, "Next Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1) + "," + eee.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                isMyKey = true;
                 Log.e("onKeyUp", "onKeyUp 3 page down");
                 return true;
             } else if (keyCode == KeyEvent.KEYCODE_PAGE_UP) {
@@ -493,8 +562,11 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
                     getController().getWrapperControlls().closeDialogs();
                     getController().getWrapperControlls().prevChose(false, event.getRepeatCount());
                     Toast.makeText(this, "Previous Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1), Toast.LENGTH_SHORT).show();
-
-                } catch (Throwable eee) { eee.printStackTrace(); }
+                } catch (Throwable eee) {
+                    eee.printStackTrace();
+                    Toast.makeText(this, "Previous Page: " + (getController().getDocumentModel().getCurrentDocPageIndex() + 1) + "," + eee.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                isMyKey = true;
                 Log.e("onKeyUp", "onKeyUp 4 page up");
                 return true;
             }
@@ -519,17 +591,17 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
     long keyTimeout = 0;
 
     private final static boolean USE_REPEAT_LOGIC = false;
-    @Override
-    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
-        Log.e("onKeyUp", "onKeyDown 1");
+    //see dispatchKeyEvent
+    //@Override
+    public boolean onKeyDown___(final int keyCode, final KeyEvent event) {
+        Log.e("onKeyDown", "onKeyDown 1");
         if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
-                Log.e("onKeyUp", "onKeyDown 2");
+                Log.e("onKeyDown", "onKeyDown 2");
                 return super.onKeyDown(keyCode, event);
             }
         }
-
-        Log.e("onKeyUp", "onKeyDown 3");
+        Log.e("onKeyDown", "onKeyDown 3");
         LOG.d("onKeyDown");
         if (USE_REPEAT_LOGIC) {
             isMyKey = false;
@@ -552,7 +624,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
                 return true;
             }
         }
-        Log.e("onKeyUp", "onKeyDown 4");
+        Log.e("onKeyDown", "onKeyDown 4");
         return super.onKeyDown(keyCode, event);
     }
 
