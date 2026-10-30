@@ -3,12 +3,15 @@ package com.dseink;
 import android.app.Activity;
 import android.app.Dialog;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 public class EinkUtils {
+    private final static String TAG = "EinkUtils";
+
     public static void forceEinkFullUpdateWithView(View view) {
         if (view == null) {
             return;
@@ -50,7 +53,8 @@ public class EinkUtils {
             try {
                 result = ReflectUtils.reflect(act).method("getCurrentScreenPanel").get();
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                Log.e(TAG, "getCurrentScreenPanel error");
             }
             return result != null ? result.intValue() : defVal;
         } catch (Throwable e) {
@@ -87,6 +91,42 @@ public class EinkUtils {
                 WindowManager.LayoutParams params = new WindowManager.LayoutParams();
                 params.copyFrom(window.getAttributes());
                 params.x = -(int)(screenWidth*0.25);//-310;
+//                            params.y = 200;
+                params.width = (int)(screenWidth*0.25);//500;
+//                            params.height = 200;
+                window.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+                window.setAttributes(params);
+            }
+        }
+    }
+
+    public static void centerToRightScreen(Activity act, Dialog dialog) {
+        if (act == null) {
+            return;
+        }
+        if (dialog == null) {
+            return;
+        }
+        if (EinkUtils.getCurrentScreenPos(act, 0) ==
+                DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+            Window window = dialog.getWindow();
+            if (window != null) {
+//                            window.setGravity(Gravity.BOTTOM);
+//                            WindowManager.LayoutParams params = window.getAttributes();
+//                            params.x = 0;
+//                            params.y = 0;
+//                            window.setAttributes(params);
+
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenWidth = displayMetrics.widthPixels;
+//                            window.setGravity(Gravity.CENTER_VERTICAL);
+//                            window.setLayout((int) (screenWidth * 0.5), WindowManager.LayoutParams.WRAP_CONTENT);
+
+                //WindowManager.LayoutParams params = window.getAttributes();
+                WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+                params.copyFrom(window.getAttributes());
+                params.x = +(int)(screenWidth*0.25);//-310;
 //                            params.y = 200;
                 params.width = (int)(screenWidth*0.25);//500;
 //                            params.height = 200;

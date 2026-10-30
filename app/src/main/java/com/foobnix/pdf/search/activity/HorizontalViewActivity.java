@@ -2308,8 +2308,8 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
     }
 
     @SuppressLint("RestrictedApi")
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
+    //@Override
+    public boolean dispatchKeyEvent__(KeyEvent event) {
         //Log.e(TAG, "dispatchKeyEvent == " + event.toString());
         try {
             if (event != null && event.getAction() == KeyEvent.ACTION_UP) {
@@ -2363,8 +2363,8 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
 
     //see dispatchKeyEvent
-    //@Override
-    public boolean onKeyUp__(final int keyCode, final KeyEvent event) {
+    @Override
+    public boolean onKeyUp(final int keyCode, final KeyEvent event) {
         if (MainTabs2.USE_NEW_UI) {
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
                 return super.onKeyUp(keyCode, event);
@@ -2481,8 +2481,8 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
     }
 
     //see dispatchKeyEvent
-    //@Override
-    public boolean onKeyDown___(final int keyCode1, final KeyEvent event) {
+    @Override
+    public boolean onKeyDown(final int keyCode1, final KeyEvent event) {
         if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
                 return super.onKeyDown(keyCode1, event);
@@ -3031,7 +3031,14 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         if (dc != null) {
             int screenPos = EinkUtils.getCurrentScreenPos(this,
                     DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE);
-            if (screenPos == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+            boolean isIntentDual = false;
+            if (getIntent() != null &&
+                getIntent().getIntExtra(DualScreenConstant.EXTRA_LAUNCH_SCREEN, 0)
+                            == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+                isIntentDual = true;
+            }
+
+            if (isIntentDual || screenPos == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
                 //search DocumentWrapperUI.onModeChange
                 //search HorizontalViewActivity.onModeChange
                 //p.getMenu().add(R.string.two_pages)
@@ -3045,15 +3052,19 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                 SettingsManager.getBookSettings().updateFromAppState();
                 SharedBooks.save(SettingsManager.getBookSettings());
 
-                if (dc.isTextFormat()) {
-                    nullAdapter();
-                    dc.restartActivity();
-                    dc.cleanImageMatrix();
+                if (MainTabs2.MOD_VERSION) {
+                    //skip, stop loop restart
                 } else {
-                    TTSEngine.get().stop();
-                    dc.cleanImageMatrix();
-                    reloadDoc.run();
-                    authoFit();
+                    if (dc.isTextFormat()) {
+                        nullAdapter();
+                        dc.restartActivity();
+                        dc.cleanImageMatrix();
+                    } else {
+                        TTSEngine.get().stop();
+                        dc.cleanImageMatrix();
+                        reloadDoc.run();
+                        authoFit();
+                    }
                 }
 
                 LinearLayout rl_book_menu = (LinearLayout)findViewById(R.id.rl_book_menu);
@@ -3077,15 +3088,19 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                 SharedBooks.save(SettingsManager.getBookSettings());
 
 
-                if (dc.isTextFormat()) {
-                    nullAdapter();
-                    dc.restartActivity();
-                    dc.cleanImageMatrix();
+                if (MainTabs2.MOD_VERSION) {
+                    //skip, stop loop restart
                 } else {
-                    TTSEngine.get().stop();
-                    dc.cleanImageMatrix();
-                    reloadDoc.run();
-                    authoFit();
+                    if (dc.isTextFormat()) {
+                        nullAdapter();
+                        dc.restartActivity();
+                        dc.cleanImageMatrix();
+                    } else {
+                        TTSEngine.get().stop();
+                        dc.cleanImageMatrix();
+                        reloadDoc.run();
+                        authoFit();
+                    }
                 }
 
                 LinearLayout rl_book_menu = (LinearLayout)findViewById(R.id.rl_book_menu);

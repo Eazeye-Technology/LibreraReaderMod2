@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 
+import com.dseink.DualScreenConstant;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.Intents;
 import com.foobnix.android.utils.LOG;
@@ -89,10 +90,20 @@ public abstract class HorizontalModeController extends DocumentController {
         AppBook bs = SettingsManager.getBookSettings(bookPath);
 
         if (bs != null) {
-            AppSP.get().isCut = bs.sp;
-            AppSP.get().isCrop = bs.cp;
-            AppSP.get().isDouble = bs.dp;
-            AppSP.get().isDoubleCoverAlone = bs.dc;
+            if (getActivity() != null &&
+                    getActivity().getIntent() != null &&
+                    getActivity().getIntent().getIntExtra(DualScreenConstant.EXTRA_LAUNCH_SCREEN, 0)
+                            == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH) {
+                AppSP.get().isDouble = true;
+                AppSP.get().isCut = false;
+                AppSP.get().isDoubleCoverAlone = false;
+                AppSP.get().isSmartReflow = false;
+            } else {
+                AppSP.get().isCut = bs.sp;
+                AppSP.get().isCrop = bs.cp;
+                AppSP.get().isDouble = bs.dp;
+                AppSP.get().isDoubleCoverAlone = bs.dc;
+            }
             AppSP.get().isLocked = bs.getLock(isTextFormat);
             TempHolder.get().pageDelta = bs.d;
 

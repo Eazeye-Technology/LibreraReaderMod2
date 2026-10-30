@@ -461,8 +461,8 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
     }
 
     @SuppressLint("RestrictedApi")
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
+    //@Override
+    public boolean dispatchKeyEvent__(KeyEvent event) {
         //Log.e(TAG, "dispatchKeyEvent == " + event.toString());
         try {
             if (event != null && event.getAction() == KeyEvent.ACTION_UP) {
@@ -527,8 +527,8 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
     private volatile boolean isMyKey = false;
 
     //see dispatchKeyEvent
-    //@Override
-    public boolean onKeyUp___(final int keyCode, final KeyEvent event) {
+    @Override
+    public boolean onKeyUp(final int keyCode, final KeyEvent event) {
         Log.e("onKeyUp", "onKeyUp 1");
         if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
@@ -592,8 +592,8 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
 
     private final static boolean USE_REPEAT_LOGIC = false;
     //see dispatchKeyEvent
-    //@Override
-    public boolean onKeyDown___(final int keyCode, final KeyEvent event) {
+    @Override
+    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
         Log.e("onKeyDown", "onKeyDown 1");
         if (MainTabs2.USE_NEW_UI) { //see dispatchKeyEventDown
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {

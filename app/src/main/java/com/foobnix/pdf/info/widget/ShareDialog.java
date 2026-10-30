@@ -535,7 +535,7 @@ public class ShareDialog {
 
         });
         create.show();
-        EinkUtils.centerToLeftScreen(a, create);
+        EinkUtils.centerToRightScreen(a, create);
 
 //        MyPopupMenu menu = new MyPopupMenu(a, null);
 //
@@ -645,6 +645,15 @@ public class ShareDialog {
 //                        } else {
                             AppSP.get().readingMode = AppState.READING_MODE_BOOK;
 //                        }
+
+                        //FIXME:added
+                        if (true) { //MainTabs2.MOD_VERSION) {
+                            AppSP.get().isDouble = true;
+                            AppSP.get().isCut = false;
+                            AppSP.get().isDoubleCoverAlone = false;
+                            AppSP.get().isSmartReflow = false;
+                        }
+
                         ExtUtils.showDocumentWithoutDialog(a, file,
                                 a.getIntent().getStringExtra(DocumentController.EXTRA_PLAYLIST), DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH);
                     }
