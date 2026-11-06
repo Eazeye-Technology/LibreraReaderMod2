@@ -248,22 +248,29 @@ android:theme="@style/Theme.LibreraReaderMod2"
 
         <activity
             android:name="com.foobnix.pdf.search.activity.HorizontalViewActivity"
-            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTask"
             android:resizeableActivity="true"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustPan" />
+        <!--
+            dual-screen:android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize"
+            old:android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            -->
 
         <activity
             android:name="org.ebookdroid.ui.viewer.VerticalViewActivity"
-            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTask"
             android:resizeableActivity="true"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustPan">
-
+            <!--
+            dual-screen:android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize"
+            old:android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            -->
         </activity>
 
         <!--

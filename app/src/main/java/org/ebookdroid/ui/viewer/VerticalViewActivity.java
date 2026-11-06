@@ -51,6 +51,7 @@ import com.foobnix.tts.TTSNotification;
 import com.foobnix.ui2.FileMetaCore;
 import com.foobnix.ui2.MainTabs2;
 import com.foobnix.ui2.MyContextWrapper;
+import com.upgradetool.upgrade.UpgradeUtil;
 
 import org.ebookdroid.common.settings.SettingsManager;
 import org.ebookdroid.ui.viewer.viewers.PdfSurfaceView;
@@ -102,6 +103,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
      * Called when the activity is first created.
      */
 
+    private UpgradeUtil upgradeUtil;
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         intetrstialTimeoutSec = ADS.FULL_SCREEN_TIMEOUT_SEC;
@@ -150,6 +152,15 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
         super.onCreate(savedInstanceState);
 
         Dips.initActivity(this);
+
+        upgradeUtil = new UpgradeUtil(this);
+        upgradeUtil.onCreate_upgrade();
+        if (UpgradeUtil.USE_UPGRADE) {
+            if (upgradeUtil != null) {
+                upgradeUtil.onCreateUpdateReceiver();
+                upgradeUtil.checkVersion();
+            }
+        }
 
         checkPermission();
 
@@ -316,12 +327,26 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
     };
 
     @Override
+    protected Dialog onCreateDialog(int id) {
+        if (UpgradeUtil.USE_UPGRADE) {
+            Dialog dialog = upgradeUtil.onCreateDailog_upgrade(id);
+            if (dialog != null) {
+                return dialog;
+            }
+        }
+        return super.onCreateDialog(id);
+    }
+
+    @Override
     protected void onDestroy() {
 
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);
         }
         super.onDestroy();
+        if (UpgradeUtil.USE_UPGRADE && upgradeUtil != null) {
+            upgradeUtil.onDestroyUpdateReceiver();
+        }
     }
 
     Dialog rotationDialog;

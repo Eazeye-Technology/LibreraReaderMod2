@@ -117,6 +117,7 @@ import com.foobnix.ui2.AdsFragmentActivity;
 import com.foobnix.ui2.AppDB;
 import com.foobnix.ui2.MainTabs2;
 import com.foobnix.ui2.MyContextWrapper;
+import com.upgradetool.upgrade.UpgradeUtil;
 
 import org.ebookdroid.common.settings.SettingsManager;
 import org.ebookdroid.common.settings.books.SharedBooks;
@@ -261,6 +262,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         setContentView(R.layout.activity_horiziontal_view);
     }
 
+    private UpgradeUtil upgradeUtil;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         quickBookmark = getString(R.string.fast_bookmark);
@@ -287,6 +289,15 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         clickUtils = new ClickUtils();
 
         super.onCreate(savedInstanceState);
+
+        upgradeUtil = new UpgradeUtil(this);
+        upgradeUtil.onCreate_upgrade();
+        if (UpgradeUtil.USE_UPGRADE) {
+            if (upgradeUtil != null) {
+                upgradeUtil.onCreateUpdateReceiver();
+                upgradeUtil.checkVersion();
+            }
+        }
 
         checkPermission(); //FIXME:added
 
@@ -1580,6 +1591,17 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
     }
 
     @Override
+    protected Dialog onCreateDialog(int id) {
+        if (UpgradeUtil.USE_UPGRADE) {
+            Dialog dialog = upgradeUtil.onCreateDailog_upgrade(id);
+            if (dialog != null) {
+                return dialog;
+            }
+        }
+        return super.onCreateDialog(id);
+    }
+
+    @Override
     protected void onDestroy() {
 
         if (loadinAsyncTask != null) {
@@ -1603,6 +1625,10 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
 
         super.onDestroy();
+
+        if (UpgradeUtil.USE_UPGRADE && upgradeUtil != null) {
+            upgradeUtil.onDestroyUpdateReceiver();
+        }
 
 
     }
@@ -2874,9 +2900,13 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
             public void onClick(View view) {
 //                onTextToSpeach.onClick(view);
                 LOG.d("bookTTS", AppSP.get().isDoubleCoverAlone, AppSP.get().isDouble, AppSP.get().isCut);
-                if (AppSP.get().isDouble || AppSP.get().isCut) {
-                    modeOnePage();
-                    return;
+                if (false) { //MainTabs2.MOD_VERSION) {
+                    //skip
+                } else {
+                    if (AppSP.get().isDouble || AppSP.get().isCut) {
+                        modeOnePage();
+                        return;
+                    }
                 }
                 DragingDialogs.textToSpeachDialog(anchor, dc);
             }

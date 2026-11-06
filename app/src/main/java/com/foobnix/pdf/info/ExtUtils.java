@@ -216,6 +216,10 @@ public class ExtUtils {
     }
 
     public static void updateSearchExts() {
+        boolean enableZip = true;
+        if (MainTabs2.MOD_VERSION) {
+            enableZip = false;
+        }
         List<String> result = new ArrayList<String>();
         seachExts.clear();
 
@@ -248,14 +252,14 @@ public class ExtUtils {
         if (AppState.get().supportRTF) {
             result.add(".rtf");
 
-            if (!AppState.get().supportZIP) {
+            if (!AppState.get().supportZIP && enableZip) {
                 result.add(".rtf.zip");
             }
         }
 
         if (AppState.get().supportFB2) {
             result.add(".fb2");
-            if (!AppState.get().supportZIP) {
+            if (!AppState.get().supportZIP && enableZip) {
                 result.add(".fb2.zip");
             }
         }
@@ -264,7 +268,7 @@ public class ExtUtils {
             result.add(".html");
             result.add(".xhtml");
             result.add(".md");
-            if (!AppState.get().supportZIP) {
+            if (!AppState.get().supportZIP && enableZip) {
                 result.add(".txt.zip");
             }
         }
@@ -280,7 +284,7 @@ public class ExtUtils {
                 result.add(".cbr");
             }
         }
-        if (AppState.get().supportZIP) {
+        if (AppState.get().supportZIP && enableZip) {
             result.add(".zip");
             result.add(".okular");
         }

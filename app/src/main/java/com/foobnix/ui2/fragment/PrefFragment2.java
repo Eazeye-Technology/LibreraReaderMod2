@@ -1642,7 +1642,11 @@ public class PrefFragment2 extends UIFragment {
                                                           @Override
                                                           public void onCheckedChanged(final CompoundButton buttonView,
                                                                                        final boolean isChecked) {
-                                                              AppState.get().supportZIP = isChecked;
+                                                              if (MainTabs2.MOD_VERSION) {
+                                                                  AppState.get().supportZIP = false;
+                                                              } else {
+                                                                  AppState.get().supportZIP = isChecked;
+                                                              }
                                                               ExtUtils.updateSearchExts();
                                                               handler.removeCallbacks(ask);
                                                               handler.postDelayed(ask, timeout);
