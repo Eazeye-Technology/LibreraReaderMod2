@@ -132,6 +132,18 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class HorizontalViewActivity extends AdsFragmentActivity {
+    public void startCheckVersionAnimation(View view) {
+        if (upgradeUtil != null && upgradeUtil.rotateAnimHelper != null) {
+            upgradeUtil.rotateAnimHelper.start(view);
+        }
+    }
+
+    public void checkVersion(boolean hasFeedback) {
+        if (upgradeUtil != null) {
+            upgradeUtil.checkVersion(hasFeedback);
+        }
+    }
+
     public final static boolean USE_NEW_UI = true;
 
     public boolean prev = true;
@@ -295,7 +307,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         if (UpgradeUtil.USE_UPGRADE) {
             if (upgradeUtil != null) {
                 upgradeUtil.onCreateUpdateReceiver();
-                upgradeUtil.checkVersion();
+                upgradeUtil.checkVersion(false);
             }
         }
 
@@ -347,6 +359,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         bottomIndicators = findViewById(R.id.bottomIndicators);
         adFrame = findViewById(R.id.adFrame);
         anchor = (FrameLayout) findViewById(R.id.anchor);
+        DragingDialogs.updateRightScreen(anchor);
 
         anchorX = (ImageView) findViewById(R.id.anchorX);
         anchorY = (ImageView) findViewById(R.id.anchorY);
@@ -1671,7 +1684,9 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         handlerTimer.post(updateTimePower);
 
         if (AppState.get().inactivityTime != -1) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
             LOG.d("FLAG addFlags", "FLAG_KEEP_SCREEN_ON", "add", AppState.get().inactivityTime);
 
         }
@@ -2784,7 +2799,9 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 
 
             if (AppState.get().inactivityTime > 0) {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
                 LOG.d("FLAG addFlags", "FLAG_KEEP_SCREEN_ON", "add", AppState.get().inactivityTime);
 //                handler.removeCallbacks(clearFlags);  //memory leak
 //                handler.postDelayed(clearFlags, TimeUnit.MINUTES.toMillis(AppState.get().inactivityTime));
@@ -2937,6 +2954,11 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
             public void onClick(View view) {
 //                onLockUnlock.onClick(view);
                 AppSP.get().isLocked = !AppSP.get().isLocked;
+                if (AppSP.get().isLocked) {
+                    Toast.makeText(HorizontalViewActivity.this, "Locked", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(HorizontalViewActivity.this, "Unlocked", Toast.LENGTH_LONG).show();
+                }
                 updateLockMode();
             }
         });
@@ -3014,25 +3036,29 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         a.findViewById(R.id.iv_reading_107_exit_enter_full_screen).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (false) {
 //                onFull.onClick(view);
-                if (dc == null) {
-                    return;
-                }
-
-                DocumentController.showFullScreenPopup(dc.getActivity(), v, id -> {
-                    AppState.get().fullScreenMode = id;
-                    DocumentController.chooseFullScreen(HorizontalViewActivity.this, AppState.get().fullScreenMode);
-                    //FIXME:
-                    //onFullScreen.setImageResource(DocumentController.getFullScreenIcon(HorizontalViewActivity.this, AppState.get().fullScreenMode));
-                    if (dc.isTextFormat()) {
-                        if (onRefresh != null) {
-                            onRefresh.run();
-                        }
-                        nullAdapter();
-                        dc.restartActivity();
+                    if (dc == null) {
+                        return;
                     }
-                    return true;
-                }, AppState.get().fullScreenMode);
+
+                    DocumentController.showFullScreenPopup(dc.getActivity(), v, id -> {
+                        AppState.get().fullScreenMode = id;
+                        DocumentController.chooseFullScreen(HorizontalViewActivity.this, AppState.get().fullScreenMode);
+                        //FIXME:
+                        //onFullScreen.setImageResource(DocumentController.getFullScreenIcon(HorizontalViewActivity.this, AppState.get().fullScreenMode));
+                        if (dc.isTextFormat()) {
+                            if (onRefresh != null) {
+                                onRefresh.run();
+                            }
+                            nullAdapter();
+                            dc.restartActivity();
+                        }
+                        return true;
+                    }, AppState.get().fullScreenMode);
+                } else {
+                    ShareDialog.toggleDualScreen(HorizontalViewActivity.this, dc, dc.getCurrentBook());
+                }
             }
         });
         a.findViewById(R.id.iv_reading_108_undo_link_navigation).setOnClickListener(new View.OnClickListener() {
@@ -3097,7 +3123,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                     }
                 }
 
-                LinearLayout rl_book_menu = (LinearLayout)findViewById(R.id.rl_book_menu);
+                View rl_book_menu = findViewById(R.id.rl_book_menu);
                 if (rl_book_menu != null) {
                     LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)rl_book_menu.getLayoutParams();
                     if (lp != null) {
@@ -3133,7 +3159,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                     }
                 }
 
-                LinearLayout rl_book_menu = (LinearLayout)findViewById(R.id.rl_book_menu);
+                View rl_book_menu = findViewById(R.id.rl_book_menu);
                 if (rl_book_menu != null) {
                     LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)rl_book_menu.getLayoutParams();
                     if (lp != null) {

@@ -44,6 +44,7 @@ import com.foobnix.model.AppBook;
 import com.foobnix.model.AppProfile;
 import com.foobnix.model.AppSP;
 import com.foobnix.model.AppState;
+import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.model.BookCSS;
 import com.foobnix.pdf.info.widget.TTSWidget;
@@ -458,8 +459,10 @@ public class TTSService extends Service {
             TTSEngine.get().stop(mMediaSessionCompat);
 
             playPage("", AppSP.get().lastBookPage, null);
-            if (!wakeLock.isHeld()) {
-                wakeLock.acquire();
+            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                if (!wakeLock.isHeld()) {
+                    wakeLock.acquire();
+                }
             }
             TTSNotification.showLast();
         }
@@ -473,8 +476,10 @@ public class TTSService extends Service {
             AppSP.get().lastBookParagraph = 0;
             TTSEngine.get().stop(mMediaSessionCompat);
             playPage("", AppSP.get().lastBookPage + 1, null);
-            if (!wakeLock.isHeld()) {
-                wakeLock.acquire();
+            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                if (!wakeLock.isHeld()) {
+                    wakeLock.acquire();
+                }
             }
         }
         if (TTSNotification.TTS_PREV.equals(intent.getAction())) {
@@ -487,8 +492,10 @@ public class TTSService extends Service {
             AppSP.get().lastBookParagraph = 0;
             TTSEngine.get().stop(mMediaSessionCompat);
             playPage("", AppSP.get().lastBookPage - 1, null);
-            if (!wakeLock.isHeld()) {
-                wakeLock.acquire();
+            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                if (!wakeLock.isHeld()) {
+                    wakeLock.acquire();
+                }
             }
         }
 
@@ -506,10 +513,11 @@ public class TTSService extends Service {
             if (pageNumber != -1) {
                 playPage("", pageNumber, anchor);
             }
-            if (!wakeLock.isHeld()) {
-                wakeLock.acquire();
+            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                if (!wakeLock.isHeld()) {
+                    wakeLock.acquire();
+                }
             }
-
         }
 
         EventBus.getDefault().post(new TtsStatus());

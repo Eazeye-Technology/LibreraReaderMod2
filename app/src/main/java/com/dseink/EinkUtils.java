@@ -2,6 +2,8 @@ package com.dseink;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -11,6 +13,24 @@ import android.view.WindowManager;
 
 public class EinkUtils {
     private final static String TAG = "EinkUtils";
+
+    private final static String PREF_RIGHT_SCREEN = "RightScreenPrefs";
+    private final static String PREF_KEY_RIGHT_SCREEN = "IsRightScreen";
+    public static void setRightScreen(Activity act, boolean isRightScreen){
+        if (act == null) return;
+        SharedPreferences.Editor prefs = act.getSharedPreferences(
+                PREF_RIGHT_SCREEN,
+                Context.MODE_PRIVATE).edit();
+        prefs.putBoolean(PREF_KEY_RIGHT_SCREEN, isRightScreen);
+        prefs.apply();
+    }
+    public static boolean getRightScreen(Activity act) {
+        if (act == null) return true;
+        SharedPreferences prefs = act.getSharedPreferences(
+                PREF_RIGHT_SCREEN,
+                Context.MODE_PRIVATE);
+        return prefs.getBoolean(PREF_KEY_RIGHT_SCREEN, true);
+    }
 
     public static void forceEinkFullUpdateWithView(View view) {
         if (view == null) {

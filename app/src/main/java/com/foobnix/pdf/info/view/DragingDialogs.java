@@ -16,6 +16,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -64,6 +65,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -77,6 +79,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.artifex.mupdf.fitz.Image;
+import com.dseink.EinkUtils;
 import com.foobnix.StringResponse;
 import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.BaseItemAdapter;
@@ -164,6 +168,7 @@ import org.ebookdroid.common.settings.CoreSettings;
 import org.ebookdroid.common.settings.SettingsManager;
 import org.ebookdroid.common.settings.books.SharedBooks;
 import org.ebookdroid.droids.mupdf.codec.MuPdfOutline;
+import org.ebookdroid.ui.viewer.VerticalViewActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.librera.LinkedJSONObject;
 
@@ -4419,7 +4424,9 @@ public class DragingDialogs {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 AppState.get().inactivityTime = -1;
-                                controller.getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                                if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                                    controller.getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                                }
                                 inactivityTime.setText(R.string.system);
                                 TxtUtils.underlineTextView(inactivityTime);
                                 LOG.d("FLAG clearFlags", "FLAG_KEEP_SCREEN_ON", "clear", AppState.get().inactivityTime);
@@ -4435,7 +4442,9 @@ public class DragingDialogs {
 
                                 @Override
                                 public boolean onMenuItemClick(MenuItem item) {
-                                    controller.getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                                    if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                                        controller.getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                                    }
 
                                     AppState.get().inactivityTime = number;
                                     inactivityTime.setText("" + AppState.get().inactivityTime);
@@ -5395,6 +5404,70 @@ public class DragingDialogs {
                 //FIXME:reader inner setting dialog
                 View inflate = inflater.inflate(R.layout.dialog_prefs, null, false);
 
+                if (true) {
+                    inflate.findViewById(R.id.llVersion).setVisibility(View.VISIBLE);
+                    inflate.findViewById(R.id.llVersion).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (anchor.getContext() instanceof VerticalViewActivity) {
+                                ((VerticalViewActivity) anchor.getContext()).checkVersion(true);
+                                ((VerticalViewActivity) anchor.getContext()).startCheckVersionAnimation(
+                                        inflate.findViewById(R.id.ivVersion)
+                                );
+                            } else if (anchor.getContext() instanceof HorizontalViewActivity) {
+                                ((HorizontalViewActivity) anchor.getContext()).checkVersion(true);
+                                ((HorizontalViewActivity) anchor.getContext()).startCheckVersionAnimation(
+                                        inflate.findViewById(R.id.ivVersion)
+                                );
+                            }
+                        }
+                    });
+                    ((TextView) inflate.findViewById(R.id.tvVersion)).setText("v" + getLocalVersion(anchor.getContext()));
+
+                    boolean isRightScreen = true;
+                    if (anchor.getContext() instanceof Activity) {
+                        isRightScreen = EinkUtils.getRightScreen((Activity) anchor.getContext());
+                    }
+
+                    final TextView tvDisplayTool = inflate.findViewById(R.id.tvDisplayTool);
+                    tvDisplayTool.setText(isRightScreen ? "Right Screen" : "Left Screen");
+                    TxtUtils.underlineTextView(tvDisplayTool);
+
+                    tvDisplayTool.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PopupMenu menu = new PopupMenu(v.getContext(), v);
+                            String[] screens = {
+                                "Left Screen",
+                                "Right Screen"
+                            };
+                            for (int i = 0; i < screens.length; i++) {
+                                final int j = i;
+                                menu.getMenu().add(screens[i]).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                                    @Override
+                                    public boolean onMenuItemClick(MenuItem item) {
+                                        if (!(anchor.getContext() instanceof Activity)) {
+                                            return false;
+                                        }
+
+                                        boolean isRightScreen_ = screens[j] != null &&
+                                                screens[j].equals("Right Screen");
+                                        EinkUtils.setRightScreen((Activity) anchor.getContext(), isRightScreen_);
+                                        tvDisplayTool.setText(isRightScreen_ ?
+                                                "Right Screen" :
+                                                "Left Screen");
+                                        TxtUtils.underlineTextView(tvDisplayTool);
+
+                                        updateRightScreen(anchor);
+                                        return false;
+                                    }
+                                });
+                            }
+                            menu.show();
+                        }
+                    });
+                }
+
                 // TOP panel start
                 View topPanelLine = inflate.findViewById(R.id.topPanelLine);
                 View topPanelLineDiv = inflate.findViewById(R.id.topPanelLineDiv);
@@ -6216,5 +6289,111 @@ public class DragingDialogs {
             }
         });
         return dialog;
+    }
+
+    public static String getLocalVersion(Context mAct) {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = mAct.getApplicationContext().getPackageManager()
+                    .getPackageInfo(mAct.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (packageInfo != null) {
+            return packageInfo.versionName;
+        } else {
+            return "";
+        }
+    }
+
+    //private static boolean isRightScreen = true;
+
+    public static void updateRightScreen(View anchor) {
+//        if (anchor == null) {
+//            return;
+//        }
+        Activity act = null;
+        if (anchor.getContext() instanceof VerticalViewActivity) {
+            act = ((VerticalViewActivity) anchor.getContext());
+        } else if (anchor.getContext() instanceof HorizontalViewActivity) {
+            act = ((HorizontalViewActivity) anchor.getContext());
+        }
+        boolean isRightScreen_ = EinkUtils.getRightScreen(act);
+
+        //FIXME:
+        LinearLayout parentBottom = (LinearLayout) act.findViewById(R.id.parentBottom);
+        parentBottom.post(() -> {
+            boolean isRightScreen = isRightScreen_;
+
+            View parentBottomLeft = parentBottom.findViewById(R.id.parentBottomLeft);
+            LinearLayout rl_book_menu = (LinearLayout)parentBottom.findViewById(R.id.rl_book_menu);
+
+            parentBottom.removeAllViews();
+            if (isRightScreen) {
+                rl_book_menu.setGravity(Gravity.RIGHT);
+                rl_book_menu.requestLayout();
+
+                parentBottom.addView(parentBottomLeft);
+                parentBottom.addView(rl_book_menu);
+            } else {
+                rl_book_menu.setGravity(Gravity.LEFT);
+                rl_book_menu.requestLayout();
+
+                parentBottom.addView(rl_book_menu);
+                parentBottom.addView(parentBottomLeft);
+            }
+        });
+
+        LinearLayout llTop1 = (LinearLayout) act.findViewById(R.id.llTop1);
+        LinearLayout llTop2 = (LinearLayout) act.findViewById(R.id.llTop2);
+        if (llTop1 != null && llTop2 != null) {
+            llTop1.post(() -> {
+                boolean isRightScreen = isRightScreen_;
+
+                RelativeLayout.LayoutParams lp1 = (RelativeLayout.LayoutParams)
+                        llTop1.getLayoutParams();
+                RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams)
+                        llTop2.getLayoutParams();
+                if (isRightScreen) {
+                    lp1.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    lp1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    lp2.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    lp2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                } else {
+                    lp1.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    lp1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    lp2.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    lp2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                }
+                llTop1.setLayoutParams(lp1);
+                llTop2.setLayoutParams(lp2);
+            });
+        }
+
+        LinearLayout llTop3 = (LinearLayout) act.findViewById(R.id.llTop3);
+        LinearLayout llTop4 = (LinearLayout) act.findViewById(R.id.llTop4);
+        if (llTop3 != null && llTop4 != null) {
+            llTop3.post(() -> {
+                boolean isRightScreen = isRightScreen_;
+
+                RelativeLayout.LayoutParams lp3 = (RelativeLayout.LayoutParams)
+                        llTop3.getLayoutParams();
+                RelativeLayout.LayoutParams lp4 = (RelativeLayout.LayoutParams)
+                        llTop4.getLayoutParams();
+                if (isRightScreen) {
+                    lp3.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    lp3.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    lp4.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    lp4.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                } else {
+                    lp3.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    lp3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    lp4.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    lp4.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                }
+                llTop3.setLayoutParams(lp3);
+                llTop4.setLayoutParams(lp4);
+            });
+        }
     }
 }

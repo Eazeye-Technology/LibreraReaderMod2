@@ -546,6 +546,76 @@
                 android:layout_height="wrap_content"
                 android:text="GoogleTranslate" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:minHeight="60dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:visibility="visible"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:padding="5dip"
+                android:src="@drawable/ic_my_display_tools"
+                android:layout_marginRight="0dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:text="Display Tools"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:text="Right Screen"
+                style="@style/textLink"
+                android:id="@+id/tvDisplayTool"
+                />
+            <!--android:id="@+id/screenOrientation"
+                -->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:minHeight="60dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:id="@+id/llVersion"
+            >
+            <!--android:foreground="?android:attr/selectableItemBackground"
+            -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:text="v0.0.0"
+                android:id="@+id/tvVersion"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:padding="5dip"
+                android:src="@drawable/ic_my_refresh"
+                android:layout_marginRight="40dp"
+                android:id="@+id/ivVersion"
+                />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textCustomizeFontBGColor"

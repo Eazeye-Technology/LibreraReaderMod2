@@ -91,7 +91,9 @@ public class MultyDocSearchDialog {
     public static View getDialogView(final FragmentActivity c) {
         View inflate = LayoutInflater.from(c).inflate(R.layout.dialog_multy_search, null, false);
 
-        inflate.setKeepScreenOn(true);
+        if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+            inflate.setKeepScreenOn(true);
+        }
 
         final EditText editPath = (EditText) inflate.findViewById(R.id.editPath);
         final Button buttonPath = (Button) inflate.findViewById(R.id.buttonPath);

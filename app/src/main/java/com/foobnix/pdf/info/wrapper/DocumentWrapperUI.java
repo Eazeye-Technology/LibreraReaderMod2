@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.graphics.ColorUtils;
 
@@ -45,6 +46,7 @@ import com.foobnix.pdf.info.DictsHelper;
 import com.foobnix.pdf.info.ExtUtils;
 import com.foobnix.pdf.info.OutlineHelper;
 import com.foobnix.pdf.info.OutlineHelper.Info;
+import com.foobnix.pdf.search.activity.HorizontalViewActivity;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.UiSystemUtils;
@@ -109,6 +111,14 @@ public class DocumentWrapperUI {
 	            //
 			}
             AppSP.get().isLocked = !AppSP.get().isLocked;
+
+            if (arg0 != null) {
+                if (AppSP.get().isLocked) {
+                    Toast.makeText(arg0.getContext(), "Locked", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(arg0.getContext(), "Unlocked", Toast.LENGTH_LONG).show();
+                }
+            }
             updateLock();
         }
     };
@@ -799,7 +809,9 @@ public class DocumentWrapperUI {
         progressDraw.updateProgress(current - 1);
 
         if (AppState.get().inactivityTime > 0) {
-            dc.getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                dc.getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
             LOG.d("FLAG addFlags", "FLAG_KEEP_SCREEN_ON", "add", AppState.get().inactivityTime);
 //            handler.removeCallbacks(clearFlags); //memory leak
 //            handler.postDelayed(clearFlags, TimeUnit.MINUTES.toMillis(AppState.get().inactivityTime));
@@ -982,6 +994,7 @@ public class DocumentWrapperUI {
         speedSeekBar = (SeekBar) a.findViewById(R.id.seekBarSpeed);
         seekSpeedLayot = a.findViewById(R.id.seekSpeedLayot);
         anchor = (FrameLayout) a.findViewById(R.id.anchor);
+        DragingDialogs.updateRightScreen(anchor);
 
         anchorX = (ImageView) a.findViewById(R.id.anchorX);
         anchorY = (ImageView) a.findViewById(R.id.anchorY);
@@ -1872,21 +1885,26 @@ public class DocumentWrapperUI {
 
     public void nextChose(boolean animate) {
         nextChose(animate, 0);
-    }    public View.OnClickListener onFull = new View.OnClickListener() {
+    }
 
+    public View.OnClickListener onFull = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
-            DocumentController.showFullScreenPopup(dc.getActivity(), v, id -> {
-                AppState.get().fullScreenMode = id;
-                fullscreen.setImageResource(DocumentController.getFullScreenIcon(a, AppState.get().fullScreenMode));
+            if (false) {
+                DocumentController.showFullScreenPopup(dc.getActivity(), v, id -> {
+                    AppState.get().fullScreenMode = id;
+                    fullscreen.setImageResource(DocumentController.getFullScreenIcon(a, AppState.get().fullScreenMode));
 
-                if (dc.isTextFormat()) {
-                    onRefresh.run();
-                    dc.restartActivity();
-                }
-                DocumentController.chooseFullScreen(a, AppState.get().fullScreenMode);
-                return true;
-            }, AppState.get().fullScreenMode);
+                    if (dc.isTextFormat()) {
+                        onRefresh.run();
+                        dc.restartActivity();
+                    }
+                    DocumentController.chooseFullScreen(a, AppState.get().fullScreenMode);
+                    return true;
+                }, AppState.get().fullScreenMode);
+            } else {
+                ShareDialog.toggleDualScreen(a, dc, dc.getCurrentBook());
+            }
         }
     };
 

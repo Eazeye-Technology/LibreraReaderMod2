@@ -17,6 +17,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -58,6 +59,17 @@ import org.ebookdroid.ui.viewer.viewers.PdfSurfaceView;
 import org.emdev.ui.AbstractActionActivity;
 
 public class VerticalViewActivity extends AbstractActionActivity<VerticalViewActivity, ViewerActivityController> {
+    public void checkVersion(boolean hasFeedback) {
+        if (upgradeUtil != null) {
+            upgradeUtil.checkVersion(hasFeedback);
+        }
+    }
+    public void startCheckVersionAnimation(View view) {
+        if (upgradeUtil != null && upgradeUtil.rotateAnimHelper != null) {
+            upgradeUtil.rotateAnimHelper.start(view);
+        }
+    }
+
     public final static boolean USE_NEW_UI = true;
 
     public static final DisplayMetrics DM = new DisplayMetrics();
@@ -158,7 +170,7 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
         if (UpgradeUtil.USE_UPGRADE) {
             if (upgradeUtil != null) {
                 upgradeUtil.onCreateUpdateReceiver();
-                upgradeUtil.checkVersion();
+                upgradeUtil.checkVersion(false);
             }
         }
 
@@ -242,7 +254,9 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
             handler.removeCallbacks(closeRunnable);
         }
         if (AppState.get().inactivityTime != -1) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
             LOG.d("FLAG clearFlags", "FLAG_KEEP_SCREEN_ON", "add", AppState.get().inactivityTime);
         }
 

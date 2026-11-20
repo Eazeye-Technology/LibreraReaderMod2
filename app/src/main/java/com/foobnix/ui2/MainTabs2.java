@@ -103,10 +103,12 @@ import java.util.List;
 
 @SuppressLint("NewApi")
 public class MainTabs2 extends AdsFragmentActivity {
+    public final static boolean NO_KEEP_SCREEN_ON = true;
+
     public void checkVersion() {
         if (UpgradeUtil.USE_UPGRADE) {
             if (upgradeUtil != null) {
-                upgradeUtil.checkVersion();
+                upgradeUtil.checkVersion(true);
             }
         }
     }
@@ -377,7 +379,7 @@ public class MainTabs2 extends AdsFragmentActivity {
             if (UpgradeUtil.USE_UPGRADE) {
                 if (upgradeUtil != null) {
                     upgradeUtil.onCreateUpdateReceiver();
-                    upgradeUtil.checkVersion();
+                    upgradeUtil.checkVersion(false);
                 }
             }
         }
@@ -780,7 +782,9 @@ public class MainTabs2 extends AdsFragmentActivity {
         IMG.pauseRequests(this);
 
         if (Dips.isEInk()) {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
         }
     }
 
@@ -792,10 +796,12 @@ public class MainTabs2 extends AdsFragmentActivity {
         AppsConfig.isCloudsEnable = UITab.isShowCloudsPreferences();
 
         LOG.d(TAG, "onResume");
-        if (Dips.isEInk()) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        } else {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+            if (Dips.isEInk()) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            } else {
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
         }
         LOG.d("FLAG clearFlags", "FLAG_KEEP_SCREEN_ON", "clear");
 

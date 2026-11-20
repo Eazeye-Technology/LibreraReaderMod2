@@ -40,6 +40,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class UpgradeUtil {
+    public RotateAnimHelper rotateAnimHelper = new RotateAnimHelper();
+
     public final static boolean USE_UPGRADE = true;
     public final static String USE_UPGRADE_URL1 = "https://software.eazeye.com";
 //    public final static String USE_UPGRADE_URL2 = "/update.json";
@@ -240,17 +242,19 @@ public class UpgradeUtil {
     private String serverPathPage = null;
     private String serverNote = null;
     private String serverForceUpdate = null;
-    public void checkVersion() {
+    public void checkVersion(boolean hasFeedback) {
         if (android.os.Build.VERSION.SDK_INT < 11) {
-            new CheckVersionTask().execute();
+            new CheckVersionTask(hasFeedback).execute();
         } else {
-            new CheckVersionTask().executeOnExecutor(newFixedThreadPool);
+            new CheckVersionTask(hasFeedback).executeOnExecutor(newFixedThreadPool);
         }
     }
     public class CheckVersionTask extends AsyncTask<Void, Void, Void> {
+        private boolean mHasFeedback = false;
         private boolean isSuccess = false;
         private String localPackageName = null;
-        public CheckVersionTask() {
+        public CheckVersionTask(boolean hasFeedback) {
+            mHasFeedback = hasFeedback;
             try {
                 PackageInfo packageInfo = null;
                 packageInfo = mAct.getApplicationContext().getPackageManager()
@@ -258,6 +262,10 @@ public class UpgradeUtil {
                 localPackageName = packageInfo.packageName;
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
+            }
+
+            if (mHasFeedback) {
+                Toast.makeText(mAct, "Checking, please wait...", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -346,10 +354,27 @@ public class UpgradeUtil {
                 if (serverVersion > 0 &&
                         serverVersionUrl != null &&
                         serverVersionUrl.length() > 0) {
-                    afterCheckVersion();
+                    if (mHasFeedback) {
+                        if (rotateAnimHelper != null) {
+                            rotateAnimHelper.stop();
+                        }
+                    }
+                    afterCheckVersion(mHasFeedback);
+                } else {
+                    if (mHasFeedback) {
+                        Toast.makeText(mAct, "There is no updated version available", Toast.LENGTH_LONG).show();
+                        if (rotateAnimHelper != null) {
+                            rotateAnimHelper.stop();
+                        }
+                    }
                 }
             } else {
-
+                if (mHasFeedback) {
+                    Toast.makeText(mAct, "Failed to check for version update", Toast.LENGTH_LONG).show();
+                    if (rotateAnimHelper != null) {
+                        rotateAnimHelper.stop();
+                    }
+                }
             }
         }
     }
@@ -369,7 +394,7 @@ public class UpgradeUtil {
         }
     }
 
-    public void afterCheckVersion() {
+    public void afterCheckVersion(boolean hasFeedback) {
         PackageInfo packageInfo = null;
         try {
             packageInfo = mAct.getApplicationContext().getPackageManager()
@@ -381,10 +406,18 @@ public class UpgradeUtil {
         if (USE_UPGRADE_DEBUG_VERSION) {
             if (localVersion > serverVersion) {
                 mAct.showDialog(DIALOG_UPGRADE);
+            } else {
+                if (hasFeedback) {
+                    Toast.makeText(mAct, "There is no updated version available", Toast.LENGTH_LONG).show();
+                }
             }
         } else {
             if (localVersion < serverVersion) {
                 mAct.showDialog(DIALOG_UPGRADE);
+            } else {
+                if (hasFeedback) {
+                    Toast.makeText(mAct, "There is no updated version available", Toast.LENGTH_LONG).show();
+                }
             }
         }
     }
@@ -680,6 +713,9 @@ public class UpgradeUtil {
     public void onDestroyUpdateReceiver() {
         if (this.receiver != null) {
             this.mAct.unregisterReceiver(receiver);
+        }
+        if (this.rotateAnimHelper != null) {
+            this.rotateAnimHelper.stop();
         }
     }
 

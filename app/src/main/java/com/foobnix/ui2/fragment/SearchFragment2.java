@@ -425,7 +425,9 @@ public class SearchFragment2 extends UIFragment<FileMeta> {
                         @Override
                         public void run() {
                             // BooksService.startForeground(getActivity(), BooksService.ACTION_RUN_SELF_TEST);
-                            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                            if (!MainTabs2.NO_KEEP_SCREEN_ON) {
+                                getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                            }
                             OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(SelfTestWorker.class).build();
                             //WorkManager.getInstance(getContext()).enqueue(workRequest);
                             WorkManager.getInstance(getContext()).enqueueUniqueWork("search", ExistingWorkPolicy.KEEP, workRequest);

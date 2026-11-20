@@ -65,8 +65,10 @@ public abstract class DragingPopup {
 
     }
 
+    private int mTitleResID = 0;
     public DragingPopup(int titleResID, final FrameLayout anchor, int width, int heigth) {
         this(anchor.getContext().getString(titleResID), anchor, width, heigth);
+        mTitleResID = titleResID;
     }
 
     public DragingPopup(String title, final FrameLayout anchor, int width, int heigth) {
@@ -186,7 +188,7 @@ public abstract class DragingPopup {
                     AnchorHelper.setXY(anchor, place.x, place.y);
                 }
                 popupView.getLayoutParams().width = place.width;
-                popupView.getLayoutParams().height = place.height;
+                popupView.getLayoutParams().height = place.height + (MainTabs2.USE_NEW_UI && mTitleResID == R.string.preferences ? 40 : 0);
 
                 LOG.d("Anchor Load", tag, place.x, place.y, place.width, place.height);
 
@@ -204,7 +206,7 @@ public abstract class DragingPopup {
                     AnchorHelper.setXY(anchor, Dips.dpToPx(Dips.screenWidthDP() - width) / 2, (Dips.screenHeight() - heigth) / 2);
                 }
                 popupView.getLayoutParams().width = Dips.dpToPx(width);
-                popupView.getLayoutParams().height = heigth;// Dips.dpToPx(heigth);
+                popupView.getLayoutParams().height = heigth + (MainTabs2.USE_NEW_UI && mTitleResID == R.string.preferences ? 40 : 0);// Dips.dpToPx(heigth);
                 popupView.requestLayout();
             }
         } catch (Exception e) {
