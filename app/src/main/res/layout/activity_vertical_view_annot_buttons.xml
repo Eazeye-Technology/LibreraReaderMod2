@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#000000ff"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/llTop1Annot"
+            android:orientation="vertical"
+            android:background="#f1edec"
+            >
+            <!--#CCCCCC-->
+            <ImageView
+                android:id="@+id/annot_iv_pen"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:layout_margin="16px"
+                android:scaleType="center"
+                android:src="@drawable/ic_bottom_bar_018_pdf_annotate"
+                android:background="#00000000"
+                />
+            <ImageView
+                android:id="@+id/annot_iv_delete"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:layout_margin="16px"
+                android:scaleType="center"
+                android:src="@drawable/glyphicons_17_bin"
+                android:background="#00000000"
+                />
+            <ImageView
+                android:id="@+id/annot_iv_close"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:layout_margin="16px"
+                android:scaleType="center"
+                android:src="@drawable/reading_109_close_book"
+                android:background="#00000000"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

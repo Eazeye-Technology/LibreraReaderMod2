@@ -192,7 +192,11 @@ public class AdvGuestureDetector extends SimpleOnGestureListener implements IMul
                     if (annotation.type == AnnotationType.TEXT) {
                         docCtrl.showAnnotation(annotation);
                     } else {
-                        docCtrl.showEditDialogIfNeed();
+                        if (MainTabs2.MOD_VERSION) {
+                            //skip
+                        } else {
+                            docCtrl.showEditDialogIfNeed();
+                        }
                     }
                 }
                 return true;

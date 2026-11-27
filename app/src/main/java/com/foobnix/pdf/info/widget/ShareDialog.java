@@ -628,7 +628,7 @@ public class ShareDialog {
     }
 
 
-    private static boolean isUseDualScreen = false;
+    public static boolean isUseDualScreen = false;
     public static void toggleDualScreen(Activity a, final DocumentController dc, final File file) {
         isUseDualScreen = EinkUtils.getCurrentScreenPos(a, DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE)
                 == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH;

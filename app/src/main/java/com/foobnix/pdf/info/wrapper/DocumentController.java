@@ -774,7 +774,11 @@ public abstract class DocumentController {
 
     public void onAnnotationTap(long pageHander, int page, int index) {
         deleteAnnotation(pageHander, page, index);
-        showEditDialogIfNeed();
+        if (MainTabs2.MOD_VERSION) {
+            //skip
+        } else {
+            showEditDialogIfNeed();
+        }
         saveAnnotationsToFile();
     }
 

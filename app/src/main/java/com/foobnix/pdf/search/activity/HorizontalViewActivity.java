@@ -2407,6 +2407,11 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
     @Override
     public boolean onKeyUp(final int keyCode, final KeyEvent event) {
         if (MainTabs2.USE_NEW_UI) {
+            if (keyCode == 132) {
+                View rootLayout = findViewById(R.id.parentParent);
+                EinkUtils.forceEinkFullUpdateWithView(rootLayout);
+                return true;
+            }
             if (EinkUtils.getKeyEventStatus(this) == 17 || EinkUtils.getKeyEventStatus(this) == 34) {
                 return super.onKeyUp(keyCode, event);
             }
@@ -2915,19 +2920,30 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         a.findViewById(R.id.iv_reading_003_tts_text_to_speech).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (false) {
 //                onTextToSpeach.onClick(view);
-                LOG.d("bookTTS", AppSP.get().isDoubleCoverAlone, AppSP.get().isDouble, AppSP.get().isCut);
-                if (false) { //MainTabs2.MOD_VERSION) {
-                    //skip
-                } else {
-                    if (AppSP.get().isDouble || AppSP.get().isCut) {
-                        modeOnePage();
-                        return;
+                    LOG.d("bookTTS", AppSP.get().isDoubleCoverAlone, AppSP.get().isDouble, AppSP.get().isCut);
+                    if (false) { //MainTabs2.MOD_VERSION) {
+                        //skip
+                    } else {
+                        if (AppSP.get().isDouble || AppSP.get().isCut) {
+                            modeOnePage();
+                            return;
+                        }
                     }
+                    DragingDialogs.textToSpeachDialog(anchor, dc);
+                } else {
+                    Toast.makeText(a, "TTS is not available.", Toast.LENGTH_LONG).show();
                 }
-                DragingDialogs.textToSpeachDialog(anchor, dc);
             }
         });
+        if (AppState.get().isDayNotInvert) {
+            ((ImageView) a.findViewById(R.id.iv_reading_004_light_night_mode))
+                    .setImageResource(R.drawable.ic_bottom_bar_005_day_mod_1);
+        } else {
+            ((ImageView) a.findViewById(R.id.iv_reading_004_light_night_mode))
+                    .setImageResource(R.drawable.ic_bottom_bar_005_day_mod_2);
+        }
         a.findViewById(R.id.iv_reading_004_light_night_mode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -2955,8 +2971,12 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
 //                onLockUnlock.onClick(view);
                 AppSP.get().isLocked = !AppSP.get().isLocked;
                 if (AppSP.get().isLocked) {
+                    ((ImageView)a.findViewById(R.id.iv_reading_006_lock_pan_zoom))
+                            .setImageResource(R.drawable.ic_bottom_bar_012_lock_pan_1);
                     Toast.makeText(HorizontalViewActivity.this, "Locked", Toast.LENGTH_LONG).show();
                 } else {
+                    ((ImageView)a.findViewById(R.id.iv_reading_006_lock_pan_zoom))
+                            .setImageResource(R.drawable.ic_bottom_bar_012_lock_pan_2);
                     Toast.makeText(HorizontalViewActivity.this, "Unlocked", Toast.LENGTH_LONG).show();
                 }
                 updateLockMode();
@@ -3036,7 +3056,7 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
         a.findViewById(R.id.iv_reading_107_exit_enter_full_screen).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (false) {
+                if (true) {
 //                onFull.onClick(view);
                     if (dc == null) {
                         return;
@@ -3053,6 +3073,13 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                             }
                             nullAdapter();
                             dc.restartActivity();
+                        }
+                        if (AppState.get().fullScreenMode == AppState.FULL_SCREEN_FULLSCREEN) {
+                            ((ImageView) a.findViewById(R.id.iv_reading_107_exit_enter_full_screen))
+                                    .setImageResource(R.drawable.ic_bottom_bar_004_fullscreen_1);
+                        } else {
+                            ((ImageView) a.findViewById(R.id.iv_reading_107_exit_enter_full_screen))
+                                    .setImageResource(R.drawable.ic_bottom_bar_004_fullscreen_2);
                         }
                         return true;
                     }, AppState.get().fullScreenMode);
@@ -3076,6 +3103,23 @@ public class HorizontalViewActivity extends AdsFragmentActivity {
                 nullAdapter();
                 closeDialogs();
                 showInterstial();
+            }
+        });
+        //------------------
+        ShareDialog.isUseDualScreen = EinkUtils.getCurrentScreenPos(a, DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE)
+                == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH;
+        if (ShareDialog.isUseDualScreen) {
+            ((ImageView) a.findViewById(R.id.iv_reading_109_one_two_pages))
+                    .setImageResource(R.drawable.ic_bottom_bar_011_two_screens_1);
+        } else {
+            ((ImageView) a.findViewById(R.id.iv_reading_109_one_two_pages))
+                    .setImageResource(R.drawable.ic_bottom_bar_011_two_screens_2);
+        }
+        //------------------
+        a.findViewById(R.id.iv_reading_109_one_two_pages).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareDialog.toggleDualScreen(HorizontalViewActivity.this, dc, dc.getCurrentBook());
             }
         });
         a.findViewById(R.id.llDocumentFooterBottom3).setVisibility(View.GONE);

@@ -30,6 +30,9 @@ import android.widget.Toast;
 
 import androidx.core.graphics.ColorUtils;
 
+import com.artifex.mupdf.fitz.Image;
+import com.dseink.DualScreenConstant;
+import com.dseink.EinkUtils;
 import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.IntegerResponse;
@@ -114,8 +117,12 @@ public class DocumentWrapperUI {
 
             if (arg0 != null) {
                 if (AppSP.get().isLocked) {
+                    ((ImageView)a.findViewById(R.id.iv_reading_006_lock_pan_zoom))
+                            .setImageResource(R.drawable.ic_bottom_bar_012_lock_pan_1);
                     Toast.makeText(arg0.getContext(), "Locked", Toast.LENGTH_LONG).show();
                 } else {
+                    ((ImageView)a.findViewById(R.id.iv_reading_006_lock_pan_zoom))
+                            .setImageResource(R.drawable.ic_bottom_bar_012_lock_pan_2);
                     Toast.makeText(arg0.getContext(), "Unlocked", Toast.LENGTH_LONG).show();
                 }
             }
@@ -341,7 +348,11 @@ public class DocumentWrapperUI {
             if (AppSP.get().isCrop) {
                 onCrop.onClick(null);
             }
-            DragingDialogs.editColorsPanel(anchor, dc, drawView, false);
+            if (MainTabs2.MOD_VERSION) {
+                DragingDialogs.editColorsPanel2(anchor, dc, drawView, false, a);
+            } else {
+                DragingDialogs.editColorsPanel(anchor, dc, drawView, false);
+            }
         }
     };
     SeekBar.OnSeekBarChangeListener onSpeed = new SeekBar.OnSeekBarChangeListener() {
@@ -1890,7 +1901,8 @@ public class DocumentWrapperUI {
     public View.OnClickListener onFull = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
-            if (false) {
+            if (true) {
+                int mode = AppState.get().fullScreenMode;
                 DocumentController.showFullScreenPopup(dc.getActivity(), v, id -> {
                     AppState.get().fullScreenMode = id;
                     fullscreen.setImageResource(DocumentController.getFullScreenIcon(a, AppState.get().fullScreenMode));
@@ -1900,6 +1912,13 @@ public class DocumentWrapperUI {
                         dc.restartActivity();
                     }
                     DocumentController.chooseFullScreen(a, AppState.get().fullScreenMode);
+                    if (AppState.get().fullScreenMode == AppState.FULL_SCREEN_FULLSCREEN) {
+                        ((ImageView) a.findViewById(R.id.iv_reading_107_exit_enter_full_screen))
+                                .setImageResource(R.drawable.ic_bottom_bar_004_fullscreen_1);
+                    } else {
+                        ((ImageView) a.findViewById(R.id.iv_reading_107_exit_enter_full_screen))
+                                .setImageResource(R.drawable.ic_bottom_bar_004_fullscreen_2);
+                    }
                     return true;
                 }, AppState.get().fullScreenMode);
             } else {
@@ -2303,9 +2322,20 @@ public class DocumentWrapperUI {
         a.findViewById(R.id.iv_reading_003_tts_text_to_speech).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onTextToSpeach.onClick(view);
+                if (false) {
+                    onTextToSpeach.onClick(view);
+                } else {
+                    Toast.makeText(a, "TTS is not available.", Toast.LENGTH_LONG).show();
+                }
             }
         });
+        if (AppState.get().isDayNotInvert) {
+            ((ImageView) a.findViewById(R.id.iv_reading_004_light_night_mode))
+                    .setImageResource(R.drawable.ic_bottom_bar_005_day_mod_1);
+        } else {
+            ((ImageView) a.findViewById(R.id.iv_reading_004_light_night_mode))
+                    .setImageResource(R.drawable.ic_bottom_bar_005_day_mod_2);
+        }
         a.findViewById(R.id.iv_reading_004_light_night_mode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -2383,6 +2413,23 @@ public class DocumentWrapperUI {
             @Override
             public void onClick(View view) {
                 onClose.onClick(view);
+            }
+        });
+        //------------------
+        ShareDialog.isUseDualScreen = EinkUtils.getCurrentScreenPos(a, DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_NONE)
+                == DualScreenConstant.EXTRA_LAUNCH_SCREEN_PANEL_BOTH;
+        if (ShareDialog.isUseDualScreen) {
+            ((ImageView) a.findViewById(R.id.iv_reading_109_one_two_pages))
+                    .setImageResource(R.drawable.ic_bottom_bar_011_two_screens_1);
+        } else {
+            ((ImageView) a.findViewById(R.id.iv_reading_109_one_two_pages))
+                    .setImageResource(R.drawable.ic_bottom_bar_011_two_screens_2);
+        }
+        //------------------
+        a.findViewById(R.id.iv_reading_109_one_two_pages).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareDialog.toggleDualScreen(a, dc, dc.getCurrentBook());
             }
         });
         a.findViewById(R.id.llDocumentFooterBottom3).setVisibility(View.GONE);

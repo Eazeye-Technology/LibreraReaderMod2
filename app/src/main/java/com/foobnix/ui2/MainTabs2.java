@@ -39,6 +39,7 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import com.cloudrail.si.CloudRail;
 import com.dseink.DualScreenConstant;
+import com.dseink.EinkUtils;
 import com.foobnix.android.utils.Apps;
 import com.foobnix.android.utils.Dips;
 import com.foobnix.android.utils.LOG;
@@ -856,6 +857,12 @@ public class MainTabs2 extends AdsFragmentActivity {
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == 132) {
+            View rootLayout = findViewById(R.id.parentParent);
+            EinkUtils.forceEinkFullUpdateWithView(rootLayout);
+            return true;
+        }
+
         if (!isEink) {
             return super.onKeyUp(keyCode, event);
         }

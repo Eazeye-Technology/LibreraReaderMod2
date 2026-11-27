@@ -574,6 +574,11 @@ public class VerticalViewActivity extends AbstractActionActivity<VerticalViewAct
                 Log.e("onKeyUp", "onKeyUp 2");
                 return super.onKeyUp(keyCode, event);
             }
+            if (keyCode == 132) {
+                View rootLayout = findViewById(R.id.parentParent);
+                EinkUtils.forceEinkFullUpdateWithView(rootLayout);
+                return true;
+            }
             if (keyCode == KeyEvent.KEYCODE_PAGE_DOWN) {
                 //onPageUp();
                 //search prevChose

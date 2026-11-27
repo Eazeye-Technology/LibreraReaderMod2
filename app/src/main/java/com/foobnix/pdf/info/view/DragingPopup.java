@@ -23,10 +23,13 @@ import com.foobnix.android.utils.Keyboards;
 import com.foobnix.android.utils.LOG;
 import com.foobnix.android.utils.TxtUtils;
 import com.foobnix.model.AppProfile;
+import com.foobnix.pdf.search.activity.msg.InvalidateMessage;
 import com.foobnix.ui2.MainTabs2;
 import com.txkj.readingapp.R;
 import com.foobnix.pdf.info.TintUtil;
 import com.foobnix.pdf.info.widget.DraggbleTouchListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -173,7 +176,7 @@ public abstract class DragingPopup {
     public void initState() {
         try {
             String tag = getTAG() + Dips.screenWidth();
-            if (cache.containsKey(tag)) {
+            if (!MainTabs2.MOD_VERSION && cache.containsKey(tag)) {
                 Place place = cache.get(tag);
 
                 Activity act = (Activity) anchor.getContext();
@@ -221,7 +224,7 @@ public abstract class DragingPopup {
     public abstract View getContentView(LayoutInflater inflater);
 
     public DragingPopup show(String tag) {
-        show(tag, false, false);
+        show(tag, MainTabs2.MOD_VERSION ? true : false, false);
         return this;
     }
 
@@ -451,6 +454,11 @@ public abstract class DragingPopup {
         Keyboards.close(anchor);
         Keyboards.hideNavigation((Activity) anchor.getContext());
         AppProfile.save(anchor.getContext());
+        if (MainTabs2.MOD_VERSION) {
+            EinkUtils.forceEinkFullUpdateWithView(anchor);
+            //anchor.invalidate();
+            //EventBus.getDefault().post(new InvalidateMessage());
+        }
     }
 
     private void saveLayout() {

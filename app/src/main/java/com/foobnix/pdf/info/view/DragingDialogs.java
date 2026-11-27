@@ -2646,12 +2646,149 @@ public class DragingDialogs {
 
     }
 
+    public static void editColorsPanel2(final FrameLayout anchor, final DocumentController controller, final DrawView drawView, final boolean force, Activity a) {
+        if (controller == null) { //Annotations are not supported
+            Toast.makeText(a, "Annotation is not supported", Toast.LENGTH_LONG).show();
+            return;
+        }
+        boolean isAnnot = false;
+        View annotLayout = a.findViewById(R.id.annotLayout);
+        View annot_iv_pen = a.findViewById(R.id.annot_iv_pen);
+        View annot_iv_delete = a.findViewById(R.id.annot_iv_delete);
+        View annot_iv_close = a.findViewById(R.id.annot_iv_close);
+
+        if (annotLayout != null) {
+            isAnnot = annotLayout.getVisibility() == View.VISIBLE;
+        }
+        if (annot_iv_close != null) {
+            annot_iv_close.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    AppState.get().editWith = AppState.EDIT_NONE;
+//                    AppState.get().annotationDrawColor = "";
+//                    drawView.setVisibility(View.GONE);
+//                    drawView.clear();
+//                    if (annotLayout != null) {
+//                        annotLayout.setVisibility(View.GONE);
+//                    }
+
+                    String annotationDrawColor = AppState.get().annotationDrawColor;
+                    if (TxtUtils.isEmpty(annotationDrawColor)) {
+                        annotationDrawColor = AppState.COLORS.get(0);
+                    }
+                    controller.saveChanges(drawView.getPoints(), Color.parseColor(annotationDrawColor));
+                    drawView.clear();
+                    controller.saveAnnotationsToFile();
+
+                    View annotLayout = a.findViewById(R.id.annotLayout);
+                    if (annotLayout != null) {
+                        annotLayout.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+        if (annot_iv_pen != null) {
+            annot_iv_pen.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppState.get().editWith = AppState.EDIT_PEN;
+                    AppState.get().annotationDrawColor = "#000000"; //(String) view.getTag();
+                    int acolor = IMG.alphaColor(100/*AppState.get().editAlphaColor*/, AppState.get().annotationDrawColor);
+                    drawView.setColor(acolor, 3);//AppState.get().editLineWidth);
+                    drawView.setVisibility(View.VISIBLE);
+
+                    if (annot_iv_delete != null && annot_iv_pen != null) {
+                        annot_iv_pen.setBackgroundResource(R.drawable.bg_border_1_lines);
+                        annot_iv_delete.setBackgroundColor(Color.TRANSPARENT);
+                    }
+                }
+            });
+        }
+        if (annot_iv_delete != null) {
+            annot_iv_delete.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    AppState.get().annotationDrawColor = "#000000"; //(String) view.getTag();
+//                    int acolor = IMG.alphaColor(AppState.get().editAlphaColor, AppState.get().annotationDrawColor);
+//                    drawView.setColor(acolor, AppState.get().editLineWidth);
+                    String annotationDrawColor = AppState.get().annotationDrawColor;
+                    if (TxtUtils.isEmpty(annotationDrawColor)) {
+                        annotationDrawColor = AppState.COLORS.get(0);
+                    }
+                    controller.saveChanges(drawView.getPoints(), Color.parseColor(annotationDrawColor));
+//                    drawView.clear();
+                    controller.saveAnnotationsToFile();
+
+
+                    drawView.setVisibility(View.GONE);
+                    AppState.get().editWith = AppState.EDIT_DELETE;
+
+                    if (annot_iv_delete != null && annot_iv_pen != null) {
+                        annot_iv_delete.setBackgroundResource(R.drawable.bg_border_1_lines);
+                        annot_iv_pen.setBackgroundColor(Color.TRANSPARENT);
+                    }
+                }
+            });
+        }
+
+
+        if (false) { //isAnnot) {
+            AppState.get().editWith = AppState.EDIT_NONE;
+            AppState.get().annotationDrawColor = "";
+            drawView.setVisibility(View.GONE);
+            drawView.clear();
+            if (annotLayout != null) {
+                annotLayout.setVisibility(View.GONE);
+            }
+        } else {
+            drawView.setOnFinishDraw(new Runnable() {
+                @Override
+                public void run() {
+                    String annotationDrawColor = AppState.get().annotationDrawColor;
+                    if (TxtUtils.isEmpty(annotationDrawColor)) {
+                        annotationDrawColor = AppState.COLORS.get(0);
+                    }
+                    controller.saveChanges(drawView.getPoints(), Color.parseColor(annotationDrawColor));
+//                    drawView.clear();
+                    controller.saveAnnotationsToFile();
+
+//                    View annotLayout = a.findViewById(R.id.annotLayout);
+//                    if (annotLayout != null) {
+//                        annotLayout.setVisibility(View.GONE);
+//                    }
+                }
+            });
+            if (annotLayout != null) {
+                annotLayout.setVisibility(View.VISIBLE);
+            }
+
+            if (annot_iv_delete != null && annot_iv_pen != null) {
+                annot_iv_pen.setBackgroundResource(R.drawable.bg_border_1_lines);
+                annot_iv_delete.setBackgroundColor(Color.TRANSPARENT);
+            }
+
+            AppState.get().editWith = AppState.EDIT_PEN;
+//            if (view.getTag().equals(AppState.get().annotationDrawColor)) {
+//                AppState.get().annotationDrawColor = "";
+//                drawView.setVisibility(View.GONE);
+//            } else {
+                AppState.get().annotationDrawColor = "#000000"; //(String) view.getTag();
+                int acolor = IMG.alphaColor(100/*AppState.get().editAlphaColor*/, AppState.get().annotationDrawColor);
+                drawView.setColor(acolor, 3);//AppState.get().editLineWidth);
+                drawView.setVisibility(View.VISIBLE);
+//                if (position == 0) {
+//                    drawView.setVisibility(View.GONE);
+//                    AppState.get().editWith = AppState.EDIT_DELETE;
+//                }
+//            }
+        }
+    }
+
     public static void editColorsPanel(final FrameLayout anchor, final DocumentController controller, final DrawView drawView, final boolean force) {
         if (controller == null) {
             return;
         }
         drawView.setOnFinishDraw(new Runnable() {
-
             @Override
             public void run() {
                 String annotationDrawColor = AppState.get().annotationDrawColor;
@@ -6274,7 +6411,7 @@ public class DragingDialogs {
                 return inflate;
 
             }
-        }.show(DragingPopup.PREF + "_preferences").setOnCloseListener(new Runnable() {
+        }.show(DragingPopup.PREF + "_preferences", MainTabs2.MOD_VERSION ? true : false).setOnCloseListener(new Runnable() {
 
             @Override
             public void run() {

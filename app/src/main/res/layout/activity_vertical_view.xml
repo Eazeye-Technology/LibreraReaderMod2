@@ -165,6 +165,16 @@ android:elevation="2dip"
         android:layout_marginTop="0dp"
         />
 
+    <include
+        android:id="@+id/annotLayout"
+        layout="@layout/activity_vertical_view_annot_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300px"
+        android:layout_marginLeft="10dp"
+        android:visibility="gone"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
